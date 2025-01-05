@@ -1,36 +1,110 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Eastleigh Real Estate Frontend
 
-## Getting Started
+This project is the frontend for the Eastleigh Real Estate application. It is built using [Next.js](https://nextjs.org/) with [React](https://react.dev/), styled using [Tailwind CSS](https://tailwindcss.com/), and utilizes [TypeScript](https://www.typescriptlang.org/) for type safety. The project uses [Bun](https://bun.sh/) as the package manager and runtime for improved performance and developer experience.
 
-First, run the development server:
+## Features
+
+- Modern Next.js application with Turbopack for fast development builds.
+- Tailwind CSS for styling.
+- TypeScript for robust type-checking.
+- Prettier and ESLint integration for code formatting and linting.
+- Ready-to-use scripts for development, building, and formatting.
+
+## Prerequisites
+
+Ensure you have [Bun](https://bun.sh/) installed on your system. If not, install it by running:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+curl -fsSL https://bun.sh/install | bash
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Clone the repository and install the dependencies:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+git clone <repository_url>
+cd eastleigh-realeastate-fe
+bun install
+```
 
-## Learn More
+## Available Scripts
 
-To learn more about Next.js, take a look at the following resources:
+Here are the scripts available for use in this project:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Development
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Run the development server with Turbopack:
 
-## Deploy on Vercel
+```bash
+bun run dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Build
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Build the application for production:
+
+```bash
+bun run build
+```
+
+### Start
+
+Start the production server:
+
+```bash
+bun run start
+```
+
+### Lint
+
+Run ESLint to check for code quality and enforce coding standards:
+
+```bash
+bun run lint
+```
+
+### Format
+
+Format the codebase using Prettier:
+
+```bash
+bun run fmt
+```
+
+## Configuration
+
+### ESLint
+
+The project uses ESLint for linting and code quality. The configuration is defined in `.eslintrc.js` and extends the Next.js and Prettier configurations. Errors or warnings can be fixed using the lint script.
+
+### Prettier
+
+Prettier is configured to ensure consistent code formatting. The configuration is defined in a `.prettierrc` file. Run the format script to format the entire codebase.
+
+### Tailwind CSS
+
+Tailwind CSS is configured via the `tailwind.config.js` file. You can extend or customize it as needed for the project.
+
+## Directory Structure
+
+```plaintext
+/
+├── pages/       # Next.js pages for routing
+├── components/  # Reusable React components
+├── styles/      # Global and component-specific styles
+├── public/      # Static assets
+├── tsconfig.json # TypeScript configuration
+├── tailwind.config.js # Tailwind CSS configuration
+├── .eslintrc.js # ESLint configuration
+├── .prettierrc  # Prettier configuration
+└── package.json # Project metadata and scripts
+```
+
+## Contributing
+
+1. Fork the repository.
+2. Create a new branch: `git checkout -b my-feature-branch`.
+3. Make your changes and commit them: `git commit -m 'Add some feature'`.
+4. Push to the branch: `git push origin my-feature-branch`.
+5. Submit a pull request.
