@@ -7,7 +7,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "next lint --fix",
     "fmt": "prettier --write ."
   },
   "dependencies": {
@@ -20,7 +20,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^9",
+    "eslint": "^9.17.0",
     "eslint-config-next": "15.1.3",
     "postcss": "^8",
     "prettier": "^3.4.2",
