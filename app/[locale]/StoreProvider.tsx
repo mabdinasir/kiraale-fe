@@ -4,16 +4,16 @@ import { Provider } from 'react-redux'
 import { makeStore, AppStore } from '@store/store'
 
 type Props = {
-  children: React.ReactNode
+    children: React.ReactNode
 }
 
 const StoreProvider: FC<Props> = ({ children }) => {
-  const storeRef = useRef<AppStore>(undefined)
-  if (!storeRef.current) {
-    storeRef.current = makeStore()
-  }
+    const storeRef = useRef<AppStore>(undefined)
+    if (!storeRef.current) {
+        storeRef.current = makeStore()
+    }
 
-  return <Provider store={storeRef.current}>{children}</Provider>
+    return <Provider store={storeRef.current}>{children}</Provider>
 }
 
 export default StoreProvider

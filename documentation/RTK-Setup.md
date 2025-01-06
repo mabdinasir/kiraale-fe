@@ -32,10 +32,10 @@ import rootReducer from './rootReducer'
 import middlewareArray from './middleWareArray'
 
 export const makeStore = () =>
-  configureStore({
-    reducer: rootReducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(middlewareArray),
-  })
+    configureStore({
+        reducer: rootReducer,
+        middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(middlewareArray),
+    })
 
 export type AppStore = ReturnType<typeof makeStore>
 export type RootState = ReturnType<AppStore['getState']>
@@ -45,9 +45,9 @@ export type AppDispatch = AppStore['dispatch']
 - **`configureStore`**: Sets up the store with the root reducer and middleware.
 - **`makeStore`**: Factory function to create the store.
 - **Type Definitions**:
-  - `AppStore`: Type for the store instance.
-  - `RootState`: Type for the root state.
-  - `AppDispatch`: Type for the store dispatch.
+    - `AppStore`: Type for the store instance.
+    - `RootState`: Type for the root state.
+    - `AppDispatch`: Type for the store dispatch.
 
 ### `store/rootReducer.ts`
 
@@ -58,7 +58,7 @@ import { combineReducers } from '@reduxjs/toolkit'
 import { todosApi } from './api/todos'
 
 const rootReducer = combineReducers({
-  [todosApi.reducerPath]: todosApi.reducer,
+    [todosApi.reducerPath]: todosApi.reducer,
 })
 
 export default rootReducer
