@@ -1,4 +1,4 @@
-import Todos from '@components/Todos'
+import Todos from '@components/Examples/Todos'
 import StoreProvider from './StoreProvider'
 
 const Home = () => (
