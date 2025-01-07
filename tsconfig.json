@@ -30,7 +30,8 @@
             "@config/*": ["./config/*"],
             "@translations/*": ["./translations/*"],
             "@middleware/*": ["./middleware/*"],
-            "@documentation/*": ["./documentation/*"]
+            "@documentation/*": ["./documentation/*"],
+            "@assets/*": ["./assets/*"]
         }
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
