@@ -15,7 +15,6 @@ const eslintConfig = [
     {
         rules: {
             'arrow-body-style': ['error', 'as-needed'],
-            'react/prop-types': 'error',
             'react/jsx-props-no-spreading': 'error',
             'import/no-extraneous-dependencies': 'error',
             'import/prefer-default-export': 'error',

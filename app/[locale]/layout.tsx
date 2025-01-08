@@ -7,6 +7,7 @@ import { getMessages } from 'next-intl/server'
 import '@assets/css/materialdesignicons.min.css'
 import '@assets/css/tailwind.css'
 import '../globals.css'
+import Navbar from '@components/Layout/Navbar'
 
 const league_Spartan = League_Spartan({
     subsets: ['latin'],
@@ -34,6 +35,7 @@ export default async function RootLayout({
         <html lang={locale} className="light scroll-smooth" dir="ltr">
             <body className={`${league_Spartan.className} dark:bg-slate-900 antialiased`}>
                 <NextIntlClientProvider messages={messages}>
+                    <Navbar />
                     {children}
                     <Analytics />
                 </NextIntlClientProvider>
