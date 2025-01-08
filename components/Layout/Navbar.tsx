@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 
 import { User } from 'react-feather'
-import { usePathname } from 'next/navigation'
+import { useParams, usePathname } from 'next/navigation'
 import ReusableLink from '@components/Links/ReusableLink'
 import Link from 'next/link'
 
@@ -21,12 +21,12 @@ const Navbar: React.FC<NavbarProps> = ({ navClass, topnavClass, tagline }) => {
     const [menu, setMenu] = useState('')
     // const [subMenu, setSubMenu] = useState('')
 
-    const current = usePathname()
-    const locale = current.split('/')[1]
+    const currentPath = usePathname()
+    const { locale } = useParams()
 
     useEffect(() => {
-        setMenu(current)
-        // setSubMenu(current)
+        setMenu(currentPath)
+        // setSubMenu(currentPath)
 
         const windowScroll = () => {
             setTopNavBar(window.scrollY >= 50)
@@ -37,10 +37,18 @@ const Navbar: React.FC<NavbarProps> = ({ navClass, topnavClass, tagline }) => {
         return () => {
             window.removeEventListener('scroll', windowScroll)
         }
-    }, [current])
+    }, [currentPath])
 
     const toggleMenu = () => {
-        setIsOpen((prevState) => !prevState)
+        setIsOpen(!isOpen)
+    }
+
+    if (
+        currentPath === `/${locale}/auth/login` ||
+        currentPath === `/${locale}/auth/signup` ||
+        currentPath === `/${locale}/auth/reset-password`
+    ) {
+        return null
     }
 
     return (
@@ -139,7 +147,7 @@ const Navbar: React.FC<NavbarProps> = ({ navClass, topnavClass, tagline }) => {
                     </ul>
                     {/* <!--Login button End--> */}
 
-                    <div id="navigation" className={`${isOpen === true ? 'hidden' : 'block'}`}>
+                    <div id="navigation" className={`${isOpen ? 'block' : 'hidden'}`}>
                         {/* <!-- Navigation Menu--> */}
                         <ul
                             className={`navigation-menu  ${navClass === '' || navClass === undefined ? '' : 'nav-light'}   ${topnavClass !== '' && topnavClass !== undefined ? 'justify-center' : 'justify-end'}`}

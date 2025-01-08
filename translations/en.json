@@ -1,3 +1,11 @@
 {
-    "welcome": "Welcome to the React Native App"
+    "login": "Login",
+    "login-signin": "Login / Sign in",
+    "signup": "Sign up",
+    "logout": "Logout",
+    "email-address": "Email address:",
+    "password": "Password:",
+    "remember-me": "Remember me",
+    "forgot-password": "Forgot password ?",
+    "dont-have-account": "Dont have an account ?"
 }

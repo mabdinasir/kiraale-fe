@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 import Link, { LinkProps } from 'next/link'
-import { usePathname } from 'next/navigation'
+import { useParams } from 'next/navigation'
 
 interface ReusableLinkProps extends LinkProps {
     href: string
@@ -10,8 +10,7 @@ interface ReusableLinkProps extends LinkProps {
 }
 
 const ReusableLink: React.FC<ReusableLinkProps> = ({ href, title, children, className }) => {
-    const current = usePathname()
-    const locale = current.split('/')[1]
+    const { locale } = useParams()
 
     return (
         <Link href={`/${locale}${href}`} className={className}>
