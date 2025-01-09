@@ -424,7 +424,7 @@ export const conatctDetails = [
         Icon: FiMapPin,
     },
 ]
-export const accordion = [
+export const accordionData = [
     {
         title: 'How does it work ?',
         content:

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Accordion from '@components/UI/Accordion'
 import { FiArrowRight } from 'react-icons/fi'
 import Navbar from '@components/Layout/Navbar'
+import { accordionData } from '@data/data'
 
 const Terms = () => (
     <>
@@ -98,7 +99,7 @@ const Terms = () => (
 
                             <h5 className="text-xl font-medium mt-8">Users Question & Answer :</h5>
 
-                            <Accordion />
+                            <Accordion accordionData={accordionData} />
 
                             <div className="mt-6">
                                 <Link href="#" className="btn bg-green-600 hover:bg-green-700 text-white rounded-md">

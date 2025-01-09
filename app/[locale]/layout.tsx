@@ -37,8 +37,8 @@ export default async function RootLayout({
             <body className={`${league_Spartan.className} dark:bg-slate-900 antialiased`}>
                 <NextIntlClientProvider messages={messages}>
                     <Navbar />
-                    {children}
                     <Switcher />
+                    {children}
                     <Analytics />
                 </NextIntlClientProvider>
             </body>
