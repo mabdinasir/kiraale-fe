@@ -73,7 +73,7 @@ const Switcher = () => {
             {/* <!-- Switcher --> */}
 
             {/* <!-- LTR & RTL Mode Code --> */}
-            <div className="fixed top-[40%] -left-3 z-50">
+            {/* <div className="fixed top-[40%] -left-3 z-50">
                 <Link href="#" id="switchRtl">
                     <span
                         className="py-1 px-3 relative inline-block rounded-b-md -rotate-90 bg-white dark:bg-slate-900 shadow-md dark:shadow dark:shadow-gray-800 font-semibold"
@@ -82,7 +82,7 @@ const Switcher = () => {
                         {layoutMode}
                     </span>
                 </Link>
-            </div>
+            </div> */}
 
             <Link
                 href="#"
