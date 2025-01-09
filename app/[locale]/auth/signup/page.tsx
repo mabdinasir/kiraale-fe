@@ -101,7 +101,7 @@ const SignUp = () => {
                                             href="/auth/login"
                                             className="text-black dark:text-white font-bold"
                                         >
-                                            {t('signin')}
+                                            {t('sign-in')}
                                         </ReusableLink>
                                     </div>
                                 </div>

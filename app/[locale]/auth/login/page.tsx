@@ -82,7 +82,7 @@ const Login = () => {
                                             href="#"
                                             className="btn bg-green-600 hover:bg-green-700 text-white rounded-md w-full"
                                         >
-                                            {t('login-signin')}
+                                            {t('login-sign-in')}
                                         </Link>
                                     </div>
 

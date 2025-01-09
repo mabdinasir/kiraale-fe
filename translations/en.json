@@ -1,7 +1,7 @@
 {
     "login": "Login",
-    "login-signin": "Login / Sign in",
-    "signin": "Sign in",
+    "login-sign-in": "Login / Sign in",
+    "sign-in": "Sign in",
     "signup": "Sign up",
     "logout": "Logout",
     "email-address": "Email address:",
@@ -13,5 +13,9 @@
     "i-accept": "I accept",
     "terms-conditions": "Terms And Conditions",
     "register": "Register",
-    "already-have-account": "Already have an account ?"
+    "send": "Send",
+    "already-have-account": "Already have an account ?",
+    "reset-password": "Reset Your Password",
+    "remember-password": "Remember your password ?",
+    "reset-password-desc": "Please enter your email address. You will receive a link to create a new password via email."
 }
