@@ -3,7 +3,6 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import Switcher from '@components/UI/Switcher'
 import { useTranslations } from 'next-intl'
 import ReusableLink from '@components/Links/ReusableLink'
 
@@ -79,9 +78,9 @@ const SignUp = () => {
                                             />
                                             <label className="form-check-label text-slate-400" htmlFor="AcceptT&C">
                                                 {t('i-accept')}{' '}
-                                                <Link href="#" className="text-green-600">
+                                                <ReusableLink href="/terms" className="text-green-600">
                                                     {t('terms-conditions')}
-                                                </Link>
+                                                </ReusableLink>
                                             </label>
                                         </div>
                                     </div>
@@ -110,7 +109,6 @@ const SignUp = () => {
                     </div>
                 </div>
             </section>
-            <Switcher />
         </>
     )
 }

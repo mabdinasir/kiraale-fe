@@ -3,7 +3,6 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import Switcher from '@components/UI/Switcher'
 import { useTranslations } from 'next-intl'
 import ReusableLink from '@components/Links/ReusableLink'
 
@@ -101,7 +100,6 @@ const Login = () => {
                     </div>
                 </div>
             </section>
-            <Switcher />
         </>
     )
 }

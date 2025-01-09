@@ -4,7 +4,6 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-import Switcher from '@components/UI/Switcher'
 import ReusableLink from '@components/Links/ReusableLink'
 
 const ResetPassword = () => {
@@ -72,7 +71,6 @@ const ResetPassword = () => {
                     </div>
                 </div>
             </section>
-            <Switcher />
         </>
     )
 }

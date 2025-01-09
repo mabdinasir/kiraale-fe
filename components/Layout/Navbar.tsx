@@ -43,11 +43,9 @@ const Navbar: React.FC<NavbarProps> = ({ navClass, topnavClass, tagline }) => {
         setIsOpen(!isOpen)
     }
 
-    if (
-        currentPath === `/${locale}/auth/login` ||
-        currentPath === `/${locale}/auth/signup` ||
-        currentPath === `/${locale}/auth/reset-password`
-    ) {
+    const noNavPaths = [`/${locale}/auth/login`, `/${locale}/auth/signup`, `/${locale}/auth/reset-password`]
+
+    if (noNavPaths.includes(currentPath)) {
         return null
     }
 

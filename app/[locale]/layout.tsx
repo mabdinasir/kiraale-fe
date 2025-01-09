@@ -8,6 +8,7 @@ import '@assets/css/materialdesignicons.min.css'
 import '@assets/css/tailwind.css'
 import '../globals.css'
 import Navbar from '@components/Layout/Navbar'
+import Switcher from '@components/UI/Switcher'
 
 const league_Spartan = League_Spartan({
     subsets: ['latin'],
@@ -37,6 +38,7 @@ export default async function RootLayout({
                 <NextIntlClientProvider messages={messages}>
                     <Navbar />
                     {children}
+                    <Switcher />
                     <Analytics />
                 </NextIntlClientProvider>
             </body>

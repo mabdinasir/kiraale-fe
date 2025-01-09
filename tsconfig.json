@@ -31,7 +31,8 @@
             "@translations/*": ["./translations/*"],
             "@middleware/*": ["./middleware/*"],
             "@documentation/*": ["./documentation/*"],
-            "@assets/*": ["./assets/*"]
+            "@assets/*": ["./assets/*"],
+            "@data/*": ["./data/*"]
         }
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/Layout/Navbar.tsx"],
