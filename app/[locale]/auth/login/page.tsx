@@ -27,6 +27,7 @@ const Login = () => {
                                     alt=""
                                     width={64}
                                     height={64}
+                                    priority
                                 />
                             </Link>
                             <h5 className="my-6 text-xl font-semibold">{t('login')}</h5>

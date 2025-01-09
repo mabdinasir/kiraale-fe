@@ -1,11 +1,17 @@
 {
     "login": "Login",
     "login-signin": "Login / Sign in",
+    "signin": "Sign in",
     "signup": "Sign up",
     "logout": "Logout",
     "email-address": "Email address:",
     "password": "Password:",
     "remember-me": "Remember me",
     "forgot-password": "Forgot password ?",
-    "dont-have-account": "Dont have an account ?"
+    "dont-have-account": "Dont have an account ?",
+    "your-name": "Your name:",
+    "i-accept": "I accept",
+    "terms-conditions": "Terms And Conditions",
+    "register": "Register",
+    "already-have-account": "Already have an account ?"
 }
