@@ -17,5 +17,19 @@
     "already-have-account": "Already have an account ?",
     "reset-password": "Reset Your Password",
     "remember-password": "Remember your password ?",
-    "reset-password-desc": "Please enter your email address. You will receive a link to create a new password via email."
+    "reset-password-desc": "Please enter your email address. You will receive a link to create a new password via email.",
+    "home-title-part1": "We will help you find",
+    "home-title-part2": "your",
+    "home-title-highlight": "Wonderful",
+    "home-title-part3": "home",
+    "home-subtitle": "A great platform to buy, sell, and rent your properties without any agent or commissions.",
+    "buy": "Buy",
+    "sell": "Sell",
+    "rent": "Rent",
+    "search": "Search",
+    "select-category": "Select Category",
+    "min-price": "Min Price",
+    "max-price": "Max Price",
+    "search-placeholder": "Search for properties",
+    "select": "Select"
 }
