@@ -1,3 +1,5 @@
+'use client' // This is a client component 👈🏽
+
 import React, { ReactNode } from 'react'
 import Link, { LinkProps } from 'next/link'
 import { useParams } from 'next/navigation'

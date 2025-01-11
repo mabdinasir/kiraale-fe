@@ -5,15 +5,15 @@ import { GoRocket } from 'react-icons/go'
 export const counterData = [
     {
         title: 'Properties Sell',
-        target: '1548',
+        target: 1548,
     },
     {
         title: 'Award Gained',
-        target: '25',
+        target: 25,
     },
     {
         title: 'Years Experience',
-        target: '9',
+        target: 9,
     },
 ]
 export const featureData = [

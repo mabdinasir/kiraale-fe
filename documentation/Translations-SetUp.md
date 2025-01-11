@@ -122,7 +122,7 @@ To use translations, call `useTranslations` in any component:
 ```typescript
 import { useTranslations } from 'next-intl';
 
-export default function Example() {
+const Example = () => {
     const t = useTranslations();
 
     return <h1>{t('welcome')}</h1>; // Displays the translated "welcome" message.

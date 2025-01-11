@@ -9,6 +9,7 @@ import '@assets/css/tailwind.css'
 import '../globals.css'
 import Navbar from '@components/Layout/Navbar'
 import Switcher from '@components/UI/Switcher'
+import Footer from '@components/Layout/Footer'
 
 const league_Spartan = League_Spartan({
     subsets: ['latin'],
@@ -40,6 +41,7 @@ export default async function RootLayout({
                     {children}
                     <Switcher />
                     <Analytics />
+                    <Footer />
                 </NextIntlClientProvider>
             </body>
         </html>
