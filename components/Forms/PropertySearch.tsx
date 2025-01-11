@@ -122,7 +122,7 @@ const PropertySearch = () => {
                 data-tabs-toggle="#StarterContent"
                 role="tablist"
             >
-                {['buy', 'sell', 'rent'].map((tab, index) => (
+                {['rent', 'buy', 'sell'].map((tab, index) => (
                     <li key={tab} role="presentation" className="inline-block">
                         <button
                             onClick={() => handleTabClick(index)}
