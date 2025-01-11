@@ -10,7 +10,6 @@ import {
     FiMail,
     FiMapPin,
     FiPhone,
-    FiShoppingCart,
     FiTwitter,
 } from 'react-icons/fi'
 import { BsPencil } from 'react-icons/bs'
@@ -239,16 +238,7 @@ const Footer = () => {
                             <ul className="list-none md:text-end text-center">
                                 <li className="inline ms-1">
                                     <Link
-                                        href="https://1.envato.market/hously-next"
-                                        target="_blank"
-                                        className="btn btn-icon btn-sm text-gray-400 hover:text-white border border-gray-800 dark:border-gray-700 rounded-md hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600"
-                                    >
-                                        <FiShoppingCart className="h-4 w-4"></FiShoppingCart>
-                                    </Link>
-                                </li>
-                                <li className="inline ms-1">
-                                    <Link
-                                        href="https://dribbble.com/shreethemes"
+                                        href="https://dribbble.com"
                                         target="_blank"
                                         className="btn btn-icon btn-sm text-gray-400 hover:text-white border border-gray-800 dark:border-gray-700 rounded-md hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600"
                                     >
@@ -257,7 +247,7 @@ const Footer = () => {
                                 </li>
                                 <li className="inline ms-1">
                                     <Link
-                                        href="https://www.behance.net/shreethemes"
+                                        href="https://www.behance.net"
                                         target="_blank"
                                         className="btn btn-icon btn-sm text-gray-400 hover:text-white border border-gray-800 dark:border-gray-700 rounded-md hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600"
                                     >
@@ -266,7 +256,7 @@ const Footer = () => {
                                 </li>
                                 <li className="inline ms-1">
                                     <Link
-                                        href="http://linkedin.com/company/shreethemes"
+                                        href="http://linkedin.com/company"
                                         target="_blank"
                                         className="btn btn-icon btn-sm text-gray-400 hover:text-white border border-gray-800 dark:border-gray-700 rounded-md hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600"
                                     >
@@ -275,7 +265,7 @@ const Footer = () => {
                                 </li>
                                 <li className="inline ms-1">
                                     <Link
-                                        href="https://www.facebook.com/shreethemes"
+                                        href="https://www.facebook.com"
                                         target="_blank"
                                         className="btn btn-icon btn-sm text-gray-400 hover:text-white border border-gray-800 dark:border-gray-700 rounded-md hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600"
                                     >
@@ -284,7 +274,7 @@ const Footer = () => {
                                 </li>
                                 <li className="inline ms-1">
                                     <Link
-                                        href="https://www.instagram.com/shreethemes/"
+                                        href="https://www.instagram.com/"
                                         target="_blank"
                                         className="btn btn-icon btn-sm text-gray-400 hover:text-white border border-gray-800 dark:border-gray-700 rounded-md hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600"
                                     >
@@ -293,7 +283,7 @@ const Footer = () => {
                                 </li>
                                 <li className="inline ms-1">
                                     <Link
-                                        href="https://twitter.com/shreethemes"
+                                        href="https://twitter.com"
                                         target="_blank"
                                         className="btn btn-icon btn-sm text-gray-400 hover:text-white border border-gray-800 dark:border-gray-700 rounded-md hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600"
                                     >
@@ -302,7 +292,7 @@ const Footer = () => {
                                 </li>
                                 <li className="inline ms-1">
                                     <ReusableLink
-                                        href="mailto:support@shreethemes.in"
+                                        href="mailto:mabdinasira@gmail.com"
                                         className="btn btn-icon btn-sm text-gray-400 hover:text-white border border-gray-800 dark:border-gray-700 rounded-md hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600"
                                     >
                                         <FiMail className="h-4 w-4"></FiMail>
