@@ -408,19 +408,19 @@ export const conatctDetails = [
     {
         title: 'Phone',
         description: 'The phrasal sequence of the is now so that many campaign and benefit',
-        contact: '+152 534-468-854',
+        contact: '+254 746 661 538',
         Icon: FiPhone,
     },
     {
         title: 'Email',
         description: 'The phrasal sequence of the is now so that many campaign and benefit',
-        contact: 'contact@example.com',
+        contact: 'contact@eastleighrealestate.com',
         Icon: FiMail,
     },
     {
         title: 'Location',
         description: 'The phrasal sequence of the is now so that many campaign and benefit',
-        contact: 'C/54 Northwest Freeway, Suite 558,  Houston, USA 485',
+        contact: 'Thenth Street, 1st Avenue, Eastleigh, Nairobi, Kenya',
         Icon: FiMapPin,
     },
 ]

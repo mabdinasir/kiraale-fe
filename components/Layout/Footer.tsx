@@ -192,7 +192,7 @@ const Footer = () => {
                                             <FiMail className="w-5 h-5 text-green-600 me-3"></FiMail>
                                             <div className="">
                                                 <ReusableLink
-                                                    href="mailto:contact@example.com"
+                                                    href="mailto:contact@eastleighrealestate.com"
                                                     className="text-slate-300 hover:text-slate-400 duration-500 ease-in-out"
                                                 >
                                                     contact@eastleighrealestate.com
@@ -204,7 +204,7 @@ const Footer = () => {
                                             <FiPhone className="w-5 h-5 text-green-600 me-3"></FiPhone>
                                             <div className="">
                                                 <ReusableLink
-                                                    href="tel:+152534-468-854"
+                                                    href="tel:+254746661538"
                                                     className="text-slate-300 hover:text-slate-400 duration-500 ease-in-out"
                                                 >
                                                     +254 746 661 538
