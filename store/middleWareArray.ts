@@ -1,5 +1,6 @@
-import { todosApi } from './api/todos'
+import { authApi } from './services/auth'
+import { todosApi } from './services/todos'
 
-const middlewareArray = [todosApi.middleware]
+const middlewareArray = [todosApi.middleware, authApi.middleware]
 
 export default middlewareArray

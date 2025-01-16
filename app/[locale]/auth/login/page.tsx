@@ -8,6 +8,7 @@ import ReusableLink from '@components/Links/ReusableLink'
 
 const Login = () => {
     const t = useTranslations()
+
     return (
         <>
             <section className="md:h-screen py-36 flex items-center relative overflow-hidden zoom-image">

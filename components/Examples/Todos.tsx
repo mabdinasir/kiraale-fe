@@ -1,6 +1,6 @@
 'use client'
 
-import { useGetTodosQuery } from '@store/api/todos'
+import { useGetTodosQuery } from '@store/services/todos'
 
 type Todo = {
     userId: number

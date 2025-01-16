@@ -22,17 +22,18 @@
         "paths": {
             "@components/*": ["./components/*"],
             "@lib/*": ["./lib/*"],
-            "@types/*": ["./types/*"],
             "@utils/*": ["./utils/*"],
             "@hooks/*": ["./hooks/*"],
             "@store/*": ["./store/*"],
+            "@models/*": ["./models/*"],
             "@styles/*": ["./styles/*"],
             "@config/*": ["./config/*"],
             "@translations/*": ["./translations/*"],
             "@middleware/*": ["./middleware/*"],
             "@documentation/*": ["./documentation/*"],
             "@assets/*": ["./assets/*"],
-            "@data/*": ["./data/*"]
+            "@data/*": ["./data/*"],
+            "@services/*": ["./store/services/*"]
         }
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/Layout/Navbar.tsx"],
