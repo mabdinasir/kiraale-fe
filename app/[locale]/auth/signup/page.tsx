@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import StoreProvider from 'app/[locale]/StoreProvider'
-import SignupForm from './Forms/SignupForm'
+import SignupForm from './components/SignupForm'
 
 const SignUp = () => {
     const t = useTranslations()
