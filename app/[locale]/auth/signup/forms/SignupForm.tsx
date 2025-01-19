@@ -117,6 +117,8 @@ const SignupForm = () => {
 
         await signUp(userData).unwrap()
 
+        router.push(`/${locale}/auth/login`)
+
         setUserData({
             firstName: '',
             lastName: '',
@@ -124,12 +126,10 @@ const SignupForm = () => {
             password: '',
             mobile: '',
         })
-
-        router.push(`/${locale}/auth/login`)
     }
 
     return (
-        <form onSubmit={handleSubmit} className="text-start" noValidate>
+        <form className="text-start" noValidate>
             <div className="grid grid-cols-1">
                 <div className="grid grid-cols-1 md:gap-4 md:grid-cols-2">
                     <div className="mb-4">
