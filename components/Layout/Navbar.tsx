@@ -7,6 +7,8 @@ import { User } from 'react-feather'
 import { useParams, usePathname } from 'next/navigation'
 import ReusableLink from '@components/Links/ReusableLink'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
+import { useAppSelector } from '@hooks/rtkHooks'
 
 type NavbarProps = {
     navClass?: string
@@ -15,14 +17,16 @@ type NavbarProps = {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ navClass, topnavClass, tagline }) => {
-    const [isOpen, setIsOpen] = useState(false)
-    const [topNavbar, setTopNavBar] = useState(false)
+    const token = useAppSelector((state) => state.token.value)
 
     const [menu, setMenu] = useState('')
     // const [subMenu, setSubMenu] = useState('')
+    const [isOpen, setIsOpen] = useState(false)
+    const [topNavbar, setTopNavBar] = useState(false)
 
     const currentPath = usePathname()
     const { locale } = useParams()
+    const t = useTranslations()
 
     useEffect(() => {
         setMenu(currentPath)
@@ -126,22 +130,26 @@ const Navbar: React.FC<NavbarProps> = ({ navClass, topnavClass, tagline }) => {
 
                     {/* <!-- Login button Start --> */}
                     <ul className="buy-button list-none mb-0">
-                        <li className="inline mb-0">
-                            <ReusableLink
-                                href="/auth/login"
-                                className="btn btn-icon bg-green-600 hover:bg-green-700 border-green-600 dark:border-green-600 text-white rounded-full"
-                            >
-                                <User className="h-4 w-4 stroke-[3]"></User>
-                            </ReusableLink>
-                        </li>
-                        <li className="sm:inline ps-1 mb-0 hidden">
-                            <ReusableLink
-                                href="/auth/signup"
-                                className="btn bg-green-600 hover:bg-green-700 border-green-600 dark:border-green-600 text-white rounded-full"
-                            >
-                                Signup
-                            </ReusableLink>
-                        </li>
+                        {!token && (
+                            <li className="inline mb-0">
+                                <ReusableLink
+                                    href="/auth/login"
+                                    className="btn btn-icon bg-green-600 hover:bg-green-700 border-green-600 dark:border-green-600 text-white rounded-full"
+                                >
+                                    <User className="h-4 w-4 stroke-[3]"></User>
+                                </ReusableLink>
+                            </li>
+                        )}
+                        {!token && (
+                            <li className="sm:inline ps-1 mb-0 hidden">
+                                <ReusableLink
+                                    href="/auth/signup"
+                                    className="btn bg-green-600 hover:bg-green-700 border-green-600 dark:border-green-600 text-white rounded-full"
+                                >
+                                    {t('signup')}
+                                </ReusableLink>
+                            </li>
+                        )}
                     </ul>
                     {/* <!--Login button End--> */}
 
@@ -152,19 +160,19 @@ const Navbar: React.FC<NavbarProps> = ({ navClass, topnavClass, tagline }) => {
                         >
                             <li className={menu === `/${locale}` ? 'active' : ''}>
                                 <ReusableLink href="/" className="sub-menu-item">
-                                    Home
+                                    {t('home')}
                                 </ReusableLink>
                             </li>
 
                             <li className={menu === `/${locale}/buy` ? 'active' : ''}>
                                 <ReusableLink href="/buy" className="sub-menu-item">
-                                    Buy
+                                    {t('buy')}
                                 </ReusableLink>
                             </li>
 
                             <li className={menu === `/${locale}/sell` ? 'active' : ''}>
                                 <ReusableLink href="/sell" className="sub-menu-item">
-                                    Sell
+                                    {t('sell')}
                                 </ReusableLink>
                             </li>
 
@@ -495,7 +503,7 @@ const Navbar: React.FC<NavbarProps> = ({ navClass, topnavClass, tagline }) => {
 
                             <li className={menu === `/${locale}/contact` ? 'active' : ''}>
                                 <ReusableLink href="/contact" className="sub-menu-item">
-                                    Contact
+                                    {t('contact')}
                                 </ReusableLink>
                             </li>
                         </ul>

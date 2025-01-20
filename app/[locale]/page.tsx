@@ -9,6 +9,7 @@ import ClientTwo from '@components/UI/ClientTwo'
 
 const Home = () => {
     const t = useTranslations()
+
     return (
         <>
             {/* Hero Start  */}

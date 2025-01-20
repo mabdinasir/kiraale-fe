@@ -10,10 +10,13 @@ import validatePassword from '@utils/validatePassword'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
+import { useAppDispatch } from '@hooks/rtkHooks'
+import { setToken } from '@store/slices/tokenSlice'
 
 const LoginForm = () => {
     const t = useTranslations()
     const router = useRouter()
+    const dispatch = useAppDispatch()
 
     const initialUserData = {
         email: '',
@@ -99,7 +102,9 @@ const LoginForm = () => {
         const isValid = await validateFields()
         if (!isValid) return
 
-        await login(userData).unwrap()
+        const response = await login(userData).unwrap()
+
+        dispatch(setToken(response.jwt))
 
         router.push('/')
 
@@ -108,6 +113,7 @@ const LoginForm = () => {
             password: '',
         })
     }
+
     return (
         <form className="text-start" noValidate>
             <div className="grid grid-cols-1">

@@ -39,7 +39,6 @@ const eslintConfig = [
             'no-useless-constructor': 'error',
             'no-constant-condition': 'error',
             'no-irregular-whitespace': 'error',
-            'no-implicit-coercion': 'error',
             'no-implicit-globals': 'error',
             'no-iterator': 'error',
             'no-new': 'error',

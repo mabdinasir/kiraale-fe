@@ -13,6 +13,7 @@ export interface User {
     lastName: string
     mobile: string
     email: string
+    isSignedIn: boolean
     isDeleted: boolean
     roles: Role[]
     createdAt: Date

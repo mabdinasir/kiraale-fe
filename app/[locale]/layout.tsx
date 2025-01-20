@@ -10,6 +10,7 @@ import '../globals.css'
 import Navbar from '@components/Layout/Navbar'
 import Switcher from '@components/UI/Switcher'
 import Footer from '@components/Layout/Footer'
+import StoreProvider from './StoreProvider'
 
 const league_Spartan = League_Spartan({
     subsets: ['latin'],
@@ -37,7 +38,9 @@ export default async function RootLayout({
         <html lang={locale} className="light scroll-smooth" dir="ltr">
             <body className={`${league_Spartan.className} dark:bg-slate-900 antialiased`}>
                 <NextIntlClientProvider messages={messages}>
-                    <Navbar />
+                    <StoreProvider key={'navBar'}>
+                        <Navbar />
+                    </StoreProvider>
                     {children}
                     <Switcher />
                     <Analytics />
