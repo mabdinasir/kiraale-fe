@@ -9,6 +9,7 @@ import ReusableLink from '@components/Links/ReusableLink'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { useAppSelector } from '@hooks/rtkHooks'
+import ProfileMenu from 'app/[locale]/users/components/ProfileMenu'
 
 type NavbarProps = {
     navClass?: string
@@ -130,7 +131,9 @@ const Navbar: React.FC<NavbarProps> = ({ navClass, topnavClass, tagline }) => {
 
                     {/* <!-- Login button Start --> */}
                     <ul className="buy-button list-none mb-0">
-                        {!token && (
+                        {token ? (
+                            <ProfileMenu />
+                        ) : (
                             <li className="inline mb-0">
                                 <ReusableLink
                                     href="/auth/login"

@@ -50,14 +50,14 @@ const Contact = () => {
                                         <div className="grid lg:grid-cols-12 lg:gap-6">
                                             <div className="lg:col-span-6 mb-5">
                                                 <label htmlFor="name" className="font-medium">
-                                                    {t('your-name')}
+                                                    {t('firstName')}
                                                 </label>
                                                 <input
                                                     name="name"
                                                     id="name"
                                                     type="text"
                                                     className="form-input mt-2"
-                                                    placeholder={t('your-name')}
+                                                    placeholder={t('firstName')}
                                                 />
                                             </div>
 

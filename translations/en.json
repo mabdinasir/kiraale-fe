@@ -89,5 +89,11 @@
     "location": "Location",
     "field-required": "This field is required.",
     "min-length": "{field} must be at least {min} characters.",
-    "max-length": "{field} must be at most {max} characters."
+    "max-length": "{field} must be at most {max} characters.",
+    "open-profile-menu": "Open profile menu",
+    "properties": "Properties",
+    "profile": "Profile",
+    "settings": "Settings",
+    "dashboard": "Dashboard",
+    "sign-out": "Sign out"
 }
