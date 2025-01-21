@@ -5,10 +5,13 @@ import { useSignOutMutation } from '@store/services/auth'
 import user from 'user'
 import { useAppDispatch } from '@hooks/rtkHooks'
 import { clearToken } from '@store/slices/tokenSlice'
+import useCurrentUser from '@hooks/useCurrentUser'
 
 const ProfileMenu = () => {
     const t = useTranslations()
     const dispatch = useAppDispatch()
+    const currentUser = useCurrentUser()
+
     const [isOpen, setIsOpen] = useState(false)
     const [signout, {}] = useSignOutMutation()
 
@@ -43,9 +46,11 @@ const ProfileMenu = () => {
             >
                 {/* User Info */}
                 <div className="px-4 py-3 text-base font-semibold text-gray-900 dark:text-white">
-                    <div className="font-bold">Bonnie Green</div>
+                    <div className="font-bold">
+                        {currentUser?.firstName} {currentUser?.lastName}
+                    </div>
                     <div className="text-sm font-medium text-gray-600 dark:text-gray-400 truncate">
-                        name@flowbite.com
+                        {currentUser?.email}
                     </div>
                 </div>
 
