@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 
-enum Role {
+export enum Role {
     USER,
     MODERATOR,
     AGENT,

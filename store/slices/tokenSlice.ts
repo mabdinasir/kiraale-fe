@@ -33,6 +33,7 @@ const tokenSlice = createSlice({
         clearToken(state) {
             state.value = null
             Cookies.remove('authToken')
+            window.location.href = '/'
         },
     },
 })

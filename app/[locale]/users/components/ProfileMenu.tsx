@@ -1,10 +1,16 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+import { useSignOutMutation } from '@store/services/auth'
+import user from 'user'
+import { useAppDispatch } from '@hooks/rtkHooks'
+import { clearToken } from '@store/slices/tokenSlice'
 
 const ProfileMenu = () => {
     const t = useTranslations()
+    const dispatch = useAppDispatch()
     const [isOpen, setIsOpen] = useState(false)
+    const [signout, {}] = useSignOutMutation()
 
     const toggleDropdown = () => {
         setIsOpen(!isOpen)
@@ -17,7 +23,6 @@ const ProfileMenu = () => {
                 onClick={toggleDropdown}
                 className="btn btn-icon bg-green-600 hover:bg-green-500 active:bg-green-700 border-green-600 text-white rounded-full focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
                 type="button"
-                onBlur={() => setIsOpen(false)}
             >
                 <span className="sr-only">{t('open-profile-menu')}</span>
                 <Image
@@ -77,12 +82,15 @@ const ProfileMenu = () => {
 
                 {/* Sign-Out */}
                 <div className="py-2">
-                    <a
-                        href="#"
-                        className="block px-4 py-2 text-base font-medium text-gray-800 hover:bg-red-100 hover:text-red-600 dark:text-gray-200 dark:hover:bg-red-600 dark:hover:text-white rounded"
+                    <button
+                        className="block px-4 py-2 text-base font-medium text-gray-800 hover:bg-red-100 hover:text-red-600 dark:text-gray-200 dark:hover:bg-red-600 dark:hover:text-white rounded w-full text-left"
+                        onClick={async () => {
+                            await signout(user)
+                            dispatch(clearToken())
+                        }}
                     >
                         {t('sign-out')}
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
