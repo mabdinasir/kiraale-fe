@@ -3,7 +3,6 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { SignUpForm, SignUpResponse } from '@models/auth/SignupForm'
 import { LoginForm, LoginResponse } from '@models/auth/LoginForm'
 import { SignOutResponse } from '@models/auth/Signout'
-import { User } from '@models/user'
 import Cookies from 'js-cookie'
 
 const token = Cookies.get('authToken')
@@ -35,11 +34,10 @@ export const authApi = createApi({
                 body: credentials,
             }),
         }),
-        signOut: builder.mutation<SignOutResponse, User>({
-            query: (credentials) => ({
+        signOut: builder.mutation<SignOutResponse, void>({
+            query: () => ({
                 url: '/signout',
                 method: 'POST',
-                body: credentials,
             }),
         }),
     }),

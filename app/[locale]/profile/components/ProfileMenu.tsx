@@ -5,6 +5,7 @@ import { useSignOutMutation } from '@store/services/auth'
 import { useAppDispatch } from '@hooks/rtkHooks'
 import { clearToken } from '@store/slices/tokenSlice'
 import useCurrentUser from '@hooks/useCurrentUser'
+import Button from '@components/UI/Button'
 
 const ProfileMenu = () => {
     const t = useTranslations()
@@ -12,7 +13,7 @@ const ProfileMenu = () => {
     const currentUser = useCurrentUser()
 
     const [isOpen, setIsOpen] = useState(false)
-    const [signout, {}] = useSignOutMutation()
+    const [signout, { isLoading }] = useSignOutMutation()
 
     const toggleDropdown = () => {
         setIsOpen(!isOpen)
@@ -86,18 +87,19 @@ const ProfileMenu = () => {
 
                 {/* Sign-Out */}
                 <div className="py-2">
-                    <button
+                    <Button
                         className="block px-4 py-2 text-base font-medium text-gray-800 hover:bg-red-100 hover:text-red-600 dark:text-gray-200 dark:hover:bg-red-600 dark:hover:text-white rounded w-full text-left"
+                        isLoading={isLoading}
+                        title={isLoading ? t('signing-out') : t('sign-out')}
+                        redVariant
                         onClick={async () => {
                             if (currentUser) {
-                                await signout(currentUser)
+                                await signout()
                                 dispatch(clearToken())
                             }
                             dispatch(clearToken())
                         }}
-                    >
-                        {t('sign-out')}
-                    </button>
+                    />
                 </div>
             </div>
         </div>

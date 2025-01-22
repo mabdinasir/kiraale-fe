@@ -104,9 +104,9 @@ const LoginForm = () => {
 
         const response = await login(userData).unwrap()
 
-        dispatch(setToken(response.jwt))
-
         router.push('/')
+
+        dispatch(setToken(response.jwt))
 
         setUserData({
             email: '',
@@ -176,7 +176,7 @@ const LoginForm = () => {
                 <div className="mb-4 mt-4">
                     <Button
                         isLoading={isLoading}
-                        text={isLoading ? t('login-in') : t('login-sign-in')}
+                        title={isLoading ? t('login-in') : t('login-sign-in')}
                         disabled={isLoading}
                         onClick={handleSubmit}
                     />

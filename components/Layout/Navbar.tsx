@@ -8,8 +8,8 @@ import { useParams, usePathname } from 'next/navigation'
 import ReusableLink from '@components/Links/ReusableLink'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
-import { useAppSelector } from '@hooks/rtkHooks'
-import ProfileMenu from 'app/[locale]/users/components/ProfileMenu'
+import ProfileMenu from 'app/[locale]/profile/components/ProfileMenu'
+import useCurrentUser from '@hooks/useCurrentUser'
 
 type NavbarProps = {
     navClass?: string
@@ -18,7 +18,7 @@ type NavbarProps = {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ navClass, topnavClass, tagline }) => {
-    const token = useAppSelector((state) => state.token.value)
+    const currentUser = useCurrentUser()
 
     const [menu, setMenu] = useState('')
     // const [subMenu, setSubMenu] = useState('')
@@ -131,7 +131,7 @@ const Navbar: React.FC<NavbarProps> = ({ navClass, topnavClass, tagline }) => {
 
                     {/* <!-- Login button Start --> */}
                     <ul className="buy-button list-none mb-0">
-                        {token ? (
+                        {currentUser?.isSignedIn === true ? (
                             <ProfileMenu />
                         ) : (
                             <li className="inline mb-0">
@@ -143,7 +143,7 @@ const Navbar: React.FC<NavbarProps> = ({ navClass, topnavClass, tagline }) => {
                                 </ReusableLink>
                             </li>
                         )}
-                        {!token && (
+                        {!currentUser?.isSignedIn && (
                             <li className="sm:inline ps-1 mb-0 hidden">
                                 <ReusableLink
                                     href="/auth/signup"

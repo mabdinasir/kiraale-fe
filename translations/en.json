@@ -95,5 +95,6 @@
     "profile": "Profile",
     "settings": "Settings",
     "dashboard": "Dashboard",
-    "sign-out": "Sign out"
+    "sign-out": "Sign out",
+    "signing-out": "Signing out..."
 }

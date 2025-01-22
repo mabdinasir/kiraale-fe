@@ -218,7 +218,7 @@ const SignupForm = () => {
                 <div className="mb-4">
                     <Button
                         isLoading={isLoading}
-                        text={isLoading ? t('registering') : t('register')}
+                        title={isLoading ? t('registering') : t('register')}
                         disabled={isLoading}
                         onClick={handleSubmit}
                     />
