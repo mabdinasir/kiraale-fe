@@ -10,6 +10,7 @@ import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import ProfileMenu from 'app/[locale]/profile/components/ProfileMenu'
 import useCurrentUser from '@hooks/useCurrentUser'
+import StoreProvider from 'app/[locale]/StoreProvider'
 
 type NavbarProps = {
     navClass?: string
@@ -132,7 +133,9 @@ const Navbar: React.FC<NavbarProps> = ({ navClass, topnavClass, tagline }) => {
                     {/* <!-- Login button Start --> */}
                     <ul className="buy-button list-none mb-0">
                         {currentUser?.isSignedIn === true ? (
-                            <ProfileMenu />
+                            <StoreProvider>
+                                <ProfileMenu />
+                            </StoreProvider>
                         ) : (
                             <li className="inline mb-0">
                                 <ReusableLink

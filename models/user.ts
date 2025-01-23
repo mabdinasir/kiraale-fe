@@ -13,6 +13,7 @@ export interface User {
     lastName: string
     mobile: string
     email: string
+    hasAcceptedTnC: boolean
     isSignedIn: boolean
     isDeleted: boolean
     roles: Role[]

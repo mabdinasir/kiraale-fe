@@ -30,6 +30,7 @@ const SignupForm = () => {
         email: '',
         password: '',
         mobile: '',
+        terms: '',
     }
 
     const fieldRules: { [key: string]: FieldRules } = {
@@ -43,6 +44,7 @@ const SignupForm = () => {
     const [signUp, { isLoading, error }] = useSignUpMutation()
 
     const [userData, setUserData] = useState(initialUserData)
+    const [termsAccepted, setTermsAccepted] = useState(false)
     const [errors, setErrors] = useState(initialErrors)
 
     const validateFields = async () => {
@@ -90,6 +92,11 @@ const SignupForm = () => {
             }
         }
 
+        if (!termsAccepted) {
+            newErrors.terms = t('accept-terms-required')
+            isValid = false
+        }
+
         setErrors(newErrors)
         return isValid
     }
@@ -115,17 +122,17 @@ const SignupForm = () => {
         const isValid = await validateFields()
         if (!isValid) return
 
-        await signUp(userData).unwrap()
+        const dataToSubmit = {
+            ...userData,
+            hasAcceptedTnC: termsAccepted,
+        }
+
+        await signUp(dataToSubmit).unwrap()
 
         router.push(`/${locale}/auth/login`)
 
-        setUserData({
-            firstName: '',
-            lastName: '',
-            email: '',
-            password: '',
-            mobile: '',
-        })
+        setUserData(initialUserData)
+        setTermsAccepted(false)
     }
 
     return (
@@ -209,6 +216,26 @@ const SignupForm = () => {
                         onChange={handleChange}
                     />
                     {errors.mobile && <p className="text-red-500 text-sm mt-1">{errors.mobile}</p>}
+                </div>
+
+                <div className="mb-4">
+                    <div className="flex items-center w-full mb-0">
+                        <input
+                            className="form-checkbox text-green-600 rounded w-4 h-4 me-2 border border-inherit"
+                            type="checkbox"
+                            value=""
+                            id="AcceptT&C"
+                            checked={termsAccepted}
+                            onChange={() => setTermsAccepted((prev) => !prev)}
+                        />
+                        <label className="form-check-label text-slate-400" htmlFor="AcceptT&C">
+                            {t('i-accept')}{' '}
+                            <ReusableLink href="/terms" className="text-green-600">
+                                {t('terms-conditions')}
+                            </ReusableLink>
+                        </label>
+                    </div>
+                    {errors.terms && <p className="text-red-500 text-sm mt-1">{errors.terms}</p>}
                 </div>
 
                 {error && 'data' in error && (error as { data: { message: string } }).data?.message && (

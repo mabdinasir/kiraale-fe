@@ -108,10 +108,7 @@ const LoginForm = () => {
 
         dispatch(setToken(response.jwt))
 
-        setUserData({
-            email: '',
-            password: '',
-        })
+        setUserData(initialUserData)
     }
 
     return (
