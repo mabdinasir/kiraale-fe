@@ -95,7 +95,18 @@
     "properties": "Properties",
     "profile": "Profile",
     "settings": "Settings",
+    "chat": "Chat",
     "dashboard": "Dashboard",
     "sign-out": "Sign out",
-    "signing-out": "Signing out..."
+    "signing-out": "Signing out...",
+    "developed-by": "Eastleigh Real Estate. Designed & Developed with ❤️ by",
+    "notifications": "Notifications",
+    "explore-properties": "Explore Properties",
+    "favorite-properties": "Favorite Properties",
+    "add-property": "Add Property",
+    "user-profile": "User Profile",
+    "profile-settings": "Profile Settings",
+    "blog": "Blog",
+    "blogs": "Blogs",
+    "blog-detail": "Blog Detail"
 }

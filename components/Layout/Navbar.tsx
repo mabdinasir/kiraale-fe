@@ -8,7 +8,7 @@ import { useParams, usePathname } from 'next/navigation'
 import ReusableLink from '@components/Links/ReusableLink'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
-import ProfileMenu from 'app/[locale]/profile/components/ProfileMenu'
+import ProfileMenu from 'app/[locale]/dashboard/profile/components/ProfileMenu'
 import useCurrentUser from '@hooks/useCurrentUser'
 import StoreProvider from 'app/[locale]/StoreProvider'
 
@@ -49,7 +49,12 @@ const Navbar: React.FC<NavbarProps> = ({ navClass, topnavClass, tagline }) => {
         setIsOpen(!isOpen)
     }
 
-    const noNavPaths = [`/${locale}/auth/login`, `/${locale}/auth/signup`, `/${locale}/auth/reset-password`]
+    const noNavPaths = [
+        `/${locale}/auth/login`,
+        `/${locale}/auth/signup`,
+        `/${locale}/auth/reset-password`,
+        `/${locale}/dashboard`,
+    ]
 
     if (noNavPaths.includes(currentPath)) {
         return null

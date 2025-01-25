@@ -1,3 +1,5 @@
+'use client' // This is a client component 👈🏽
+
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -16,9 +18,18 @@ import { BsPencil } from 'react-icons/bs'
 import { RiBehanceFill } from 'react-icons/ri'
 import { useTranslations } from 'next-intl'
 import ReusableLink from '@components/Links/ReusableLink'
+import { useParams, usePathname } from 'next/navigation'
 
 const Footer = () => {
     const t = useTranslations()
+    const { locale } = useParams()
+    const currentPath = usePathname()
+
+    const noFooterPrefix = `/${locale}/dashboard`
+
+    if (currentPath.startsWith(noFooterPrefix)) {
+        return null
+    }
 
     return (
         <>
@@ -222,8 +233,7 @@ const Footer = () => {
                         <div className="grid md:grid-cols-2 items-center gap-6">
                             <div className="md:text-start text-center">
                                 <p className="mb-0 text-gray-300">
-                                    ©{new Date().getFullYear()} Eastleigh Real Estate. Designed & Developed with{' '}
-                                    <i className="mdi mdi-heart text-red-600"></i> by{' '}
+                                    ©{new Date().getFullYear()} {t('developed-by')}{' '}
                                     <Link
                                         href="https://btj.so/en"
                                         target="_blank"
@@ -231,7 +241,6 @@ const Footer = () => {
                                     >
                                         BTJ Software
                                     </Link>
-                                    .
                                 </p>
                             </div>
 

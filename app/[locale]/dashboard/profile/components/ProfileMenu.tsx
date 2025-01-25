@@ -6,6 +6,7 @@ import { useAppDispatch } from '@hooks/rtkHooks'
 import { clearToken } from '@store/slices/tokenSlice'
 import useCurrentUser from '@hooks/useCurrentUser'
 import Button from '@components/UI/Button'
+import ReusableLink from '@components/Links/ReusableLink'
 
 const ProfileMenu = () => {
     const t = useTranslations()
@@ -60,12 +61,12 @@ const ProfileMenu = () => {
                     aria-labelledby="dropdownUserAvatarButton"
                 >
                     <li>
-                        <a
-                            href="#"
+                        <ReusableLink
+                            href={'/dashboard'}
                             className="block px-4 py-2 hover:bg-green-100 hover:text-green-700 dark:hover:bg-gray-700 dark:hover:text-green-400 rounded"
                         >
                             {t('dashboard')}
-                        </a>
+                        </ReusableLink>
                     </li>
                     <li>
                         <a
@@ -97,7 +98,6 @@ const ProfileMenu = () => {
                                 await signout()
                                 dispatch(clearToken())
                             }
-                            dispatch(clearToken())
                         }}
                     />
                 </div>

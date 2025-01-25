@@ -26,6 +26,7 @@
         "react-scroll": "^1.9.0",
         "react-select": "^5.9.0",
         "sass": "^1.83.1",
+        "simplebar-react": "^3.3.0",
         "tiny-slider": "^2.9.4",
         "tiny-slider-react": "^0.5.7",
         "validator": "^13.12.0"
