@@ -1,5 +1,7 @@
+'use client' // This is a client component 👈🏽
+
 import Sidebar from '@components/Layout/Sidebar'
-import React from 'react'
+import React, { useState } from 'react'
 import '@assets/css/globals.css'
 import '@assets/css/tailwind2.css'
 import '@assets/css/materialdesignicons2.min.css'
@@ -13,13 +15,15 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode
 }>) {
+    const [toggle, setToggle] = useState(false)
+
     return (
         <>
-            <div className={'toggled page-wrapper'}>
+            <div className={`${toggle ? '' : 'toggled'} page-wrapper`}>
                 <Sidebar />
                 <main className="page-content bg-gray-50 dark:bg-slate-800 min-h-screen">
                     <StoreProvider>
-                        <TopHeader />
+                        <TopHeader toggle={toggle} setToggle={setToggle} />
                     </StoreProvider>
                     <div className="mt-24 mx-8">{children}</div>
                     <DashboardFooter />

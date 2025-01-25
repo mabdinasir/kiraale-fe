@@ -1,12 +1,12 @@
 'use client' // This is a client component 👈🏽
 
-import React, { useState } from 'react'
+import React, { Dispatch, FC, SetStateAction, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
 import SimpleBar from 'simplebar-react'
 import 'simplebar-react/dist/simplebar.min.css'
-import { FiBell, FiDollarSign, FiShoppingCart, FiTruck } from 'react-icons/fi'
+import { FiBell, FiDollarSign, FiMenu, FiShoppingCart, FiTruck } from 'react-icons/fi'
 import ReusableLink from '@components/Links/ReusableLink'
 import { useTranslations } from 'next-intl'
 import Button from '@components/UI/Button'
@@ -15,7 +15,12 @@ import { useAppDispatch } from '@hooks/rtkHooks'
 import { useSignOutMutation } from '@store/services/auth'
 import { clearToken } from '@store/slices/tokenSlice'
 
-const TopHeader = () => {
+type TopHeaderProps = {
+    toggle: boolean
+    setToggle: Dispatch<SetStateAction<boolean>>
+}
+
+const TopHeader: FC<TopHeaderProps> = ({ toggle, setToggle }) => {
     const t = useTranslations()
     const dispatch = useAppDispatch()
     const currentUser = useCurrentUser()
@@ -29,7 +34,7 @@ const TopHeader = () => {
         <div className="top-header">
             <div className="header-bar flex justify-between">
                 <div className="flex items-center space-x-1">
-                    <ReusableLink href="/dashboard" className="xl:hidden block me-2">
+                    <ReusableLink href="/" className="xl:hidden block me-2">
                         <Image
                             src="/images/logo-icon-32.png"
                             width={32}
@@ -54,6 +59,15 @@ const TopHeader = () => {
                             />
                         </span>
                     </ReusableLink>
+
+                    <Link
+                        id="close-sidebar"
+                        onClick={() => setToggle(!toggle)}
+                        className="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-[20px] text-center bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 border border-gray-100 dark:border-gray-800 text-slate-900 dark:text-white rounded-md"
+                        href="#"
+                    >
+                        <FiMenu className="h-4 w-4" />
+                    </Link>
 
                     <div className="ps-1.5">
                         <div className="form-icon relative sm:block hidden">

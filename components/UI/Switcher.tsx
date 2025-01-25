@@ -4,10 +4,12 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import * as Scroll from 'react-scroll'
 import { FiArrowUp, FiMoon, FiSun } from 'react-icons/fi'
+import { usePathname } from 'next/navigation'
 
 const scroll = Scroll.animateScroll
 
 const Switcher = () => {
+    const currentPath = usePathname()
     const [scrollToTops, setScrollToTops] = useState(false)
     const [layoutMode, setLayoutMode] = useState<'LTR' | 'RTL'>('LTR')
 
@@ -46,6 +48,10 @@ const Switcher = () => {
             default:
                 break
         }
+    }
+
+    if (currentPath.includes('/dashboard')) {
+        return null
     }
 
     return (
