@@ -25,7 +25,7 @@ export default function RootLayout({
                     <StoreProvider>
                         <TopHeader toggle={toggle} setToggle={setToggle} />
                     </StoreProvider>
-                    <div className="mt-24 mx-8">{children}</div>
+                    <div className="mx-4">{children}</div>
                     <DashboardFooter />
                     <Switcher />
                 </main>

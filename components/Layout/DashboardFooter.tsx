@@ -6,7 +6,7 @@ const DashboardFooter = () => {
     const t = useTranslations()
 
     return (
-        <footer className="shadow dark:shadow-gray-700 bg-white dark:bg-slate-900 px-8 py-4 fixed bottom-0 w-full">
+        <footer className="shadow dark:shadow-gray-700 bg-white dark:bg-slate-900 px-7 py-4 fixed bottom-0 w-full">
             <div className="container-fluid">
                 <div className="grid grid-cols-1">
                     <div className="sm:text-start text-center mx-md-2">
