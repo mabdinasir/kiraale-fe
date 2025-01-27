@@ -132,7 +132,16 @@
     "land": "Land",
     "industrial": "Industrial",
     "hotel": "Hotel",
-    "upload-image": "Upload Image",
-    "upload-property-image": "Upload Your Property Images Here. (Min 5 images)",
-    "image-upload-info": "Supports JPG, PNG and MP4 videos. Max file size : 10MB."
+    "select-images": "Select Images",
+    "select-images-info": "Select images to upload",
+    "upload-to-server": "Upload to Server",
+    "upload-images-info": "Upload images to server",
+    "uploading": "Uploading...",
+    "uploaded": "Uploaded",
+    "save-images": "Save Images",
+    "upload-property-image": "Upload Your Property Images Here. (Min 4 images/Videos)",
+    "image-upload-info": "Supports JPG, PNG and MP4 videos. Max file size : 10MB.",
+    "upload-error": "Failed to upload the image: {fileName}.",
+    "signed-url-error": "Failed to get signed URL for the image: {fileName}. Error: {error}.",
+    "unexpected-error": "An unexpected error occurred: {error}."
 }

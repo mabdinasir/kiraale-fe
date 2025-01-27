@@ -1,17 +1,62 @@
-'use client' // This is a client component 👈🏽
+'use client'
 
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { MdDeleteForever } from 'react-icons/md'
+import getSignedURL from 'app/actions/getSignedUrl'
+import computeSHA256 from '@utils/computeSHA256'
+import isValidFile from '@utils/isValidFile'
+import Error from '@components/UI/Error'
 
 const ImageUpload = () => {
     const t = useTranslations()
-    const [files, setFiles] = useState<string[]>([])
+    const [files, setFiles] = useState<File[]>([])
+    const [uploading, setUploading] = useState(false)
+    const [errorMessage, setErrorMessage] = useState<string | null>(null)
+
+    const handleUploadImages = async () => {
+        setUploading(true)
+        setErrorMessage(null)
+
+        try {
+            for (const file of files) {
+                const checksum = await computeSHA256(file)
+
+                const signedURLResult = await getSignedURL({
+                    fileSize: file.size,
+                    fileType: file.type,
+                    checksum,
+                })
+
+                if (signedURLResult.success) {
+                    const { url } = signedURLResult.success
+
+                    const uploadResponse = await fetch(url, {
+                        method: 'PUT',
+                        body: file,
+                        headers: {
+                            'Content-Type': file.type,
+                        },
+                    })
+
+                    if (!uploadResponse.ok) {
+                        setErrorMessage(t('upload-error', { fileName: file.name }))
+                    }
+                } else if (signedURLResult.failure) {
+                    setErrorMessage(t('signed-url-error', { fileName: file.name, error: signedURLResult.failure }))
+                }
+            }
+        } catch (error) {
+            setErrorMessage(t('unexpected-error', { error: (error as Error).message || 'Unknown error' }))
+        } finally {
+            setUploading(false)
+        }
+    }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
-            const uploadedFiles = Array.from(e.target.files).map((file) => URL.createObjectURL(file))
+            const uploadedFiles = Array.from(e.target.files)
             setFiles((prevFiles) => [...prevFiles, ...uploadedFiles])
         }
     }
@@ -20,18 +65,23 @@ const ImageUpload = () => {
         setFiles((prevFiles) => prevFiles.filter((_, i) => i !== index))
     }
 
+    const isUploadDisabled =
+        files.length < 3 || files.length > 10 || uploading || !!errorMessage || files.some((file) => !isValidFile(file))
+
     return (
         <div>
             <p className="font-medium mb-4">
                 {t('upload-property-image')} <span className="text-red-500">*</span>
             </p>
 
+            {errorMessage && <Error error={errorMessage} />}
+
             {files.length > 0 ? (
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                     {files.map((file, index) => (
                         <div key={index} className="relative group">
                             <Image
-                                src={file}
+                                src={URL.createObjectURL(file)}
                                 alt={`Uploaded image ${index + 1}`}
                                 width={0}
                                 height={0}
@@ -56,20 +106,36 @@ const ImageUpload = () => {
             )}
 
             <input
-                type="file"
                 id="input-file"
+                type="file"
                 name="input-file"
-                accept="image/*"
+                accept="image/jpeg,image/png,video/mp4,video/quicktime"
                 multiple
                 onChange={handleChange}
                 hidden
             />
-            <label
-                className="btn-upload btn bg-green-600 hover:bg-green-700 border-green-600 hover:border-green-700 text-white rounded-md mt-6 cursor-pointer"
-                htmlFor="input-file"
-            >
-                {t('upload-image')}
-            </label>
+
+            <div className="flex flex-col gap-4 mt-6">
+                <div>
+                    <label
+                        className="btn-upload btn bg-blue-600 hover:bg-blue-700 border-blue-600 hover:border-blue-700 text-white rounded-md cursor-pointer px-4 py-2"
+                        htmlFor="input-file"
+                    >
+                        {t('select-images')}
+                    </label>
+                </div>
+                <div>
+                    <button
+                        className={`btn-upload btn ${
+                            isUploadDisabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700'
+                        } text-white rounded-md px-4 py-2`}
+                        onClick={handleUploadImages}
+                        disabled={isUploadDisabled}
+                    >
+                        {uploading ? t('uploading') : t('upload-to-server')}
+                    </button>
+                </div>
+            </div>
         </div>
     )
 }
