@@ -1,5 +1,3 @@
-import crypto from 'crypto'
-
 const computeSHA256 = async (file: File) => {
     const buffer = await file.arrayBuffer()
     const hashBuffer = await crypto.subtle.digest('SHA-256', buffer)

@@ -1,5 +1,3 @@
-'use client' // This is a client component 👈🏽
-
 import React, { useState } from 'react'
 import { useSignUpMutation } from '@store/services/auth'
 import { useTranslations } from 'next-intl'

@@ -11,7 +11,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Button: React.FC<Props> = ({ onClick, isLoading, title, disabled = false, className = '', redVariant }) => (
     <button
-        type="button"
+        type="submit"
         onClick={onClick}
         className={
             className ||

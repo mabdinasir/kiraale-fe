@@ -1,5 +1,3 @@
-'use client' // This is a client component 👈🏽
-
 import React, { Dispatch, FC, SetStateAction, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
