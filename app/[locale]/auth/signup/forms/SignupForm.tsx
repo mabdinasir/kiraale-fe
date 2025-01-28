@@ -1,3 +1,5 @@
+'use client' // This isa client component 👈🏽
+
 import React, { useState } from 'react'
 import { useSignUpMutation } from '@store/services/auth'
 import { useTranslations } from 'next-intl'

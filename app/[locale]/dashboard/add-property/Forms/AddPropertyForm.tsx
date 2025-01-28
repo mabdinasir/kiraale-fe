@@ -9,6 +9,7 @@ import { CgDetailsMore } from 'react-icons/cg'
 import { IoCalendarNumber, IoExpandOutline } from 'react-icons/io5'
 import dynamic from 'next/dynamic'
 import { MdHolidayVillage } from 'react-icons/md'
+import Button from '@components/UI/Button'
 
 const Select = dynamic(() => import('react-select'), { ssr: false })
 
@@ -288,14 +289,12 @@ const AddPropertyForm = () => {
                 </div>
             </div>
 
-            <button
-                type="submit"
-                id="submit"
+            <Button
+                title={t('add-property')}
+                id="add-property"
                 name="send"
                 className="btn bg-green-600 hover:bg-green-700 border-green-600 hover:border-green-700 text-white rounded-md mt-5"
-            >
-                {t('add-property')}
-            </button>
+            />
         </form>
     )
 }

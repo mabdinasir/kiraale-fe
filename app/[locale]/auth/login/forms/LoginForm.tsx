@@ -1,3 +1,5 @@
+'use client' // This is a client component 👈🏽
+
 import ReusableLink from '@components/Links/ReusableLink'
 import Button from '@components/UI/Button'
 import Error from '@components/UI/Error'
