@@ -1,14 +1,10 @@
 import { User } from '@models/user'
+import { signUpSchema } from 'schemas'
+import { z } from 'zod'
 
-export interface SignUpForm {
-    firstName: string
-    lastName: string
-    email: string
-    password: string
-    mobile: string
-}
+export type SignupForm = z.infer<typeof signUpSchema>
 
-export interface SignUpResponse {
+export interface SignupResponse {
     success: boolean
     message: string
     User?: User

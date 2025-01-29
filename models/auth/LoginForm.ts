@@ -1,9 +1,8 @@
 import { User } from '@models/user'
+import { loginSchema } from 'schemas'
+import { z } from 'zod'
 
-export interface LoginForm {
-    email: string
-    password: string
-}
+export type LoginForm = z.infer<typeof loginSchema>
 
 export interface LoginResponse {
     success: boolean

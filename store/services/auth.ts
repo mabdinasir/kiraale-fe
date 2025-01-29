@@ -1,6 +1,6 @@
 import apiConfig from '@config/apiConfig'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { SignUpForm, SignUpResponse } from '@models/auth/SignupForm'
+import { SignupForm, SignupResponse } from '@models/auth/SignupForm'
 import { LoginForm, LoginResponse } from '@models/auth/LoginForm'
 import { SignOutResponse } from '@models/auth/Signout'
 import Cookies from 'js-cookie'
@@ -20,7 +20,7 @@ export const authApi = createApi({
         },
     }),
     endpoints: (builder) => ({
-        signUp: builder.mutation<SignUpResponse, SignUpForm>({
+        signUp: builder.mutation<SignupResponse, SignupForm>({
             query: (userData) => ({
                 url: '/signup',
                 method: 'POST',

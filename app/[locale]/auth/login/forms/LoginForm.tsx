@@ -3,189 +3,179 @@
 import ReusableLink from '@components/Links/ReusableLink'
 import Button from '@components/UI/Button'
 import Error from '@components/UI/Error'
-import { FieldRules } from '@models/auth/FieldRules'
 import { useLoginMutation } from '@store/services/auth'
-import validateEmail from '@utils/validateEmail'
-import validatePassword from '@utils/validatePassword'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useAppDispatch } from '@hooks/rtkHooks'
 import { setToken } from '@store/slices/tokenSlice'
+import { z } from 'zod'
+import { loginSchema } from 'schemas'
+import type { LoginForm } from '@models/auth/LoginForm'
+import isApiError from '@utils/isApiError'
+
+type FormErrors = Record<keyof LoginForm, string>
 
 const LoginForm = () => {
     const t = useTranslations()
     const router = useRouter()
     const dispatch = useAppDispatch()
 
-    const initialUserData = {
-        email: '',
-        password: '',
-    }
-
-    const initialErrors = {
-        email: '',
-        password: '',
-    }
-
-    const fieldRules: { [key: string]: FieldRules } = {
-        email: { minLength: 5, required: true },
-        password: { minLength: 8, required: true },
-    }
+    const initialUserData = React.useMemo<LoginForm>(
+        () => ({
+            email: '',
+            password: '',
+        }),
+        [],
+    )
 
     const [login, { isLoading, error }] = useLoginMutation()
+    const [userData, setUserData] = useState<LoginForm>(initialUserData)
+    const [errors, setErrors] = useState<FormErrors>({ email: '', password: '' })
+    const [rememberMe, setRememberMe] = useState(false)
 
-    const [userData, setUserData] = useState(initialUserData)
-    const [errors, setErrors] = useState(initialErrors)
-
-    const validateFields = async () => {
-        const newErrors = { ...initialErrors }
-        let isValid = true
-
-        Object.keys(fieldRules).forEach((field) => {
-            const rules = fieldRules[field as keyof typeof fieldRules]
-            const value = userData[field as keyof typeof userData].trim()
-
-            // Check for required field first
-            if (rules.required && !value) {
-                newErrors[field as keyof typeof newErrors] = t('field-required')
-                isValid = false
+    const validateFields = useCallback(async () => {
+        try {
+            await loginSchema.parseAsync(userData)
+            return true
+        } catch (err) {
+            if (err instanceof z.ZodError) {
+                const newErrors = {} as FormErrors
+                err.issues.forEach((issue) => {
+                    const field = issue.path[0] as keyof FormErrors
+                    newErrors[field] = issue.message
+                })
+                setErrors(newErrors)
             }
-
-            // Check for minLength if not empty
-            else if (rules.minLength && value.length < rules.minLength) {
-                newErrors[field as keyof typeof newErrors] = t('min-length', { field: t(field), min: rules.minLength })
-                isValid = false
-            }
-        })
-
-        if (!newErrors.email) {
-            try {
-                await validateEmail(userData.email)
-            } catch (err: Error | unknown) {
-                newErrors.email = (err as Error).message
-                isValid = false
-            }
+            return false
         }
+    }, [userData])
 
-        if (!newErrors.password) {
-            try {
-                await validatePassword(userData.password)
-            } catch (err: Error | unknown) {
-                newErrors.password = (err as Error).message
-                isValid = false
-            }
-        }
-
-        setErrors(newErrors)
-        return isValid
-    }
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
+        setUserData((prev) => ({ ...prev, [name]: value }))
+        setErrors((prev) => ({ ...prev, [name]: '' }))
+    }, [])
 
-        setUserData((prevData) => ({
-            ...prevData,
-            [name]: value,
-        }))
+    const handleSubmit = useCallback(
+        async (e: React.FormEvent) => {
+            e.preventDefault()
+            if (!(await validateFields())) return
 
-        if (errors[name as keyof typeof initialErrors]) {
-            setErrors((prevErrors) => ({
-                ...prevErrors,
-                [name]: '',
-            }))
-        }
-    }
+            const response = await login({ ...userData }).unwrap()
+            dispatch(setToken(response.jwt))
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault()
-        const isValid = await validateFields()
-        if (!isValid) return
-
-        const response = await login(userData).unwrap()
-
-        router.push('/')
-
-        dispatch(setToken(response.jwt))
-
-        setUserData(initialUserData)
-    }
+            setTimeout(() => {
+                router.push('/')
+                setUserData(initialUserData)
+            }, 1500)
+        },
+        [validateFields, login, userData, dispatch, router, initialUserData],
+    )
 
     return (
-        <form className="text-start" noValidate>
-            <div className="grid grid-cols-1">
-                <div className="mb-4">
-                    <label className="font-semibold" htmlFor="LoginEmail">
-                        {t('email-address')}
-                    </label>
-                    <input
-                        id="LoginEmail"
-                        type="email"
-                        name="email"
-                        className={`form-input ${errors.email ? 'border-red-500' : ''}`}
-                        placeholder="name@example.com"
-                        value={userData.email}
-                        onChange={handleChange}
-                    />
-                    {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
-                </div>
-
-                <div className="mb-4">
-                    <label className="font-semibold" htmlFor="LoginPassword">
-                        {t('password')}
-                    </label>
-                    <input
-                        id="LoginPassword"
-                        type="password"
-                        name="password"
-                        className={`form-input ${errors.password ? 'border-red-500' : ''}`}
-                        placeholder={t('password')}
-                        value={userData.password}
-                        onChange={handleChange}
-                    />
-                    {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
-                </div>
-
-                <div className="flex justify-between mb-4">
-                    <div className="inline-flex items-center">
-                        <input
-                            className="form-checkbox text-green-600 rounded w-4 h-4 me-2 border border-inherit"
-                            type="checkbox"
-                            value=""
-                            id="RememberMe"
-                        />
-                        <label className="form-check-label text-slate-400" htmlFor="RememberMe">
-                            {t('remember-me')}
+        <form className="text-start" noValidate onSubmit={handleSubmit}>
+            <fieldset disabled={isLoading}>
+                <div className="grid grid-cols-1">
+                    {/* Email Input */}
+                    <div className="mb-4">
+                        <label className="font-semibold" htmlFor="LoginEmail">
+                            {t('email-address')}
                         </label>
+                        <input
+                            id="LoginEmail"
+                            type="email"
+                            name="email"
+                            autoComplete="username"
+                            aria-invalid={!!errors.email}
+                            aria-describedby="email-error"
+                            className={`form-input ${errors.email ? 'border-red-500' : ''}`}
+                            placeholder="name@example.com"
+                            value={userData.email}
+                            onChange={handleChange}
+                        />
+                        {errors.email && (
+                            <p id="email-error" className="text-red-500 text-sm mt-1" role="alert">
+                                {errors.email}
+                            </p>
+                        )}
                     </div>
 
-                    <p className="text-slate-400 mb-0">
+                    {/* Password Input */}
+                    <div className="mb-4 relative">
+                        <label className="font-semibold" htmlFor="LoginPassword">
+                            {t('password')}
+                        </label>
+                        <input
+                            id="LoginPassword"
+                            type="password"
+                            name="password"
+                            autoComplete="current-password"
+                            aria-invalid={!!errors.password}
+                            aria-describedby="password-error"
+                            className={`form-input pr-10 ${errors.password ? 'border-red-500' : ''}`}
+                            placeholder={t('password')}
+                            value={userData.password}
+                            onChange={handleChange}
+                        />
+                        {errors.password && (
+                            <p id="password-error" className="text-red-500 text-sm mt-1" role="alert">
+                                {errors.password}
+                            </p>
+                        )}
+                    </div>
+
+                    {/* Remember Me & Forgot Password */}
+                    <div className="flex justify-between mb-4">
+                        <div className="inline-flex items-center">
+                            <input
+                                id="RememberMe"
+                                type="checkbox"
+                                checked={rememberMe}
+                                onChange={(e) => setRememberMe(e.target.checked)}
+                                className="form-checkbox text-green-600 rounded w-4 h-4 me-2 border border-inherit"
+                            />
+                            <label htmlFor="RememberMe" className="form-check-label text-slate-400">
+                                {t('remember-me')}
+                            </label>
+                        </div>
+
                         <ReusableLink href="/auth/reset-password" className="text-slate-400">
                             {t('forgot-password')}
                         </ReusableLink>
-                    </p>
-                </div>
+                    </div>
 
-                {error && 'data' in error && (error as { data: { message: string } }).data?.message && (
-                    <Error error={(error as { data: { message: string } }).data.message} />
-                )}
+                    {/* Error Message */}
+                    {error && isApiError(error) && (
+                        <div>
+                            {/* Display the generic error message */}
+                            <Error error={error.data.message} />
 
-                <div className="mb-4 mt-4">
-                    <Button
-                        isLoading={isLoading}
-                        title={isLoading ? t('login-in') : t('login-sign-in')}
-                        disabled={isLoading}
-                        onClick={handleSubmit}
-                    />
-                </div>
+                            {/* Display field-specific validation errors (if they exist) */}
+                            {error.data.errors?.map((err, index) => (
+                                <Error key={index} error={`${err.field}: ${err.message}`} />
+                            ))}
+                        </div>
+                    )}
 
-                <div className="text-center">
-                    <span className="text-slate-400 me-2">{t('dont-have-account')}</span>{' '}
-                    <ReusableLink href="/auth/signup" className="text-black dark:text-white font-bold">
-                        {t('signup')}
-                    </ReusableLink>
+                    {/* Submit Button */}
+                    <div className="mb-4 mt-4">
+                        <Button
+                            isLoading={isLoading}
+                            title={isLoading ? t('login-in') : t('login-sign-in')}
+                            disabled={isLoading}
+                        />
+                    </div>
+
+                    {/* Signup Link */}
+                    <div className="text-center">
+                        <span className="text-slate-400 me-2">{t('dont-have-account')}</span>
+                        <ReusableLink href="/auth/signup" className="text-black dark:text-white font-bold">
+                            {t('sign-up')}
+                        </ReusableLink>
+                    </div>
                 </div>
-            </div>
+            </fieldset>
         </form>
     )
 }
