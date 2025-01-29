@@ -32,11 +32,10 @@ const AddProperty = () => {
                 <div className="container relative">
                     <div className="grid md:grid-cols-2 grid-cols-1 gap-6 mt-6">
                         <div className="rounded-md shadow dark:shadow-gray-700 p-6 bg-white dark:bg-slate-900 h-fit">
-                            <ImageUpload />
-                        </div>
-
-                        <div className="rounded-md shadow dark:shadow-gray-700 p-6 bg-white dark:bg-slate-900 h-fit">
                             <AddPropertyForm />
+                        </div>
+                        <div className="rounded-md shadow dark:shadow-gray-700 p-6 bg-white dark:bg-slate-900 h-fit">
+                            <ImageUpload />
                         </div>
                     </div>
                 </div>

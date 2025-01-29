@@ -1,4 +1,4 @@
-'use client'
+'use client' // This is a client component 👈🏽
 
 import React, { useState } from 'react'
 import Image from 'next/image'
@@ -8,12 +8,16 @@ import getSignedURL from 'app/actions/getSignedUrl'
 import computeSHA256 from '@utils/computeSHA256'
 import isValidFile from '@utils/isValidFile'
 import Error from '@components/UI/Error'
+import useCurrentUser from '@hooks/useCurrentUser'
+import { User } from '@models/user'
 
 const ImageUpload = () => {
     const t = useTranslations()
     const [files, setFiles] = useState<File[]>([])
     const [uploading, setUploading] = useState(false)
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
+
+    const currentUser = useCurrentUser()
 
     const handleUploadImages = async () => {
         setUploading(true)
@@ -27,6 +31,7 @@ const ImageUpload = () => {
                     fileSize: file.size,
                     fileType: file.type,
                     checksum,
+                    user: currentUser as User,
                 })
 
                 if (signedURLResult.success) {

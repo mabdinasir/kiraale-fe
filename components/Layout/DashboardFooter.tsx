@@ -1,3 +1,5 @@
+'use client' // This is a client component 👈🏽
+
 import React from 'react'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
@@ -17,9 +19,8 @@ const DashboardFooter = () => {
                                 target="_blank"
                                 className="text-reset text-green-600 hover:text-green-700 duration-500 ease-in-out lightbox"
                             >
-                                BTJ Software
+                                BTJ Software.
                             </Link>
-                            .
                         </p>
                     </div>
                 </div>

@@ -16,7 +16,7 @@ const s3Client = new S3Client({
 
 const generateFileName = (bytes = 32) => crypto.randomBytes(bytes).toString('hex')
 
-const getSignedURL = async ({ fileType, fileSize, checksum }: GetSignedURLParams): SignedURLResponse => {
+const getSignedURL = async ({ fileType, fileSize, checksum, user }: GetSignedURLParams): SignedURLResponse => {
     if (!allowedFileTypes.includes(fileType)) {
         return { failure: `File type ${fileType} is not allowed` }
     }
@@ -33,6 +33,9 @@ const getSignedURL = async ({ fileType, fileSize, checksum }: GetSignedURLParams
         ContentType: fileType,
         ContentLength: fileSize,
         ChecksumSHA256: checksum,
+        Metadata: {
+            userId: user.id,
+        },
     })
 
     const url = await getSignedUrl(s3Client, putObjectCommand, { expiresIn: 3600 }) // 1 hour
