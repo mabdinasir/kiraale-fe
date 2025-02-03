@@ -71,7 +71,7 @@ const ImageUpload = () => {
     }
 
     const isUploadDisabled =
-        files.length < 3 || files.length > 10 || uploading || !!errorMessage || files.some((file) => !isValidFile(file))
+        files.length < 4 || files.length > 10 || uploading || !!errorMessage || files.some((file) => !isValidFile(file))
 
     return (
         <div>
@@ -137,7 +137,7 @@ const ImageUpload = () => {
                         onClick={handleUploadImages}
                         disabled={isUploadDisabled}
                     >
-                        {uploading ? t('uploading') : t('upload-to-server')}
+                        {uploading ? t('saving') : t('save-images')}
                     </button>
                 </div>
             </div>

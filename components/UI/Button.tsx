@@ -13,12 +13,9 @@ const Button: React.FC<Props> = ({ onClick, isLoading, title, disabled = false, 
     <button
         type="submit"
         onClick={onClick}
-        className={
-            className ||
-            `btn w-full rounded-md text-white ${
-                isLoading || disabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700'
-            }`
-        }
+        className={`btn w-full rounded-md text-white 
+            ${isLoading || disabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700'} 
+            ${className}`}
         disabled={isLoading || disabled}
     >
         {isLoading ? (

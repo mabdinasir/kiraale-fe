@@ -163,7 +163,7 @@ const LoginForm = () => {
                         <Button
                             isLoading={isLoading}
                             title={isLoading ? t('login-in') : t('login-sign-in')}
-                            disabled={isLoading}
+                            disabled={Object.values(errors).some((err) => !!err)}
                         />
                     </div>
 

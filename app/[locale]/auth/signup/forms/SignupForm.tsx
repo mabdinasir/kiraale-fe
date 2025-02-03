@@ -247,7 +247,7 @@ const SignupForm = () => {
                         <Button
                             isLoading={isLoading}
                             title={isLoading ? t('registering') : t('register')}
-                            disabled={isLoading}
+                            disabled={Object.values(errors).some((err) => !!err)}
                         />
                     </div>
 

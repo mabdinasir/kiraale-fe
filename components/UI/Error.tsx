@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 
 type ErrorProps = {
-    error: string
+    error?: string
 }
 
 const Error: FC<ErrorProps> = ({ error }) => (
