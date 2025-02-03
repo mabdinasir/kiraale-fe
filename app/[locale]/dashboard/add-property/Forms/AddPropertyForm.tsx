@@ -15,6 +15,7 @@ import addPropertySchema from 'schemas/property.schemas'
 import { z } from 'zod'
 import Error from '@components/UI/Error'
 import isApiError from '@utils/isApiError'
+import showToast from '@utils/showToast'
 
 type FormErrors = Partial<Record<keyof AddPropertyForm, string>>
 type OptionType = { label: string; value: string }
@@ -109,9 +110,13 @@ const AddPropertyForm = () => {
             e.preventDefault()
             if (!(await validateFields())) return
 
-            await addProperty(propertyData).unwrap()
-            // Optionally, display a success message or redirect the user here.
-            setPropertyData(initialPropertyData)
+            try {
+                await addProperty(propertyData).unwrap()
+                setPropertyData(initialPropertyData)
+                showToast('success', 'Property added successfully!', 15)
+            } catch (err: Error | unknown) {
+                showToast('error', `Something went wrong! ${err}`, 15)
+            }
         },
         [validateFields, addProperty, propertyData, initialPropertyData],
     )

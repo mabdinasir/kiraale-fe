@@ -11,6 +11,7 @@ import Navbar from '@components/Layout/Navbar'
 import Switcher from '@components/UI/Switcher'
 import Footer from '@components/Layout/Footer'
 import StoreProvider from './StoreProvider'
+import { Toaster } from 'react-hot-toast'
 
 const league_Spartan = League_Spartan({
     subsets: ['latin'],
@@ -45,6 +46,7 @@ export default async function RootLayout({
                     <Switcher />
                     <Analytics />
                     <Footer />
+                    <Toaster position="bottom-left" />
                 </NextIntlClientProvider>
             </body>
         </html>
