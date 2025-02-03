@@ -11,11 +11,11 @@ import { MdHolidayVillage } from 'react-icons/md'
 import Button from '@components/UI/Button'
 import type { AddPropertyForm } from '@models/properties/property'
 import { useAddPropertyMutation } from '@store/services/properties'
-import addPropertySchema from 'schemas/property.schemas'
 import { z } from 'zod'
 import Error from '@components/UI/Error'
 import isApiError from '@utils/isApiError'
 import showToast from '@utils/showToast'
+import addPropertySchema from 'schemas/property.schema'
 
 type FormErrors = Partial<Record<keyof AddPropertyForm, string>>
 type OptionType = { label: string; value: string }
@@ -95,10 +95,12 @@ const AddPropertyForm = () => {
                 fieldValue = value
             }
 
-            setPropertyData((prev) => ({
-                ...prev,
-                [name]: fieldValue,
-            }))
+            setPropertyData(
+                (prev: AddPropertyForm): AddPropertyForm => ({
+                    ...prev,
+                    [name]: fieldValue,
+                }),
+            )
 
             setErrors((prev) => ({ ...prev, [name]: '' }))
         },

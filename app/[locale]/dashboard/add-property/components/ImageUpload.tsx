@@ -10,6 +10,8 @@ import isValidFile from '@utils/isValidFile'
 import Error from '@components/UI/Error'
 import useCurrentUser from '@hooks/useCurrentUser'
 import { User } from '@models/user'
+import { useAddMediaMutation } from '@store/services/media'
+import showToast from '@utils/showToast'
 
 const ImageUpload = () => {
     const t = useTranslations()
@@ -18,6 +20,7 @@ const ImageUpload = () => {
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
     const currentUser = useCurrentUser()
+    const [addMedia] = useAddMediaMutation()
 
     const handleUploadImages = async () => {
         setUploading(true)
@@ -47,6 +50,18 @@ const ImageUpload = () => {
 
                     if (!uploadResponse.ok) {
                         setErrorMessage(t('upload-error', { fileName: file.name }))
+                    }
+
+                    const addMediaResponse = await addMedia({
+                        propertyId: 'f8c9ea8a-4a8d-4f8f-b079-6196f2238337',
+                        url: signedURLResult?.success?.url.split('?')[0],
+                        type: file.type.includes('video') ? 'VIDEO' : 'IMAGE',
+                    }).unwrap()
+
+                    if (!addMediaResponse.success) {
+                        setErrorMessage(t('database-save-error', { fileName: file.name }))
+                    } else {
+                        showToast('success', t('image-uploaded'), 15)
                     }
                 } else if (signedURLResult.failure) {
                     setErrorMessage(t('signed-url-error', { fileName: file.name, error: signedURLResult.failure }))

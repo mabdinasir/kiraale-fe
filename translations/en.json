@@ -144,5 +144,6 @@
     "image-upload-info": "Supports JPG, PNG and MP4 videos. Max file size : 10MB.",
     "upload-error": "Failed to upload the image: {fileName}.",
     "signed-url-error": "Failed to get signed URL for the image: {fileName}. Error: {error}.",
-    "unexpected-error": "An unexpected error occurred: {error}."
+    "unexpected-error": "An unexpected error occurred: {error}.",
+    "image-uploaded": "Image uploaded successfully."
 }

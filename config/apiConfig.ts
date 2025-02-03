@@ -5,6 +5,7 @@ const apiConfig = {
     authApi: `${baseUrl}/auth`,
     usersApi: `${baseUrl}/users`,
     propertiesApi: `${baseUrl}/properties`,
+    mediaApi: `${baseUrl}/media`,
 }
 
 export default apiConfig
