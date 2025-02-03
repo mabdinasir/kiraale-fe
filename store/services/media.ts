@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import apiConfig from '@config/apiConfig'
 import Cookies from 'js-cookie'
-import { AddMediaResponse, Media } from 'schemas/media.schema'
+import { AddMediaResponse, Media } from 'schemas'
 
 const token = Cookies.get('authToken')
 

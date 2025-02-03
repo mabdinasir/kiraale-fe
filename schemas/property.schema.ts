@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-const addPropertySchema = z.object({
+export const addPropertySchema = z.object({
     title: z.string().min(3, 'Title must be at least 3 characters'),
     description: z.string().optional(),
     address: z.string().min(5, 'Address must be at least 5 characters'),

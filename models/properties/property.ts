@@ -1,4 +1,4 @@
-import addPropertySchema from 'schemas/property.schemas'
+import { addPropertySchema } from 'schemas'
 import { z } from 'zod'
 
 export interface Property {

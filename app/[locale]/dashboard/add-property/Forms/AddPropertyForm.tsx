@@ -15,7 +15,7 @@ import { z } from 'zod'
 import Error from '@components/UI/Error'
 import isApiError from '@utils/isApiError'
 import showToast from '@utils/showToast'
-import addPropertySchema from 'schemas/property.schema'
+import { addPropertySchema } from 'schemas'
 
 type FormErrors = Partial<Record<keyof AddPropertyForm, string>>
 type OptionType = { label: string; value: string }
