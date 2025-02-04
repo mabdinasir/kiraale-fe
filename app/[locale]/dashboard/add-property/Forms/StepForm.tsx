@@ -20,7 +20,7 @@ const StepForm = () => {
         <div className="w-full flex flex-col items-center mt-10">
             <ol className="flex items-center w-full max-w-4xl">
                 <li
-                    className={`flex w-full items-center ${step >= 1 ? 'text-green-600 dark:text-green-500' : 'text-gray-400'} after:w-full after:h-1 after:border-b after:border-gray-100 after:border-4 after:inline-block dark:after:border-gray-700`}
+                    className={`flex w-full items-center ${step >= 1 ? 'text-green-600 dark:text-green-500' : 'text-gray-400'} after:w-full after:h-1 after:border-b after:border-gray-300 after:border-4 after:inline-block dark:after:border-gray-700`}
                 >
                     <span
                         className={`flex items-center justify-center w-10 h-10 ${step >= 1 ? 'bg-green-100 dark:bg-green-800' : 'bg-gray-100 dark:bg-gray-700'} rounded-full lg:h-12 lg:w-12 shrink-0`}
@@ -29,7 +29,7 @@ const StepForm = () => {
                     </span>
                 </li>
                 <li
-                    className={`flex w-full items-center ${step >= 2 ? 'text-green-600 dark:text-green-500' : 'text-gray-400'} after:w-full after:h-1 after:border-b after:border-gray-100 after:border-4 after:inline-block dark:after:border-gray-700`}
+                    className={`flex w-full items-center ${step >= 2 ? 'text-green-600 dark:text-green-500' : 'text-gray-400'} after:w-full after:h-1 after:border-b after:border-gray-300 after:border-4 after:inline-block dark:after:border-gray-700`}
                 >
                     <span
                         className={`flex items-center justify-center w-10 h-10 ${step >= 2 ? 'bg-green-100 dark:bg-green-800' : 'bg-gray-100 dark:bg-gray-700'} rounded-full lg:h-12 lg:w-12 shrink-0`}
@@ -38,7 +38,7 @@ const StepForm = () => {
                     </span>
                 </li>
                 <li
-                    className={`flex w-full items-center ${step >= 3 ? 'text-green-600 dark:text-green-500' : 'text-gray-400'} after:w-full after:h-1 after:border-b after:border-gray-100 after:border-4 after:inline-block dark:after:border-gray-700`}
+                    className={`flex w-full items-center ${step >= 3 ? 'text-green-600 dark:text-green-500' : 'text-gray-400'} after:w-full after:h-1 after:border-b after:border-gray-300 after:border-4 after:inline-block dark:after:border-gray-700`}
                 >
                     <span
                         className={`flex items-center justify-center w-10 h-10 ${step >= 3 ? 'bg-green-100 dark:bg-green-800' : 'bg-gray-100 dark:bg-gray-700'} rounded-full lg:h-12 lg:w-12 shrink-0`}
