@@ -1,4 +1,5 @@
-'use client'
+'use client' // This is a client component 👈🏽
+
 import { FC, useRef } from 'react'
 import { Provider } from 'react-redux'
 import { makeStore, AppStore } from '@store/store'

@@ -461,7 +461,7 @@ const AddPropertyForm = () => {
                 )}
 
                 {/* Submit Button */}
-                <div className="mt-8">
+                <div className="mt-8 lg:w-1/4 w-1/2">
                     <Button
                         id="add-property"
                         name="add-property"
