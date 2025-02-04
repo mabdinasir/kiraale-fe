@@ -3,7 +3,7 @@
 import React, { useCallback, useState, useMemo } from 'react'
 import { useTranslations } from 'next-intl'
 
-import { FiHome, FiMapPin, FiDollarSign } from 'react-icons/fi'
+import { FiHome, FiDollarSign } from 'react-icons/fi'
 import { FaBath, FaBed, FaParking } from 'react-icons/fa'
 import { CgDetailsMore } from 'react-icons/cg'
 import { IoCalendarNumber, IoExpandOutline } from 'react-icons/io5'
@@ -16,8 +16,9 @@ import Error from '@components/UI/Error'
 import isApiError from '@utils/isApiError'
 import showToast from '@utils/showToast'
 import { addPropertySchema } from 'schemas'
+import GoogleMaps from './GoogleMaps'
 
-type FormErrors = Partial<Record<keyof AddPropertyForm, string>>
+export type FormErrors = Partial<Record<keyof AddPropertyForm, string>>
 type OptionType = { label: string; value: string }
 
 const AddPropertyForm = () => {
@@ -167,24 +168,7 @@ const AddPropertyForm = () => {
                     </div>
 
                     {/* Address */}
-                    <div className="col-span-12">
-                        <label htmlFor="address" className="font-medium">
-                            {t('address')}:
-                        </label>
-                        <div className="form-icon relative mt-2">
-                            <FiMapPin className="w-4 h-4 absolute top-3 start-4 text-green-600" />
-                            <input
-                                name="address"
-                                id="address"
-                                type="text"
-                                className="form-input ps-11"
-                                placeholder={t('address')}
-                                value={propertyData.address}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        {errors.address && <Error error={errors.address} />}
-                    </div>
+                    <GoogleMaps propertyData={propertyData} errors={errors} handleChange={handleChange} />
 
                     {/* Property Type */}
                     <div className="col-span-12">
@@ -197,7 +181,7 @@ const AddPropertyForm = () => {
                         <div className="filter-search-form relative filter-border mt-2">
                             <MdHolidayVillage className="icons" width={18} />
                             <select
-                                className="w-full filter-input-box bg-gray-50 dark:bg-slate-800 border-0"
+                                className="w-full filter-input-box border border-gray-200 focus:border-green-600 outline-none rounded-md bg-transparent dark:border-gray-800 dark:bg-gray-800 dark:bg-slate-900"
                                 name="propertyType"
                                 id="propertyType"
                                 value={propertyData.propertyType}
@@ -349,7 +333,7 @@ const AddPropertyForm = () => {
                                     type="checkbox"
                                     name="dishwasher"
                                     id="dishwasher"
-                                    className="form-checkbox w-6 h-6 rounded border-2 border-green-600 text-green-600 focus:ring-0 focus:border-green-600 checked:border-green-600 checked:bg-green-600 hover:border-green-700 hover:cursor-pointer"
+                                    className="form-checkbox rounded border-gray-200 dark:border-gray-800 text-green-600 focus:border-green-300 focus:ring focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2"
                                     checked={propertyData.dishwasher}
                                     onChange={handleChange}
                                 />
@@ -364,7 +348,7 @@ const AddPropertyForm = () => {
                                     type="checkbox"
                                     name="wardrobe"
                                     id="wardrobe"
-                                    className="form-checkbox w-6 h-6 rounded border-2 border-green-600 text-green-600 focus:ring-0 focus:border-green-600 checked:border-green-600 checked:bg-green-600 hover:border-green-700 hover:cursor-pointer"
+                                    className="form-checkbox rounded border-gray-200 dark:border-gray-800 text-green-600 focus:border-green-300 focus:ring focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2"
                                     checked={propertyData.wardrobe}
                                     onChange={handleChange}
                                 />
@@ -379,7 +363,7 @@ const AddPropertyForm = () => {
                                     type="checkbox"
                                     name="furnished"
                                     id="furnished"
-                                    className="form-checkbox w-6 h-6 rounded border-2 border-green-600 text-green-600 focus:ring-0 focus:border-green-600 checked:border-green-600 checked:bg-green-600 hover:border-green-700 hover:cursor-pointer"
+                                    className="form-checkbox rounded border-gray-200 dark:border-gray-800 text-green-600 focus:border-green-300 focus:ring focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2"
                                     checked={propertyData.furnished}
                                     onChange={handleChange}
                                 />
@@ -394,7 +378,7 @@ const AddPropertyForm = () => {
                                     type="checkbox"
                                     name="laundry"
                                     id="laundry"
-                                    className="form-checkbox w-6 h-6 rounded border-2 border-green-600 text-green-600 focus:ring-0 focus:border-green-600 checked:border-green-600 checked:bg-green-600 hover:border-green-700 hover:cursor-pointer"
+                                    className="form-checkbox rounded border-gray-200 dark:border-gray-800 text-green-600 focus:border-green-300 focus:ring focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2"
                                     checked={propertyData.laundry}
                                     onChange={handleChange}
                                 />
@@ -409,7 +393,7 @@ const AddPropertyForm = () => {
                                     type="checkbox"
                                     name="oven"
                                     id="oven"
-                                    className="form-checkbox w-6 h-6 rounded border-2 border-green-600 text-green-600 focus:ring-0 focus:border-green-600 checked:border-green-600 checked:bg-green-600 hover:border-green-700 hover:cursor-pointer"
+                                    className="form-checkbox rounded border-gray-200 dark:border-gray-800 text-green-600 focus:border-green-300 focus:ring focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2"
                                     checked={propertyData.oven}
                                     onChange={handleChange}
                                 />
@@ -424,7 +408,7 @@ const AddPropertyForm = () => {
                                     type="checkbox"
                                     name="pool"
                                     id="pool"
-                                    className="form-checkbox w-6 h-6 rounded border-2 border-green-600 text-green-600 focus:ring-0 focus:border-green-600 checked:border-green-600 checked:bg-green-600 hover:border-green-700 hover:cursor-pointer"
+                                    className="form-checkbox rounded border-gray-200 dark:border-gray-800 text-green-600 focus:border-green-300 focus:ring focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2"
                                     checked={propertyData.pool}
                                     onChange={handleChange}
                                 />
@@ -439,7 +423,7 @@ const AddPropertyForm = () => {
                                 type="checkbox"
                                 name="airConditioning"
                                 id="airConditioning"
-                                className="form-checkbox w-6 h-6 rounded border-2 border-green-600 text-green-600 focus:ring-0 focus:border-green-600 checked:border-green-600 checked:bg-green-600 hover:border-green-700 hover:cursor-pointer"
+                                className="form-checkbox rounded border-gray-200 dark:border-gray-800 text-green-600 focus:border-green-300 focus:ring focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2"
                                 checked={propertyData.airConditioning}
                                 onChange={handleChange}
                             />
