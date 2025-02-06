@@ -17,12 +17,15 @@ import isApiError from '@utils/isApiError'
 import showToast from '@utils/showToast'
 import { addPropertySchema } from 'schemas'
 import GoogleMaps from './GoogleMaps'
+import { useAppDispatch } from '@hooks/rtkHooks'
+import { setStepValidity } from '@store/slices/stepValidation'
 
 export type FormErrors = Partial<Record<keyof AddPropertyForm, string>>
 type OptionType = { label: string; value: string }
 
 const AddPropertyForm = () => {
     const t = useTranslations()
+    const dispatch = useAppDispatch()
 
     const propertyTypeOptions: OptionType[] = useMemo(
         () => [
@@ -115,13 +118,13 @@ const AddPropertyForm = () => {
 
             try {
                 await addProperty(propertyData).unwrap()
-                setPropertyData(initialPropertyData)
                 showToast('success', 'Property added successfully!', 15)
+                dispatch(setStepValidity({ step: 1, isValid: true }))
             } catch (err: Error | unknown) {
                 showToast('error', `Something went wrong! ${err}`, 15)
             }
         },
-        [validateFields, addProperty, propertyData, initialPropertyData],
+        [validateFields, addProperty, propertyData, dispatch],
     )
 
     return (
