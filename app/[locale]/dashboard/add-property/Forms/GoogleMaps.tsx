@@ -17,9 +17,10 @@ type GoogleMapsProps = {
             | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
             | { target: { name: string; value: string } },
     ) => void
+    hasMap: boolean
 }
 
-const GoogleMaps: FC<GoogleMapsProps> = ({ propertyData, errors, handleChange }) => {
+const GoogleMaps: FC<GoogleMapsProps> = ({ propertyData, errors, handleChange, hasMap }) => {
     const t = useTranslations()
     const searchBoxRef = useRef<google.maps.places.SearchBox | null>(null)
     const [address, setAddress] = useState(propertyData.address)
@@ -56,7 +57,7 @@ const GoogleMaps: FC<GoogleMapsProps> = ({ propertyData, errors, handleChange })
             </label>
             <div className="form-icon relative mt-2">
                 <FiMapPin className="w-4 h-4 absolute top-3 start-4 text-green-600" />
-                {isLoaded && (
+                {isLoaded && hasMap ? (
                     <StandaloneSearchBox
                         onLoad={(ref) => {
                             searchBoxRef.current = ref
@@ -73,6 +74,16 @@ const GoogleMaps: FC<GoogleMapsProps> = ({ propertyData, errors, handleChange })
                             onChange={(e) => setAddress(e.target.value)}
                         />
                     </StandaloneSearchBox>
+                ) : (
+                    <input
+                        name="address"
+                        id="address"
+                        type="text"
+                        className="form-input ps-11"
+                        placeholder={t('address')}
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
+                    />
                 )}
             </div>
             {errors?.address && <Error error={errors.address} />}

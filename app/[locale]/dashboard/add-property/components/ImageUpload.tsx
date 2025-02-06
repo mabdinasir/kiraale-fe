@@ -12,6 +12,7 @@ import useCurrentUser from '@hooks/useCurrentUser'
 import { User } from '@models/user'
 import { useAddMediaMutation } from '@store/services/media'
 import showToast from '@utils/showToast'
+import Button from '@components/UI/Button'
 
 const ImageUpload = () => {
     const t = useTranslations()
@@ -20,7 +21,7 @@ const ImageUpload = () => {
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
     const currentUser = useCurrentUser()
-    const [addMedia] = useAddMediaMutation()
+    const [addMedia, { isSuccess }] = useAddMediaMutation()
 
     const handleUploadImages = async () => {
         setUploading(true)
@@ -94,21 +95,28 @@ const ImageUpload = () => {
                 {t('upload-property-image')} <span className="text-red-500">*</span>
             </p>
 
-            {errorMessage && <Error error={errorMessage} />}
-
             {files.length > 0 ? (
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                     {files.map((file, index) => (
                         <div key={index} className="relative group">
-                            <Image
-                                src={URL.createObjectURL(file)}
-                                alt={`Uploaded image ${index + 1}`}
-                                width={0}
-                                height={0}
-                                sizes="100vw"
-                                style={{ width: '100%', height: 'auto' }}
-                                className="preview-content rounded-md"
-                            />
+                            {file.type.includes('video') ? (
+                                <video
+                                    src={URL.createObjectURL(file)}
+                                    controls
+                                    preload="metadata"
+                                    className="preview-content rounded-md w-full h-auto"
+                                />
+                            ) : (
+                                <Image
+                                    src={URL.createObjectURL(file)}
+                                    alt={`Uploaded image ${index + 1}`}
+                                    width={0}
+                                    height={0}
+                                    sizes="100vw"
+                                    style={{ width: '100%', height: 'auto' }}
+                                    className="preview-content rounded-md"
+                                />
+                            )}
                             <button
                                 type="button"
                                 onClick={() => handleRemove(index)}
@@ -135,7 +143,9 @@ const ImageUpload = () => {
                 hidden
             />
 
-            <div className="flex flex-col gap-4 mt-6">
+            <div className="mt-5">{errorMessage && <Error error={errorMessage} />}</div>
+
+            <div className="flex flex-row justify-between gap-4 mt-6">
                 <div>
                     <label
                         className="btn-upload btn bg-blue-600 hover:bg-blue-700 border-blue-600 hover:border-blue-700 text-white rounded-md cursor-pointer px-4 py-2"
@@ -145,15 +155,12 @@ const ImageUpload = () => {
                     </label>
                 </div>
                 <div>
-                    <button
-                        className={`btn-upload btn ${
-                            isUploadDisabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700'
-                        } text-white rounded-md px-4 py-2`}
+                    <Button
+                        title={uploading ? t('saving-images') : t('save-images')}
                         onClick={handleUploadImages}
-                        disabled={isUploadDisabled}
-                    >
-                        {uploading ? t('saving') : t('save-images')}
-                    </button>
+                        isLoading={uploading}
+                        disabled={isUploadDisabled || isSuccess}
+                    />
                 </div>
             </div>
         </div>

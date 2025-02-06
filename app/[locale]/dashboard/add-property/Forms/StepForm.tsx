@@ -8,7 +8,7 @@ import ImageUpload from 'app/[locale]/dashboard/add-property/components/ImageUpl
 import PropertyPayment from 'app/[locale]/dashboard/add-property/components/PropertyPayment'
 import Success from '../components/Success'
 import { useAppDispatch, useAppSelector } from '@hooks/rtkHooks'
-import { goToNextStep, goToPrevStep } from '@store/slices/stepValidation'
+import { goToNextStep } from '@store/slices/stepValidation'
 
 const StepForm = () => {
     const t = useTranslations()
@@ -17,7 +17,6 @@ const StepForm = () => {
     const isValidStep = useAppSelector((state) => state.stepValidation.isValidStep[currentStep])
 
     const nextStep = () => dispatch(goToNextStep())
-    const prevStep = () => dispatch(goToPrevStep())
 
     return (
         <div className="w-full flex flex-col items-center mt-10">
@@ -68,16 +67,11 @@ const StepForm = () => {
             </div>
 
             <div className="flex justify-between w-full max-w-2xl mt-6">
-                {currentStep > 1 && (
-                    <button onClick={prevStep} className="px-4 py-2 bg-gray-300 rounded">
-                        {t('back')}
-                    </button>
-                )}
                 {currentStep < 4 && (
                     <button
                         onClick={nextStep}
-                        className={`px-4 py-2 rounded ${
-                            isValidStep ? 'bg-green-600' : 'bg-gray-300 cursor-not-allowed text-black-500'
+                        className={`px-4 py-2 rounded text-white ${
+                            isValidStep ? 'bg-green-600' : 'bg-gray-400 cursor-not-allowed'
                         }`}
                         disabled={!isValidStep}
                     >

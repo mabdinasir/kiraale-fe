@@ -61,7 +61,7 @@ const AddPropertyForm = () => {
         [],
     )
 
-    const [addProperty, { isLoading, error }] = useAddPropertyMutation()
+    const [addProperty, { isLoading, isSuccess, error }] = useAddPropertyMutation()
     const [propertyData, setPropertyData] = useState<AddPropertyForm>(initialPropertyData)
     const [errors, setErrors] = useState<FormErrors>({})
 
@@ -171,7 +171,12 @@ const AddPropertyForm = () => {
                     </div>
 
                     {/* Address */}
-                    <GoogleMaps propertyData={propertyData} errors={errors} handleChange={handleChange} />
+                    <GoogleMaps
+                        propertyData={propertyData}
+                        errors={errors}
+                        handleChange={handleChange}
+                        hasMap={false}
+                    />
 
                     {/* Property Type */}
                     <div className="col-span-12">
@@ -454,7 +459,7 @@ const AddPropertyForm = () => {
                         name="add-property"
                         title={isLoading ? t('adding-property') : t('add-property')}
                         isLoading={isLoading}
-                        disabled={Object.values(errors).some((err) => !!err)}
+                        disabled={Object.values(errors).some((err) => !!err) || isSuccess}
                     />
                 </div>
             </fieldset>
