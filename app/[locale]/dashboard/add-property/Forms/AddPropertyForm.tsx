@@ -18,7 +18,7 @@ import showToast from '@utils/showToast'
 import { addPropertySchema } from 'schemas'
 import GoogleMaps from './GoogleMaps'
 import { useAppDispatch } from '@hooks/rtkHooks'
-import { setStepValidity } from '@store/slices/stepValidation'
+import { setPropertyId, setStepValidity } from '@store/slices/stepValidation'
 
 export type FormErrors = Partial<Record<keyof AddPropertyForm, string>>
 type OptionType = { label: string; value: string }
@@ -117,9 +117,12 @@ const AddPropertyForm = () => {
             if (!(await validateFields())) return
 
             try {
-                await addProperty(propertyData).unwrap()
+                const result = await addProperty(propertyData).unwrap()
                 showToast('success', 'Property added successfully!', 15)
                 dispatch(setStepValidity({ step: 1, isValid: true }))
+                if (result.property?.id) {
+                    dispatch(setPropertyId(result.property.id))
+                }
             } catch (err: Error | unknown) {
                 showToast('error', `Something went wrong! ${err}`, 15)
             }

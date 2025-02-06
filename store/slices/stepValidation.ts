@@ -1,4 +1,3 @@
-// store/slices/stepValidationSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 interface StepValidationState {
@@ -6,6 +5,8 @@ interface StepValidationState {
     isValidStep: {
         [key: number]: boolean
     }
+    propertyId: string
+    imageUrls: string[]
 }
 
 const initialState: StepValidationState = {
@@ -16,6 +17,8 @@ const initialState: StepValidationState = {
         3: false,
         4: false,
     },
+    propertyId: '',
+    imageUrls: [],
 }
 
 const stepValidationSlice = createSlice({
@@ -38,12 +41,21 @@ const stepValidationSlice = createSlice({
                 state.isValidStep[step] = isValid
             }
         },
+        setPropertyId(state, action: PayloadAction<string>) {
+            state.propertyId = action.payload
+        },
+        setImageUrls(state, action: PayloadAction<string[]>) {
+            state.imageUrls = action.payload
+        },
         resetSteps(state) {
             state.currentStep = 1
             state.isValidStep = initialState.isValidStep
+            state.propertyId = ''
+            state.imageUrls = []
         },
     },
 })
 
-export const { goToNextStep, goToPrevStep, setStepValidity, resetSteps } = stepValidationSlice.actions
+export const { goToNextStep, goToPrevStep, setStepValidity, setPropertyId, setImageUrls, resetSteps } =
+    stepValidationSlice.actions
 export default stepValidationSlice.reducer

@@ -13,19 +13,25 @@ import { User } from '@models/user'
 import { useAddMediaMutation } from '@store/services/media'
 import showToast from '@utils/showToast'
 import Button from '@components/UI/Button'
+import { useAppDispatch, useAppSelector } from '@hooks/rtkHooks'
+import { setImageUrls, setStepValidity } from '@store/slices/stepValidation'
 
 const ImageUpload = () => {
     const t = useTranslations()
+    const dispatch = useAppDispatch()
+    const currentUser = useCurrentUser()
+
     const [files, setFiles] = useState<File[]>([])
     const [uploading, setUploading] = useState(false)
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
-    const currentUser = useCurrentUser()
     const [addMedia, { isSuccess }] = useAddMediaMutation()
+    const propertyId = useAppSelector((state) => state.stepValidation.propertyId)
 
     const handleUploadImages = async () => {
         setUploading(true)
         setErrorMessage(null)
+        const newUploadedMediaUrls: string[] = []
 
         try {
             for (const file of files) {
@@ -53,21 +59,26 @@ const ImageUpload = () => {
                         setErrorMessage(t('upload-error', { fileName: file.name }))
                     }
 
+                    const mediaUrl = signedURLResult.success.url.split('?')[0]
+
                     const addMediaResponse = await addMedia({
-                        propertyId: 'f8c9ea8a-4a8d-4f8f-b079-6196f2238337',
-                        url: signedURLResult?.success?.url.split('?')[0],
+                        propertyId,
+                        url: mediaUrl,
                         type: file.type.includes('video') ? 'VIDEO' : 'IMAGE',
                     }).unwrap()
 
-                    if (!addMediaResponse.success) {
-                        setErrorMessage(t('database-save-error', { fileName: file.name }))
-                    } else {
+                    if (addMediaResponse.success) {
                         showToast('success', t('image-uploaded'), 15)
+                        newUploadedMediaUrls.push(mediaUrl)
+                    } else {
+                        setErrorMessage(t('database-save-error', { fileName: file.name }))
                     }
                 } else if (signedURLResult.failure) {
                     setErrorMessage(t('signed-url-error', { fileName: file.name, error: signedURLResult.failure }))
                 }
             }
+            dispatch(setImageUrls(newUploadedMediaUrls))
+            dispatch(setStepValidity({ step: 2, isValid: true }))
         } catch (error) {
             setErrorMessage(t('unexpected-error', { error: (error as Error).message || 'Unknown error' }))
         } finally {
