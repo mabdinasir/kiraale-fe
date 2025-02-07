@@ -2,9 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 interface StepValidationState {
     currentStep: number
-    isValidStep: {
-        [key: number]: boolean
-    }
+    isValidStep: { [key: number]: boolean }
     propertyId: string
     imageUrls: string[]
 }

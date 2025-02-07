@@ -14,47 +14,56 @@ const StepForm = () => {
     const t = useTranslations()
     const dispatch = useAppDispatch()
     const currentStep = useAppSelector((state) => state.stepValidation.currentStep)
-    const isValidStep = useAppSelector((state) => state.stepValidation.isValidStep[currentStep])
+    const isValidStep = useAppSelector((state) => state.stepValidation.isValidStep)
 
     const nextStep = () => dispatch(goToNextStep())
 
     return (
         <div className="w-full flex flex-col items-center mt-10">
             <ol className="flex items-center w-full max-w-4xl">
+                {[1, 2, 3].map((step) => (
+                    <li
+                        key={step}
+                        className={`flex w-full items-center ${isValidStep[step] ? 'text-green-600 dark:text-green-500' : 'text-gray-400'} after:w-full after:h-1 after:border-b after:border-4 ${
+                            isValidStep[step] || isValidStep[step + 1]
+                                ? 'after:border-green-600 dark:after:border-green-500'
+                                : 'after:border-gray-300 dark:after:border-gray-700'
+                        } after:inline-block`}
+                    >
+                        <span
+                            className={`flex items-center justify-center w-10 h-10 ${
+                                isValidStep[step] ? 'bg-green-100 dark:bg-green-800' : 'bg-gray-100 dark:bg-gray-700'
+                            } rounded-full lg:h-12 lg:w-12 shrink-0`}
+                        >
+                            {step === 1 && (
+                                <FaHome
+                                    className={`${isValidStep[step] ? 'text-green-600 dark:text-green-300' : 'text-gray-500 dark:text-gray-100'}`}
+                                />
+                            )}
+                            {step === 2 && (
+                                <FaImage
+                                    className={`${isValidStep[step] ? 'text-green-600 dark:text-green-300' : 'text-gray-500 dark:text-gray-100'}`}
+                                />
+                            )}
+                            {step === 3 && (
+                                <FaCreditCard
+                                    className={`${isValidStep[step] ? 'text-green-600 dark:text-green-300' : 'text-gray-500 dark:text-gray-100'}`}
+                                />
+                            )}
+                        </span>
+                    </li>
+                ))}
                 <li
-                    className={`flex w-full items-center ${currentStep >= 1 ? 'text-green-600 dark:text-green-500' : 'text-gray-400'} after:w-full after:h-1 after:border-b after:border-gray-300 after:border-4 after:inline-block dark:after:border-gray-700`}
+                    className={`flex items-center ${isValidStep[4] ? 'text-green-600 dark:text-green-500' : 'text-gray-400'}`}
                 >
                     <span
-                        className={`flex items-center justify-center w-10 h-10 ${currentStep >= 1 ? 'bg-green-100 dark:bg-green-800' : 'bg-gray-100 dark:bg-gray-700'} rounded-full lg:h-12 lg:w-12 shrink-0`}
+                        className={`flex items-center justify-center w-10 h-10 ${
+                            isValidStep[4] ? 'bg-green-100 dark:bg-green-800' : 'bg-gray-100 dark:bg-gray-700'
+                        } rounded-full lg:h-12 lg:w-12 shrink-0`}
                     >
-                        <FaHome className="text-green-600 dark:text-green-300" />
-                    </span>
-                </li>
-                <li
-                    className={`flex w-full items-center ${currentStep >= 2 ? 'text-green-600 dark:text-green-500' : 'text-gray-400'} after:w-full after:h-1 after:border-b after:border-gray-300 after:border-4 after:inline-block dark:after:border-gray-700`}
-                >
-                    <span
-                        className={`flex items-center justify-center w-10 h-10 ${currentStep >= 2 ? 'bg-green-100 dark:bg-green-800' : 'bg-gray-100 dark:bg-gray-700'} rounded-full lg:h-12 lg:w-12 shrink-0`}
-                    >
-                        <FaImage className="text-gray-500 dark:text-gray-100" />
-                    </span>
-                </li>
-                <li
-                    className={`flex w-full items-center ${currentStep >= 3 ? 'text-green-600 dark:text-green-500' : 'text-gray-400'} after:w-full after:h-1 after:border-b after:border-gray-300 after:border-4 after:inline-block dark:after:border-gray-700`}
-                >
-                    <span
-                        className={`flex items-center justify-center w-10 h-10 ${currentStep >= 3 ? 'bg-green-100 dark:bg-green-800' : 'bg-gray-100 dark:bg-gray-700'} rounded-full lg:h-12 lg:w-12 shrink-0`}
-                    >
-                        <FaCreditCard className="text-gray-500 dark:text-gray-100" />
-                    </span>
-                </li>
-                <li
-                    className={`flex items-center ${currentStep === 4 ? 'text-green-600 dark:text-green-500' : 'text-gray-400'}`}
-                >
-                    <span
-                        className={`flex items-center justify-center w-10 h-10 ${currentStep === 4 ? 'bg-green-100 dark:bg-green-800' : 'bg-gray-100 dark:bg-gray-700'} rounded-full lg:h-12 lg:w-12 shrink-0`}
-                    >
-                        <FaCheckCircle className="text-grey-500 dark:text-green-300" />
+                        <FaCheckCircle
+                            className={`${isValidStep[4] ? 'text-green-600 dark:text-green-300' : 'text-gray-500 dark:text-gray-100'}`}
+                        />
                     </span>
                 </li>
             </ol>
@@ -71,9 +80,9 @@ const StepForm = () => {
                     <button
                         onClick={nextStep}
                         className={`px-4 py-2 rounded text-white ${
-                            isValidStep ? 'bg-green-600' : 'bg-gray-400 cursor-not-allowed'
+                            isValidStep[currentStep] ? 'bg-green-600' : 'bg-gray-400 cursor-not-allowed'
                         }`}
-                        disabled={!isValidStep}
+                        disabled={!isValidStep[currentStep]}
                     >
                         {t('next')}
                     </button>
