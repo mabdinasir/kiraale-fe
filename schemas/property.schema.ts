@@ -1,11 +1,15 @@
 import { z } from 'zod'
 
-export const addPropertySchema = z.object({
+export const propertySchema = z.object({
     title: z.string().min(3, 'Title must be at least 3 characters'),
     description: z.string().optional(),
     address: z.string().min(5, 'Address must be at least 5 characters'),
     price: z.number().min(1, 'Price must be a positive number'),
+    listingType: z.enum(['SALE', 'RENT']),
     propertyType: z.enum(['RESIDENTIAL', 'COMMERCIAL', 'HOTEL', 'INDUSTRIAL', 'LAND']),
+    status: z.enum(['PENDING', 'APPROVED', 'REJECTED', 'EXPIRED']).optional(),
+    approvedAt: z.date().optional(),
+    expiresAt: z.date().optional(),
     bedrooms: z.number().optional(),
     bathrooms: z.number().optional(),
     parking: z.number().optional(),
@@ -25,4 +29,4 @@ export const addPropertySchema = z.object({
     oven: z.boolean().optional(),
 })
 
-export default addPropertySchema
+export default propertySchema

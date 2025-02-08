@@ -15,7 +15,7 @@ import { z } from 'zod'
 import Error from '@components/UI/Error'
 import isApiError from '@utils/isApiError'
 import showToast from '@utils/showToast'
-import { addPropertySchema } from 'schemas'
+import { propertySchema } from 'schemas'
 import GoogleMaps from './GoogleMaps'
 import { useAppDispatch } from '@hooks/rtkHooks'
 import { setPropertyId, setStepValidity } from '@store/slices/stepValidation'
@@ -45,6 +45,9 @@ const AddPropertyForm = () => {
             address: '',
             price: 0,
             propertyType: 'RESIDENTIAL',
+            listingType: 'SALE',
+            status: 'PENDING',
+            isActive: false,
             bedrooms: 0,
             bathrooms: 0,
             parking: 0,
@@ -67,7 +70,7 @@ const AddPropertyForm = () => {
 
     const validateFields = useCallback(async () => {
         try {
-            await addPropertySchema.parseAsync(propertyData)
+            await propertySchema.parseAsync(propertyData)
             return true
         } catch (err) {
             if (err instanceof z.ZodError) {

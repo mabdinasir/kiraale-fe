@@ -32,6 +32,6 @@ export const signUpSchema = z
         firstName: z.string().min(1, 'First name is required').max(50, 'First name cannot exceed 50 characters'),
         lastName: z.string().min(1, 'Last name is required').max(50, 'Last name cannot exceed 50 characters'),
         mobile: mobileSchema,
-        hasAcceptedTnC: z.boolean().refine((val) => val === true, 'You must accept the Terms and Conditions'),
+        hasAcceptedTnC: z.boolean().refine((val) => val === true, 'Please accept the Terms and Conditions'),
     })
     .strict()

@@ -1,4 +1,4 @@
-import { addPropertySchema } from 'schemas'
+import { propertySchema } from 'schemas'
 import { z } from 'zod'
 
 export interface Property {
@@ -8,6 +8,11 @@ export interface Property {
     address: string
     price: number
     propertyType: 'RESIDENTIAL' | 'COMMERCIAL' | 'LAND' | 'INDUSTRIAL' | 'HOTEL'
+    listingType: 'SALE' | 'RENT'
+    status: 'PENDING' | 'APPROVED' | 'REJECTED' | 'EXPIRED'
+    approvedAt?: string | null
+    expiredAt?: string | null
+    isActive: boolean
     bedrooms?: number
     bathrooms?: number
     parking?: number
@@ -24,7 +29,7 @@ export interface Property {
     updatedAt: string
 }
 
-export type AddPropertyForm = z.infer<typeof addPropertySchema>
+export type AddPropertyForm = z.infer<typeof propertySchema>
 
 export interface AddPropertyResponse {
     success: boolean
