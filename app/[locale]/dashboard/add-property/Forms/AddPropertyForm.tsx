@@ -8,6 +8,7 @@ import { FaBath, FaBed, FaParking } from 'react-icons/fa'
 import { CgDetailsMore } from 'react-icons/cg'
 import { IoCalendarNumber, IoExpandOutline } from 'react-icons/io5'
 import { MdHolidayVillage } from 'react-icons/md'
+import { PiBuildingApartmentFill } from 'react-icons/pi'
 import Button from '@components/UI/Button'
 import type { AddPropertyForm } from '@models/properties/property'
 import { useAddPropertyMutation } from '@store/services/properties'
@@ -193,7 +194,7 @@ const AddPropertyForm = () => {
                             {t('property-type')}:
                         </label>
                         <div className="filter-search-form relative filter-border mt-2">
-                            <MdHolidayVillage className="icons" width={18} />
+                            <PiBuildingApartmentFill className="icons" width={18} />
                             <select
                                 className="w-full filter-input-box border border-gray-200 focus:border-green-600 outline-none rounded-md bg-transparent dark:border-gray-800 dark:bg-gray-800 dark:bg-slate-900"
                                 name="propertyType"
@@ -209,6 +210,27 @@ const AddPropertyForm = () => {
                             </select>
                         </div>
                         {errors.propertyType && <Error error={errors.propertyType} />}
+                    </div>
+
+                    {/* Listing Type */}
+                    <div className="col-span-12">
+                        <label htmlFor="listingType" className="font-medium">
+                            {t('listing-type')}:
+                        </label>
+                        <div className="filter-search-form relative filter-border mt-2">
+                            <MdHolidayVillage className="icons" width={18} />
+                            <select
+                                name="listingType"
+                                id="listingType"
+                                className="form-input ps-11"
+                                value={propertyData.listingType}
+                                onChange={handleChange}
+                            >
+                                <option value="SALE">{t('sale')}</option>
+                                <option value="RENT">{t('rent')}</option>
+                            </select>
+                        </div>
+                        {errors.listingType && <Error error={errors.listingType} />}
                     </div>
 
                     {/* Price */}

@@ -12,6 +12,7 @@ export interface Property {
     status: 'PENDING' | 'APPROVED' | 'REJECTED' | 'EXPIRED'
     approvedAt?: string | null
     expiredAt?: string | null
+    approvedBy?: string | null
     isActive: boolean
     bedrooms?: number
     bathrooms?: number

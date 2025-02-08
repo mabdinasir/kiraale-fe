@@ -10,6 +10,7 @@ export const propertySchema = z.object({
     status: z.enum(['PENDING', 'APPROVED', 'REJECTED', 'EXPIRED']).optional(),
     approvedAt: z.date().optional(),
     expiresAt: z.date().optional(),
+    approvedBy: z.string().optional(),
     bedrooms: z.number().optional(),
     bathrooms: z.number().optional(),
     parking: z.number().optional(),
