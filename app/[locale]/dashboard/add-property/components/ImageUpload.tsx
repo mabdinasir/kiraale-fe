@@ -132,6 +132,7 @@ const ImageUpload = () => {
                                 type="button"
                                 onClick={() => handleRemove(index)}
                                 className="absolute top-1 right-1 bg-white p-1 rounded-full text-red-500 shadow-md group-hover:opacity-100 opacity-0 transition-opacity"
+                                disabled={uploading}
                             >
                                 <MdDeleteForever className="text-xl hover:text-red-700" />
                             </button>
