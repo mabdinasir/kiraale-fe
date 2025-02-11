@@ -4,7 +4,9 @@ import createNextIntlPlugin from 'next-intl/plugin'
 const withNextIntl = createNextIntlPlugin()
 
 const nextConfig: NextConfig = {
-    /* config options here */
+    images: {
+        domains: ['eastleigh-real-estate.s3.ap-southeast-2.amazonaws.com'],
+    },
 }
 
 export default withNextIntl(nextConfig)

@@ -43,7 +43,7 @@ const ProfileMenu = () => {
             {/* Dropdown menu */}
             <div
                 id="dropdownAvatar"
-                className={`z-10 bg-white divide-y divide-gray-200 rounded-lg shadow-lg w-48 dark:bg-gray-800 dark:divide-gray-700 absolute right-0 mt-2 ${
+                className={`z-10 bg-white divide-y divide-gray-200 rounded-lg shadow-lg w-48 dark:bg-slate-900 dark:divide-gray-700 absolute right-0 mt-2 ${
                     isOpen ? 'block' : 'hidden'
                 }`}
             >
@@ -59,7 +59,7 @@ const ProfileMenu = () => {
 
                 {/* Menu Items */}
                 <ul
-                    className="py-2 text-base font-medium text-gray-800 dark:text-gray-200"
+                    className="py-2 text-base font-medium text-gray-800 dark:text-white"
                     aria-labelledby="dropdownUserAvatarButton"
                 >
                     <li>
@@ -91,7 +91,7 @@ const ProfileMenu = () => {
                 {/* Sign-Out */}
                 <div className="py-2">
                     <Button
-                        className="block px-4 py-2 text-base font-medium text-gray-800 hover:bg-red-100 hover:text-red-600 dark:text-gray-200 dark:hover:bg-red-600 dark:hover:text-white rounded w-full text-left"
+                        className="block px-4 py-2 text-base font-medium text-gray-800 hover:bg-red-100 hover:text-red-600 dark:text-gray-200 dark:hover:bg-red-600 dark:hover:text-red-600 rounded w-full text-left dark:text-white"
                         isLoading={isLoading}
                         title={isLoading ? t('signing-out') : t('sign-out')}
                         redVariant

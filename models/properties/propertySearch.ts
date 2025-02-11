@@ -1,0 +1,47 @@
+export interface PropertyFeatures {
+    id: string
+    bedrooms: number
+    bathrooms: number
+    area: number
+    pool: boolean
+    furnished: boolean
+    dishwasher: boolean
+    airConditioning: boolean
+    laundry: boolean
+    wardrobe: boolean
+    oven: boolean
+    propertyId: string
+    parking: number
+    yearBuilt: number
+}
+
+export interface PropertyMedia {
+    id: string
+    url: string
+    type: 'IMAGE' | 'VIDEO'
+    propertyId: string
+}
+
+export interface Property {
+    id: string
+    title: string
+    description: string
+    address: string
+    price: number
+    createdAt: string
+    updatedAt: string
+    isActive: boolean
+    propertyType: 'RESIDENTIAL' | 'COMMERCIAL' | 'LAND' | 'INDUSTRIAL' | 'HOTEL'
+    listingType: 'SALE' | 'RENT'
+    status: 'PENDING' | 'APPROVED' | 'REJECTED' | 'EXPIRED'
+    approvedAt: string | null
+    expiresAt: string | null
+    approvedBy: string | null
+    features: PropertyFeatures
+    media: PropertyMedia[]
+}
+
+export interface PropertySearchResponse {
+    success: boolean
+    properties: Property[]
+}

@@ -1,4 +1,3 @@
-import PropertySearch from '@components/Forms/PropertySearch'
 import { useTranslations } from 'next-intl'
 import React from 'react'
 import About from './about/AboutUs'
@@ -6,6 +5,7 @@ import Feature from '@components/UI/Feature'
 import GetInTuch from '@components/UI/GetInTouch'
 import Property from '@components/UI/Property'
 import ClientTwo from '@components/UI/ClientTwo'
+import PropertySearch from './property/page'
 
 const Home = () => {
     const t = useTranslations()

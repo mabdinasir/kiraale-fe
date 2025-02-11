@@ -43,6 +43,7 @@
     "min-price": "Min Price",
     "max-price": "Max Price",
     "search-placeholder": "Search for properties",
+    "search-properties": "Search Properties",
     "select": "Select",
     "about-us": "About Us",
     "about-title-1": "Transparency",
@@ -114,8 +115,11 @@
     "blog-detail": "Blog Detail",
     "property-title": "Property Title",
     "bedrooms": "Bedrooms",
+    "beds": "Beds",
     "bathrooms": "Bathrooms",
+    "baths": "Baths",
     "area": "Area",
+    "sqf": "sqf",
     "parking": "Parking",
     "price": "Price",
     "description": "Description",
@@ -151,5 +155,7 @@
     "property-payment": "Property Payment",
     "back": "Back",
     "next": "Next",
-    "payment-successful": "Payment successful"
+    "payment-successful": "Payment successful",
+    "property-listings": "Property Listings",
+    "apply-filters": "Apply Filters"
 }
