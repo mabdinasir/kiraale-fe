@@ -157,5 +157,6 @@
     "next": "Next",
     "payment-successful": "Payment successful",
     "property-listings": "Property Listings",
-    "apply-filters": "Apply Filters"
+    "apply-filters": "Apply Filters",
+    "no-properties-found": "No properties found"
 }

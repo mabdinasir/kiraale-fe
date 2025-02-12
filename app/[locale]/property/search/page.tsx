@@ -45,7 +45,7 @@ const PropertyList = () => {
                                             <div className="relative mt-2">
                                                 <FiSearch className="absolute top-[8px] start-3" width={18} />
                                                 <input
-                                                    name="search"
+                                                    name="query"
                                                     id="searchname"
                                                     type="text"
                                                     className="form-input border border-slate-100 dark:border-slate-800 ps-10"

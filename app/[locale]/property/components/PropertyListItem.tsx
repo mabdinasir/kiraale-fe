@@ -1,6 +1,7 @@
 'use client' // This is a client component 👈🏽
 
 import ReusableLink from '@components/Links/ReusableLink'
+import LoadingIndicator from '@components/UI/LoadingIndicator'
 import { useSearchPropertiesQuery } from '@store/services/properties'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
@@ -13,10 +14,10 @@ const PropertyListItem = () => {
     const t = useTranslations()
     const searchParams = useSearchParams()
     const query = searchParams.get('query') || ''
-    const { data, isLoading, error } = useSearchPropertiesQuery(query)
+    const { data, isLoading } = useSearchPropertiesQuery(query)
 
-    if (isLoading) return <div>Loading...</div>
-    if (error) return <div>Error loading PropertyListItem</div>
+    if (isLoading) return <LoadingIndicator />
+    if (!data?.properties) return <div>{t('no-properties-found')}</div>
 
     return (
         <div className="lg:col-span-8 md:col-span-6">

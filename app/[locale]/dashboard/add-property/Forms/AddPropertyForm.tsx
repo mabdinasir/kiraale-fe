@@ -32,8 +32,6 @@ const AddPropertyForm = () => {
         () => [
             { label: t('residential'), value: 'RESIDENTIAL' },
             { label: t('commercial'), value: 'COMMERCIAL' },
-            { label: t('hotel'), value: 'HOTEL' },
-            { label: t('industrial'), value: 'INDUSTRIAL' },
             { label: t('land'), value: 'LAND' },
         ],
         [t],
