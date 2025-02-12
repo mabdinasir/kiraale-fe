@@ -1,6 +1,7 @@
 'use client' // This is a client component 👈🏽
 
 import ReusableLink from '@components/Links/ReusableLink'
+import EmptyState from '@components/UI/EmptyState'
 import LoadingIndicator from '@components/UI/LoadingIndicator'
 import { useSearchPropertiesQuery } from '@store/services/properties'
 import { useTranslations } from 'next-intl'
@@ -9,6 +10,7 @@ import { useSearchParams } from 'next/navigation'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import { LiaCompressArrowsAltSolid } from 'react-icons/lia'
 import { LuBedDouble, LuBath } from 'react-icons/lu'
+import { PiBuildingApartmentFill } from 'react-icons/pi'
 
 const PropertyListItem = () => {
     const t = useTranslations()
@@ -17,7 +19,14 @@ const PropertyListItem = () => {
     const { data, isLoading } = useSearchPropertiesQuery(query)
 
     if (isLoading) return <LoadingIndicator />
-    if (!data?.properties) return <div>{t('no-properties-found')}</div>
+    if (!data?.properties)
+        return (
+            <EmptyState
+                icon={<PiBuildingApartmentFill size={98} />}
+                title={t('no-properties-found')}
+                description={t('no-properties-description')}
+            />
+        )
 
     return (
         <div className="lg:col-span-8 md:col-span-6">
