@@ -12,7 +12,7 @@ const PropertySearch = () => {
         setactiveTabIndex(tabIndex)
     }
 
-    const translatedTabs = ['rent', 'buy', 'hotel'].map((tab) => t(tab))
+    const translatedTabs = ['rent', 'buy'].map((tab) => t(tab))
 
     return (
         <div className="grid grid-cols-1">

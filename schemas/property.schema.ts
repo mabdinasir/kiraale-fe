@@ -6,7 +6,7 @@ export const propertySchema = z.object({
     address: z.string().min(5, 'Address must be at least 5 characters'),
     price: z.number().min(1, 'Price must be a positive number'),
     listingType: z.enum(['SALE', 'RENT']),
-    propertyType: z.enum(['RESIDENTIAL', 'COMMERCIAL', 'HOTEL', 'INDUSTRIAL', 'LAND']),
+    propertyType: z.enum(['RESIDENTIAL', 'COMMERCIAL', 'LAND']),
     status: z.enum(['PENDING', 'APPROVED', 'REJECTED', 'EXPIRED']).optional(),
     approvedAt: z.date().optional(),
     expiresAt: z.date().optional(),
