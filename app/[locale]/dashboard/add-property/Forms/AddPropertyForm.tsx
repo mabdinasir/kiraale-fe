@@ -20,22 +20,18 @@ import { propertySchema } from 'schemas'
 import GoogleMaps from './GoogleMaps'
 import { useAppDispatch } from '@hooks/rtkHooks'
 import { setPropertyId, setStepValidity } from '@store/slices/stepValidation'
+import { proprtyTypes } from '@lib/constants'
 
 export type FormErrors = Partial<Record<keyof AddPropertyForm, string>>
-type OptionType = { label: string; value: string }
 
 const AddPropertyForm = () => {
     const t = useTranslations()
     const dispatch = useAppDispatch()
 
-    const propertyTypeOptions: OptionType[] = useMemo(
-        () => [
-            { label: t('residential'), value: 'RESIDENTIAL' },
-            { label: t('commercial'), value: 'COMMERCIAL' },
-            { label: t('land'), value: 'LAND' },
-        ],
-        [t],
-    )
+    const translatedPropertyTypes = proprtyTypes.map(({ label, value }) => ({
+        label: t(label),
+        value,
+    }))
 
     const initialPropertyData = useMemo<AddPropertyForm>(
         () => ({
@@ -200,7 +196,7 @@ const AddPropertyForm = () => {
                                 value={propertyData.propertyType}
                                 onChange={handleChange}
                             >
-                                {propertyTypeOptions.map((option) => (
+                                {translatedPropertyTypes.map((option) => (
                                     <option key={option.value} value={option.value}>
                                         {option.label}
                                     </option>

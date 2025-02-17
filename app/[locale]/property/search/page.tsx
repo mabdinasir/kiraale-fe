@@ -4,9 +4,15 @@ import Navbar from '@components/Layout/Navbar'
 import { useTranslations } from 'next-intl'
 import StoreProvider from 'app/[locale]/StoreProvider'
 import PropertyListItem from '../components/PropertyListItem'
+import { maxPrice, proprtyTypes } from '@lib/constants'
 
 const PropertyList = () => {
     const t = useTranslations()
+
+    const translatedPropertyTypes = proprtyTypes.map(({ label, value }) => ({
+        label: t(label),
+        value,
+    }))
 
     return (
         <>
@@ -55,22 +61,35 @@ const PropertyList = () => {
                                         </div>
 
                                         <div>
-                                            <label className="font-medium">Categories</label>
+                                            <label className="font-medium">{t('categories')} :</label>
                                             <select className="form-select form-input border border-slate-100 dark:border-slate-800 block w-full mt-1">
-                                                <option value="re">Residential</option>
-                                                <option value="la">Land</option>
-                                                <option value="co">Commercial</option>
-                                                <option value="ind">Industrial</option>
-                                                <option value="inv">Investment</option>
+                                                {translatedPropertyTypes.map((option) => (
+                                                    <option key={option.value} value={option.value}>
+                                                        {option.label}
+                                                    </option>
+                                                ))}
                                             </select>
                                         </div>
 
                                         <div>
-                                            <label className="font-medium">Location</label>
+                                            <label className="font-medium">{t('max-price')} :</label>
                                             <select className="form-select form-input border border-slate-100 dark:border-slate-800 block w-full mt-1">
-                                                <option value="NY">New York</option>
-                                                <option value="MC">North Carolina</option>
-                                                <option value="SC">South Carolina</option>
+                                                {maxPrice.map((option) => (
+                                                    <option key={option.value} value={option.value}>
+                                                        {option.label}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
+
+                                        <div>
+                                            <label className="font-medium">{t('min-price')} :</label>
+                                            <select className="form-select form-input border border-slate-100 dark:border-slate-800 block w-full mt-1">
+                                                {maxPrice.map((option) => (
+                                                    <option key={option.value} value={option.value}>
+                                                        {option.label}
+                                                    </option>
+                                                ))}
                                             </select>
                                         </div>
 

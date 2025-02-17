@@ -1,3 +1,5 @@
+'use client' // This is a client component 👈🏽
+
 import React from 'react'
 import { useTranslations } from 'next-intl'
 import dynamic from 'next/dynamic'
@@ -5,6 +7,7 @@ import Form from 'next/form'
 import { FiHome, FiSearch } from 'react-icons/fi'
 import { LuCircleDollarSign } from 'react-icons/lu'
 import { useParams } from 'next/navigation'
+import { maxPrice, minPrice, proprtyTypes } from '@lib/constants'
 
 const Select = dynamic(() => import('react-select'), { ssr: false })
 
@@ -13,21 +16,10 @@ const PropertySearchForm = () => {
     const { locale } = useParams()
     const path = `/${locale}/property/search`
 
-    const houses = [
-        { value: 'AF', label: 'Apartment' },
-        { value: 'AZ', label: 'Offices' },
-        { value: 'BS', label: 'Townhome' },
-    ]
-    const minPrice = [
-        { value: '1', label: '500' },
-        { value: '2', label: '1000' },
-        { value: '3', label: '2000' },
-        { value: '4', label: '3000' },
-        { value: '5', label: '4000' },
-        { value: '6', label: '5000' },
-        { value: '7', label: '6000' },
-    ]
-    const maxPrice = [...minPrice]
+    const translatedPropertyTypes = proprtyTypes.map(({ label, value }) => ({
+        label: t(label),
+        value,
+    }))
 
     return (
         <Form action={path}>
@@ -57,7 +49,7 @@ const PropertySearchForm = () => {
                             <FiHome className="icons" width={18} />
                             <Select
                                 className="form-input filter-input-box bg-gray-50 dark:bg-slate-800 border-0"
-                                options={houses}
+                                options={translatedPropertyTypes}
                             />
                         </div>
                     </div>

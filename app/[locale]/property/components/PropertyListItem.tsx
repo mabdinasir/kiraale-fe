@@ -103,6 +103,8 @@ const PropertyListItem = () => {
                     </div>
                 ))}
             </div>
+
+            {/* pagination */}
             <div className="grid md:grid-cols-12 grid-cols-1 mt-8">
                 <div className="md:col-span-12 text-center">
                     <nav>
