@@ -3,10 +3,13 @@
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import PropertySearchForm from './forms/PropertySearchForm'
+import { useSearchParams } from 'next/navigation'
 
 const PropertySearch = () => {
     const t = useTranslations()
-    const [activeTabIndex, setactiveTabIndex] = useState(0)
+    const searchParams = useSearchParams()
+    const initialListingType = searchParams.get('listingType') === 'SALE' ? 1 : 0
+    const [activeTabIndex, setactiveTabIndex] = useState(initialListingType)
 
     const handleTabClick = (tabIndex: number) => {
         setactiveTabIndex(tabIndex)
@@ -44,7 +47,7 @@ const PropertySearch = () => {
                 id="StarterContent"
                 className="p-6 bg-white dark:bg-slate-900 rounded-ss-none rounded-se-none md:rounded-se-xl rounded-xl shadow-md dark:shadow-gray-700"
             >
-                <PropertySearchForm />
+                <PropertySearchForm activeTabIndex={activeTabIndex} />
             </div>
         </div>
     )

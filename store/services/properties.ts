@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { AddPropertyResponse, AddPropertyForm } from '@models/properties/property'
 import apiConfig from '@config/apiConfig'
 import Cookies from 'js-cookie'
-import { PropertySearchResponse } from '@models/properties/propertySearch'
+import { PropertySearchParams, PropertySearchResponse } from '@models/properties/propertySearch'
 
 const token = Cookies.get('authToken')
 
@@ -26,11 +26,12 @@ export const propertiesAPi = createApi({
                 body,
             }),
         }),
-        searchProperties: builder.query<PropertySearchResponse, string>({
-            query: (searchTerm) => ({
+
+        searchProperties: builder.query<PropertySearchResponse, PropertySearchParams>({
+            query: (params) => ({
                 url: `/searchProperties`,
                 method: 'GET',
-                params: { query: searchTerm },
+                params,
             }),
         }),
     }),

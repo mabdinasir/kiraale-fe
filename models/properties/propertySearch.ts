@@ -41,6 +41,14 @@ export interface Property {
     media: PropertyMedia[]
 }
 
+export interface PropertySearchParams {
+    query?: string
+    minPrice?: number
+    maxPrice?: number
+    propertyType?: 'RESIDENTIAL' | 'COMMERCIAL' | 'LAND'
+    listingType?: 'SALE' | 'RENT'
+}
+
 export interface PropertySearchResponse {
     success: boolean
     properties: Property[]

@@ -7,7 +7,7 @@ import { useSearchPropertiesQuery } from '@store/services/properties'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+// import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import { LiaCompressArrowsAltSolid } from 'react-icons/lia'
 import { LuBedDouble, LuBath } from 'react-icons/lu'
 import { PiBuildingApartmentFill } from 'react-icons/pi'
@@ -16,10 +16,24 @@ const PropertyListItem = () => {
     const t = useTranslations()
     const searchParams = useSearchParams()
     const query = searchParams.get('query') || ''
-    const { data, isLoading } = useSearchPropertiesQuery(query)
+    const minPrice = searchParams.get('minPrice') || ''
+    const maxPrice = searchParams.get('maxPrice') || ''
+    const propertyType = searchParams.get('propertyType') || ''
+    const listingType = searchParams.get('listingType') || ''
+
+    const { data, isLoading } = useSearchPropertiesQuery(
+        {
+            query,
+            minPrice: minPrice ? Number(minPrice) : undefined,
+            maxPrice: maxPrice ? Number(maxPrice) : undefined,
+            propertyType: propertyType as 'RESIDENTIAL' | 'COMMERCIAL' | 'LAND',
+            listingType: listingType as 'SALE' | 'RENT',
+        },
+        { refetchOnMountOrArgChange: true },
+    )
 
     if (isLoading) return <LoadingIndicator />
-    if (!data?.properties)
+    if (!data?.properties || data?.properties.length === 0)
         return (
             <EmptyState
                 icon={<PiBuildingApartmentFill size={98} />}
@@ -73,21 +87,21 @@ const PropertyListItem = () => {
                                             className="me-2 text-green-600 text-2xl"
                                         />
                                         <span>
-                                            {item.features.area} {t('sqf')}
+                                            {item?.features?.area} {t('sqf')}
                                         </span>
                                     </li>
 
                                     <li className="flex items-center me-4">
                                         <LuBedDouble width={20} className="me-2 text-green-600 text-2xl" />
                                         <span>
-                                            {item.features.bedrooms} {t('beds')}
+                                            {item?.features?.bedrooms} {t('beds')}
                                         </span>
                                     </li>
 
                                     <li className="flex items-center">
                                         <LuBath width={20} className="me-2 text-green-600 text-2xl" />
                                         <span>
-                                            {item.features.bathrooms} {t('baths')}
+                                            {item?.features?.bathrooms} {t('baths')}
                                         </span>
                                     </li>
                                 </ul>
@@ -105,7 +119,7 @@ const PropertyListItem = () => {
             </div>
 
             {/* pagination */}
-            <div className="grid md:grid-cols-12 grid-cols-1 mt-8">
+            {/* <div className="grid md:grid-cols-12 grid-cols-1 mt-8">
                 <div className="md:col-span-12 text-center">
                     <nav>
                         <ul className="inline-flex items-center -space-x-px">
@@ -161,7 +175,7 @@ const PropertyListItem = () => {
                         </ul>
                     </nav>
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }

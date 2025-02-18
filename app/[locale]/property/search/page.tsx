@@ -1,3 +1,5 @@
+'use client' // This is a client component 👈🏽
+
 import React from 'react'
 import { FiSearch } from 'react-icons/fi'
 import Navbar from '@components/Layout/Navbar'
@@ -5,9 +7,17 @@ import { useTranslations } from 'next-intl'
 import StoreProvider from 'app/[locale]/StoreProvider'
 import PropertyListItem from '../components/PropertyListItem'
 import { maxPrice, proprtyTypes } from '@lib/constants'
+import { useSearchParams } from 'next/navigation'
 
 const PropertyList = () => {
     const t = useTranslations()
+    const searchParams = useSearchParams()
+
+    const query = searchParams.get('query') || ''
+    const minPriceValue = searchParams.get('minPrice') || ''
+    const maxPriceValue = searchParams.get('maxPrice') || ''
+    const propertyType = searchParams.get('propertyType') || ''
+    const listingType = searchParams.get('listingType') || ''
 
     const translatedPropertyTypes = proprtyTypes.map(({ label, value }) => ({
         label: t(label),
@@ -52,17 +62,22 @@ const PropertyList = () => {
                                                 <FiSearch className="absolute top-[8px] start-3" width={18} />
                                                 <input
                                                     name="query"
-                                                    id="searchname"
+                                                    id="search_query"
                                                     type="text"
                                                     className="form-input border border-slate-100 dark:border-slate-800 ps-10"
                                                     placeholder={t('search')}
+                                                    defaultValue={query}
                                                 />
                                             </div>
                                         </div>
 
                                         <div>
                                             <label className="font-medium">{t('categories')} :</label>
-                                            <select className="form-select form-input border border-slate-100 dark:border-slate-800 block w-full mt-1">
+                                            <select
+                                                name="propertyType"
+                                                className="form-select form-input border border-slate-100 dark:border-slate-800 block w-full mt-1"
+                                                defaultValue={propertyType}
+                                            >
                                                 {translatedPropertyTypes.map((option) => (
                                                     <option key={option.value} value={option.value}>
                                                         {option.label}
@@ -72,8 +87,27 @@ const PropertyList = () => {
                                         </div>
 
                                         <div>
-                                            <label className="font-medium">{t('max-price')} :</label>
-                                            <select className="form-select form-input border border-slate-100 dark:border-slate-800 block w-full mt-1">
+                                            <label className="font-medium">{t('listing-type')} :</label>
+                                            <select
+                                                name="listingType"
+                                                className="form-select form-input border border-slate-100 dark:border-slate-800 block w-full mt-1"
+                                                defaultValue={listingType}
+                                            >
+                                                {['rent', 'sale'].map((option) => (
+                                                    <option key={option} value={option.toUpperCase()}>
+                                                        {t(option)}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
+
+                                        <div>
+                                            <label className="font-medium">{t('min-price')} :</label>
+                                            <select
+                                                name="minPrice"
+                                                className="form-select form-input border border-slate-100 dark:border-slate-800 block w-full mt-1"
+                                                defaultValue={minPriceValue || maxPrice[0].value}
+                                            >
                                                 {maxPrice.map((option) => (
                                                     <option key={option.value} value={option.value}>
                                                         {option.label}
@@ -83,8 +117,12 @@ const PropertyList = () => {
                                         </div>
 
                                         <div>
-                                            <label className="font-medium">{t('min-price')} :</label>
-                                            <select className="form-select form-input border border-slate-100 dark:border-slate-800 block w-full mt-1">
+                                            <label className="font-medium">{t('max-price')} :</label>
+                                            <select
+                                                name="maxPrice"
+                                                className="form-select form-input border border-slate-100 dark:border-slate-800 block w-full mt-1"
+                                                defaultValue={maxPriceValue || maxPrice[maxPrice.length - 1].value}
+                                            >
                                                 {maxPrice.map((option) => (
                                                     <option key={option.value} value={option.value}>
                                                         {option.label}

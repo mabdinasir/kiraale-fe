@@ -2,16 +2,17 @@
 
 import React from 'react'
 import { useTranslations } from 'next-intl'
-import dynamic from 'next/dynamic'
 import Form from 'next/form'
 import { FiHome, FiSearch } from 'react-icons/fi'
 import { LuCircleDollarSign } from 'react-icons/lu'
 import { useParams } from 'next/navigation'
 import { maxPrice, minPrice, proprtyTypes } from '@lib/constants'
 
-const Select = dynamic(() => import('react-select'), { ssr: false })
+type PropertySearchFormProps = {
+    activeTabIndex: number
+}
 
-const PropertySearchForm = () => {
+const PropertySearchForm: React.FC<PropertySearchFormProps> = ({ activeTabIndex }) => {
     const t = useTranslations()
     const { locale } = useParams()
     const path = `/${locale}/property/search`
@@ -41,16 +42,23 @@ const PropertySearchForm = () => {
                         </div>
                     </div>
 
+                    <input type="hidden" name="listingType" value={activeTabIndex === 0 ? 'RENT' : 'SALE'} />
                     <div>
                         <label className="form-label text-slate-900 dark:text-white font-medium">
                             {t('select-category')}:
                         </label>
                         <div className="filter-search-form relative filter-border mt-2">
                             <FiHome className="icons" width={18} />
-                            <Select
+                            <select
+                                name="propertyType"
                                 className="form-input filter-input-box bg-gray-50 dark:bg-slate-800 border-0"
-                                options={translatedPropertyTypes}
-                            />
+                            >
+                                {translatedPropertyTypes.map((option) => (
+                                    <option key={option.value} value={option.value}>
+                                        {option.label}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
                     </div>
 
@@ -60,10 +68,17 @@ const PropertySearchForm = () => {
                         </label>
                         <div className="filter-search-form relative filter-border mt-2">
                             <LuCircleDollarSign className="icons" width={18} />
-                            <Select
+                            <select
+                                name="minPrice"
                                 className="form-input filter-input-box bg-gray-50 dark:bg-slate-800 border-0"
-                                options={minPrice}
-                            />
+                                defaultValue={minPrice[0].value}
+                            >
+                                {minPrice.map((option) => (
+                                    <option key={option.value} value={option.value}>
+                                        {option.label}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
                     </div>
 
@@ -73,10 +88,17 @@ const PropertySearchForm = () => {
                         </label>
                         <div className="filter-search-form relative mt-2">
                             <LuCircleDollarSign className="icons" width={18} />
-                            <Select
+                            <select
+                                name="maxPrice"
                                 className="form-input filter-input-box bg-gray-50 dark:bg-slate-800 border-0"
-                                options={maxPrice}
-                            />
+                                defaultValue={maxPrice[maxPrice.length - 1].value}
+                            >
+                                {maxPrice.map((option) => (
+                                    <option key={option.value} value={option.value}>
+                                        {option.label}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
                     </div>
 

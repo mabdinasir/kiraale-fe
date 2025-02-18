@@ -30,4 +30,20 @@ export const propertySchema = z.object({
     oven: z.boolean().optional(),
 })
 
+export const propertySearchQuerySchema = z.object({
+    query: z.string().optional(),
+    minPrice: z
+        .string()
+        .optional()
+        .transform((val) => (val ? parseFloat(val) : undefined))
+        .refine((val) => val === undefined || val >= 0, 'Price must be a positive number'),
+    maxPrice: z
+        .string()
+        .optional()
+        .transform((val) => (val ? parseFloat(val) : undefined))
+        .refine((val) => val === undefined || val >= 0, 'Price must be a positive number'),
+    propertyType: z.enum(['RESIDENTIAL', 'COMMERCIAL', 'LAND']).optional(),
+    listingType: z.enum(['SALE', 'RENT']).optional(),
+})
+
 export default propertySchema
