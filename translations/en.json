@@ -116,6 +116,7 @@
     "blog-detail": "Blog Detail",
     "property-title": "Property Title",
     "bedrooms": "Bedrooms",
+    "bed": "Bed",
     "beds": "Beds",
     "bathrooms": "Bathrooms",
     "baths": "Baths",
@@ -156,9 +157,18 @@
     "property-payment": "Property Payment",
     "back": "Back",
     "next": "Next",
+    "previous": "Previous",
     "payment-successful": "Payment successful",
     "property-listings": "Property Listings",
     "apply-filters": "Apply Filters",
     "no-properties-found": "No properties found!",
-    "no-properties-description": "We couldn't find any properties matching your search criteria. Please refine your search term and criteria then try again."
+    "no-properties-description": "We couldn't find any properties matching your search criteria. Please refine your search term and criteria then try again.",
+    "for": "For",
+    "yes": "Yes",
+    "no": "No",
+    "status": "Status",
+    "pending": "Pending",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "expired": "Expired"
 }

@@ -33,6 +33,7 @@ const PropertyListItem = () => {
     )
 
     if (isLoading) return <LoadingIndicator />
+
     if (!data?.properties || data?.properties.length === 0)
         return (
             <EmptyState
@@ -46,75 +47,73 @@ const PropertyListItem = () => {
         <div className="lg:col-span-8 md:col-span-6">
             <div className="grid grid-cols-1 gap-[30px]">
                 {data?.properties?.map((item) => (
-                    <div
-                        key={item.id}
-                        className="group rounded-xl bg-white dark:bg-slate-900 shadow hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden ease-in-out duration-500 w-full mx-auto xl:max-w-4xl"
-                    >
-                        <div className="md:flex">
-                            <div className="relative">
-                                <Image
-                                    className="h-full w-full object-cover lg:w-64"
-                                    src={item.media[0].url}
-                                    alt=""
-                                    width={0}
-                                    height={0}
-                                    sizes="100vw"
-                                    style={{ width: '100%', height: 'auto' }}
-                                />
-                                <div className="absolute top-4 end-4">
-                                    <ReusableLink
-                                        href="#"
-                                        className="btn btn-icon bg-white dark:bg-slate-900 shadow dark:shadow-gray-700 rounded-full text-slate-100 dark:text-slate-700 focus:text-red-600 dark:focus:text-red-600 hover:text-red-600 dark:hover:text-red-600"
-                                    >
-                                        <i className="mdi mdi-heart mdi-18px"></i>
-                                    </ReusableLink>
+                    <ReusableLink key={item.id} href={`/property/${item.id}`}>
+                        <div
+                            key={item.id}
+                            className="group rounded-xl bg-white dark:bg-slate-900 shadow hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden ease-in-out duration-500 w-full mx-auto xl:max-w-4xl"
+                        >
+                            <div className="md:flex">
+                                <div className="relative">
+                                    <Image
+                                        className="h-full w-full object-cover lg:w-64"
+                                        src={item.media[0].url}
+                                        alt=""
+                                        width={0}
+                                        height={0}
+                                        sizes="100vw"
+                                        style={{ width: '100%', height: 'auto' }}
+                                    />
+                                    <div className="absolute top-4 end-4">
+                                        <div
+                                            className="btn btn-icon bg-white dark:bg-slate-900 shadow dark:shadow-gray-700 rounded-full text-slate-100 dark:text-slate-700 focus:text-red-600 dark:focus:text-red-600 hover:text-red-600 dark:hover:text-red-600"
+                                            onClick={(e) => {
+                                                e.preventDefault()
+                                                //favoriteProperty(item.id)
+                                            }}
+                                        >
+                                            <i className="mdi mdi-heart mdi-18px"></i>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="p-6 w-full">
-                                <div className="md:pb-4 pb-6">
-                                    <ReusableLink
-                                        href={`/property-detail/${item.id}`}
-                                        className="text-lg hover:text-green-600 font-medium ease-in-out duration-500"
-                                    >
-                                        {item.title}
-                                    </ReusableLink>
+                                <div className="p-6 w-full">
+                                    <div className="md:pb-4 pb-6">{item.title}</div>
+
+                                    <ul className="md:py-4 py-6 border-y border-slate-100 dark:border-gray-800 flex items-center list-none justify-between">
+                                        <li className="flex items-center me-4">
+                                            <LiaCompressArrowsAltSolid
+                                                width={20}
+                                                className="me-2 text-green-600 text-2xl"
+                                            />
+                                            <span>
+                                                {item?.features?.area} {t('sqf')}
+                                            </span>
+                                        </li>
+
+                                        <li className="flex items-center me-4">
+                                            <LuBedDouble width={20} className="me-2 text-green-600 text-2xl" />
+                                            <span>
+                                                {item?.features?.bedrooms} {t('beds')}
+                                            </span>
+                                        </li>
+
+                                        <li className="flex items-center">
+                                            <LuBath width={20} className="me-2 text-green-600 text-2xl" />
+                                            <span>
+                                                {item?.features?.bathrooms} {t('baths')}
+                                            </span>
+                                        </li>
+                                    </ul>
+
+                                    <ul className="md:pt-4 pt-6 flex justify-between items-center list-none">
+                                        <li>
+                                            <span className="text-slate-400">{t('price')}</span>
+                                            <p className="text-lg font-medium">${item.price}</p>
+                                        </li>
+                                    </ul>
                                 </div>
-
-                                <ul className="md:py-4 py-6 border-y border-slate-100 dark:border-gray-800 flex items-center list-none justify-between">
-                                    <li className="flex items-center me-4">
-                                        <LiaCompressArrowsAltSolid
-                                            width={20}
-                                            className="me-2 text-green-600 text-2xl"
-                                        />
-                                        <span>
-                                            {item?.features?.area} {t('sqf')}
-                                        </span>
-                                    </li>
-
-                                    <li className="flex items-center me-4">
-                                        <LuBedDouble width={20} className="me-2 text-green-600 text-2xl" />
-                                        <span>
-                                            {item?.features?.bedrooms} {t('beds')}
-                                        </span>
-                                    </li>
-
-                                    <li className="flex items-center">
-                                        <LuBath width={20} className="me-2 text-green-600 text-2xl" />
-                                        <span>
-                                            {item?.features?.bathrooms} {t('baths')}
-                                        </span>
-                                    </li>
-                                </ul>
-
-                                <ul className="md:pt-4 pt-6 flex justify-between items-center list-none">
-                                    <li>
-                                        <span className="text-slate-400">{t('price')}</span>
-                                        <p className="text-lg font-medium">${item.price}</p>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
-                    </div>
+                    </ReusableLink>
                 ))}
             </div>
 

@@ -53,3 +53,8 @@ export interface PropertySearchResponse {
     success: boolean
     properties: Property[]
 }
+
+export interface GetPropertyByIdResponse {
+    success: boolean
+    property: Property
+}

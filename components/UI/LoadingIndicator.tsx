@@ -5,7 +5,7 @@ type Props = {
 }
 
 const LoadingIndicator: FC<Props> = ({ redVariant }) => (
-    <div className="lg:col-span-8 md:col-span-6 flex flex-col items-center justify-center h-full" role="status">
+    <div className="flex lg:col-span-8 md:col-span-6 flex flex-col items-center justify-center h-[500px]" role="status">
         <svg
             aria-hidden="true"
             className={`w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 ${
