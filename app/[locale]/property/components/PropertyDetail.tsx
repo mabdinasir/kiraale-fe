@@ -22,7 +22,7 @@ const propertyStatusColor: Record<PropertyStatus, string> = {
 }
 
 const PropertyDetail = () => {
-    const { id } = useParams()
+    const { id, locale } = useParams()
     const t = useTranslations()
 
     const { data } = useGetPropertyByIdQuery(id as string)
@@ -103,7 +103,17 @@ const PropertyDetail = () => {
                                     </div>
 
                                     <div className="flex justify-between items-center">
-                                        <span className="text-xl font-medium">${property?.price}</span>
+                                        <span className="text-xl font-medium">
+                                            {new Intl.NumberFormat('en-US', {
+                                                style: 'currency',
+                                                currency: 'USD',
+                                                minimumFractionDigits: 0,
+                                                maximumFractionDigits: 0,
+                                                currencyDisplay: 'narrowSymbol',
+                                            })
+                                                .format(property?.price || 0)
+                                                .replace('$', '$ ')}
+                                        </span>
 
                                         <span className="bg-green-600/10 text-green-600 text-sm px-2.5 py-0.75 rounded h-6">
                                             {t('for')} {t(property?.listingType.toLowerCase())}
@@ -136,35 +146,29 @@ const PropertyDetail = () => {
 
                                 <div className="flex">
                                     <div className="p-1 w-1/2">
-                                        <Link
-                                            href=""
-                                            className="btn bg-green-600 hover:bg-green-700 text-white rounded-md w-full"
-                                        >
-                                            Book Now
-                                        </Link>
+                                        <div className="btn bg-green-600 hover:bg-green-700 text-white rounded-md w-full">
+                                            {property?.user?.firstName.toUpperCase()}
+                                        </div>
                                     </div>
                                     <div className="p-1 w-1/2">
-                                        <Link
-                                            href=""
-                                            className="btn bg-green-600 hover:bg-green-700 text-white rounded-md w-full"
-                                        >
-                                            Offer Now
-                                        </Link>
+                                        <div className="btn bg-green-600 hover:bg-green-700 text-white rounded-md w-full">
+                                            {property?.user?.mobile}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
                             <div className="mt-12 text-center">
                                 <h3 className="mb-6 text-xl leading-normal font-medium text-black dark:text-white">
-                                    Have Question ? Get in touch!
+                                    {t('have-a-question')}
                                 </h3>
 
                                 <div className="mt-6">
                                     <Link
-                                        href="/contact"
+                                        href={`/${locale}/contact`}
                                         className="btn bg-transparent hover:bg-green-600 border border-green-600 text-green-600 hover:text-white rounded-md"
                                     >
-                                        <FiPhone className="align-middle me-2" /> Contact us
+                                        <FiPhone className="align-middle me-2" /> {t('contact-us')}
                                     </Link>
                                 </div>
                             </div>

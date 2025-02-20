@@ -22,6 +22,13 @@ export interface PropertyMedia {
     propertyId: string
 }
 
+export interface PropertyUser {
+    firstName: string
+    lastName: string
+    mobile: string
+    email: string
+}
+
 export interface Property {
     id: string
     title: string
@@ -39,6 +46,7 @@ export interface Property {
     approvedBy: string | null
     features: PropertyFeatures
     media: PropertyMedia[]
+    user: PropertyUser
 }
 
 export interface PropertySearchParams {
