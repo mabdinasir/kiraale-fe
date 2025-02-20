@@ -11,7 +11,7 @@ import { useAppDispatch } from '@hooks/rtkHooks'
 import { setToken } from '@store/slices/tokenSlice'
 import { z } from 'zod'
 import { loginSchema } from 'schemas'
-import type { LoginForm } from '@models/auth/LoginForm'
+import type { LoginForm } from '@models/auth/loginForm'
 import isApiError from '@utils/isApiError'
 
 type FormErrors = Record<keyof LoginForm, string>

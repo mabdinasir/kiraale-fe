@@ -8,7 +8,7 @@ import { useParams, useRouter } from 'next/navigation'
 import Error from '@components/UI/Error'
 import Button from '@components/UI/Button'
 import { z } from 'zod'
-import type { SignupForm } from '@models/auth/SignupForm'
+import type { SignupForm } from '@models/auth/signupForm'
 import isApiError from '@utils/isApiError'
 import { signUpSchema } from 'schemas'
 

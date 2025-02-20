@@ -1,4 +1,4 @@
-import { ApiError } from '@models/ApiError'
+import { ApiError } from '@models/apiError'
 
 const isApiError = (error: unknown): error is ApiError =>
     typeof error === 'object' &&

@@ -1,8 +1,8 @@
 import apiConfig from '@config/apiConfig'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { SignupForm, SignupResponse } from '@models/auth/SignupForm'
-import { LoginForm, LoginResponse } from '@models/auth/LoginForm'
-import { SignOutResponse } from '@models/auth/Signout'
+import { SignupForm, SignupResponse } from '@models/auth/signupForm'
+import { LoginForm, LoginResponse } from '@models/auth/loginForm'
+import { SignOutResponse } from '@models/auth/signout'
 import Cookies from 'js-cookie'
 
 const token = Cookies.get('authToken')

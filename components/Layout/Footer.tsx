@@ -98,7 +98,8 @@ const Footer = () => {
                                                     href="/about"
                                                     className="text-slate-300 hover:text-slate-400 duration-500 ease-in-out flex items-center"
                                                 >
-                                                    <FiChevronRight width={18} className="me-1" /> <span>About us</span>{' '}
+                                                    <FiChevronRight width={18} className="me-1" />{' '}
+                                                    <span>About us</span>{' '}
                                                 </ReusableLink>
                                             </li>
                                             <li className="mt-[10px]">
@@ -106,7 +107,8 @@ const Footer = () => {
                                                     href="/features"
                                                     className="text-slate-300 hover:text-slate-400 duration-500 ease-in-out flex items-center"
                                                 >
-                                                    <FiChevronRight width={18} className="me-1" /> <span>Services</span>{' '}
+                                                    <FiChevronRight width={18} className="me-1" />{' '}
+                                                    <span>Services</span>{' '}
                                                 </ReusableLink>
                                             </li>
                                             <li className="mt-[10px]">
@@ -114,7 +116,8 @@ const Footer = () => {
                                                     href="/pricing"
                                                     className="text-slate-300 hover:text-slate-400 duration-500 ease-in-out flex items-center"
                                                 >
-                                                    <FiChevronRight width={18} className="me-1" /> <span>Pricing</span>{' '}
+                                                    <FiChevronRight width={18} className="me-1" />{' '}
+                                                    <span>Pricing</span>{' '}
                                                 </ReusableLink>
                                             </li>
                                             <li className="mt-[10px]">
@@ -122,7 +125,8 @@ const Footer = () => {
                                                     href="/blogs"
                                                     className="text-slate-300 hover:text-slate-400 duration-500 ease-in-out flex items-center"
                                                 >
-                                                    <FiChevronRight width={18} className="me-1" /> <span>Blog</span>{' '}
+                                                    <FiChevronRight width={18} className="me-1" />{' '}
+                                                    <span>Blog</span>{' '}
                                                 </ReusableLink>
                                             </li>
                                             <li className="mt-[10px]">
@@ -130,7 +134,8 @@ const Footer = () => {
                                                     href="/auth/login"
                                                     className="text-slate-300 hover:text-slate-400 duration-500 ease-in-out flex items-center"
                                                 >
-                                                    <FiChevronRight width={18} className="me-1" /> <span>Login</span>{' '}
+                                                    <FiChevronRight width={18} className="me-1" />{' '}
+                                                    <span>Login</span>{' '}
                                                 </ReusableLink>
                                             </li>
                                         </ul>
@@ -164,7 +169,8 @@ const Footer = () => {
                                                     href="/grid"
                                                     className="text-slate-300 hover:text-slate-400 duration-500 ease-in-out flex items-center"
                                                 >
-                                                    <FiChevronRight width={18} className="me-1" /> <span>Listing</span>{' '}
+                                                    <FiChevronRight width={18} className="me-1" />{' '}
+                                                    <span>Listing</span>{' '}
                                                 </ReusableLink>
                                             </li>
                                             <li className="mt-[10px]">
@@ -172,7 +178,8 @@ const Footer = () => {
                                                     href="/contact"
                                                     className="text-slate-300 hover:text-slate-400 duration-500 ease-in-out flex items-center"
                                                 >
-                                                    <FiChevronRight width={18} className="me-1" /> <span> Contact</span>{' '}
+                                                    <FiChevronRight width={18} className="me-1" />{' '}
+                                                    <span> Contact</span>{' '}
                                                 </ReusableLink>
                                             </li>
                                         </ul>
