@@ -7,8 +7,8 @@ import { useSearchPropertiesQuery } from '@store/services/properties'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
+import { FaCalendarAlt } from 'react-icons/fa'
 // import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
-import { LiaCompressArrowsAltSolid } from 'react-icons/lia'
 import { LuBedDouble, LuBath } from 'react-icons/lu'
 import { PiBuildingApartmentFill } from 'react-icons/pi'
 
@@ -80,26 +80,23 @@ const PropertyListItem = () => {
 
                                     <ul className="md:py-4 py-6 border-y border-slate-100 dark:border-gray-800 flex items-center list-none justify-between">
                                         <li className="flex items-center me-4">
-                                            <LiaCompressArrowsAltSolid
-                                                width={20}
-                                                className="me-2 text-green-600 text-2xl"
-                                            />
-                                            <span>
-                                                {item?.features?.area} {t('sqf')}
-                                            </span>
+                                            <FaCalendarAlt width={20} className="me-2 text-green-600 text-2xl" />
+                                            <span>{item?.features?.yearBuilt}</span>
                                         </li>
 
                                         <li className="flex items-center me-4">
                                             <LuBedDouble width={20} className="me-2 text-green-600 text-2xl" />
                                             <span>
-                                                {item?.features?.bedrooms} {t('beds')}
+                                                {item.features.bedrooms}{' '}
+                                                {item.features.bedrooms <= 1 ? t('bed') : t('beds')}
                                             </span>
                                         </li>
 
                                         <li className="flex items-center">
                                             <LuBath width={20} className="me-2 text-green-600 text-2xl" />
                                             <span>
-                                                {item?.features?.bathrooms} {t('baths')}
+                                                {item.features.bathrooms}{' '}
+                                                {item.features.bathrooms <= 1 ? t('bath') : t('baths')}
                                             </span>
                                         </li>
                                     </ul>
@@ -107,7 +104,17 @@ const PropertyListItem = () => {
                                     <ul className="md:pt-4 pt-6 flex justify-between items-center list-none">
                                         <li>
                                             <span className="text-slate-400">{t('price')}</span>
-                                            <p className="text-lg font-medium">${item.price}</p>
+                                            <p className="text-lg font-medium">
+                                                {new Intl.NumberFormat('en-US', {
+                                                    style: 'currency',
+                                                    currency: 'USD',
+                                                    minimumFractionDigits: 0,
+                                                    maximumFractionDigits: 0,
+                                                    currencyDisplay: 'narrowSymbol',
+                                                })
+                                                    .format(item?.price || 0)
+                                                    .replace('$', '$ ')}
+                                            </p>
                                         </li>
                                     </ul>
                                 </div>

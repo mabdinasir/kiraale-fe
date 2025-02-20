@@ -25,10 +25,11 @@ const PropertyDetail = () => {
     const { id, locale } = useParams()
     const t = useTranslations()
 
-    const { data } = useGetPropertyByIdQuery(id as string)
+    const { data, isLoading } = useGetPropertyByIdQuery(id as string)
     const property = data?.property
 
-    if (!data) return <LoadingIndicator />
+    if (isLoading) return <LoadingIndicator />
+    if (!property) return null
 
     return (
         <section className="relative md:py-24 pt-24 pb-16">
@@ -68,7 +69,7 @@ const PropertyDetail = () => {
                                 <LuBedDouble className="lg:text-3xl text-2xl me-2 text-green-600" />
                                 <span className="lg:text-xl">
                                     {property?.features.bedrooms}{' '}
-                                    {property?.features.bedrooms === 1 ? t('bed') : t('beds')}
+                                    {property?.features.bedrooms <= 1 ? t('bed') : t('beds')}
                                 </span>
                             </li>
 
@@ -76,7 +77,7 @@ const PropertyDetail = () => {
                                 <LuBath className="lg:text-3xl text-2xl me-2 text-green-600" />
                                 <span className="lg:text-xl">
                                     {property?.features.bathrooms}{' '}
-                                    {property?.features.bathrooms === 1 ? t('bath') : t('baths')}
+                                    {property?.features.bathrooms <= 1 ? t('bath') : t('baths')}
                                 </span>
                             </li>
                         </ul>

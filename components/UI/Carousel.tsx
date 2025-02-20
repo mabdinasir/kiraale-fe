@@ -40,7 +40,6 @@ const Carousel = ({
 
     return (
         <div id="default-carousel" className={`relative w-full ${className} group`} data-carousel="slide">
-            {/* Carousel wrapper */}
             <div className="relative h-96 md:h-[600px] overflow-hidden rounded-lg">
                 {images.map((image, index) => (
                     <div
@@ -49,13 +48,9 @@ const Carousel = ({
                         data-carousel-item
                         style={{ transitionDuration: `${slideDuration}ms` }}
                     >
-                        <Image
-                            src={image.src}
-                            fill
-                            className="absolute block w-full object-cover"
-                            alt={image.alt}
-                            priority={index === 0}
-                        />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            <Image src={image.src} fill alt={image.alt} priority={index === 0} />
+                        </div>
                     </div>
                 ))}
             </div>
