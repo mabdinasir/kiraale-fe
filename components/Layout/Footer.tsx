@@ -14,11 +14,12 @@ import {
     FiPhone,
     FiTwitter,
 } from 'react-icons/fi'
-import { BsPencil } from 'react-icons/bs'
 import { RiBehanceFill } from 'react-icons/ri'
 import { useTranslations } from 'next-intl'
 import ReusableLink from '@components/Links/ReusableLink'
 import { useParams, usePathname } from 'next/navigation'
+import SubscriptionForm from '@components/UI/SubscriptionForm'
+import StoreProvider from 'app/[locale]/StoreProvider'
 
 const Footer = () => {
     const t = useTranslations()
@@ -37,51 +38,10 @@ const Footer = () => {
                 <div className="container">
                     <div className="grid grid-cols-1">
                         <div className="relative py-16">
-                            {/* <!-- Subscribe --> */}
                             <div className="relative w-full">
-                                <div className="relative -top-40 bg-white dark:bg-slate-900 lg:px-8 px-6 py-10 rounded-xl shadow-lg dark:shadow-gray-700 overflow-hidden">
-                                    <div className="grid md:grid-cols-2 grid-cols-1 items-center gap-[30px]">
-                                        <div className="md:text-start text-center z-1">
-                                            <h3 className="md:text-3xl text-2xl md:leading-normal leading-normal font-medium text-black dark:text-white">
-                                                {t('subscribe-title')}
-                                            </h3>
-                                            <p className="text-slate-400 max-w-xl mx-auto">{t('subscribe-subtitle')}</p>
-                                        </div>
-
-                                        <div className="subcribe-form z-1">
-                                            <form className="relative max-w-lg md:ms-auto">
-                                                <input
-                                                    type="email"
-                                                    id="subcribe"
-                                                    name="email"
-                                                    className="rounded-full bg-white dark:bg-slate-900 shadow dark:shadow-gray-700"
-                                                    placeholder={`${t('enter-email')} :`}
-                                                />
-                                                <button
-                                                    type="submit"
-                                                    className="btn bg-green-600 hover:bg-green-700 text-white rounded-full"
-                                                >
-                                                    {t('subscribe')}
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
-
-                                    <div className="absolute -top-5 -start-5">
-                                        <FiMail
-                                            className=" text-black/5 dark:text-white/5 ltr:-rotate-45 rtl:rotate-45"
-                                            style={{ width: '150px', height: '150px' }}
-                                        />
-                                    </div>
-
-                                    <div className="absolute -bottom-5 -end-5">
-                                        <BsPencil
-                                            className=" text-black/5 dark:text-white/5 rtl:-rotate-90"
-                                            style={{ width: '150px', height: '150px' }}
-                                        />
-                                    </div>
-                                </div>
-
+                                <StoreProvider key={'subscribe'}>
+                                    <SubscriptionForm />
+                                </StoreProvider>
                                 <div className="grid md:grid-cols-12 grid-cols-1 gap-[30px] -mt-24">
                                     <div className="lg:col-span-4 md:col-span-12">
                                         <ReusableLink href="#" className="text-[22px] focus:outline-none">
@@ -99,7 +59,7 @@ const Footer = () => {
                                                     className="text-slate-300 hover:text-slate-400 duration-500 ease-in-out flex items-center"
                                                 >
                                                     <FiChevronRight width={18} className="me-1" />{' '}
-                                                    <span>About us</span>{' '}
+                                                    <span>{t('about-us')}</span>{' '}
                                                 </ReusableLink>
                                             </li>
                                             <li className="mt-[10px]">
@@ -108,7 +68,7 @@ const Footer = () => {
                                                     className="text-slate-300 hover:text-slate-400 duration-500 ease-in-out flex items-center"
                                                 >
                                                     <FiChevronRight width={18} className="me-1" />{' '}
-                                                    <span>Services</span>{' '}
+                                                    <span>{t('services')}</span>{' '}
                                                 </ReusableLink>
                                             </li>
                                             <li className="mt-[10px]">
@@ -117,16 +77,7 @@ const Footer = () => {
                                                     className="text-slate-300 hover:text-slate-400 duration-500 ease-in-out flex items-center"
                                                 >
                                                     <FiChevronRight width={18} className="me-1" />{' '}
-                                                    <span>Pricing</span>{' '}
-                                                </ReusableLink>
-                                            </li>
-                                            <li className="mt-[10px]">
-                                                <ReusableLink
-                                                    href="/blogs"
-                                                    className="text-slate-300 hover:text-slate-400 duration-500 ease-in-out flex items-center"
-                                                >
-                                                    <FiChevronRight width={18} className="me-1" />{' '}
-                                                    <span>Blog</span>{' '}
+                                                    <span>{t('pricing')}</span>{' '}
                                                 </ReusableLink>
                                             </li>
                                             <li className="mt-[10px]">
@@ -135,7 +86,7 @@ const Footer = () => {
                                                     className="text-slate-300 hover:text-slate-400 duration-500 ease-in-out flex items-center"
                                                 >
                                                     <FiChevronRight width={18} className="me-1" />{' '}
-                                                    <span>Login</span>{' '}
+                                                    <span>{t('login')}</span>{' '}
                                                 </ReusableLink>
                                             </li>
                                         </ul>
@@ -170,7 +121,7 @@ const Footer = () => {
                                                     className="text-slate-300 hover:text-slate-400 duration-500 ease-in-out flex items-center"
                                                 >
                                                     <FiChevronRight width={18} className="me-1" />{' '}
-                                                    <span>Listing</span>{' '}
+                                                    <span>{t('featured-properties')}</span>{' '}
                                                 </ReusableLink>
                                             </li>
                                             <li className="mt-[10px]">
@@ -179,7 +130,7 @@ const Footer = () => {
                                                     className="text-slate-300 hover:text-slate-400 duration-500 ease-in-out flex items-center"
                                                 >
                                                     <FiChevronRight width={18} className="me-1" />{' '}
-                                                    <span> Contact</span>{' '}
+                                                    <span>{t('contact')}</span>{' '}
                                                 </ReusableLink>
                                             </li>
                                         </ul>
@@ -192,9 +143,7 @@ const Footer = () => {
                                         <div className="flex mt-6">
                                             <FiMapPin className="w-5 h-5 text-green-600 me-3"></FiMapPin>
                                             <div className="">
-                                                <h6 className="text-gray-300 mb-2">
-                                                    Tenth Street, <br /> 1st Avaneue, Eastleigh, <br /> Nairobi, Kenya
-                                                </h6>
+                                                <h6 className="text-gray-300 mb-2">{t('address-info')}</h6>
                                                 <Link
                                                     href="https://maps.app.goo.gl/A629QdF68idAcHGL6"
                                                     target="_blank"
@@ -231,7 +180,6 @@ const Footer = () => {
                                     </div>
                                 </div>
                             </div>
-                            {/* <!-- Subscribe --> */}
                         </div>
                     </div>
                 </div>

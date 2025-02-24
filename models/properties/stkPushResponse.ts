@@ -1,5 +1,5 @@
 export interface StkPushResponse {
-    message: boolean
+    success: boolean
     data: {
         MerchantRequestID: string
         CheckoutRequestID: string

@@ -1,10 +1,11 @@
-'use client'
+'use client' // This is a client component 👈🏽
+
 import React from 'react'
 import Image from 'next/image'
 import TinySlider from 'tiny-slider-react'
 import 'tiny-slider/dist/tiny-slider.css'
 
-import { review } from '@data/data'
+import { reviews } from '@data/data'
 import { useTranslations } from 'next-intl'
 
 const settings = {
@@ -29,9 +30,9 @@ const ClientOne = () => {
             <div className="container lg:mt-24 mt-16">
                 <div className="grid grid-cols-1 pb-8 text-center">
                     <h3 className="mb-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold">
-                        {t('what-our-client-say')}
+                        {t('client-testimonials-title')}
                     </h3>
-                    <p className="text-slate-400 max-w-xl mx-auto">{t('feature-subtitle')}</p>
+                    <p className="text-slate-400 max-w-xl mx-auto">{t('client-testimonials-subtitle')}</p>
                 </div>
 
                 <div className="flex justify-center relative mt-16">
@@ -46,10 +47,10 @@ const ClientOne = () => {
 
                         <div className="tiny-single-item">
                             <TinySlider settings={settings}>
-                                {review.map((el, index) => (
+                                {reviews.map((review, index) => (
                                     <div className="tiny-slide" key={index}>
                                         <div className="text-center">
-                                            <p className="text-xl text-slate-400 italic"> {el.description} </p>
+                                            <p className="text-xl text-slate-400 italic"> {review.description} </p>
 
                                             <div className="text-center mt-5">
                                                 <ul className="text-xl font-medium text-amber-400 list-none mb-2">
@@ -71,15 +72,15 @@ const ClientOne = () => {
                                                 </ul>
 
                                                 <Image
-                                                    src={el.profile}
+                                                    src={review.profile}
                                                     className="h-14 w-14 rounded-full shadow-md dark:shadow-gray-700 mx-auto"
                                                     alt=""
                                                     height={56}
                                                     width={56}
                                                     priority
                                                 />
-                                                <h6 className="mt-2 fw-semibold">{el.name}</h6>
-                                                <span className="text-slate-400 text-sm">{el.designation}</span>
+                                                <h6 className="mt-2 fw-semibold">{review.name}</h6>
+                                                <span className="text-slate-400 text-sm">{review.designation}</span>
                                             </div>
                                         </div>
                                     </div>

@@ -5,6 +5,7 @@ import ReusableLink from '@components/Links/ReusableLink'
 
 const GetInTuch = () => {
     const t = useTranslations()
+
     return (
         <div className="container lg:mt-24 mt-16">
             <div className="grid grid-cols-1 text-center">
@@ -12,7 +13,7 @@ const GetInTuch = () => {
                     {t('have-a-question')}
                 </h3>
 
-                <p className="text-slate-400 max-w-xl mx-auto">{t('feature-subtitle')}</p>
+                <p className="text-slate-400 max-w-xl mx-auto">{t('have-a-question-subtitle')}</p>
 
                 <div className="mt-6">
                     <ReusableLink href="/contact" className="btn bg-green-600 hover:bg-green-700 text-white rounded-md">

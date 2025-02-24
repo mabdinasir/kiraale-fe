@@ -1,6 +1,7 @@
 import { authApi } from './services/auth'
 import { mediaAPi } from './services/media'
 import { propertiesAPi } from './services/properties'
+import { subscriberApi } from './services/subscriber'
 import { todosApi } from './services/todos'
 import { usersApi } from './services/users'
 
@@ -10,6 +11,7 @@ const middlewareArray = [
     usersApi.middleware,
     propertiesAPi.middleware,
     mediaAPi.middleware,
+    subscriberApi.middleware,
 ]
 
 export default middlewareArray

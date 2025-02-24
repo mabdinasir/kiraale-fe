@@ -8,7 +8,6 @@ import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import { FaCalendarAlt } from 'react-icons/fa'
-// import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import { LuBedDouble, LuBath } from 'react-icons/lu'
 import { PiBuildingApartmentFill } from 'react-icons/pi'
 

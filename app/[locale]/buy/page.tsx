@@ -1,14 +1,12 @@
 import React from 'react'
-
-import Property from '@components/UI/Property'
 import Feature from '@components/UI/Feature'
-
 import GetInTuch from '@components/UI/GetInTouch'
-
+import FeaturedProperties from '@components/UI/FeaturedProperties'
 import { Search } from 'react-feather'
 import BuyTab from '@components/UI/BuyTab'
 import { useTranslations } from 'next-intl'
 import Navbar from '@components/Layout/Navbar'
+import StoreProvider from '../StoreProvider'
 
 const Buy = () => {
     const t = useTranslations()
@@ -59,7 +57,9 @@ const Buy = () => {
                         </div>
                     </div>
                 </div>
-                <Property />
+                <StoreProvider key={'featured-properties-buy'}>
+                    <FeaturedProperties />
+                </StoreProvider>
                 <Feature />
                 <BuyTab />
                 <GetInTuch />

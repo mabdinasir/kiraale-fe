@@ -1,4 +1,4 @@
-import { FiBriefcase, FiHome, FiKey, FiMail, FiMapPin, FiPhone, FiShield } from 'react-icons/fi'
+import { FiMail, FiMapPin, FiPhone, FiShield } from 'react-icons/fi'
 import { LuTrees } from 'react-icons/lu'
 import { GoRocket } from 'react-icons/go'
 
@@ -14,26 +14,6 @@ export const counterData = [
     {
         title: 'Years Experience',
         target: 9,
-    },
-]
-export const featureData = [
-    {
-        title: 'Evaluate Property',
-        description:
-            'If the distribution of letters and words is random, the reader will not be distracted from making.',
-        icon: FiHome,
-    },
-    {
-        title: 'Meeting with Agent',
-        description:
-            'If the distribution of letters and words is random, the reader will not be distracted from making.',
-        icon: FiBriefcase,
-    },
-    {
-        title: 'Close the Deal',
-        description:
-            'If the distribution of letters and words is random, the reader will not be distracted from making.',
-        icon: FiKey,
     },
 ]
 
@@ -59,265 +39,42 @@ export const teamData = [
         designation: 'Designer',
     },
 ]
-export const review = [
+
+export const reviews = [
     {
         id: '1',
         profile: '/images/client/01.jpg',
-        name: 'Calvin Carlo',
-        designation: 'Manager',
+        name: 'Amina Ali',
+        designation: 'Business Owner',
         description:
-            'Hously made the processes so easy. Hously instantly increased the amount of interest and ultimately saved us over $10,000.',
+            'This platform made finding a property in Eastleigh so easy! I quickly found a shop in the perfect location for my business.',
     },
     {
         id: '2',
         profile: '/images/client/02.jpg',
-        name: 'Christa Smith',
-        designation: 'Manager',
+        name: 'Mohamed Hassan',
+        designation: 'Real Estate Agent',
         description:
-            'I highly recommend Hously as the new way to sell your home "by owner". My home sold in 24 hours for the asking price. Best $400 you could spend to sell your home.',
+            'As an agent, I appreciate how simple it is to list properties and connect with buyers and renters in Eastleigh and beyond.',
     },
     {
         id: '3',
         profile: '/images/client/03.jpg',
-        name: 'Christa Smith',
-        designation: 'Manager',
+        name: 'Abdullahi Ibrahim',
+        designation: 'Homeowner',
         description:
-            'My favorite part about selling my home myself was that we got to meet and get to know the people personally. This made it so much more enjoyable!',
+            'Selling my home was quick and easy. I received several inquiries within days and found a buyer without any hassle.',
     },
     {
         id: '4',
         profile: '/images/client/04.jpg',
-        name: 'Christa Smith',
-        designation: 'Manager',
-        description: 'Great experience all around! Easy to use and efficient.',
+        name: 'Ahmed Yusuf',
+        designation: 'Tenant',
+        description:
+            'I found an affordable apartment in Eastleigh through this platform. The process was smooth, and I moved in within a week!',
     },
 ]
-export const properties = [
-    {
-        id: 1,
-        image: '/images/property/1.jpg',
-        name: '10765 Hillshire Ave, Baton Rouge, LA 70810, USA',
-        square: 8000,
-        beds: 4,
-        baths: 4,
-        price: 5000,
-        rating: 5.0,
-        detail: [
-            '/images/property/single/1.jpg',
-            '/images/property/single/2',
-            '/images/property/single/3',
-            '/images/property/single/4.jpg',
-            '/images/property/single/5.jpg',
-        ],
-    },
-    {
-        id: 2,
-        image: '/images/property/2.jpg',
-        name: '59345 STONEWALL DR, Plaquemine, LA 70764, USA',
-        square: 8000,
-        beds: 4,
-        baths: 4,
-        price: 5000,
-        rating: 5.0,
-        detail: [
-            '/images/property/single/1.jpg',
-            '/images/property/single/2',
-            '/images/property/single/3',
-            '/images/property/single/4.jpg',
-            '/images/property/single/5.jpg',
-        ],
-    },
-    {
-        id: 3,
-        image: '/images/property/3.jpg',
-        name: '3723 SANDBAR DR, Addis, LA 70710, USA',
-        square: 8000,
-        beds: 4,
-        baths: 4,
-        price: 5000,
-        rating: 5.0,
-        detail: [
-            '/images/property/single/1.jpg',
-            '/images/property/single/2',
-            '/images/property/single/3',
-            '/images/property/single/4.jpg',
-            '/images/property/single/5.jpg',
-        ],
-    },
-    {
-        id: 4,
-        image: '/images/property/4.jpg',
-        name: 'Lot 21 ROYAL OAK DR, Prairieville, LA 70769, USA',
-        square: 8000,
-        beds: 4,
-        baths: 4,
-        price: 5000,
-        rating: 5.0,
-        detail: [
-            '/images/property/single/1.jpg',
-            '/images/property/single/2',
-            '/images/property/single/3',
-            '/images/property/single/4.jpg',
-            '/images/property/single/5.jpg',
-        ],
-    },
-    {
-        id: 5,
-        image: '/images/property/5.jpg',
-        name: '710 BOYD DR, Unit #1102, Baton Rouge, LA 70808, USA',
-        square: 8000,
-        beds: 4,
-        baths: 4,
-        price: 5000,
-        rating: 5.0,
-        detail: [
-            '/images/property/single/1.jpg',
-            '/images/property/single/2',
-            '/images/property/single/3',
-            '/images/property/single/4.jpg',
-            '/images/property/single/5.jpg',
-        ],
-    },
-    {
-        id: 6,
-        image: '/images/property/6.jpg',
-        name: '5133 MCLAIN WAY, Baton Rouge, LA 70809, USA',
-        square: 8000,
-        beds: 4,
-        baths: 4,
-        price: 5000,
-        rating: 5.0,
-        detail: [
-            '/images/property/single/1.jpg',
-            '/images/property/single/2',
-            '/images/property/single/3',
-            '/images/property/single/4.jpg',
-            '/images/property/single/5.jpg',
-        ],
-    },
-]
-export const propertiesDetails = [
-    {
-        id: 1,
-        image: '/images/property/1.jpg',
-        name: '10765 Hillshire Ave, Baton Rouge, LA 70810, USA',
-        square: 8000,
-        beds: 4,
-        baths: 4,
-        price: 5000,
-        rating: 5.0,
-    },
-    {
-        id: 2,
-        image: '/images/property/2.jpg',
-        name: '59345 STONEWALL DR, Plaquemine, LA 70764, USA',
-        square: 8000,
-        beds: 4,
-        baths: 4,
-        price: 5000,
-        rating: 5.0,
-    },
-    {
-        id: 3,
-        image: '/images/property/3.jpg',
-        name: '3723 SANDBAR DR, Addis, LA 70710, USA',
-        square: 8000,
-        beds: 4,
-        baths: 4,
-        price: 5000,
-        rating: 5.0,
-    },
-    {
-        id: 4,
-        image: '/images/property/4.jpg',
-        name: 'Lot 21 ROYAL OAK DR, Prairieville, LA 70769, USA',
-        square: 8000,
-        beds: 4,
-        baths: 4,
-        price: 5000,
-        rating: 5.0,
-    },
-    {
-        id: 5,
-        image: '/images/property/5.jpg',
-        name: '710 BOYD DR, Unit #1102, Baton Rouge, LA 70808, USA',
-        square: 8000,
-        beds: 4,
-        baths: 4,
-        price: 5000,
-        rating: 5.0,
-    },
-    {
-        id: 6,
-        image: '/images/property/6.jpg',
-        name: '5133 MCLAIN WAY, Baton Rouge, LA 70809, USA',
-        square: 8000,
-        beds: 4,
-        baths: 4,
-        price: 5000,
-        rating: 5.0,
-    },
-    {
-        id: 7,
-        image: '/images/property/7.jpg',
-        name: '2141 Fiero Street, Baton Rouge, LA 70808',
-        square: 8000,
-        beds: 4,
-        baths: 4,
-        price: 5000,
-        rating: 5,
-    },
-    {
-        id: 8,
-        image: '/images/property/8.jpg',
-        name: '9714 Inniswold Estates Ave, Baton Rouge, LA 70809',
-        square: 8000,
-        beds: 4,
-        baths: 4,
-        price: 5000,
-        rating: 5,
-    },
-    {
-        id: 9,
-        image: '/images/property/9.jpg',
-        name: '1433 Beckenham Dr, Baton Rouge, LA 70808, USA',
-        square: 8000,
-        beds: 4,
-        baths: 4,
-        price: 5000,
-        rating: 5,
-    },
-    {
-        id: 10,
-        image: '/images/property/10.jpg',
-        name: '1574 Sharlo Ave, Baton Rouge, LA 70820, USA',
-        square: 8000,
-        beds: 4,
-        baths: 4,
-        price: 5000,
-        rating: 5,
-    },
-    {
-        id: 11,
-        image: '/images/property/11.jpg',
-        name: '2528 BOCAGE LAKE DR, Baton Rouge, LA 70809, USA',
-        square: 8000,
-        beds: 4,
-        baths: 4,
-        price: 5000,
-        rating: 5,
-    },
-    {
-        id: 11,
-        image: '/images/property/12.jpg',
-        name: '1533 NICHOLSON DR, Baton Rouge, LA 70802, USA',
-        square: 8000,
-        beds: 4,
-        baths: 4,
-        price: 5000,
-        rating: 5,
-    },
-]
+
 export const blogList = [
     {
         id: 1,

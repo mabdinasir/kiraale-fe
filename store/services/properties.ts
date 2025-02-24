@@ -42,7 +42,15 @@ export const propertiesAPi = createApi({
         getPropertyById: builder.query<GetPropertyByIdResponse, string>({
             query: (id) => `/getPropertyById/${id}`,
         }),
+        getFeaturedProperties: builder.query<PropertySearchResponse, void>({
+            query: () => '/featuredProperties',
+        }),
     }),
 })
 
-export const { useAddPropertyMutation, useSearchPropertiesQuery, useGetPropertyByIdQuery } = propertiesAPi
+export const {
+    useAddPropertyMutation,
+    useSearchPropertiesQuery,
+    useGetPropertyByIdQuery,
+    useGetFeaturedPropertiesQuery,
+} = propertiesAPi

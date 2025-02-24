@@ -6,6 +6,7 @@ const apiConfig = {
     usersApi: `${baseUrl}/users`,
     propertiesApi: `${baseUrl}/properties`,
     mediaApi: `${baseUrl}/media`,
+    subscriberApi: `${baseUrl}/subscriber`,
 }
 
 export default apiConfig

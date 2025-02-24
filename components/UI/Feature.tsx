@@ -1,11 +1,28 @@
 import React from 'react'
 
-import { featureData } from '@data/data'
-import { FiHexagon } from 'react-icons/fi'
+import { FiBriefcase, FiHexagon, FiHome, FiKey } from 'react-icons/fi'
 import { useTranslations } from 'next-intl'
 
 const Feature = () => {
     const t = useTranslations()
+
+    const featureData = [
+        {
+            title: t('feature-evaluate-title'),
+            description: t('feature-evaluate-description'),
+            icon: FiHome,
+        },
+        {
+            title: t('feature-agent-title'),
+            description: t('feature-agent-description'),
+            icon: FiBriefcase,
+        },
+        {
+            title: t('feature-deal-title'),
+            description: t('feature-deal-description'),
+            icon: FiKey,
+        },
+    ]
 
     return (
         <>

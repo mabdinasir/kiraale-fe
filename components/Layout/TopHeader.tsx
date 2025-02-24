@@ -177,7 +177,7 @@ const TopHeader: FC<TopHeaderProps> = ({ toggle, setToggle }) => {
                                         <Link href="#!" className="block font-medium py-1.5 px-4">
                                             <div className="flex items-center">
                                                 <Image
-                                                    src="/images/client/04.jpg"
+                                                    src="/images/client/03.jpg"
                                                     width={40}
                                                     height={40}
                                                     className="h-10 w-10 rounded-md shadow dark:shadow-gray-700"
@@ -226,7 +226,7 @@ const TopHeader: FC<TopHeaderProps> = ({ toggle, setToggle }) => {
                                         <Link href="#!" className="block font-medium py-1.5 px-4">
                                             <div className="flex items-center">
                                                 <Image
-                                                    src="/images/client/05.jpg"
+                                                    src="/images/client/02.jpg"
                                                     width={40}
                                                     height={40}
                                                     className="h-10 w-10 rounded-md shadow dark:shadow-gray-700"
@@ -255,7 +255,7 @@ const TopHeader: FC<TopHeaderProps> = ({ toggle, setToggle }) => {
                         >
                             <span className="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-[20px] text-center bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 border border-gray-100 dark:border-gray-800 text-slate-900 dark:text-white rounded-md">
                                 <Image
-                                    src="/images/client/07.jpg"
+                                    src="/images/client/03.jpg"
                                     width={30}
                                     height={30}
                                     className="rounded-md"
