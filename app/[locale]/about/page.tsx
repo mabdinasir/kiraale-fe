@@ -9,11 +9,26 @@ import Counter from '@components/UI/Counter'
 import GetInTuch from '@components/UI/GetInTouch'
 
 import { useTranslations } from 'next-intl'
-import { counterData } from '@data/data'
 import ClientOne from '@components/UI/ClientOne'
 
 const About = () => {
     const t = useTranslations()
+
+    const counterData = [
+        {
+            title: t('happy-clients'),
+            target: 1548,
+        },
+        {
+            title: t('properties-sold'),
+            target: 25,
+        },
+        {
+            title: t('real-estate-agents'),
+            target: 9,
+        },
+    ]
+
     return (
         <>
             <Navbar navClass="navbar-white" />

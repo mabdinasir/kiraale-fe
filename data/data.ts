@@ -2,21 +2,6 @@ import { FiMail, FiMapPin, FiPhone, FiShield } from 'react-icons/fi'
 import { LuTrees } from 'react-icons/lu'
 import { GoRocket } from 'react-icons/go'
 
-export const counterData = [
-    {
-        title: 'Properties Sell',
-        target: 1548,
-    },
-    {
-        title: 'Award Gained',
-        target: 25,
-    },
-    {
-        title: 'Years Experience',
-        target: 9,
-    },
-]
-
 export const teamData = [
     {
         image: '/images/client/04.jpg',
