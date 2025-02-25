@@ -2,7 +2,6 @@
 
 import React from 'react'
 import { useTranslations } from 'next-intl'
-import Form from 'next/form'
 import { FiHome, FiSearch } from 'react-icons/fi'
 import { LuCircleDollarSign } from 'react-icons/lu'
 import { useParams } from 'next/navigation'
@@ -23,7 +22,7 @@ const PropertySearchForm: React.FC<PropertySearchFormProps> = ({ activeTabIndex 
     }))
 
     return (
-        <Form action={path}>
+        <form action={path}>
             <div className="registration-form text-dark text-start">
                 <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 lg:gap-0 gap-6">
                     <div>
@@ -113,7 +112,7 @@ const PropertySearchForm: React.FC<PropertySearchFormProps> = ({ activeTabIndex 
                     </div>
                 </div>
             </div>
-        </Form>
+        </form>
     )
 }
 

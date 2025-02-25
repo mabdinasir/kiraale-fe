@@ -1,10 +1,11 @@
 import React from 'react'
 
 import Navbar from '@components/Layout/Navbar'
-import Feature from '@components/UI/Feature'
 import GetInTuch from '@components/UI/GetInTouch'
-import Brokerage from '@components/UI/Brokerage'
+// import Brokerage from '@components/UI/Brokerage'
 import { useTranslations } from 'next-intl'
+import SellTab from '@components/UI/SellTab'
+import HowToSell from '@components/UI/HowToSell'
 
 const Sell = () => {
     const t = useTranslations()
@@ -33,8 +34,11 @@ const Sell = () => {
                 </div>
             </div>
             <section className="relative md:pb-24 pb-16">
-                <Feature />
-                <div className="container lg:mt-24 mt-16">
+                <HowToSell />
+                <SellTab />
+
+                {/* Brokerage Calc */}
+                {/* <div className="container lg:mt-24 mt-16">
                     <div className="grid grid-cols-1 pb-8 text-center">
                         <h3 className="mb-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold">
                             {t('brokerage-calc')}
@@ -55,7 +59,7 @@ const Sell = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
                 <GetInTuch />
             </section>
         </>

@@ -55,7 +55,7 @@ const PropertyListItem = () => {
                                 <div className="relative">
                                     <Image
                                         className="h-full w-full object-cover lg:w-64"
-                                        src={item.media[0].url}
+                                        src={item?.media[0]?.url || '/images/property/1.jpg'}
                                         alt=""
                                         width={0}
                                         height={0}

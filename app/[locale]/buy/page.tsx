@@ -1,3 +1,5 @@
+'use client' // This is a client component 👈🏽
+
 import React from 'react'
 import Feature from '@components/UI/Feature'
 import GetInTuch from '@components/UI/GetInTouch'
@@ -7,9 +9,12 @@ import BuyTab from '@components/UI/BuyTab'
 import { useTranslations } from 'next-intl'
 import Navbar from '@components/Layout/Navbar'
 import StoreProvider from '../StoreProvider'
+import { useParams } from 'next/navigation'
 
 const Buy = () => {
     const t = useTranslations()
+    const { locale } = useParams()
+    const path = `/${locale}/property/search`
 
     return (
         <>
@@ -38,15 +43,16 @@ const Buy = () => {
                 <div className="container relative -mt-[25px]">
                     <div className="grid grid-cols-1">
                         <div className="subcribe-form z-1">
-                            <form className="relative max-w-2xl mx-auto">
+                            <form className="relative max-w-2xl mx-auto" action={path}>
                                 <Search className="w-5 h-5 absolute top-[47%] -translate-y-1/2 start-4"></Search>
                                 <input
-                                    type="name"
-                                    id="search_name"
-                                    name="name"
+                                    type="text"
+                                    id="search_query"
+                                    name="query"
                                     className="rounded-md bg-white dark:bg-slate-900 shadow dark:shadow-gray-700 ps-12"
-                                    placeholder="City, Address, Zip :"
+                                    placeholder={t('Search-address-property')}
                                 />
+                                <input type="hidden" name="listingType" value={'SALE'} />
                                 <button
                                     type="submit"
                                     className="btn bg-green-600 hover:bg-green-700 text-white rounded-md"

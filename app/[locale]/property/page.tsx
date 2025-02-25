@@ -9,10 +9,10 @@ const PropertySearch = () => {
     const t = useTranslations()
     const searchParams = useSearchParams()
     const initialListingType = searchParams.get('listingType') === 'SALE' ? 1 : 0
-    const [activeTabIndex, setactiveTabIndex] = useState(initialListingType)
+    const [activeTabIndex, setActiveTabIndex] = useState(initialListingType || 0)
 
     const handleTabClick = (tabIndex: number) => {
-        setactiveTabIndex(tabIndex)
+        setActiveTabIndex(tabIndex)
     }
 
     const translatedTabs = ['rent', 'buy'].map((tab) => t(tab))
