@@ -8,6 +8,8 @@ import Navbar from '@components/Layout/Navbar'
 import { conatctDetails } from '@data/data'
 import { FiHexagon } from 'react-icons/fi'
 import { useTranslations } from 'next-intl'
+import ContactForm from './components/ContactForm'
+import StoreProvider from '../StoreProvider'
 
 const Contact = () => {
     const t = useTranslations()
@@ -45,70 +47,9 @@ const Contact = () => {
                             <div className="lg:me-5">
                                 <div className="bg-white dark:bg-slate-900 rounded-md shadow dark:shadow-gray-700 p-6">
                                     <h3 className="mb-6 text-2xl leading-normal font-medium">{t('get-in-touch')} !</h3>
-
-                                    <form>
-                                        <div className="grid lg:grid-cols-12 lg:gap-6">
-                                            <div className="lg:col-span-6 mb-5">
-                                                <label htmlFor="name" className="font-medium">
-                                                    {t('firstName')}
-                                                </label>
-                                                <input
-                                                    name="name"
-                                                    id="name"
-                                                    type="text"
-                                                    className="form-input mt-2"
-                                                    placeholder={t('firstName')}
-                                                />
-                                            </div>
-
-                                            <div className="lg:col-span-6 mb-5">
-                                                <label htmlFor="email" className="font-medium">
-                                                    {t('your-email')}
-                                                </label>
-                                                <input
-                                                    name="email"
-                                                    id="email"
-                                                    type="email"
-                                                    className="form-input mt-2"
-                                                    placeholder={t('your-email')}
-                                                />
-                                            </div>
-                                        </div>
-
-                                        <div className="grid grid-cols-1">
-                                            <div className="mb-5">
-                                                <label htmlFor="subject" className="font-medium">
-                                                    {t('your-question')}
-                                                </label>
-                                                <input
-                                                    name="subject"
-                                                    id="subject"
-                                                    className="form-input mt-2"
-                                                    placeholder={t('subject')}
-                                                />
-                                            </div>
-
-                                            <div className="mb-5">
-                                                <label htmlFor="comments" className="font-medium">
-                                                    {t('your-comment')}
-                                                </label>
-                                                <textarea
-                                                    name="comments"
-                                                    id="comments"
-                                                    className="form-input mt-2 textarea"
-                                                    placeholder={t('message')}
-                                                ></textarea>
-                                            </div>
-                                        </div>
-                                        <button
-                                            type="submit"
-                                            id="submit"
-                                            name="send"
-                                            className="btn bg-green-600 hover:bg-green-700 text-white rounded-md"
-                                        >
-                                            {t('send-message')}
-                                        </button>
-                                    </form>
+                                    <StoreProvider key={'contact-form'}>
+                                        <ContactForm />
+                                    </StoreProvider>
                                 </div>
                             </div>
                         </div>

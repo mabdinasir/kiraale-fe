@@ -68,7 +68,7 @@ const ImageUpload = () => {
                     }).unwrap()
 
                     if (addMediaResponse.success) {
-                        showToast('success', t('image-uploaded'), 15)
+                        showToast('success', t('image-uploaded'))
                         newUploadedMediaUrls.push(mediaUrl)
                     } else {
                         setErrorMessage(t('database-save-error', { fileName: file.name }))

@@ -1,29 +1,41 @@
 'use client' // This is a client component 👈🏽
 
+import React, { useState } from 'react'
+import { z } from 'zod'
 import { useAddSubscriberMutation } from '@store/services/subscriber'
 import showToast from '@utils/showToast'
 import { useTranslations } from 'next-intl'
-import React, { useState } from 'react'
 import { BsPencil } from 'react-icons/bs'
 import { FiMail } from 'react-icons/fi'
 
 const SubscriptionForm = () => {
     const t = useTranslations()
+    const emailSchema = z.string().email(t('invalid-email'))
 
     const [email, setEmail] = useState('')
+    const [error, setError] = useState('')
     const [addSubscriber, { isLoading, isError }] = useAddSubscriberMutation()
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        if (!email.trim()) return
+        try {
+            emailSchema.parse(email)
+            setError('')
+        } catch (err) {
+            if (err instanceof z.ZodError) {
+                setError(err.errors[0].message)
+            }
+            return
+        }
 
         await addSubscriber({ email }).unwrap()
         setEmail('')
-        showToast('success', t('subscribe-success'), 15)
+        showToast('success', t('subscribe-success'))
 
         if (isError) {
-            showToast('error', t('subscribe-error'), 15)
+            showToast('error', t('subscribe-error'))
+            setError(t('subscribe-error'))
         }
     }
 
@@ -38,17 +50,26 @@ const SubscriptionForm = () => {
                 </div>
 
                 <div className="subcribe-form z-1">
-                    <form className="relative max-w-lg md:ms-auto" onSubmit={handleSubmit}>
+                    <form className="relative max-w-lg md:ms-auto" onSubmit={handleSubmit} noValidate>
                         <input
                             type="email"
                             id="subscribe"
                             name="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="rounded-full bg-white dark:bg-slate-900 shadow dark:shadow-gray-700"
+                            className={`rounded-full bg-white dark:bg-slate-900 shadow dark:shadow-gray-700 ${
+                                error ? 'border-red-500' : ''
+                            }`}
                             placeholder={`${t('enter-email')} :`}
                             required
+                            aria-invalid={!!error}
+                            aria-describedby="email-error"
                         />
+                        {error && (
+                            <p id="email-error" className="text-red-500 text-sm mt-1" role="alert">
+                                {error}
+                            </p>
+                        )}
                         <button
                             type="submit"
                             className="btn bg-green-600 hover:bg-green-700 text-white rounded-full"

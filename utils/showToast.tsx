@@ -1,6 +1,6 @@
 import { toast } from 'react-hot-toast'
 
-const showToast = (type: 'success' | 'error', message: string, duration: number = 3) => {
+const showToast = (type: 'success' | 'error', message: string, duration: number = 20) => {
     toast[type](message, {
         duration: duration * 1000,
         style: {
