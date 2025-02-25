@@ -3,19 +3,11 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+import { buyTabs } from '@data/data'
 
 const BuyTab = () => {
     const [activeTabIndex, setActiveTabIndex] = useState(0)
     const t = useTranslations()
-
-    const tabs = [
-        { key: 'pre-purchase', image: '/images/svg/Agent_Monochromatic.svg' },
-        { key: 'schedule-a-showing', image: '/images/svg/presentation_Flatline.svg' },
-        { key: 'submit-an-offer', image: '/images/svg/session_Flatline.svg' },
-        { key: 'property-inspection', image: '/images/svg/Startup_Flatline.svg' },
-        { key: 'appraisal', image: '/images/svg/team_Flatline.svg' },
-        { key: 'closing-deal', image: '/images/svg/Team_meeting_Two.svg' },
-    ]
 
     const handleTabClick = (index: number) => {
         setActiveTabIndex(index)
@@ -27,7 +19,7 @@ const BuyTab = () => {
                 <div className="lg:col-span-4 md:col-span-5">
                     <div className="sticky top-20">
                         <ul className="flex-column text-center p-6 bg-white dark:bg-slate-900 shadow dark:shadow-gray-700 rounded-md">
-                            {tabs.map((tab, index) => (
+                            {buyTabs.map((tab, index) => (
                                 <li key={tab.key} role="presentation">
                                     <button
                                         className={`px-4 py-2 text-base font-medium rounded-md w-full mt-3 transition-all duration-500 ease-in-out ${activeTabIndex === index ? 'text-white bg-green-600' : 'dark:hover:bg-slate-800 dark:hover:text-white hover:bg-gray-50 hover:text-green-600'}`}
@@ -43,7 +35,7 @@ const BuyTab = () => {
 
                 <div className="lg:col-span-8 md:col-span-7">
                     <div>
-                        {tabs.map(
+                        {buyTabs.map(
                             (tab, index) =>
                                 activeTabIndex === index && (
                                     <div key={tab.key}>

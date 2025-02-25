@@ -1,15 +1,14 @@
 import React from 'react'
-import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 
 import Navbar from '@components/Layout/Navbar'
 import Client from '@components/UI/ClientOne'
 import GetInTuch from '@components/UI/GetInTouch'
 
-import { feature } from '@data/data'
+import { servicesData } from '@data/data'
 import { FiHexagon } from 'react-icons/fi'
 
-const Features = () => {
+const Services = () => {
     const t = useTranslations()
 
     return (
@@ -36,9 +35,15 @@ const Features = () => {
                 </div>
             </div>
             <section className="relative lg:py-24 py-16">
+                <div className="grid grid-cols-1 pb-8 text-center">
+                    <h3 className="mb-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold">
+                        {t('services-title')}
+                    </h3>
+                    <p className="text-slate-400 max-w-xl mx-auto">{t('services-subtitle')}</p>{' '}
+                </div>
                 <div className="container">
                     <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-x-[30px] gap-y-[50px]">
-                        {feature.map((item, index) => (
+                        {servicesData.map((item, index) => (
                             <div
                                 className="group relative lg:px-10 transition-all duration-500 ease-in-out rounded-xl bg-white dark:bg-slate-900 overflow-hidden"
                                 key={index}
@@ -51,10 +56,8 @@ const Features = () => {
                                 </div>
 
                                 <div className="mt-6">
-                                    <Link href="#" className="text-xl hover:text-green-600 font-medium">
-                                        {item.title}
-                                    </Link>
-                                    <p className="text-slate-400 mt-3">{item.description}</p>
+                                    <p className="text-xl hover:text-green-600 font-medium">{t(item.title)}</p>
+                                    <p className="text-slate-400 mt-3">{t(item.description)}</p>
                                 </div>
                             </div>
                         ))}
@@ -68,4 +71,4 @@ const Features = () => {
     )
 }
 
-export default Features
+export default Services

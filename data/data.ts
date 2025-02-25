@@ -1,6 +1,93 @@
-import { FiMail, FiMapPin, FiPhone, FiShield } from 'react-icons/fi'
+import { FiBriefcase, FiHome, FiKey, FiMail, FiMapPin, FiPhone, FiSearch, FiSettings, FiShield } from 'react-icons/fi'
 import { LuTrees } from 'react-icons/lu'
 import { GoRocket } from 'react-icons/go'
+
+export const counterData = [
+    {
+        title: 'happy-clients',
+        target: 1548,
+    },
+    {
+        title: 'properties-sold',
+        target: 25,
+    },
+    {
+        title: 'real-estate-agents',
+        target: 9,
+    },
+]
+
+export const aboutUsData = [
+    {
+        title: 'about-matching-title',
+        description: 'about-matching-description',
+        icon: FiSearch,
+    },
+    {
+        title: 'about-automation-title',
+        description: 'about-automation-description',
+        icon: FiSettings,
+    },
+    {
+        title: 'about-listings-title',
+        description: 'about-listings-description',
+        icon: FiHome,
+    },
+]
+
+export const howToSellData = [
+    {
+        title: 'sell-prepare-title',
+        description: 'sell-prepare-description',
+        icon: FiHome,
+    },
+    {
+        title: 'sell-list-title',
+        description: 'sell-list-description',
+        icon: FiBriefcase,
+    },
+    {
+        title: 'sell-close-title',
+        description: 'sell-close-description',
+        icon: FiKey,
+    },
+]
+
+export const buyTabs = [
+    { key: 'pre-purchase', image: '/images/svg/Agent_Monochromatic.svg' },
+    { key: 'schedule-a-showing', image: '/images/svg/presentation_Flatline.svg' },
+    { key: 'submit-an-offer', image: '/images/svg/session_Flatline.svg' },
+    { key: 'property-inspection', image: '/images/svg/Startup_Flatline.svg' },
+    { key: 'appraisal', image: '/images/svg/team_Flatline.svg' },
+    { key: 'closing-deal', image: '/images/svg/Team_meeting_Two.svg' },
+]
+
+export const sellTabs = [
+    { key: 'price-your-property', image: '/images/svg/pricing.svg' },
+    { key: 'prepare-your-home', image: '/images/svg/Home_Prepare.svg' },
+    { key: 'list-your-property', image: '/images/svg/List_Property.svg' },
+    { key: 'schedule-showings', image: '/images/svg/Showings.svg' },
+    { key: 'review-offers', image: '/images/svg/Offers.svg' },
+    { key: 'finalize-sale', image: '/images/svg/Finalize_Sale.svg' },
+]
+
+export const homeFeatureData = [
+    {
+        title: 'feature-evaluate-title',
+        description: 'feature-evaluate-description',
+        icon: FiHome,
+    },
+    {
+        title: 'feature-agent-title',
+        description: 'feature-agent-description',
+        icon: FiBriefcase,
+    },
+    {
+        title: 'feature-deal-title',
+        description: 'feature-deal-description',
+        icon: FiKey,
+    },
+]
 
 export const teamData = [
     {
@@ -188,44 +275,40 @@ export const accordionData = [
             'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.',
     },
 ]
-export const feature = [
+
+export const servicesData = [
     {
-        title: 'Comfortable',
-        description:
-            'If the distribution of letters and words is random, the reader will not be distracted from making.',
-        icon: 'mdi mdi-cards-heart',
+        title: 'services-matching',
+        description: 'services-matching-desc',
+        icon: 'mdi mdi-account-multiple',
     },
     {
-        title: 'Extra Security',
-        description:
-            'If the distribution of letters and words is random, the reader will not be distracted from making.',
-        icon: 'mdi mdi-shield-sun',
+        title: 'services-insights',
+        description: 'services-insights-desc',
+        icon: 'mdi mdi-chart-areaspline',
     },
     {
-        title: 'Luxury',
-        description:
-            'If the distribution of letters and words is random, the reader will not be distracted from making.',
-        icon: 'mdi mdi-star',
+        title: 'services-listings',
+        description: 'services-listings-desc',
+        icon: 'mdi mdi-home',
     },
     {
-        title: 'Best Price',
-        description:
-            'If the distribution of letters and words is random, the reader will not be distracted from making.',
-        icon: 'mdi mdi-currency-usd',
+        title: 'services-payments',
+        description: 'services-payments-desc',
+        icon: 'mdi mdi-cash-multiple',
     },
     {
-        title: 'Stratagic Location',
-        description:
-            'If the distribution of letters and words is random, the reader will not be distracted from making.',
-        icon: 'mdi mdi-map-marker',
+        title: 'services-support',
+        description: 'services-support-desc',
+        icon: 'mdi mdi-headset',
     },
     {
-        title: 'Efficient',
-        description:
-            'If the distribution of letters and words is random, the reader will not be distracted from making.',
-        icon: 'mdi mdi-chart-arc',
+        title: 'services-security',
+        description: 'services-security-desc',
+        icon: 'mdi mdi-lock',
     },
 ]
+
 export const listingData = [
     {
         image: '/images/property/residential.jpg',

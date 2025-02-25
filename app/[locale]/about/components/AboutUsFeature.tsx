@@ -1,28 +1,11 @@
 import React from 'react'
 
-import { FiHexagon, FiHome, FiSearch, FiSettings } from 'react-icons/fi'
+import { FiHexagon } from 'react-icons/fi'
 import { useTranslations } from 'next-intl'
+import { aboutUsData } from '@data/data'
 
 const AboutUsFeature = () => {
     const t = useTranslations()
-
-    const featureData = [
-        {
-            title: t('about-matching-title'),
-            description: t('about-matching-description'),
-            icon: FiSearch,
-        },
-        {
-            title: t('about-automation-title'),
-            description: t('about-automation-description'),
-            icon: FiSettings,
-        },
-        {
-            title: t('about-listings-title'),
-            description: t('about-listings-description'),
-            icon: FiHome,
-        },
-    ]
 
     return (
         <>
@@ -35,7 +18,7 @@ const AboutUsFeature = () => {
                 </div>
 
                 <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-8 gap-[30px]">
-                    {featureData.map((item, index) => {
+                    {aboutUsData.map((item, index) => {
                         const Icon = item.icon
                         return (
                             <div
@@ -50,8 +33,8 @@ const AboutUsFeature = () => {
                                 </div>
 
                                 <div className="mt-6">
-                                    <h5 className="text-xl font-medium">{item.title}</h5>
-                                    <p className="text-slate-400 mt-3">{item.description}</p>
+                                    <h5 className="text-xl font-medium">{t(item.title)}</h5>
+                                    <p className="text-slate-400 mt-3">{t(item.description)}</p>
                                 </div>
                             </div>
                         )

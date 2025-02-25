@@ -64,7 +64,7 @@ const Footer = () => {
                                             </li>
                                             <li className="mt-[10px]">
                                                 <ReusableLink
-                                                    href="/features"
+                                                    href="/services"
                                                     className="text-slate-300 hover:text-slate-400 duration-500 ease-in-out flex items-center"
                                                 >
                                                     <FiChevronRight width={18} className="me-1" />{' '}

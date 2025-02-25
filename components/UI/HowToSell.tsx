@@ -1,27 +1,10 @@
 import React from 'react'
-import { FiBriefcase, FiHexagon, FiHome, FiKey } from 'react-icons/fi'
+import { FiHexagon } from 'react-icons/fi'
 import { useTranslations } from 'next-intl'
+import { howToSellData } from '@data/data'
 
 const HowToSell = () => {
     const t = useTranslations()
-
-    const featureData = [
-        {
-            title: t('sell-prepare-title'),
-            description: t('sell-prepare-description'),
-            icon: FiHome,
-        },
-        {
-            title: t('sell-list-title'),
-            description: t('sell-list-description'),
-            icon: FiBriefcase,
-        },
-        {
-            title: t('sell-close-title'),
-            description: t('sell-close-description'),
-            icon: FiKey,
-        },
-    ]
 
     return (
         <div className="container lg:mt-24 mt-16">
@@ -33,7 +16,7 @@ const HowToSell = () => {
             </div>
 
             <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-8 gap-[30px]">
-                {featureData.map((item, index) => {
+                {howToSellData.map((item, index) => {
                     const Icon = item.icon
                     return (
                         <div
@@ -48,8 +31,8 @@ const HowToSell = () => {
                             </div>
 
                             <div className="mt-6">
-                                <h5 className="text-xl font-medium">{item.title}</h5>
-                                <p className="text-slate-400 mt-3">{item.description}</p>
+                                <h5 className="text-xl font-medium">{t(item.title)}</h5>
+                                <p className="text-slate-400 mt-3">{t(item.description)}</p>
                             </div>
                         </div>
                     )

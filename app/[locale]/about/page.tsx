@@ -10,24 +10,10 @@ import GetInTuch from '@components/UI/GetInTouch'
 
 import { useTranslations } from 'next-intl'
 import ClientOne from '@components/UI/ClientOne'
+import { counterData } from '@data/data'
 
 const About = () => {
     const t = useTranslations()
-
-    const counterData = [
-        {
-            title: t('happy-clients'),
-            target: 1548,
-        },
-        {
-            title: t('properties-sold'),
-            target: 25,
-        },
-        {
-            title: t('real-estate-agents'),
-            target: 9,
-        },
-    ]
 
     return (
         <>
@@ -70,7 +56,7 @@ const About = () => {
                                         <h1 className="text-white lg:text-5xl text-4xl font-semibold mb-2">
                                             <Counter start={0} end={item.target}></Counter>+
                                         </h1>
-                                        <h5 className="counter-head text-white text-lg font-medium">{item.title}</h5>
+                                        <h5 className="counter-head text-white text-lg font-medium">{t(item.title)}</h5>
                                     </div>
                                 ))}
                             </div>

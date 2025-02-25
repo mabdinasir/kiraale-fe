@@ -3,19 +3,11 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+import { sellTabs } from '@data/data'
 
 const SellTab = () => {
     const [activeTabIndex, setActiveTabIndex] = useState(0)
     const t = useTranslations()
-
-    const tabs = [
-        { key: 'price-your-property', image: '/images/svg/pricing.svg' },
-        { key: 'prepare-your-home', image: '/images/svg/Home_Prepare.svg' },
-        { key: 'list-your-property', image: '/images/svg/List_Property.svg' },
-        { key: 'schedule-showings', image: '/images/svg/Showings.svg' },
-        { key: 'review-offers', image: '/images/svg/Offers.svg' },
-        { key: 'finalize-sale', image: '/images/svg/Finalize_Sale.svg' },
-    ]
 
     return (
         <div className="container lg:mt-24 mt-16">
@@ -23,7 +15,7 @@ const SellTab = () => {
                 <div className="lg:col-span-4 md:col-span-5">
                     <div className="sticky top-20">
                         <ul className="flex-column text-center p-6 bg-white dark:bg-slate-900 shadow dark:shadow-gray-700 rounded-md">
-                            {tabs.map((tab, index) => (
+                            {sellTabs.map((tab, index) => (
                                 <li key={index} role="presentation">
                                     <button
                                         className={`px-4 py-2 text-base font-medium rounded-md w-full mt-3 transition-all duration-500 ease-in-out ${
@@ -43,7 +35,7 @@ const SellTab = () => {
 
                 <div className="lg:col-span-8 md:col-span-7">
                     <div id="sellTabContent">
-                        {tabs.map(
+                        {sellTabs.map(
                             (tab, index) =>
                                 activeTabIndex === index && (
                                     <div key={index}>
