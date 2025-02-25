@@ -6,8 +6,7 @@ import Image from 'next/image'
 import ModalVideo from 'react-modal-video'
 import { useTranslations } from 'next-intl'
 
-import '../../../node_modules/react-modal-video/scss/modal-video.scss'
-import ReusableLink from '@components/Links/ReusableLink'
+import '@node_modules/react-modal-video/scss/modal-video.scss'
 
 const About = () => {
     const [isOpen, setOpen] = useState(false)
@@ -52,12 +51,12 @@ const About = () => {
                             <p className="text-slate-400 max-w-xl">{t('about-description-1')}</p>
 
                             <div className="mt-4">
-                                <ReusableLink
-                                    href="/about"
+                                <button
+                                    onClick={() => setOpen(true)}
                                     className="btn bg-green-600 hover:bg-green-700 text-white rounded-md mt-3"
                                 >
                                     {t('learn-more')}{' '}
-                                </ReusableLink>
+                                </button>
                             </div>
                         </div>
                     </div>

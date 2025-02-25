@@ -3,11 +3,10 @@
 import React from 'react'
 
 import Navbar from '@components/Layout/Navbar'
-import Feature from '@components/UI/Feature'
-import AboutUs from './AboutUs'
+import AboutUs from './components/AboutUs'
+import AboutUsFeature from './components/AboutUsFeature'
 import Counter from '@components/UI/Counter'
 import GetInTuch from '@components/UI/GetInTouch'
-import Team from '@components/UI/Team'
 
 import { useTranslations } from 'next-intl'
 import { counterData } from '@data/data'
@@ -39,8 +38,8 @@ const About = () => {
                 </div>
             </div>
             <section className="relative md:pb-24 pb-16">
+                <AboutUsFeature />
                 <AboutUs />
-                <Feature />
             </section>
             <section
                 style={{ backgroundImage: "url('/images/bg/01.jpg')" }}
@@ -63,9 +62,6 @@ const About = () => {
                         </div>
                     </div>
                 </div>
-            </section>
-            <section>
-                <Team />
             </section>
             <section className="md:pb-24 pb-16">
                 <ClientOne />

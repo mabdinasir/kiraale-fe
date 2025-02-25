@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl'
 import React from 'react'
-import About from './about/AboutUs'
+import About from './about/components/AboutUs'
 import Feature from '@components/UI/Feature'
 import GetInTuch from '@components/UI/GetInTouch'
 import ClientTwo from '@components/UI/ClientTwo'

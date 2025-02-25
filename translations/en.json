@@ -96,6 +96,14 @@
     "review-offers-desc": "When offers come in, evaluate the price and terms carefully. Consider both the offer amount and the buyer's ability to close quickly.",
     "finalize-sale": "Finalize the Sale",
     "finalize-sale-desc": "Once you accept an offer, the final step is signing the paperwork, transferring ownership, and receiving payment.",
+    "about-title": "Why Choose Eastleigh Real Estate?",
+    "about-subtitle": "We connect buyers, sellers, renters, and landlords while making property transactions seamless.",
+    "about-matching-title": "Effortless Matching",
+    "about-matching-description": "We connect buyers with sellers and renters with landlords, making property transactions quick and easy.",
+    "about-automation-title": "Seamless Automation",
+    "about-automation-description": "From listings to payments, our platform automates the process, ensuring efficiency and convenience.",
+    "about-listings-title": "Wide Property Selection",
+    "about-listings-description": "Discover a variety of properties tailored to your needs, with updated listings and transparent pricing.",
     "sell-faster": "Sell Faster, Save Thousands.",
     "brokerage-calc": "Brokerage Calculator",
     "get-in-touch": "Get in Touch",
@@ -210,5 +218,7 @@
     "services": "Services",
     "pricing": "Pricing",
     "address-info": "Tenth Street, 1st Avenue, Eastleigh, Nairobi, Kenya",
-    "Search-address-property": "Search address, property or business name"
+    "Search-address-property": "Search address, property or business name",
+    "what-we-do-title": "What We Do",
+    "what-we-do-subtitle": "We simplify property transactions by connecting buyers, sellers, renters, and landlords seamlessly."
 }
