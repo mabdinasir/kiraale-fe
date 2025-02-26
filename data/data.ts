@@ -234,26 +234,28 @@ export const blogList = [
         image: '/images/property/1.jpg',
     },
 ]
-export const conatctDetails = [
+
+export const contactDetails = [
     {
-        title: 'Phone',
-        description: 'The phrasal sequence of the is now so that many campaign and benefit',
-        contact: '+254 746 661 538',
+        title: 'phone',
+        description: 'contact-phone-description',
+        contact: 'contact-phone-number',
         Icon: FiPhone,
     },
     {
-        title: 'Email',
-        description: 'The phrasal sequence of the is now so that many campaign and benefit',
-        contact: 'contact@eastleighrealestate.com',
+        title: 'email',
+        description: 'contact-email-description',
+        contact: 'contact-email-address',
         Icon: FiMail,
     },
     {
-        title: 'Location',
-        description: 'The phrasal sequence of the is now so that many campaign and benefit',
-        contact: 'Thenth Street, 1st Avenue, Eastleigh, Nairobi, Kenya',
+        title: 'location',
+        description: 'contact-location-description',
+        contact: 'contact-location-address',
         Icon: FiMapPin,
     },
 ]
+
 export const termsFaqData = [
     {
         title: 'terms-faq-title-1',

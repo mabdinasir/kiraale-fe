@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 import Navbar from '@components/Layout/Navbar'
 
-import { conatctDetails } from '@data/data'
+import { contactDetails } from '@data/data'
 import { FiHexagon } from 'react-icons/fi'
 import { useTranslations } from 'next-intl'
 import ContactForm from './components/ContactForm'
@@ -58,7 +58,7 @@ const Contact = () => {
 
                 <div className="container lg:mt-24 mt-16">
                     <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-[30px]">
-                        {conatctDetails.map((item, index) => {
+                        {contactDetails.map((item, index) => {
                             const { Icon } = item
                             return (
                                 <div className="text-center px-6" key={index}>
@@ -70,15 +70,15 @@ const Contact = () => {
                                     </div>
 
                                     <div className="content mt-7">
-                                        <h5 className="title h5 text-xl font-medium">{item.title}</h5>
-                                        <p className="text-slate-400 mt-3">{item.description}</p>
+                                        <h5 className="title h5 text-xl font-medium">{t(item.title)}</h5>
+                                        <p className="text-slate-400 mt-3">{t(item.description)}</p>
 
                                         <div className="mt-5">
                                             <Link
                                                 href="tel:+254 746 661 538"
-                                                className="btn btn-link text-green-600 hover:text-green-600 after:bg-green-600 transition duration-500"
+                                                className="btn btn-link text-green-600 hover:text-green-600 after:bg-green-600 transition duration-500 inline-block"
                                             >
-                                                {item.contact}
+                                                {t(item.contact)}
                                             </Link>
                                         </div>
                                     </div>
