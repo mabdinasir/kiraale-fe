@@ -1,6 +1,7 @@
 'use client' // This is a client component 👈🏽
 
 import React, { FC, useState } from 'react'
+import { useTranslations } from 'next-intl'
 
 type AccordionProps = {
     accordionData: {
@@ -11,6 +12,7 @@ type AccordionProps = {
 
 const Accordion: FC<AccordionProps> = ({ accordionData }) => {
     const [activeIndex, setActiveIndex] = useState<number | null>(0)
+    const t = useTranslations()
 
     const toggleAccordion = (index: number) => {
         if (activeIndex === index) {
@@ -32,7 +34,7 @@ const Accordion: FC<AccordionProps> = ({ accordionData }) => {
                                 activeIndex === index ? 'bg-gray-50 dark:bg-slate-800 text-green-600' : ''
                             }`}
                         >
-                            <span>{section.title}</span>
+                            <span>{t(section.title)}</span>
                             <svg
                                 className={`w-4 h-4 transform ${activeIndex === index ? 'rotate-180' : ''}`}
                                 fill="currentColor"
@@ -53,7 +55,7 @@ const Accordion: FC<AccordionProps> = ({ accordionData }) => {
                             aria-labelledby={`accordion-collapse-heading-${index}`}
                         >
                             <div className="p-5">
-                                <p className="text-slate-400 dark:text-gray-400">{section.content}</p>
+                                <p className="text-slate-400 dark:text-gray-400">{t(section.content)}</p>
                             </div>
                         </div>
                     )}

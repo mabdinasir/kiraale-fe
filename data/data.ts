@@ -1,6 +1,7 @@
-import { FiBriefcase, FiHome, FiKey, FiMail, FiMapPin, FiPhone, FiSearch, FiSettings, FiShield } from 'react-icons/fi'
-import { LuTrees } from 'react-icons/lu'
-import { GoRocket } from 'react-icons/go'
+import { FiBriefcase, FiHome, FiKey, FiMail, FiMapPin, FiPhone, FiSearch, FiSettings } from 'react-icons/fi'
+import { GiFamilyHouse } from 'react-icons/gi'
+import { FcManager } from 'react-icons/fc'
+import { BsHouseHeartFill } from 'react-icons/bs'
 
 export const counterData = [
     {
@@ -253,26 +254,22 @@ export const conatctDetails = [
         Icon: FiMapPin,
     },
 ]
-export const accordionData = [
+export const termsFaqData = [
     {
-        title: 'How does it work ?',
-        content:
-            'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.',
+        title: 'terms-faq-title-1',
+        content: 'terms-faq-content-1',
     },
     {
-        title: 'Do I need a designer to use Hously ?',
-        content:
-            'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.',
+        title: 'terms-faq-title-2',
+        content: 'terms-faq-content-2',
     },
     {
-        title: 'What do I need to do to start selling ?',
-        content:
-            'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.',
+        title: 'terms-faq-title-3',
+        content: 'terms-faq-content-3',
     },
     {
-        title: 'What happens when I receive an order ?',
-        content:
-            'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.',
+        title: 'terms-faq-title-4',
+        content: 'terms-faq-content-4',
     },
 ]
 
@@ -336,26 +333,28 @@ export const listingData = [
         noOfListing: 12,
     },
 ]
+
 export const pricingPlan = [
     {
-        title: 'Basic',
-        time: 19,
-        Icon: LuTrees,
-        fearures: ['Full Access', 'Source Files', 'Free Appointments', 'Enhanced Security'],
+        title: 'pricing-rental-title',
+        time: 'pricing-rental-price',
+        Icon: BsHouseHeartFill,
+        features: ['pricing-duration', 'pricing-feature-1', 'pricing-rental-feature-2'],
     },
     {
-        title: 'Premium',
-        time: 39,
-        Icon: FiShield,
-        fearures: ['Full Access', 'Source Files', 'Free Appointments', 'Enhanced Security'],
+        title: 'pricing-sale-title',
+        time: 'pricing-sale-price',
+        Icon: GiFamilyHouse,
+        features: ['pricing-duration', 'pricing-feature-1', 'pricing-sale-feature-2'],
     },
     {
-        title: 'Business',
-        time: 99,
-        Icon: GoRocket,
-        fearures: ['Full Access', 'Source Files', 'Free Appointments', 'Enhanced Security'],
+        title: 'pricing-management-title',
+        time: 'pricing-management-price',
+        Icon: FcManager,
+        features: ['pricing-management-feature-1', 'pricing-management-feature-2', 'pricing-management-feature-3'],
     },
 ]
+
 export const aboutData = [
     {
         image: '/images/rent.png',
