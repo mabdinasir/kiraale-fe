@@ -86,20 +86,20 @@ const ProfileMenu = () => {
                         </ReusableLink>
                     </li>
                     <li>
-                        <a
-                            href="#"
-                            className="block px-4 py-2 hover:bg-green-100 hover:text-green-700 dark:hover:bg-gray-700 dark:hover:text-green-400 rounded"
+                        <ReusableLink
+                            href={'/dashboard/profile'}
+                            className="block px-3 py-2 hover:bg-green-100 hover:text-green-700 dark:hover:bg-gray-700 dark:hover:text-green-400 rounded"
                         >
-                            {t('settings')}
-                        </a>
+                            {t('profile')}
+                        </ReusableLink>
                     </li>
                     <li>
-                        <a
-                            href="#"
-                            className="block px-4 py-2 hover:bg-green-100 hover:text-green-700 dark:hover:bg-gray-700 dark:hover:text-green-400 rounded"
+                        <ReusableLink
+                            href={'/dashboard/settings'}
+                            className="block px-3 py-2 hover:bg-green-100 hover:text-green-700 dark:hover:bg-gray-700 dark:hover:text-green-400 rounded"
                         >
-                            {t('properties')}
-                        </a>
+                            {t('settings')}
+                        </ReusableLink>
                     </li>
                 </ul>
 
