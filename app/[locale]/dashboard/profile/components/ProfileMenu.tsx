@@ -1,6 +1,6 @@
 'use client' // This is a client component 👈🏽
 
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { useSignOutMutation } from '@store/services/auth'
@@ -18,12 +18,27 @@ const ProfileMenu = () => {
     const [isOpen, setIsOpen] = useState(false)
     const [signout, { isLoading }] = useSignOutMutation()
 
+    const dropdownRef = useRef<HTMLDivElement>(null)
+
     const toggleDropdown = () => {
         setIsOpen(!isOpen)
     }
 
+    const handleClickOutside = (event: MouseEvent) => {
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+            setIsOpen(false)
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
+    }, [])
+
     return (
-        <div className="relative inline-block">
+        <div className="relative inline-block" ref={dropdownRef}>
             <button
                 id="dropdownUserAvatarButton"
                 onClick={toggleDropdown}

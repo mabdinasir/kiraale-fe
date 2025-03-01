@@ -1,9 +1,8 @@
-'use client' // This is a client component 👈🏽
+'use client'
 
-import React, { Dispatch, FC, SetStateAction, useState } from 'react'
+import React, { FC, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-
 import SimpleBar from 'simplebar-react'
 import 'simplebar-react/dist/simplebar.min.css'
 import { FiBell, FiDollarSign, FiMenu, FiShoppingCart, FiTruck } from 'react-icons/fi'
@@ -15,20 +14,36 @@ import { useAppDispatch } from '@hooks/rtkHooks'
 import { useSignOutMutation } from '@store/services/auth'
 import { clearToken } from '@store/slices/tokenSlice'
 
-type TopHeaderProps = {
-    toggle: boolean
-    setToggle: Dispatch<SetStateAction<boolean>>
-}
+type MenuType = 'country' | 'notifications' | 'profile' | null
 
-const TopHeader: FC<TopHeaderProps> = ({ toggle, setToggle }) => {
+const TopHeader: FC = () => {
     const t = useTranslations()
     const dispatch = useAppDispatch()
     const currentUser = useCurrentUser()
     const [signout, { isLoading }] = useSignOutMutation()
 
-    const [showCountry, setShowCountry] = useState(false)
-    const [notifications, setNotifications] = useState(false)
-    const [toggleProfile, setToggleProfile] = useState(false)
+    const [activeMenu, setActiveMenu] = useState<MenuType>(null)
+    const countryMenuRef = useRef<HTMLDivElement>(null)
+    const notificationsMenuRef = useRef<HTMLDivElement>(null)
+    const profileMenuRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (
+                countryMenuRef.current &&
+                !countryMenuRef.current.contains(event.target as Node) &&
+                notificationsMenuRef.current &&
+                !notificationsMenuRef.current.contains(event.target as Node) &&
+                profileMenuRef.current &&
+                !profileMenuRef.current.contains(event.target as Node)
+            ) {
+                setActiveMenu(null)
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => document.removeEventListener('mousedown', handleClickOutside)
+    }, [])
 
     return (
         <div className="top-header">
@@ -60,14 +75,16 @@ const TopHeader: FC<TopHeaderProps> = ({ toggle, setToggle }) => {
                         </span>
                     </ReusableLink>
 
-                    <Link
+                    <div
                         id="close-sidebar"
-                        onClick={() => setToggle(!toggle)}
-                        className="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-[20px] text-center bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 border border-gray-100 dark:border-gray-800 text-slate-900 dark:text-white rounded-md"
-                        href="#"
+                        className="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-[20px] text-center bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 border border-gray-100 dark:border-gray-800 text-slate-900 dark:text-white rounded-md cursor-pointer"
+                        onClick={() => {
+                            const sidebar = document.querySelector('.page-wrapper')
+                            sidebar?.classList.toggle('toggled')
+                        }}
                     >
                         <FiMenu className="h-4 w-4" />
-                    </Link>
+                    </div>
 
                     <div className="ps-1.5">
                         <div className="form-icon relative sm:block hidden">
@@ -87,8 +104,7 @@ const TopHeader: FC<TopHeaderProps> = ({ toggle, setToggle }) => {
                     <li className="dropdown inline-block relative">
                         <button
                             className="dropdown-toggle h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-[20px] text-center bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 border border-gray-100 dark:border-gray-800 text-slate-900 dark:text-white rounded-md"
-                            type="button"
-                            onClick={() => setShowCountry(!showCountry)}
+                            onClick={() => setActiveMenu(activeMenu === 'country' ? null : 'country')}
                         >
                             <Image
                                 src="/images/flags/usa.png"
@@ -100,7 +116,8 @@ const TopHeader: FC<TopHeaderProps> = ({ toggle, setToggle }) => {
                         </button>
 
                         <div
-                            className={`${showCountry ? 'show' : 'hidden'} dropdown-menu absolute end-0 m-0 mt-4 z-10 w-36 rounded-md overflow-hidden bg-white dark:bg-slate-900 shadow dark:shadow-gray-700`}
+                            ref={countryMenuRef}
+                            className={`${activeMenu === 'country' ? 'show' : 'hidden'} dropdown-menu absolute end-0 m-0 mt-4 z-10 w-36 rounded-md overflow-hidden bg-white dark:bg-slate-900 shadow dark:shadow-gray-700`}
                         >
                             <ul className="list-none py-2 text-start">
                                 <li className="my-1">
@@ -140,15 +157,15 @@ const TopHeader: FC<TopHeaderProps> = ({ toggle, setToggle }) => {
                     <li className="dropdown inline-block relative">
                         <button
                             className="dropdown-toggle h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-[20px] text-center bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 border border-gray-100 dark:border-gray-800 text-slate-900 dark:text-white rounded-md"
-                            type="button"
-                            onClick={() => setNotifications(!notifications)}
+                            onClick={() => setActiveMenu(activeMenu === 'notifications' ? null : 'notifications')}
                         >
                             <FiBell className="h-4 w-4"></FiBell>
                             <span className="absolute top-0 end-0 flex items-center justify-center bg-red-600 text-white text-[10px] font-bold rounded-md w-2 h-2 after:content-[''] after:absolute after:h-2 after:w-2 after:bg-red-600 after:top-0 after:end-0 after:rounded-md after:animate-ping"></span>
                         </button>
 
                         <div
-                            className={`${notifications ? 'show' : 'hidden'} dropdown-menu absolute end-0 m-0 mt-4 z-10 w-64 rounded-md overflow-hidden bg-white dark:bg-slate-900 shadow dark:shadow-gray-700`}
+                            ref={notificationsMenuRef}
+                            className={`${activeMenu === 'notifications' ? 'show' : 'hidden'} dropdown-menu absolute end-0 m-0 mt-4 z-10 w-64 rounded-md overflow-hidden bg-white dark:bg-slate-900 shadow dark:shadow-gray-700`}
                         >
                             <span className="px-4 py-4 flex justify-between">
                                 <span className="font-semibold">{t('notifications')} </span>
@@ -250,8 +267,7 @@ const TopHeader: FC<TopHeaderProps> = ({ toggle, setToggle }) => {
                     <li className="dropdown inline-block relative">
                         <button
                             className="dropdown-toggle items-center"
-                            type="button"
-                            onClick={() => setToggleProfile(!toggleProfile)}
+                            onClick={() => setActiveMenu(activeMenu === 'profile' ? null : 'profile')}
                         >
                             <span className="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-[20px] text-center bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 border border-gray-100 dark:border-gray-800 text-slate-900 dark:text-white rounded-md">
                                 <Image
@@ -264,7 +280,8 @@ const TopHeader: FC<TopHeaderProps> = ({ toggle, setToggle }) => {
                             </span>
                         </button>
                         <div
-                            className={`${toggleProfile ? 'show' : 'hidden'} dropdown-menu absolute end-0 m-0 mt-4 z-10 w-44 rounded-md overflow-hidden bg-white dark:bg-slate-900 shadow dark:shadow-gray-700`}
+                            ref={profileMenuRef}
+                            className={`${activeMenu === 'profile' ? 'show' : 'hidden'} dropdown-menu absolute end-0 m-0 mt-4 z-10 w-44 rounded-md overflow-hidden bg-white dark:bg-slate-900 shadow dark:shadow-gray-700`}
                         >
                             <ul className="py-2 text-start">
                                 <li>
@@ -279,7 +296,6 @@ const TopHeader: FC<TopHeaderProps> = ({ toggle, setToggle }) => {
                                 <li>
                                     <ReusableLink
                                         href="/chat"
-                                        onClick={() => setToggleProfile(false)}
                                         className="block py-1 px-4 dark:text-white/70 hover:text-green-600 dark:hover:text-white"
                                     >
                                         <i className="mdi mdi-chat-outline me-2"></i>
@@ -289,7 +305,6 @@ const TopHeader: FC<TopHeaderProps> = ({ toggle, setToggle }) => {
                                 <li>
                                     <ReusableLink
                                         href="/setting"
-                                        onClick={() => setToggleProfile(false)}
                                         className="block py-1 px-4 dark:text-white/70 hover:text-green-600 dark:hover:text-white"
                                     >
                                         <i className="mdi mdi-cog-outline me-2"></i>
@@ -300,7 +315,6 @@ const TopHeader: FC<TopHeaderProps> = ({ toggle, setToggle }) => {
                                 <li>
                                     <Link
                                         href="/lock-screen"
-                                        onClick={() => setToggleProfile(false)}
                                         className="block py-1 px-4 dark:text-white/70 hover:text-green-600 dark:hover:text-white"
                                     >
                                         <i className="mdi mdi-lock-outline me-2"></i>Lockscreen
