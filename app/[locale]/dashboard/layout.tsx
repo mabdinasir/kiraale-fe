@@ -1,12 +1,13 @@
 import Sidebar from '@components/Layout/Sidebar'
 import React from 'react'
-import '@assets/css/globals.css'
-import '@assets/css/tailwind2.css'
-import '@assets/css/materialdesignicons2.min.css'
 import TopHeader from '@components/Layout/TopHeader'
 import Switcher from '@components/UI/DashboardSwitcher'
 import DashboardFooter from '@components/Layout/DashboardFooter'
 import StoreProvider from '../StoreProvider'
+
+import '../../globals.css'
+import '@assets/css/tailwind2.css'
+import '@assets/css/materialdesignicons2.min.css'
 
 export default function RootLayout({
     children,
@@ -21,7 +22,9 @@ export default function RootLayout({
                     <StoreProvider>
                         <TopHeader />
                     </StoreProvider>
-                    <div className="mx-4">{children}</div>
+                    <div className="container-fluid relative pb-16">
+                        <div className="mx-4 className layout-spacing">{children}</div>
+                    </div>
                     <DashboardFooter />
                     <Switcher />
                 </main>

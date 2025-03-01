@@ -4,14 +4,15 @@ import { Analytics } from '@vercel/analytics/react'
 import { League_Spartan } from 'next/font/google'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
-import '@assets/css/materialdesignicons.min.css'
-import '@assets/css/tailwind.css'
-import '../globals.css'
 import Navbar from '@components/Layout/Navbar'
 import Switcher from '@components/UI/Switcher'
 import Footer from '@components/Layout/Footer'
 import StoreProvider from './StoreProvider'
 import { Toaster } from 'react-hot-toast'
+
+import '../globals.css'
+import '@assets/css/materialdesignicons.min.css'
+import '@assets/css/tailwind.css'
 
 const league_Spartan = League_Spartan({
     subsets: ['latin'],
