@@ -62,25 +62,41 @@ const Sidebar = () => {
                         </li>
 
                         <li
-                            className={`sidebar-dropdown ms-0 ${['/profile', '/profile-settings', '/user-item'].includes(menu) ? 'active' : ''}`}
+                            className={`sidebar-dropdown ms-0 ${
+                                [
+                                    `/${locale}/dashboard/profile`,
+                                    `/${locale}/dashboard/profile/profile-settings`,
+                                ].includes(menu)
+                                    ? 'active'
+                                    : ''
+                            }`}
                         >
                             <Link
                                 href="#"
                                 onClick={() => {
-                                    setSubMenu(subMenu === '/user-item' ? '' : '/user-item')
+                                    setSubMenu(subMenu === menu ? '' : menu)
                                 }}
                             >
                                 <i className="mdi mdi-account-edit me-2"></i>
                                 {t('user-profile')}
                             </Link>
                             <div
-                                className={`sidebar-submenu ${['/profile', '/profile-setting', '/user-item'].includes(subMenu) ? 'block' : ''}`}
+                                className={`sidebar-submenu ${
+                                    [
+                                        `/${locale}/dashboard/profile`,
+                                        `/${locale}/dashboard/profile/profile-settings`,
+                                    ].includes(subMenu)
+                                        ? 'block'
+                                        : ''
+                                }`}
                             >
                                 <ul>
-                                    <li className={`${menu === '/profile' ? 'active' : ''} ms-0`}>
+                                    <li className={`${menu === `/${locale}/dashboard/profile` ? 'active' : ''} ms-0`}>
                                         <ReusableLink href="/dashboard/profile">{t('profile')}</ReusableLink>
                                     </li>
-                                    <li className={`${menu === '/profile-settings' ? 'active' : ''} ms-0`}>
+                                    <li
+                                        className={`${menu === `/${locale}/dashboard/profile/profile-settings` ? 'active' : ''} ms-0`}
+                                    >
                                         <ReusableLink href="/dashboard/profile/profile-settings">
                                             {t('profile-settings')}
                                         </ReusableLink>
