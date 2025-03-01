@@ -7,9 +7,10 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     disabled?: boolean
     className?: string
     redVariant?: boolean
+    icon?: React.ReactNode
 }
 
-const Button: React.FC<Props> = ({ onClick, isLoading, title, disabled = false, className = '', redVariant }) => (
+const Button: React.FC<Props> = ({ onClick, isLoading, title, disabled = false, className = '', redVariant, icon }) => (
     <button
         type="submit"
         onClick={onClick}
@@ -21,14 +22,11 @@ const Button: React.FC<Props> = ({ onClick, isLoading, title, disabled = false, 
         }
         disabled={isLoading || disabled}
     >
-        {isLoading ? (
-            <div className="flex items-center justify-center">
-                <LoadingIndicator redVariant={redVariant} />
-                <span className="ml-2">{title}</span>
-            </div>
-        ) : (
-            title
-        )}
+        <div className="flex items-center w-full">
+            {isLoading && <LoadingIndicator redVariant={redVariant} smallVariant />}
+            {icon && !isLoading && <span className="mr-1">{icon}</span>}
+            {title}
+        </div>
     </button>
 )
 

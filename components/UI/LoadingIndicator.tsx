@@ -2,10 +2,14 @@ import React, { FC } from 'react'
 
 type Props = {
     redVariant?: boolean
+    smallVariant?: boolean
 }
 
-const LoadingIndicator: FC<Props> = ({ redVariant }) => (
-    <div className="flex lg:col-span-8 md:col-span-6 flex flex-col items-center justify-center h-[500px]" role="status">
+const LoadingIndicator: FC<Props> = ({ redVariant, smallVariant }) => (
+    <div
+        className={`flex lg:col-span-8 md:col-span-6 flex flex-col items-center justify-center ${smallVariant ? 'mr-2' : 'h-[500px]'}`}
+        role="status"
+    >
         <svg
             aria-hidden="true"
             className={`w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 ${

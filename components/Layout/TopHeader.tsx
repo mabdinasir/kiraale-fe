@@ -295,34 +295,17 @@ const TopHeader: FC = () => {
                                 </li>
                                 <li>
                                     <ReusableLink
-                                        href="/chat"
-                                        className="block py-1 px-4 dark:text-white/70 hover:text-green-600 dark:hover:text-white"
-                                    >
-                                        <i className="mdi mdi-chat-outline me-2"></i>
-                                        {t('chat')}
-                                    </ReusableLink>
-                                </li>
-                                <li>
-                                    <ReusableLink
-                                        href="/setting"
-                                        className="block py-1 px-4 dark:text-white/70 hover:text-green-600 dark:hover:text-white"
+                                        href="/dashboard/settings"
+                                        className="block py-1 px-3 dark:text-white/70 hover:text-green-600 dark:hover:text-white"
                                     >
                                         <i className="mdi mdi-cog-outline me-2"></i>
                                         {t('settings')}
                                     </ReusableLink>
                                 </li>
                                 <li className="border-t border-gray-100 dark:border-gray-800 my-2"></li>
-                                <li>
-                                    <Link
-                                        href="/lock-screen"
-                                        className="block py-1 px-4 dark:text-white/70 hover:text-green-600 dark:hover:text-white"
-                                    >
-                                        <i className="mdi mdi-lock-outline me-2"></i>Lockscreen
-                                    </Link>
-                                </li>
-                                <div className="py-2 px-4">
+                                <div className="py-2">
                                     <Button
-                                        className="block px-4 py-2 text-base font-medium text-gray-800 hover:bg-red-100 hover:text-red-600 dark:text-gray-200 dark:hover:bg-red-600 dark:hover:text-white rounded w-full text-left"
+                                        className="flex items-center px-4 py-2 text-base font-medium text-gray-800 hover:bg-red-100 hover:text-red-600 dark:text-gray-200 dark:hover:bg-red-600 dark:hover:text-white rounded w-full text-left"
                                         isLoading={isLoading}
                                         title={isLoading ? t('signing-out') : t('sign-out')}
                                         redVariant
@@ -332,6 +315,7 @@ const TopHeader: FC = () => {
                                                 dispatch(clearToken())
                                             }
                                         }}
+                                        icon={<i className="mdi mdi-logout me-1"></i>}
                                     />
                                 </div>
                             </ul>

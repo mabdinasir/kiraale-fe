@@ -62,7 +62,7 @@ const Sidebar = () => {
                         </li>
 
                         <li
-                            className={`sidebar-dropdown ms-0 ${['/dashboard/profile', '/profile-settings', '/user-item'].includes(menu) ? 'active' : ''}`}
+                            className={`sidebar-dropdown ms-0 ${['/profile', '/profile-settings', '/user-item'].includes(menu) ? 'active' : ''}`}
                         >
                             <Link
                                 href="#"
