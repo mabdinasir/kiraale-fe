@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { FiMenu } from 'react-icons/fi'
 import ReusableLink from '@components/Links/ReusableLink'
 import Notifications from '@components/Layout/TopHeader/Notifications'
-import Languages from '@components/Layout/TopHeader/Languages'
+import LanguageSelector from '@components/Layout/TopHeader/LanguageSelector'
 import Profile from './Profile'
 
 const TopHeader: FC = () => (
@@ -58,7 +58,7 @@ const TopHeader: FC = () => (
             </div>
 
             <ul className="list-none mb-0 space-x-1">
-                <Languages />
+                <LanguageSelector />
 
                 <Notifications />
 

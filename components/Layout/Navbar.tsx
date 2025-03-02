@@ -10,7 +10,7 @@ import { useTranslations } from 'next-intl'
 import ProfileMenu from 'app/[locale]/dashboard/profile/components/ProfileMenu'
 import useCurrentUser from '@hooks/useCurrentUser'
 import StoreProvider from 'app/[locale]/StoreProvider'
-import Languages from './TopHeader/Languages'
+import LanguageSelector from './TopHeader/LanguageSelector'
 
 type NavbarProps = {
     navClass?: string
@@ -137,7 +137,7 @@ const Navbar: React.FC<NavbarProps> = ({ navClass, topnavClass, tagline }) => {
                         )}
 
                         {/* Languages Dropdown */}
-                        <Languages />
+                        <LanguageSelector />
                     </div>
 
                     {/* Right Section: Navigation Tabs, Mobile Toggle, and Profile Menu */}
