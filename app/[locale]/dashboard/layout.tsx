@@ -1,6 +1,6 @@
 import Sidebar from '@components/Layout/Sidebar'
 import React from 'react'
-import TopHeader from '@components/Layout/TopHeader'
+import TopHeader from '@components/Layout/TopHeader/TopHeader'
 import Switcher from '@components/UI/DashboardSwitcher'
 import DashboardFooter from '@components/Layout/DashboardFooter'
 import StoreProvider from '../StoreProvider'
