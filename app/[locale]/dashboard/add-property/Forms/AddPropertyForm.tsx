@@ -118,14 +118,17 @@ const AddPropertyForm = () => {
                 const result = await addProperty(propertyData).unwrap()
                 showToast('success', 'Property added successfully!')
                 dispatch(setStepValidity({ step: 1, isValid: true }))
-                if (result.properties[0]?.id) {
-                    dispatch(setPropertyId(result.properties[0].id))
+                if (result.property.id) {
+                    dispatch(setPropertyId(result.property.id))
                 }
+
+                setPropertyData(initialPropertyData)
+                setErrors({})
             } catch (err: Error | unknown) {
                 showToast('error', `Something went wrong! ${err}`)
             }
         },
-        [validateFields, addProperty, propertyData, dispatch],
+        [validateFields, addProperty, propertyData, dispatch, initialPropertyData],
     )
 
     return (
