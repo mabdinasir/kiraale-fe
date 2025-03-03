@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 
-import { AddPropertyForm } from '@models/properties/property'
 import { useTranslations } from 'next-intl'
 import React, { FC, useRef, useState } from 'react'
 import { FiMapPin } from 'react-icons/fi'
@@ -8,6 +7,7 @@ import { FormErrors } from './AddPropertyForm'
 import Error from '@components/UI/Error'
 import { useJsApiLoader, StandaloneSearchBox, Libraries } from '@react-google-maps/api'
 import useDebouncedEffect from 'use-debounced-effect'
+import { AddPropertyForm } from '@models/properties/addPropertyForm'
 
 type GoogleMapsProps = {
     propertyData: AddPropertyForm

@@ -11,7 +11,7 @@ import { clearToken } from '@store/slices/tokenSlice'
 import ReusableLink from '@components/Links/ReusableLink'
 import { useGetUserByIdQuery } from '@store/services/users'
 
-const Profile = () => {
+const TopHeaderProfileMenu = () => {
     const t = useTranslations()
     const dispatch = useAppDispatch()
     const currentUser = useCurrentUser()
@@ -85,4 +85,4 @@ const Profile = () => {
     )
 }
 
-export default Profile
+export default TopHeaderProfileMenu
