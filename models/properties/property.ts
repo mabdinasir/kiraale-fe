@@ -57,8 +57,14 @@ export interface PropertySearchParams {
     listingType?: 'SALE' | 'RENT'
 }
 
-export interface PropertyResponse {
+export interface PropertiesResponse {
     success: boolean
     message: string
     properties: Property[]
+}
+
+export interface PropertyResponse {
+    success: boolean
+    message: string
+    property: Property
 }

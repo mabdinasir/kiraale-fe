@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import apiConfig from '@config/apiConfig'
 import Cookies from 'js-cookie'
 import { AddPropertyForm } from '@models/properties/addPropertyForm'
-import { Property, PropertyResponse, PropertySearchParams } from '@models/properties/property'
+import { PropertiesResponse, PropertyResponse, PropertySearchParams } from '@models/properties/property'
 
 const token = Cookies.get('authToken')
 
@@ -27,7 +27,7 @@ export const propertiesAPi = createApi({
             }),
         }),
 
-        searchProperties: builder.query<PropertyResponse, PropertySearchParams>({
+        searchProperties: builder.query<PropertiesResponse, PropertySearchParams>({
             query: (params) => ({
                 url: `/searchProperties`,
                 method: 'GET',
@@ -35,13 +35,13 @@ export const propertiesAPi = createApi({
             }),
         }),
 
-        getPropertyById: builder.query<PropertyResponse, Pick<Property, 'id'>>({
+        getPropertyById: builder.query<PropertyResponse, string>({
             query: (id) => `/getPropertyById/${id}`,
         }),
-        getFeaturedProperties: builder.query<PropertyResponse, void>({
+        getFeaturedProperties: builder.query<PropertiesResponse, void>({
             query: () => '/featuredProperties',
         }),
-        getPropertiesByUser: builder.query<PropertyResponse, string>({
+        getPropertiesByUser: builder.query<PropertiesResponse, string>({
             query: (userId) => `/getPropertiesByUser/${userId}`,
         }),
     }),
