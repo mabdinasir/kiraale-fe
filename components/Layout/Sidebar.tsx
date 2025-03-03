@@ -74,7 +74,12 @@ const Sidebar = () => {
                             <Link
                                 href="#"
                                 onClick={() => {
-                                    setSubMenu(subMenu === menu ? '' : menu)
+                                    setSubMenu(
+                                        subMenu === `/${locale}/dashboard/profile` ||
+                                            subMenu === `/${locale}/dashboard/profile/profile-settings`
+                                            ? ''
+                                            : `/${locale}/dashboard/profile`,
+                                    )
                                 }}
                             >
                                 <i className="mdi mdi-account-edit me-2"></i>

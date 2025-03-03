@@ -1,7 +1,7 @@
 'use client' // This is a client component 👈🏽
 
 import React, { useEffect, useRef, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import Image from 'next/image'
 
 import { useTranslations } from 'next-intl'
@@ -9,6 +9,7 @@ import { useTranslations } from 'next-intl'
 const LanguageSelector = () => {
     const t = useTranslations()
     const router = useRouter()
+    const pathname = usePathname()
 
     const languagesMenuRef = useRef<HTMLDivElement>(null)
     const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -34,11 +35,11 @@ const LanguageSelector = () => {
         return () => document.removeEventListener('mousedown', handleClickOutside)
     }, [])
 
-    const currentLocale = window.location.pathname.split('/')[1]
+    const currentLocale = pathname.split('/')[1]
     const selectedLanguage = availableLanguages.find((lang) => lang.key === currentLocale) || availableLanguages[0]
 
     const handleLanguageChange = (language: { key: string; name: string }) => {
-        const newPath = `/${language.key}${window.location.pathname.substring(currentLocale.length + 1)}`
+        const newPath = `/${language.key}${pathname.substring(currentLocale.length + 1)}`
         router.push(newPath)
         setIsMenuOpen(false)
     }
