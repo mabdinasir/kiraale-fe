@@ -9,11 +9,14 @@ import { useAppDispatch } from '@hooks/rtkHooks'
 import { useSignOutMutation } from '@store/services/auth'
 import { clearToken } from '@store/slices/tokenSlice'
 import ReusableLink from '@components/Links/ReusableLink'
+import { useGetUserByIdQuery } from '@store/services/users'
 
 const Profile = () => {
     const t = useTranslations()
     const dispatch = useAppDispatch()
     const currentUser = useCurrentUser()
+    const id = currentUser?.id
+    const { data } = useGetUserByIdQuery(id || '')
     const [signout, { isLoading }] = useSignOutMutation()
     const profileMenuRef = useRef<HTMLDivElement>(null)
     const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -68,7 +71,7 @@ const Profile = () => {
                             title={isLoading ? t('signing-out') : t('sign-out')}
                             redVariant
                             onClick={async () => {
-                                if (currentUser) {
+                                if (data?.user?.id && data?.user?.isSignedIn) {
                                     await signout()
                                     dispatch(clearToken())
                                 }

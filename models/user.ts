@@ -16,7 +16,15 @@ export interface User {
     hasAcceptedTnC: boolean
     isSignedIn: boolean
     isDeleted: boolean
-    roles: Role[]
+    role: Role[]
     createdAt: Date
     updatedAt: Date
+    profilePicture: string | null
+    bio: string | null
+    address: string | null
+    agencyName: string | null
+    licenseNumber: string | null
+    yearsOfExperience: number | null
+    nationalIdNumber: string | null
+    passportNumber: string | null
 }

@@ -6,7 +6,8 @@ import { FiMenu } from 'react-icons/fi'
 import ReusableLink from '@components/Links/ReusableLink'
 import Notifications from '@components/Layout/TopHeader/Notifications'
 import LanguageSelector from '@components/Layout/TopHeader/LanguageSelector'
-import Profile from './Profile'
+import Menu from './Menu'
+import StoreProvider from 'app/[locale]/StoreProvider'
 
 const TopHeader: FC = () => (
     <div className="top-header">
@@ -62,7 +63,9 @@ const TopHeader: FC = () => (
 
                 <Notifications />
 
-                <Profile />
+                <StoreProvider key={'profile'}>
+                    <Menu />
+                </StoreProvider>
             </ul>
         </div>
     </div>

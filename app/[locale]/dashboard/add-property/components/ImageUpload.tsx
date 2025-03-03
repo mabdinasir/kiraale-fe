@@ -15,11 +15,14 @@ import showToast from '@utils/showToast'
 import Button from '@components/UI/Button'
 import { useAppDispatch, useAppSelector } from '@hooks/rtkHooks'
 import { setImageUrls, setStepValidity } from '@store/slices/stepValidation'
+import { useGetUserByIdQuery } from '@store/services/users'
 
 const ImageUpload = () => {
     const t = useTranslations()
     const dispatch = useAppDispatch()
     const currentUser = useCurrentUser()
+    const id = currentUser?.id
+    const { data } = useGetUserByIdQuery(id || '')
 
     const [files, setFiles] = useState<File[]>([])
     const [uploading, setUploading] = useState(false)
@@ -41,7 +44,7 @@ const ImageUpload = () => {
                     fileSize: file.size,
                     fileType: file.type,
                     checksum,
-                    user: currentUser as User,
+                    user: data?.user as User,
                 })
 
                 if (signedURLResult.success) {

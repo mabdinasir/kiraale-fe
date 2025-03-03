@@ -1,12 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { AddPropertyResponse, AddPropertyForm } from '@models/properties/property'
 import apiConfig from '@config/apiConfig'
 import Cookies from 'js-cookie'
-import {
-    GetPropertyByIdResponse,
-    PropertySearchParams,
-    PropertySearchResponse,
-} from '@models/properties/propertySearch'
+import { AddPropertyForm } from '@models/properties/addPropertyForm'
+import { Property, PropertyResponse, PropertySearchParams } from '@models/properties/property'
 
 const token = Cookies.get('authToken')
 
@@ -23,7 +19,7 @@ export const propertiesAPi = createApi({
         },
     }),
     endpoints: (builder) => ({
-        addProperty: builder.mutation<AddPropertyResponse, AddPropertyForm>({
+        addProperty: builder.mutation<PropertyResponse, AddPropertyForm>({
             query: (body) => ({
                 url: '/addProperty',
                 method: 'POST',
@@ -31,7 +27,7 @@ export const propertiesAPi = createApi({
             }),
         }),
 
-        searchProperties: builder.query<PropertySearchResponse, PropertySearchParams>({
+        searchProperties: builder.query<PropertyResponse, PropertySearchParams>({
             query: (params) => ({
                 url: `/searchProperties`,
                 method: 'GET',
@@ -39,11 +35,14 @@ export const propertiesAPi = createApi({
             }),
         }),
 
-        getPropertyById: builder.query<GetPropertyByIdResponse, string>({
+        getPropertyById: builder.query<PropertyResponse, Pick<Property, 'id'>>({
             query: (id) => `/getPropertyById/${id}`,
         }),
-        getFeaturedProperties: builder.query<PropertySearchResponse, void>({
+        getFeaturedProperties: builder.query<PropertyResponse, void>({
             query: () => '/featuredProperties',
+        }),
+        getPropertiesByUser: builder.query<PropertyResponse, string>({
+            query: (userId) => `/getPropertiesByUser/${userId}`,
         }),
     }),
 })
@@ -53,4 +52,5 @@ export const {
     useSearchPropertiesQuery,
     useGetPropertyByIdQuery,
     useGetFeaturedPropertiesQuery,
+    useGetPropertiesByUserQuery,
 } = propertiesAPi

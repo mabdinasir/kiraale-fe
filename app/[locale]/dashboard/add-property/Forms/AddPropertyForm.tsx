@@ -10,7 +10,6 @@ import { IoCalendarNumber, IoExpandOutline } from 'react-icons/io5'
 import { MdHolidayVillage } from 'react-icons/md'
 import { PiBuildingApartmentFill } from 'react-icons/pi'
 import Button from '@components/UI/Button'
-import type { AddPropertyForm } from '@models/properties/property'
 import { useAddPropertyMutation } from '@store/services/properties'
 import { z } from 'zod'
 import Error from '@components/UI/Error'
@@ -21,8 +20,9 @@ import GoogleMaps from './GoogleMaps'
 import { useAppDispatch } from '@hooks/rtkHooks'
 import { setPropertyId, setStepValidity } from '@store/slices/stepValidation'
 import { proprtyTypes } from '@lib/constants'
+import { AddPropertyForm as IAddPropertyForm } from '@models/properties/addPropertyForm'
 
-export type FormErrors = Partial<Record<keyof AddPropertyForm, string>>
+export type FormErrors = Partial<Record<keyof IAddPropertyForm, string>>
 
 const AddPropertyForm = () => {
     const t = useTranslations()
@@ -33,7 +33,7 @@ const AddPropertyForm = () => {
         value,
     }))
 
-    const initialPropertyData = useMemo<AddPropertyForm>(
+    const initialPropertyData = useMemo<IAddPropertyForm>(
         () => ({
             title: '',
             description: '',
@@ -60,7 +60,7 @@ const AddPropertyForm = () => {
     )
 
     const [addProperty, { isLoading, isSuccess, error }] = useAddPropertyMutation()
-    const [propertyData, setPropertyData] = useState<AddPropertyForm>(initialPropertyData)
+    const [propertyData, setPropertyData] = useState<IAddPropertyForm>(initialPropertyData)
     const [errors, setErrors] = useState<FormErrors>({})
 
     const validateFields = useCallback(async () => {
@@ -98,7 +98,7 @@ const AddPropertyForm = () => {
             }
 
             setPropertyData(
-                (prev: AddPropertyForm): AddPropertyForm => ({
+                (prev: IAddPropertyForm): IAddPropertyForm => ({
                     ...prev,
                     [name]: fieldValue,
                 }),
@@ -118,8 +118,8 @@ const AddPropertyForm = () => {
                 const result = await addProperty(propertyData).unwrap()
                 showToast('success', 'Property added successfully!')
                 dispatch(setStepValidity({ step: 1, isValid: true }))
-                if (result.property?.id) {
-                    dispatch(setPropertyId(result.property.id))
+                if (result.properties[0]?.id) {
+                    dispatch(setPropertyId(result.properties[0].id))
                 }
             } catch (err: Error | unknown) {
                 showToast('error', `Something went wrong! ${err}`)

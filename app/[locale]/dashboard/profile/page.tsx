@@ -1,5 +1,11 @@
 import React from 'react'
+import Profile from './components/Profile'
+import StoreProvider from 'app/[locale]/StoreProvider'
 
-const Profile = () => <div>Profile</div>
+const page = () => (
+    <StoreProvider key={'user-profile'}>
+        <Profile />
+    </StoreProvider>
+)
 
-export default Profile
+export default page

@@ -9,6 +9,7 @@ import PropertyPayment from 'app/[locale]/dashboard/add-property/components/Prop
 import Success from '../components/Success'
 import { useAppDispatch, useAppSelector } from '@hooks/rtkHooks'
 import { goToNextStep } from '@store/slices/stepValidation'
+import StoreProvider from 'app/[locale]/StoreProvider'
 
 const StepForm = () => {
     const t = useTranslations()
@@ -70,7 +71,11 @@ const StepForm = () => {
 
             <div className="w-full max-w-2xl mt-8">
                 {currentStep === 1 && <AddPropertyForm />}
-                {currentStep === 2 && <ImageUpload />}
+                {currentStep === 2 && (
+                    <StoreProvider key={'image-upload'}>
+                        <ImageUpload />
+                    </StoreProvider>
+                )}
                 {currentStep === 3 && <PropertyPayment />}
                 {currentStep === 4 && <Success />}
             </div>

@@ -9,11 +9,14 @@ import { clearToken } from '@store/slices/tokenSlice'
 import useCurrentUser from '@hooks/useCurrentUser'
 import Button from '@components/UI/Button'
 import ReusableLink from '@components/Links/ReusableLink'
+import { useGetUserByIdQuery } from '@store/services/users'
 
 const ProfileMenu = () => {
     const t = useTranslations()
     const dispatch = useAppDispatch()
     const currentUser = useCurrentUser()
+    const id = currentUser?.id
+    const { data } = useGetUserByIdQuery(id || '')
 
     const [isOpen, setIsOpen] = useState(false)
     const [signout, { isLoading }] = useSignOutMutation()
@@ -66,11 +69,11 @@ const ProfileMenu = () => {
                 <div className="px-4 py-3 text-base font-semibold text-gray-900 dark:text-white">
                     <div className="font-bold">
                         <i className="mdi mdi-account me-1"></i>
-                        {currentUser?.firstName} {currentUser?.lastName.charAt(0)}
+                        {data?.user?.firstName} {data?.user?.lastName.charAt(0)}
                     </div>
                     <div className="flex items-center text-gray-600 dark:text-gray-400 truncate">
                         <i className="font-bold mdi mdi-email me-1"></i>
-                        <span className="text-sm text-center">{currentUser?.email}</span>
+                        <span className="text-sm text-center">{data?.user?.email}</span>
                     </div>
                 </div>
 
