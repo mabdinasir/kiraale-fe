@@ -1,5 +1,12 @@
 import React from 'react'
 
-const ProfileSettings = () => <div>Profile Settings</div>
+import StoreProvider from 'app/[locale]/StoreProvider'
+import ProfileSettings from './components/ProfileSettings'
 
-export default ProfileSettings
+const page = () => (
+    <StoreProvider key={'profile-settings'}>
+        <ProfileSettings />
+    </StoreProvider>
+)
+
+export default page

@@ -8,17 +8,27 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     className?: string
     redVariant?: boolean
     icon?: React.ReactNode
+    fullWidth?: boolean
 }
 
-const Button: React.FC<Props> = ({ onClick, isLoading, title, disabled = false, className = '', redVariant, icon }) => (
+const Button: React.FC<Props> = ({
+    onClick,
+    isLoading,
+    title,
+    disabled = false,
+    className = '',
+    redVariant,
+    icon,
+    fullWidth = true,
+}) => (
     <button
         type="submit"
         onClick={onClick}
         className={
             className ||
-            `btn w-full rounded-md text-white ${
+            `btn rounded-md text-white ${
                 isLoading || disabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700'
-            }`
+            } ${fullWidth ? 'w-full' : ''} ${redVariant ? 'bg-red-600 hover:bg-red-700' : ''}`
         }
         disabled={isLoading || disabled}
     >

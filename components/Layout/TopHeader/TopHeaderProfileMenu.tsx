@@ -16,7 +16,7 @@ const TopHeaderProfileMenu = () => {
     const dispatch = useAppDispatch()
     const currentUser = useCurrentUser()
     const id = currentUser?.id
-    const { data } = useGetUserByIdQuery(id || '')
+    const { data: userData } = useGetUserByIdQuery(id || '')
     const [signout, { isLoading }] = useSignOutMutation()
     const profileMenuRef = useRef<HTMLDivElement>(null)
     const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -35,8 +35,14 @@ const TopHeaderProfileMenu = () => {
     return (
         <li className="dropdown inline-block relative">
             <button className="dropdown-toggle items-center" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-                <span className="h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-[20px] text-center bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 border border-gray-100 dark:border-gray-800 text-slate-900 dark:text-white rounded-md">
-                    <Image src="/images/client/03.jpg" width={30} height={30} className="rounded-md" alt="Profile" />
+                <span className="h-8 w-8 inline-flex items-center justify-center rounded-full overflow-hidden tracking-wide align-middle duration-500 text-[20px] text-center bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 border border-gray-100 dark:border-gray-800 text-slate-900 dark:text-white rounded-md">
+                    <Image
+                        src={userData?.user?.profilePicture || '/images/profile/profile-picture-3.jpg'}
+                        width={40}
+                        height={40}
+                        className="object-cover w-full h-full"
+                        alt="Profile"
+                    />
                 </span>
             </button>
 
@@ -66,12 +72,12 @@ const TopHeaderProfileMenu = () => {
                     <li className="border-t border-gray-100 dark:border-gray-800 my-2"></li>
                     <div className="py-2">
                         <Button
-                            className="flex items-center px-4 py-2 text-base font-medium text-gray-800 hover:bg-red-100 hover:text-red-600 dark:text-gray-200 dark:hover:bg-red-600 dark:hover:text-white rounded w-full text-left"
+                            className="flex items-center px-4 py-2 text-base font-medium text-gray-800 hover:bg-red-100 hover:text-red-600 dark:text-white dark:hover:bg-red-600 dark:hover:text-red-600 rounded w-full text-left"
                             isLoading={isLoading}
                             title={isLoading ? t('signing-out') : t('sign-out')}
                             redVariant
                             onClick={async () => {
-                                if (data?.user?.id && data?.user?.isSignedIn) {
+                                if (userData?.user?.id && userData?.user?.isSignedIn) {
                                     await signout()
                                     dispatch(clearToken())
                                 }

@@ -16,7 +16,7 @@ const ProfileMenu = () => {
     const dispatch = useAppDispatch()
     const currentUser = useCurrentUser()
     const id = currentUser?.id
-    const { data } = useGetUserByIdQuery(id || '')
+    const { data: userData } = useGetUserByIdQuery(id || '')
 
     const [isOpen, setIsOpen] = useState(false)
     const [signout, { isLoading }] = useSignOutMutation()
@@ -51,7 +51,7 @@ const ProfileMenu = () => {
                 <span className="sr-only">{t('open-profile-menu')}</span>
                 <Image
                     className="w-8 h-8 rounded-full"
-                    src="/images/profile/profile-picture-3.jpg"
+                    src={userData?.user?.profilePicture || '/images/profile/profile-picture-3.jpg'}
                     alt="user photo"
                     width={32}
                     height={32}
@@ -69,11 +69,11 @@ const ProfileMenu = () => {
                 <div className="px-4 py-3 text-base font-semibold text-gray-900 dark:text-white">
                     <div className="font-bold">
                         <i className="mdi mdi-account me-1"></i>
-                        {data?.user?.firstName} {data?.user?.lastName.charAt(0)}
+                        {userData?.user?.firstName} {userData?.user?.lastName.charAt(0)}
                     </div>
                     <div className="flex items-center text-gray-600 dark:text-gray-400 truncate">
                         <i className="font-bold mdi mdi-email me-1"></i>
-                        <span className="text-sm text-center">{data?.user?.email}</span>
+                        <span className="text-sm text-center">{userData?.user?.email}</span>
                     </div>
                 </div>
 
