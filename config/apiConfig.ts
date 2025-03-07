@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:8080/api'
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || process.env.NEXT_PUBLIC_LOCAL_URL
 
 const apiConfig = {
     baseUrl,
