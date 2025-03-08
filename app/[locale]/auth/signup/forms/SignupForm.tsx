@@ -213,7 +213,7 @@ const SignupForm = () => {
                                 name="hasAcceptedTnC"
                                 checked={userData.hasAcceptedTnC}
                                 onChange={handleChange}
-                                className="form-checkbox text-green-600 rounded w-4 h-4 me-2 border border-inherit"
+                                className="form-checkbox rounded border-green-600 ring ring-green-200 text-green-600 focus:border-green-300 focus:ring focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2"
                             />
                             <label className="form-check-label text-slate-400" htmlFor="AcceptT&C">
                                 {t('i-accept')}{' '}

@@ -147,7 +147,7 @@ const PropertyDetail = () => {
 
                                 <div className="flex">
                                     <div className="p-1 w-1/2">
-                                        <div className="btn bg-green-600 hover:bg-green-700 text-white rounded-md w-full">
+                                        <div className="btn bg-green-600 hover:bg-green-700 text-white rounded-md w-full truncate">
                                             {property?.user?.firstName.toUpperCase()}
                                         </div>
                                     </div>

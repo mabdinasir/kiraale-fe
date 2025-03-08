@@ -366,7 +366,7 @@ const AddPropertyForm = () => {
                                     type="checkbox"
                                     name="dishwasher"
                                     id="dishwasher"
-                                    className="form-checkbox rounded border-gray-200 dark:border-gray-800 text-green-600 focus:border-green-300 focus:ring focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2"
+                                    className="form-checkbox rounded border-green-600 ring ring-green-200 text-green-600 focus:border-green-300 focus:ring focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2 dark:bg-slate-900"
                                     checked={propertyData.dishwasher}
                                     onChange={handleChange}
                                 />
@@ -381,7 +381,7 @@ const AddPropertyForm = () => {
                                     type="checkbox"
                                     name="wardrobe"
                                     id="wardrobe"
-                                    className="form-checkbox rounded border-gray-200 dark:border-gray-800 text-green-600 focus:border-green-300 focus:ring focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2"
+                                    className="form-checkbox rounded border-green-600 ring ring-green-200 text-green-600 focus:border-green-300 focus:ring focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2 dark:bg-slate-900"
                                     checked={propertyData.wardrobe}
                                     onChange={handleChange}
                                 />
@@ -396,7 +396,7 @@ const AddPropertyForm = () => {
                                     type="checkbox"
                                     name="furnished"
                                     id="furnished"
-                                    className="form-checkbox rounded border-gray-200 dark:border-gray-800 text-green-600 focus:border-green-300 focus:ring focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2"
+                                    className="form-checkbox rounded border-green-600 ring ring-green-200 text-green-600 focus:border-green-300 focus:ring focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2 dark:bg-slate-900"
                                     checked={propertyData.furnished}
                                     onChange={handleChange}
                                 />
@@ -411,7 +411,7 @@ const AddPropertyForm = () => {
                                     type="checkbox"
                                     name="laundry"
                                     id="laundry"
-                                    className="form-checkbox rounded border-gray-200 dark:border-gray-800 text-green-600 focus:border-green-300 focus:ring focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2"
+                                    className="form-checkbox rounded border-green-600 ring ring-green-200 text-green-600 focus:border-green-300 focus:ring focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2 dark:bg-slate-900"
                                     checked={propertyData.laundry}
                                     onChange={handleChange}
                                 />
@@ -426,7 +426,7 @@ const AddPropertyForm = () => {
                                     type="checkbox"
                                     name="oven"
                                     id="oven"
-                                    className="form-checkbox rounded border-gray-200 dark:border-gray-800 text-green-600 focus:border-green-300 focus:ring focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2"
+                                    className="form-checkbox rounded border-green-600 ring ring-green-200 text-green-600 focus:border-green-300 focus:ring focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2 dark:bg-slate-900"
                                     checked={propertyData.oven}
                                     onChange={handleChange}
                                 />
@@ -441,7 +441,7 @@ const AddPropertyForm = () => {
                                     type="checkbox"
                                     name="pool"
                                     id="pool"
-                                    className="form-checkbox rounded border-gray-200 dark:border-gray-800 text-green-600 focus:border-green-300 focus:ring focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2"
+                                    className="form-checkbox rounded border-green-600 ring ring-green-200 text-green-600 focus:border-green-300 focus:ring focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2 dark:bg-slate-900"
                                     checked={propertyData.pool}
                                     onChange={handleChange}
                                 />
@@ -456,7 +456,7 @@ const AddPropertyForm = () => {
                                 type="checkbox"
                                 name="airConditioning"
                                 id="airConditioning"
-                                className="form-checkbox rounded border-gray-200 dark:border-gray-800 text-green-600 focus:border-green-300 focus:ring focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2"
+                                className="form-checkbox rounded border-green-600 ring ring-green-200 text-green-600 focus:border-green-300 focus:ring focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2 dark:bg-slate-900"
                                 checked={propertyData.airConditioning}
                                 onChange={handleChange}
                             />
