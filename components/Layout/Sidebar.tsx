@@ -55,6 +55,13 @@ const Sidebar = () => {
                         </li>
 
                         <li className={`${menu === '/chat' ? 'active' : ''} ms-0`}>
+                            <ReusableLink href="/dashboard/notifications">
+                                <i className="mdi mdi-bell-outline me-2"></i>
+                                {t('notifications')}
+                            </ReusableLink>
+                        </li>
+
+                        <li className={`${menu === '/chat' ? 'active' : ''} ms-0`}>
                             <ReusableLink href="/dashboard/settings">
                                 <i className="mdi mdi-chat-outline me-2"></i>
                                 {t('settings')}

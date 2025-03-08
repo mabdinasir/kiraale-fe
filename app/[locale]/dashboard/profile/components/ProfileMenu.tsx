@@ -38,7 +38,7 @@ const ProfileMenu = () => {
         return () => {
             document.removeEventListener('mousedown', handleClickOutside)
         }
-    }, [])
+    }, [isOpen])
 
     return (
         <div className="relative inline-block" ref={dropdownRef}>
@@ -61,7 +61,7 @@ const ProfileMenu = () => {
             {/* Dropdown menu */}
             <div
                 id="dropdownAvatar"
-                className={`z-10 bg-white divide-y divide-gray-200 rounded-lg shadow-lg w-48 dark:bg-slate-900 dark:divide-gray-700 absolute right-0 mt-2 ${
+                className={`z-50 bg-white dark:bg-slate-900 divide-y divide-gray-200 rounded-lg shadow-lg w-48 absolute right-0 mt-2 ${
                     isOpen ? 'block' : 'hidden'
                 }`}
             >
@@ -69,52 +69,72 @@ const ProfileMenu = () => {
                 <div className="px-4 py-3 text-base font-semibold text-gray-900 dark:text-white">
                     <div className="font-bold">
                         <i className="mdi mdi-account me-1"></i>
-                        {userData?.user?.firstName} {userData?.user?.lastName.charAt(0)}
+                        {userData?.user?.firstName} {userData?.user?.lastName.charAt(0) ?? 'Loading...'}
                     </div>
                     <div className="flex items-center text-gray-600 dark:text-gray-400 truncate">
                         <i className="font-bold mdi mdi-email me-1"></i>
-                        <span className="text-sm text-center">{userData?.user?.email}</span>
+                        <span className="text-sm text-center">{userData?.user?.email ?? 'Loading...'}</span>
                     </div>
                 </div>
 
                 {/* Menu Items */}
-                <ul
-                    className="py-2 text-base font-medium text-gray-800 dark:text-white"
-                    aria-labelledby="dropdownUserAvatarButton"
-                >
-                    <li>
-                        <ReusableLink
-                            href={'/dashboard'}
-                            className="block px-4 py-2 hover:bg-green-100 hover:text-green-700 dark:hover:bg-gray-700 dark:hover:text-green-400 rounded"
-                        >
-                            <i className="mdi mdi-view-dashboard me-2"></i>
-                            {t('dashboard')}
-                        </ReusableLink>
-                    </li>
-                    <li>
-                        <ReusableLink
-                            href={'/dashboard/profile'}
-                            className="block px-3 py-2 hover:bg-green-100 hover:text-green-700 dark:hover:bg-gray-700 dark:hover:text-green-400 rounded"
-                        >
-                            <i className="mdi mdi-account-outline me-2"></i>
-                            {t('profile')}
-                        </ReusableLink>
-                    </li>
-                    <li>
-                        <ReusableLink
-                            href={'/dashboard/settings'}
-                            className="block px-3 py-2 hover:bg-green-100 hover:text-green-700 dark:hover:bg-gray-700 dark:hover:text-green-400 rounded"
-                        >
-                            <i className="mdi mdi-cog-outline me-2"></i>
-                            {t('settings')}
-                        </ReusableLink>
-                    </li>
-                </ul>
+                <div onClick={() => setIsOpen(false)}>
+                    <ul
+                        className="py-2 text-base font-medium text-gray-800 dark:text-white"
+                        aria-labelledby="dropdownUserAvatarButton"
+                    >
+                        <li>
+                            <ReusableLink
+                                href={'/dashboard'}
+                                className="block px-4 py-2 hover:bg-green-100 hover:text-green-700 dark:hover:bg-gray-700 dark:hover:text-green-600 rounded"
+                            >
+                                <i className="mdi mdi-view-dashboard me-2"></i>
+                                {t('dashboard')}
+                            </ReusableLink>
+                        </li>
+                        <li>
+                            <ReusableLink
+                                href={'/dashboard/profile'}
+                                className="block px-3 py-2 hover:bg-green-100 hover:text-green-700 dark:hover:bg-gray-700 dark:hover:text-green-600 rounded"
+                            >
+                                <i className="mdi mdi-account me-2"></i>
+                                {t('profile')}
+                            </ReusableLink>
+                        </li>
+                        <li>
+                            <ReusableLink
+                                href={'/dashboard/add-property'}
+                                className="block px-3 py-2 hover:bg-green-100 hover:text-green-700 dark:hover:bg-gray-700 dark:hover:text-green-600 rounded"
+                            >
+                                <i className="mdi mdi-home me-2"></i>
+                                {t('add-property')}
+                            </ReusableLink>
+                        </li>
+                        <li>
+                            <ReusableLink
+                                href={'/dashboard/notifications'}
+                                className="block px-3 py-2 hover:bg-green-100 hover:text-green-700 dark:hover:bg-gray-700 dark:hover:text-green-400 rounded"
+                            >
+                                <i className="mdi mdi-bell me-2"></i>
+                                {t('notifications')}
+                            </ReusableLink>
+                        </li>
+                        <li>
+                            <ReusableLink
+                                href={'/dashboard/settings'}
+                                className="block px-3 py-2 hover:bg-green-100 hover:text-green-700 dark:hover:bg-gray-700 dark:hover:text-green-600 rounded"
+                            >
+                                <i className="mdi mdi-cog me-2"></i>
+                                {t('settings')}
+                            </ReusableLink>
+                        </li>
+                    </ul>
+                </div>
 
                 {/* Sign-Out */}
                 <div className="py-2">
                     <Button
-                        className="block px-4 py-2 text-base font-medium text-gray-800 hover:bg-red-100 hover:text-red-600 dark:text-gray-200 dark:hover:bg-red-600 dark:hover:text-red-600 rounded w-full text-left dark:text-white"
+                        className="block px-4 py-2 text-base font-medium hover:bg-red-100 hover:text-red-600 dark:hover:bg-red-600 dark:hover:text-red-600 rounded w-full text-left"
                         isLoading={isLoading}
                         title={isLoading ? t('signing-out') : t('sign-out')}
                         redVariant

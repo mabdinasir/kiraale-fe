@@ -9,7 +9,7 @@ const intlMiddleware = createMiddleware({
 })
 
 // Define all base protected route prefixes
-const protectedRoutePrefixes = ['/dashboard', '/admin', '/settings']
+const protectedRoutePrefixes = ['/dashboard', '/admin', '/notifications', '/settings']
 
 export default function middleware(request: NextRequest) {
     const token = request.cookies.get('authToken')?.value || null
