@@ -66,7 +66,7 @@ const ProfileMenu = () => {
                 }`}
             >
                 {/* User Info */}
-                <div className="px-4 py-3 text-base font-semibold text-gray-900 dark:text-white">
+                <div className="px-4 py-3 text-base font-semibold text-gray-600 dark:text-gray-400">
                     <div className="font-bold">
                         <i className="mdi mdi-account me-1"></i>
                         {userData?.user?.firstName} {userData?.user?.lastName.charAt(0) ?? 'Loading...'}
@@ -80,7 +80,7 @@ const ProfileMenu = () => {
                 {/* Menu Items */}
                 <div onClick={() => setIsOpen(false)}>
                     <ul
-                        className="py-2 text-base font-medium text-gray-800 dark:text-white"
+                        className="py-2 text-base font-medium text-gray-600 dark:text-gray-400"
                         aria-labelledby="dropdownUserAvatarButton"
                     >
                         <li>
