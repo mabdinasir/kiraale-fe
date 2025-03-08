@@ -66,12 +66,12 @@ const ProfileMenu = () => {
                 }`}
             >
                 {/* User Info */}
-                <div className="px-4 py-3 text-base font-semibold text-gray-600 dark:text-gray-400">
+                <div className="px-4 py-3 text-base font-semibold">
                     <div className="font-bold">
                         <i className="mdi mdi-account me-1"></i>
                         {userData?.user?.firstName} {userData?.user?.lastName.charAt(0) ?? 'Loading...'}
                     </div>
-                    <div className="flex items-center text-gray-600 dark:text-gray-400 truncate">
+                    <div className="flex items-center truncate">
                         <i className="font-bold mdi mdi-email me-1"></i>
                         <span className="text-sm text-center">{userData?.user?.email ?? 'Loading...'}</span>
                     </div>
@@ -79,10 +79,7 @@ const ProfileMenu = () => {
 
                 {/* Menu Items */}
                 <div onClick={() => setIsOpen(false)}>
-                    <ul
-                        className="py-2 text-base font-medium text-gray-600 dark:text-gray-400"
-                        aria-labelledby="dropdownUserAvatarButton"
-                    >
+                    <ul className="py-2 text-base font-medium" aria-labelledby="dropdownUserAvatarButton">
                         <li>
                             <ReusableLink
                                 href={'/dashboard'}

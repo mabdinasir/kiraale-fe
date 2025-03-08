@@ -54,7 +54,7 @@ const TopHeaderProfileMenu = () => {
                     <li>
                         <ReusableLink
                             href="/dashboard/profile"
-                            className="block py-1 px-4 hover:text-green-600 dark:hover:text-white text-gray-600 dark:text-gray-400"
+                            className="block py-1 px-4 hover:text-green-600 dark:hover:text-white"
                         >
                             <i className="mdi mdi-account-outline me-2"></i>
                             {t('profile')}
@@ -63,7 +63,7 @@ const TopHeaderProfileMenu = () => {
                     <li>
                         <ReusableLink
                             href="/dashboard/notifications"
-                            className="block py-1 px-3 hover:text-green-600 dark:hover:text-white text-gray-600 dark:text-gray-400"
+                            className="block py-1 px-3 hover:text-green-600 dark:hover:text-white"
                         >
                             <i className="mdi mdi-bell-outline me-2"></i>
                             {t('notifications')}
@@ -72,7 +72,7 @@ const TopHeaderProfileMenu = () => {
                     <li>
                         <ReusableLink
                             href="/dashboard/settings"
-                            className="block py-1 px-3 hover:text-green-600 dark:hover:text-white text-gray-600 dark:text-gray-400"
+                            className="block py-1 px-3 hover:text-green-600 dark:hover:text-white"
                         >
                             <i className="mdi mdi-cog-outline me-2"></i>
                             {t('settings')}
@@ -81,7 +81,7 @@ const TopHeaderProfileMenu = () => {
                     <li className="border-t border-gray-100 dark:border-gray-800 my-2"></li>
                     <div className="py-2">
                         <Button
-                            className="flex items-center px-4 py-2 text-base font-medium text-gray-800 hover:bg-red-100 hover:text-red-600 dark:text-white dark:hover:bg-red-600 dark:hover:text-red-600 rounded w-full text-left"
+                            className="flex items-center px-4 text-base font-medium hover:bg-red-100 hover:text-red-600 dark:hover:bg-red-600 dark:hover:text-red-600 rounded w-full text-left"
                             isLoading={isLoading}
                             title={isLoading ? t('signing-out') : t('sign-out')}
                             redVariant
