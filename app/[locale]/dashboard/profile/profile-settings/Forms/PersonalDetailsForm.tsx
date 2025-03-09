@@ -1,8 +1,13 @@
 import React from 'react'
 import { FiUser, FiMail, FiPhone, FiUserCheck, FiEdit } from 'react-icons/fi'
 import { useTranslations } from 'next-intl'
+import { User } from '@models/user'
 
-const PersonalDetailsForm = () => {
+type PersonalDetailsFormProps = {
+    user?: User
+}
+
+const PersonalDetailsForm: React.FC<PersonalDetailsFormProps> = ({ user }) => {
     const t = useTranslations()
 
     return (
@@ -22,6 +27,7 @@ const PersonalDetailsForm = () => {
                                 placeholder={t('firstName')}
                                 id="firstname"
                                 name="firstname"
+                                defaultValue={user?.firstName}
                             />
                         </div>
                     </div>
@@ -37,6 +43,7 @@ const PersonalDetailsForm = () => {
                                 placeholder={t('lastName')}
                                 id="lastname"
                                 name="lastname"
+                                defaultValue={user?.lastName}
                             />
                         </div>
                     </div>
@@ -51,6 +58,8 @@ const PersonalDetailsForm = () => {
                                 className="form-input ps-12 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-green-600 dark:border-gray-800 dark:focus:border-green-600 focus:ring-0"
                                 placeholder={t('email')}
                                 name="email"
+                                id="email"
+                                defaultValue={user?.email}
                             />
                         </div>
                     </div>
@@ -64,6 +73,7 @@ const PersonalDetailsForm = () => {
                                 type="tel"
                                 className="form-input ps-12 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-green-600 dark:border-gray-800 dark:focus:border-green-600 focus:ring-0"
                                 placeholder={t('phone')}
+                                defaultValue={user?.mobile}
                             />
                         </div>
                     </div>
@@ -79,6 +89,7 @@ const PersonalDetailsForm = () => {
                                 id="profile-description"
                                 className="form-input ps-11 w-full py-2 px-3 h-28 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-green-600 dark:border-gray-800 dark:focus:border-green-600 focus:ring-0"
                                 placeholder={t('profile-desc')}
+                                defaultValue={user?.bio}
                             ></textarea>
                         </div>
                     </div>

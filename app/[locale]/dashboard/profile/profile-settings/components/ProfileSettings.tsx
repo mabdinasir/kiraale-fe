@@ -52,11 +52,11 @@ const ProfileSettings = () => {
 
                     <div className="xl:col-span-9 lg:col-span-8 md:col-span-8">
                         <div className="grid grid-cols-1 gap-6">
-                            <PersonalDetailsForm />
+                            <PersonalDetailsForm user={userData?.user} />
                             <div className="p-6 relative rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
                                 <div className="grid lg:grid-cols-2 grid-cols-1 gap-6">
-                                    <OtherDetailsForm />
-                                    <ChangePasswordForm />
+                                    <OtherDetailsForm user={userData?.user} />
+                                    <ChangePasswordForm user={userData?.user} />
                                 </div>
                             </div>
 

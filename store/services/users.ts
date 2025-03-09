@@ -1,8 +1,8 @@
 import apiConfig from '@config/apiConfig'
-import { User } from '@models/user'
 import { GetUserByIdResponse } from '@models/users/getUserByIdResponse'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import Cookies from 'js-cookie'
+import { Profile } from 'schemas'
 
 const token = Cookies.get('authToken')
 
@@ -25,9 +25,9 @@ export const usersApi = createApi({
                 method: 'GET',
             }),
         }),
-        updateProfile: builder.mutation<void, { id: string; data: User }>({
+        updateUserProfile: builder.mutation<void, { id: string; data: Partial<Profile> }>({
             query: ({ id, data }) => ({
-                url: `/updateProfile/${id}`,
+                url: `/updateUserProfile/${id}`,
                 method: 'PUT',
                 body: data,
             }),
@@ -35,4 +35,4 @@ export const usersApi = createApi({
     }),
 })
 
-export const { useGetUserByIdQuery, useUpdateProfileMutation } = usersApi
+export const { useGetUserByIdQuery, useUpdateUserProfileMutation } = usersApi

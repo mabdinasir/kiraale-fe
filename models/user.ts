@@ -19,12 +19,12 @@ export interface User {
     role: Role[]
     createdAt: Date
     updatedAt: Date
-    profilePicture: string | null
-    bio: string | null
-    address: string | null
-    agencyName: string | null
-    licenseNumber: string | null
-    yearsOfExperience: number | null
-    nationalIdNumber: string | null
-    passportNumber: string | null
+    profilePicture?: string
+    bio?: string
+    address?: string
+    agencyName?: string
+    licenseNumber?: string
+    yearsOfExperience?: number
+    nationalIdNumber?: string
+    passportNumber?: string
 }

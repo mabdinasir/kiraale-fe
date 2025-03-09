@@ -1,8 +1,13 @@
 import React from 'react'
 import { FiKey } from 'react-icons/fi'
 import { useTranslations } from 'next-intl'
+import { User } from '@models/user'
 
-const ChangePasswordForm = () => {
+type ChangePasswordFormProps = {
+    user?: User
+}
+
+const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({ user }) => {
     const t = useTranslations()
 
     return (
@@ -18,6 +23,9 @@ const ChangePasswordForm = () => {
                                 type="password"
                                 className="form-input ps-12 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-green-600 dark:border-gray-800 dark:focus:border-green-600 focus:ring-0"
                                 placeholder={t('old-password')}
+                                id="old-password"
+                                name="old-password"
+                                defaultValue={user?.password}
                             />
                         </div>
                     </div>
@@ -30,6 +38,8 @@ const ChangePasswordForm = () => {
                                 type="password"
                                 className="form-input ps-12 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-green-600 dark:border-gray-800 dark:focus:border-green-600 focus:ring-0"
                                 placeholder={t('new-password')}
+                                id="new-password"
+                                name="new-password"
                             />
                         </div>
                     </div>
@@ -42,6 +52,8 @@ const ChangePasswordForm = () => {
                                 type="password"
                                 className="form-input ps-12 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-green-600 dark:border-gray-800 dark:focus:border-green-600 focus:ring-0"
                                 placeholder={t('confirm-password')}
+                                id="confirm-password"
+                                name="confirm-password"
                             />
                         </div>
                     </div>
