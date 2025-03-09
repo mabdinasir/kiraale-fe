@@ -1,5 +1,6 @@
 import apiConfig from '@config/apiConfig'
-import { GetUserByIdResponse } from '@models/users/getUserByIdResponse'
+import { GetUserByIdResponse } from '@models/user/getUserByIdResponse'
+import { UpdateUserPassword } from '@models/user/updateUserPassword'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import Cookies from 'js-cookie'
 import { Profile } from 'schemas'
@@ -32,7 +33,18 @@ export const usersApi = createApi({
                 body: data,
             }),
         }),
+        updateUserPassword: builder.mutation<void, UpdateUserPassword>({
+            query: ({ id, passwords }) => ({
+                url: `/updateUserPassword/${id}`,
+                method: 'PUT',
+                body: {
+                    oldPassword: passwords.oldPassword,
+                    newPassword: passwords.newPassword,
+                    confirmNewPassword: passwords.confirmNewPassword,
+                },
+            }),
+        }),
     }),
 })
 
-export const { useGetUserByIdQuery, useUpdateUserProfileMutation } = usersApi
+export const { useGetUserByIdQuery, useUpdateUserProfileMutation, useUpdateUserPasswordMutation } = usersApi

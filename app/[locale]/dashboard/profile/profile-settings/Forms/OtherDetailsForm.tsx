@@ -7,9 +7,9 @@ import { FaLocationDot } from 'react-icons/fa6'
 import { GrOrganization } from 'react-icons/gr'
 import { TbSortAscendingNumbers } from 'react-icons/tb'
 import { useTranslations } from 'next-intl'
-import profileSchema, { Profile } from 'schemas/profile.schema'
+import { profileSchema, Profile } from 'schemas/profile.schema'
 import Button from '@components/UI/Button'
-import { User } from '@models/user'
+import { User } from '@models/user/user'
 import isApiError from '@utils/isApiError'
 import Error from '@components/UI/Error'
 import { useUpdateUserProfileMutation } from '@store/services/users'
@@ -130,8 +130,8 @@ const OtherDetailsForm: React.FC<OtherDetailsFormProps> = ({ user }) => {
                         <div className="form-icon relative mt-2">
                             <FaIdCard className="w-4 h-4 absolute top-3 start-4"></FaIdCard>
                             <input
-                                name="national-id"
-                                id="national-id"
+                                name="nationalIdNumber"
+                                id="nationalIdNumber"
                                 type="text"
                                 className="form-input ps-12 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-green-600 dark:border-gray-800 dark:focus:border-green-600 focus:ring-0"
                                 placeholder={t('national-id')}
@@ -180,7 +180,7 @@ const OtherDetailsForm: React.FC<OtherDetailsFormProps> = ({ user }) => {
 
                 {/* Error Message */}
                 {error && isApiError(error) && (
-                    <div>
+                    <div className="mt-4">
                         {/* Display the generic error message */}
                         <Error error={error.data.message} />
 

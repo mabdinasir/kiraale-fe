@@ -3,9 +3,9 @@
 import React, { useCallback, useState } from 'react'
 import { FiUser, FiMail, FiPhone, FiUserCheck, FiEdit } from 'react-icons/fi'
 import { useTranslations } from 'next-intl'
-import { User } from '@models/user'
+import { User } from '@models/user/user'
 import { Profile } from 'schemas'
-import profileSchema from 'schemas/profile.schema'
+import { profileSchema } from 'schemas/profile.schema'
 import { z } from '@node_modules/zod'
 import { useUpdateUserProfileMutation } from '@store/services/users'
 import showToast from '@utils/showToast'
@@ -174,7 +174,7 @@ const PersonalDetailsForm: React.FC<PersonalDetailsFormProps> = ({ user }) => {
 
                 {/* Error Message */}
                 {error && isApiError(error) && (
-                    <div>
+                    <div className="mt-4">
                         {/* Display the generic error message */}
                         <Error error={error.data.message} />
 

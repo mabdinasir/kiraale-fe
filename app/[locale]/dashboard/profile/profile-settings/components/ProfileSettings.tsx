@@ -25,7 +25,7 @@ const ProfileSettings = () => {
             <div className="layout-specing">
                 <div className="grid grid-cols-1">
                     <div className="profile-banner relative text-transparent rounded-md shadow dark:shadow-gray-700 overflow-hidden">
-                        <input id="pro-banner" name="profile-banner" type="file" className="hidden" />
+                        <input id="pro-banner" name="profile-banner" type="file" className="hidden" disabled />
                         <div className="relative shrink-0">
                             <Image
                                 src="/images/bg/profile-avatar.jpg"

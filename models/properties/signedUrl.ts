@@ -1,4 +1,4 @@
-import { User } from '@models/user'
+import { User } from '@models/user/user'
 
 export type SignedURLResponse = Promise<
     { failure?: undefined; success: { url: string; id: string } } | { failure: string; success?: undefined }

@@ -13,6 +13,18 @@ const profileSchema = z.object({
     yearsOfExperience: z.number().min(0, 'Experience cannot be a negative number').optional(),
 })
 
-export type Profile = z.infer<typeof profileSchema>
+const profilePasswordSchema = z
+    .object({
+        oldPassword: z.string().min(8, 'Old password is required and must be at least 8 characters'),
+        newPassword: z.string().min(8, 'New password is required and must be at least 8 characters'),
+        confirmNewPassword: z.string().min(8, 'Please confirm your new password'),
+    })
+    .refine((data) => data.newPassword === data.confirmNewPassword, {
+        message: 'New passwords do not match',
+        path: ['confirmNewPassword'],
+    })
 
-export default profileSchema
+export type Profile = z.infer<typeof profileSchema>
+export type ProfilePassword = z.infer<typeof profilePasswordSchema>
+
+export { profileSchema, profilePasswordSchema }
