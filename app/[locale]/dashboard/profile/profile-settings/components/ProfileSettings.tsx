@@ -61,10 +61,10 @@ const ProfileSettings = () => {
                             </div>
 
                             <div className="p-6 relative rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
-                                <h5 className="text-lg font-semibold mb-4 text-red-600">{t('delete-account')} :</h5>
-                                <p className="text-slate-400 mb-4">{t('delete-account-desc')} </p>
+                                <h5 className="text-lg font-semibold mb-4 text-red-600">{t('deactivate-account')} :</h5>
+                                <p className="text-slate-400 mb-4">{t('deactivate-account-desc')} </p>
                                 <Button
-                                    title={isLoading ? t('deleting-account') : t('delete-account')}
+                                    title={isLoading ? t('deactivating-account') : t('deactivate-account')}
                                     isLoading={false}
                                     disabled={false}
                                     fullWidth={false}

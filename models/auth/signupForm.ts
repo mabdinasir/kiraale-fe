@@ -1,4 +1,4 @@
-import { User } from '@models/user/user'
+import { User } from '@models/user'
 import { signUpSchema } from 'schemas'
 import { z } from 'zod'
 

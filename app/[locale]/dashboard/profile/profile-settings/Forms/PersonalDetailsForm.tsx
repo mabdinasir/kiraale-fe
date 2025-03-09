@@ -3,7 +3,7 @@
 import React, { useCallback, useState } from 'react'
 import { FiUser, FiMail, FiPhone, FiUserCheck, FiEdit } from 'react-icons/fi'
 import { useTranslations } from 'next-intl'
-import { User } from '@models/user/user'
+import { User } from '@models/user'
 import { Profile } from 'schemas'
 import { profileSchema } from 'schemas/profile.schema'
 import { z } from '@node_modules/zod'

@@ -326,11 +326,11 @@
     "confirm-password": "Confirm Password",
     "save-password": "Save Password",
     "saving-password": "Saving Password...",
-    "delete-account": "Delete Account",
-    "delete-account-desc": "Are you sure you want to delete your account? Your account will be permanently removed, and you will lose access to all your data after the grace period.",
-    "deleting-account": "Deleting Account...",
+    "deactivate-account": "Deactivate Account",
+    "deactivate-account-desc": "Are you sure you want to deactivate your account? Your account will be marked for deactivation, however you can always reactivate by simply logging back in.",
+    "deactivating-account": "Deactivating Account...",
     "profile-details-updated-successfully": "Profile details updated successfully.",
     "something-went-wrong": "Something went wrong. Please try again later.",
     "password-updated-successfully": "Password updated successfully.",
-    "account-deleted-successfully": "Account marked for deletion. You will lose access to your account after the grace period."
+    "account-deactivation-successfully": "Account successfully deactivate. You can reactivate by logging back in."
 }

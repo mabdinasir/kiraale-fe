@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import { useTranslations } from 'next-intl'
-import { User } from '@models/user/user'
+import { User } from '@models/user'
 import Button from '@components/UI/Button'
 import PasswordInput from '@components/UI/PasswordInput'
 import { useUpdateUserPasswordMutation } from '@store/services/users'

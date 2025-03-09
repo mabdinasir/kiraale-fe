@@ -1,4 +1,4 @@
-import { User } from '@models/user/user'
+import { User } from '@models/user'
 import { jwtDecode } from 'jwt-decode'
 
 const decodeAuthToken = (token: string | undefined): User | null => {

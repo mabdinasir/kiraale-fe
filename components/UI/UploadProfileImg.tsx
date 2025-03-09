@@ -1,7 +1,7 @@
 'use client'
 import React, { ChangeEvent, FC, useState } from 'react'
 import Image from 'next/image'
-import { User } from '@models/user/user'
+import { User } from '@models/user'
 // import { useUpdateProfileMutation } from '@store/services/users'
 
 type UploadProfileImgProps = {
