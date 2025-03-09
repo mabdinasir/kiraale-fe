@@ -1,8 +1,7 @@
-'use client'
+'use client' // This is a client component 👈🏽
 
 import React, { useState, useCallback } from 'react'
 import { z } from 'zod'
-import { toast } from 'react-hot-toast'
 import { FaPassport, FaIdCard } from 'react-icons/fa'
 import { FaLocationDot } from 'react-icons/fa6'
 import { GrOrganization } from 'react-icons/gr'
@@ -14,6 +13,7 @@ import { User } from '@models/user'
 import isApiError from '@utils/isApiError'
 import Error from '@components/UI/Error'
 import { useUpdateUserProfileMutation } from '@store/services/users'
+import showToast from '@utils/showToast'
 
 type OtherDetailsFormProps = {
     user?: User
@@ -23,6 +23,7 @@ type FormErrors = Partial<Record<keyof Profile, string>>
 
 const OtherDetailsForm: React.FC<OtherDetailsFormProps> = ({ user }) => {
     const t = useTranslations()
+    const [errors, setErrors] = useState<FormErrors>({})
     const [updateUserProfile, { isLoading, error }] = useUpdateUserProfileMutation()
 
     const [formData, setFormData] = useState<Profile>({
@@ -30,14 +31,13 @@ const OtherDetailsForm: React.FC<OtherDetailsFormProps> = ({ user }) => {
         lastName: user?.lastName || '',
         email: user?.email || '',
         mobile: user?.mobile || '',
+        bio: user?.bio || '',
         address: user?.address || '',
         passportNumber: user?.passportNumber || '',
         nationalIdNumber: user?.nationalIdNumber || '',
         agencyName: user?.agencyName || '',
         yearsOfExperience: user?.yearsOfExperience || 0,
     })
-
-    const [errors, setErrors] = useState<FormErrors>({})
 
     const validateFields = useCallback(async () => {
         try {
@@ -73,9 +73,13 @@ const OtherDetailsForm: React.FC<OtherDetailsFormProps> = ({ user }) => {
 
             try {
                 await updateUserProfile({ id: user?.id || '', data: formData }).unwrap()
-                toast.success(t('details-updated-successfully'))
-            } catch {
-                toast.error(t('something-went-wrong'))
+                showToast('success', t('profile-details-updated-successfully'))
+            } catch (err) {
+                if (isApiError(err)) {
+                    showToast('error', err.data.message)
+                } else {
+                    showToast('error', t('something-went-wrong'))
+                }
             } finally {
                 setFormData(formData)
             }
@@ -188,7 +192,7 @@ const OtherDetailsForm: React.FC<OtherDetailsFormProps> = ({ user }) => {
                 )}
 
                 <Button
-                    title={t('save-changes')}
+                    title={isLoading ? t('saving-changes') : t('save-changes')}
                     className="btn bg-green-600 hover:bg-green-700 border-green-600 hover:border-green-700 text-white rounded-md mt-5"
                     isLoading={isLoading}
                     disabled={isLoading || Object.values(errors).some((err) => !!err)}
