@@ -5,7 +5,7 @@ const withNextIntl = createNextIntlPlugin()
 
 const nextConfig: NextConfig = {
     images: {
-        domains: ['eastleigh-real-estate.s3.ap-southeast-2.amazonaws.com'],
+        domains: ['eastleigh-real-estate-properties.s3.ap-southeast-2.amazonaws.com'],
     },
 }
 
