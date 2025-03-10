@@ -9,6 +9,7 @@ import { useTranslations } from 'next-intl'
 import dynamic from 'next/dynamic'
 import useCurrentUser from '@hooks/useCurrentUser'
 import StoreProvider from 'app/[locale]/StoreProvider'
+import Link from 'next/link'
 
 // Dynamically load client-only components
 const ProfileMenu = dynamic(() => import('app/[locale]/dashboard/profile/components/ProfileMenu'), { ssr: false })
@@ -83,30 +84,29 @@ const Navbar: React.FC<NavbarProps> = ({ navClass, topnavClass, tagline }) => {
 
                     {/* Navigation Menu - Simplified Active State */}
                     <div className="flex items-center gap-4">
+                        {/* Mobile Toggle */}
                         <div className="menu-extras">
-                            <button
-                                className="navbar-toggle"
-                                onClick={() => setIsOpen(!isOpen)}
-                                aria-label="Toggle menu"
-                            >
-                                <div className="lines">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                            </button>
+                            <div className="menu-item">
+                                <Link href="#" className="navbar-toggle" onClick={() => setIsOpen(!isOpen)}>
+                                    <div className="lines">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+                                </Link>
+                            </div>
                         </div>
 
-                        <div ref={menuRef} className={`${isOpen ? 'block' : 'hidden'} md:block`}>
-                            <ul className={`navigation-menu ${navClass || ''}`}>
+                        {/* Navigation Menu */}
+                        <div id="navigation" ref={menuRef} className={`${isOpen ? 'block' : 'hidden'} md:block`}>
+                            <ul
+                                className={`navigation-menu ${navClass === '' || navClass === undefined ? '' : 'nav-light'}`}
+                            >
                                 {['home', 'buy', 'sell', 'contact'].map((path) => (
                                     <li
                                         key={path}
                                         className={
-                                            currentPath === `/${locale}/${path === 'home' ? '' : path}` ||
-                                            (path === 'home' && currentPath === `/${locale}`)
-                                                ? 'active'
-                                                : ''
+                                            currentPath === `/${locale}/${path === 'home' ? '' : path}` ? 'active' : ''
                                         }
                                     >
                                         <ReusableLink
