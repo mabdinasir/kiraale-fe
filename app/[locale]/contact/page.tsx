@@ -3,8 +3,6 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-import Navbar from '@components/Layout/Navbar'
-
 import { contactDetails } from '@data/data'
 import { FiHexagon } from 'react-icons/fi'
 import { useTranslations } from 'next-intl'
@@ -16,7 +14,6 @@ const Contact = () => {
 
     return (
         <>
-            <Navbar />
             <div className="container-fluid relative mt-20">
                 <div className="grid grid-cols-1">
                     <div className="w-full leading-[0] border-0">

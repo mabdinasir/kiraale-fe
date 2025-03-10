@@ -3,7 +3,6 @@ import React from 'react'
 import TopHeader from '@components/Layout/TopHeader/TopHeader'
 import Switcher from '@components/UI/DashboardSwitcher'
 import DashboardFooter from '@components/Layout/DashboardFooter'
-import StoreProvider from '../StoreProvider'
 
 import '../../globals.css'
 import '@assets/css/tailwind2.css'
@@ -19,9 +18,7 @@ export default function RootLayout({
             <div className={'toggled page-wrapper'}>
                 <Sidebar />
                 <main className="page-content bg-gray-50 dark:bg-slate-800 min-h-screen">
-                    <StoreProvider>
-                        <TopHeader />
-                    </StoreProvider>
+                    <TopHeader />
                     <div className="container-fluid relative pb-16">
                         <div className="mx-4 className layout-spacing">{children}</div>
                     </div>

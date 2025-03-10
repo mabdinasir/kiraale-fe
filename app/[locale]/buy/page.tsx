@@ -7,7 +7,6 @@ import FeaturedProperties from '@components/UI/FeaturedProperties'
 import { Search } from 'react-feather'
 import BuyTab from '@components/UI/BuyTab'
 import { useTranslations } from 'next-intl'
-import Navbar from '@components/Layout/Navbar'
 import StoreProvider from '../StoreProvider'
 import { useParams } from 'next/navigation'
 
@@ -17,8 +16,7 @@ const Buy = () => {
     const path = `/${locale}/property/search`
 
     return (
-        <>
-            <Navbar navClass="navbar-white" />
+        <div className="mt-20">
             <section
                 style={{ backgroundImage: "url('/images/bg/01.jpg')" }}
                 className="relative table w-full py-32 lg:py-36 bg-no-repeat bg-center bg-cover"
@@ -70,7 +68,7 @@ const Buy = () => {
                 <BuyTab />
                 <GetInTuch />
             </section>
-        </>
+        </div>
     )
 }
 

@@ -1,7 +1,6 @@
 import React from 'react'
 import Accordion from '@components/UI/Accordion'
 import { FiArrowRight } from 'react-icons/fi'
-import Navbar from '@components/Layout/Navbar'
 import { termsFaqData } from '@data/data'
 import { useTranslations } from 'next-intl'
 
@@ -9,8 +8,7 @@ const Terms = () => {
     const t = useTranslations()
 
     return (
-        <>
-            <Navbar navClass="navbar-white" />
+        <div className="mt-20">
             <section
                 style={{ backgroundImage: "url('/images/bg/01.jpg')" }}
                 className="relative table w-full py-32 lg:py-36 bg-no-repeat bg-center bg-cover"
@@ -93,7 +91,7 @@ const Terms = () => {
                     </div>
                 </div>
             </section>
-        </>
+        </div>
     )
 }
 

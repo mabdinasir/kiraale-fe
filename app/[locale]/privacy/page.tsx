@@ -4,7 +4,6 @@ import React from 'react'
 import Link from 'next/link'
 // import * as Unicons from '@iconscout/react-unicons'
 
-import Navbar from '@components/Layout/Navbar'
 import { FiArrowRight } from 'react-icons/fi'
 import { useTranslations } from 'next-intl'
 
@@ -12,8 +11,7 @@ const Privacy = () => {
     const t = useTranslations()
 
     return (
-        <>
-            <Navbar navClass="navbar-white" />
+        <div className="mt-20">
             <section
                 style={{ backgroundImage: "url('/images/bg/01.jpg')" }}
                 className="relative table w-full py-32 lg:py-36 bg-no-repeat bg-center bg-cover"
@@ -87,7 +85,7 @@ const Privacy = () => {
                     </div>
                 </div>
             </section>
-        </>
+        </div>
     )
 }
 

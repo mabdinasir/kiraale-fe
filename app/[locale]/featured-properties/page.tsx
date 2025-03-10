@@ -2,14 +2,12 @@ import FeaturedProperties from '@components/UI/FeaturedProperties'
 import React from 'react'
 import StoreProvider from '../StoreProvider'
 import { useTranslations } from 'next-intl'
-import Navbar from '@components/Layout/Navbar'
 
 const Page = () => {
     const t = useTranslations()
 
     return (
-        <>
-            <Navbar navClass="navbar-white" />
+        <div className="mt-20">
             <section
                 style={{ backgroundImage: "url('/images/bg/01.jpg')" }}
                 className="relative table w-full py-32 lg:py-36 bg-no-repeat bg-center bg-cover"
@@ -33,7 +31,7 @@ const Page = () => {
             <StoreProvider key={'featured-properties-home'}>
                 <FeaturedProperties />
             </StoreProvider>
-        </>
+        </div>
     )
 }
 

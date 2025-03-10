@@ -2,7 +2,6 @@
 
 import React from 'react'
 import { FiSearch } from 'react-icons/fi'
-import Navbar from '@components/Layout/Navbar'
 import { useTranslations } from 'next-intl'
 import StoreProvider from 'app/[locale]/StoreProvider'
 import PropertyListItem from '../components/PropertyListItem'
@@ -25,8 +24,7 @@ const PropertyList = () => {
     }))
 
     return (
-        <>
-            <Navbar navClass="navbar-white" topnavClass={''} tagline={false} />
+        <div className="mt-20">
             <section
                 style={{ backgroundImage: "url('/images/bg/01.jpg')" }}
                 className="relative table w-full py-32 lg:py-36 bg-no-repeat bg-center bg-cover"
@@ -149,7 +147,7 @@ const PropertyList = () => {
                     </div>
                 </div>
             </section>
-        </>
+        </div>
     )
 }
 

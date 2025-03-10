@@ -1,6 +1,5 @@
 import React from 'react'
 
-import Navbar from '@components/Layout/Navbar'
 import GetInTuch from '@components/UI/GetInTouch'
 // import Brokerage from '@components/UI/Brokerage'
 import { useTranslations } from 'next-intl'
@@ -11,8 +10,7 @@ const Sell = () => {
     const t = useTranslations()
 
     return (
-        <>
-            <Navbar navClass="navbar-white" />
+        <div className="mt-20">
             <section
                 style={{ backgroundImage: "url('/images/bg/01.jpg')" }}
                 className="relative table w-full py-32 lg:py-36 bg-no-repeat bg-center bg-cover"
@@ -62,7 +60,7 @@ const Sell = () => {
                 </div> */}
                 <GetInTuch />
             </section>
-        </>
+        </div>
     )
 }
 

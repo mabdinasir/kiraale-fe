@@ -7,7 +7,6 @@ import { getMessages } from 'next-intl/server'
 import Navbar from '@components/Layout/Navbar'
 import Switcher from '@components/UI/Switcher'
 import Footer from '@components/Layout/Footer'
-import StoreProvider from './StoreProvider'
 import { Toaster } from 'react-hot-toast'
 
 import '../globals.css'
@@ -40,9 +39,7 @@ export default async function RootLayout({
         <html lang={locale} className="light scroll-smooth" dir="ltr">
             <body className={`${league_Spartan.className} dark:bg-slate-900 antialiased`}>
                 <NextIntlClientProvider messages={messages}>
-                    <StoreProvider key={'navBar'}>
-                        <Navbar />
-                    </StoreProvider>
+                    <Navbar />
                     {children}
                     <Switcher />
                     <Analytics />

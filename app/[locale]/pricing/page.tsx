@@ -4,7 +4,6 @@ import { pricingPlan } from '@data/data'
 import { MdOutlineCheckCircle } from 'react-icons/md'
 import { IconType } from 'react-icons'
 import GetInTuch from '@components/UI/GetInTouch'
-import Navbar from '@components/Layout/Navbar'
 import { useTranslations } from 'next-intl'
 
 interface PriceData {
@@ -18,8 +17,7 @@ export default function Pricing() {
     const t = useTranslations()
 
     return (
-        <>
-            <Navbar navClass="navbar-white" topnavClass={''} tagline={false} />
+        <div className="mt-20">
             <section
                 style={{ backgroundImage: "url('/images/bg/01.jpg')" }}
                 className="relative table w-full py-32 lg:py-36 bg-no-repeat bg-center bg-cover"
@@ -91,6 +89,6 @@ export default function Pricing() {
                 </div>
                 <GetInTuch />
             </section>
-        </>
+        </div>
     )
 }
