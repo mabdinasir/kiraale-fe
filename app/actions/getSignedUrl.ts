@@ -1,18 +1,10 @@
 'use server'
 
 import crypto from 'crypto'
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3'
 import { GetSignedURLParams, SignedURLResponse } from '@models/properties/signedUrl'
 import { allowedFileTypes, maxFileSize } from '@config/index'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
-
-const s3Client = new S3Client({
-    region: process.env.AWS_BUCKET_REGION!,
-    credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY!,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
-    },
-})
+import { createS3Client, createPutObjectCommand } from '@utils/s3Client'
 
 const generateFileName = (bytes = 32) => crypto.randomBytes(bytes).toString('hex')
 
@@ -27,18 +19,11 @@ const getSignedURL = async ({ fileType, fileSize, checksum, user }: GetSignedURL
 
     const fileName = generateFileName()
 
-    const putObjectCommand = new PutObjectCommand({
-        Bucket: process.env.AWS_BUCKET_NAME!,
-        Key: fileName,
-        ContentType: fileType,
-        ContentLength: fileSize,
-        ChecksumSHA256: checksum,
-        Metadata: {
-            userId: user.id,
-        },
-    })
-
-    const url = await getSignedUrl(s3Client, putObjectCommand, { expiresIn: 3600 }) // 1 hour
+    const url = await getSignedUrl(
+        createS3Client(process.env.AWS_BUCKET_REGION!, process.env.AWS_ACCESS_KEY!, process.env.AWS_SECRET_ACCESS_KEY!),
+        createPutObjectCommand(process.env.AWS_BUCKET_NAME!, fileName, fileType, fileSize, checksum, user.id),
+        { expiresIn: 3600 }, // 1 hour
+    )
 
     return { success: { url, id: fileName } }
 }

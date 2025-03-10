@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 import React from 'react'
 import { FaHome, FaImage, FaCreditCard, FaCheckCircle } from 'react-icons/fa'
 import AddPropertyForm from 'app/[locale]/dashboard/add-property/Forms/AddPropertyForm'
-import ImageUpload from 'app/[locale]/dashboard/add-property/components/ImageUpload'
+import PropertyImageUpload from 'app/[locale]/dashboard/add-property/components/PropertyImageUpload'
 import PropertyPayment from 'app/[locale]/dashboard/add-property/components/PropertyPayment'
 import Success from '../components/Success'
 import { useAppDispatch, useAppSelector } from '@hooks/rtkHooks'
@@ -72,8 +72,8 @@ const StepForm = () => {
             <div className="w-full max-w-2xl mt-8">
                 {currentStep === 1 && <AddPropertyForm />}
                 {currentStep === 2 && (
-                    <StoreProvider key={'image-upload'}>
-                        <ImageUpload />
+                    <StoreProvider key={'property-image-upload'}>
+                        <PropertyImageUpload />
                     </StoreProvider>
                 )}
                 {currentStep === 3 && <PropertyPayment />}
