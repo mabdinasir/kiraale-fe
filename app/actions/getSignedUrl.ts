@@ -26,7 +26,7 @@ const getSignedURL = async ({ fileType, fileSize, checksum, user }: GetSignedURL
             process.env.AWS_SECRET_ACCESS_KEY!,
         ),
         createPutObjectCommand(process.env.AWS_BUCKET_NAME!, fileName, fileType, fileSize, checksum, user.id),
-        { expiresIn: 3600 }, // 1 hour
+        { expiresIn: 3600 }, // 1 hour expiry
     )
 
     return { success: { url, id: fileName } }
