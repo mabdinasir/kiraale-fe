@@ -91,7 +91,7 @@ const PersonalDetailsForm: React.FC<PersonalDetailsFormProps> = ({ user }) => {
                             <FiUser className="w-4 h-4 absolute top-3 start-4" />
                             <input
                                 type="text"
-                                className="form-input ps-12 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-green-600 dark:border-gray-700 dark:focus:border-green-600 focus:ring-0"
+                                className="form-input ps-12 w-full py-2 px-3 h-10 dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-green-600 dark:border-gray-700 dark:focus:border-green-600 focus:ring-0"
                                 placeholder={t('firstName')}
                                 id="firstName"
                                 name="firstName"
@@ -109,7 +109,7 @@ const PersonalDetailsForm: React.FC<PersonalDetailsFormProps> = ({ user }) => {
                             <FiUserCheck className="w-4 h-4 absolute top-3 start-4" />
                             <input
                                 type="text"
-                                className="form-input ps-12 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-green-600 dark:border-gray-700 dark:focus:border-green-600 focus:ring-0"
+                                className="form-input ps-12 w-full py-2 px-3 h-10 dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-green-600 dark:border-gray-700 dark:focus:border-green-600 focus:ring-0"
                                 placeholder={t('lastName')}
                                 id="lastName"
                                 name="lastName"
@@ -127,7 +127,7 @@ const PersonalDetailsForm: React.FC<PersonalDetailsFormProps> = ({ user }) => {
                             <FiMail className="w-4 h-4 absolute top-3 start-4" />
                             <input
                                 type="email"
-                                className="form-input ps-12 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-green-600 dark:border-gray-700 dark:focus:border-green-600 focus:ring-0"
+                                className="form-input ps-12 w-full py-2 px-3 h-10 dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-green-600 dark:border-gray-700 dark:focus:border-green-600 focus:ring-0"
                                 placeholder={t('email')}
                                 name="email"
                                 id="email"
@@ -145,7 +145,7 @@ const PersonalDetailsForm: React.FC<PersonalDetailsFormProps> = ({ user }) => {
                                 name="mobile"
                                 id="number"
                                 type="tel"
-                                className="form-input ps-12 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-green-600 dark:border-gray-700 dark:focus:border-green-600 focus:ring-0"
+                                className="form-input ps-12 w-full py-2 px-3 h-10 dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-green-600 dark:border-gray-700 dark:focus:border-green-600 focus:ring-0"
                                 placeholder={t('phone')}
                                 value={formData?.mobile}
                                 onChange={handleChange}
@@ -163,7 +163,7 @@ const PersonalDetailsForm: React.FC<PersonalDetailsFormProps> = ({ user }) => {
                             <textarea
                                 name="bio"
                                 id="bio"
-                                className="form-input ps-11 w-full py-2 px-3 h-28 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-green-600 dark:border-gray-700 dark:focus:border-green-600 focus:ring-0"
+                                className="form-input ps-11 w-full py-2 px-3 h-28 dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-green-600 dark:border-gray-700 dark:focus:border-green-600 focus:ring-0"
                                 placeholder={t('profile-desc')}
                                 value={formData?.bio}
                                 onChange={handleChange}

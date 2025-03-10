@@ -100,7 +100,7 @@ const OtherDetailsForm: React.FC<OtherDetailsFormProps> = ({ user }) => {
                                 name="address"
                                 id="address"
                                 type="text"
-                                className={`form-input ps-12 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border ${errors.address ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'} focus:border-green-600 focus:ring-0`}
+                                className={`form-input ps-12 w-full py-2 px-3 h-10 dark:bg-slate-900 dark:text-slate-200 rounded outline-none border ${errors.address ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'} focus:border-green-600 focus:ring-0`}
                                 placeholder={t('address')}
                                 value={formData.address}
                                 onChange={handleChange}
@@ -117,7 +117,7 @@ const OtherDetailsForm: React.FC<OtherDetailsFormProps> = ({ user }) => {
                                 name="passportNumber"
                                 id="passportNumber"
                                 type="text"
-                                className={`form-input ps-12 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border ${errors.passportNumber ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'} focus:border-green-600 focus:ring-0`}
+                                className={`form-input ps-12 w-full py-2 px-3 h-10 dark:bg-slate-900 dark:text-slate-200 rounded outline-none border ${errors.passportNumber ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'} focus:border-green-600 focus:ring-0`}
                                 placeholder={t('passport-number')}
                                 value={formData.passportNumber}
                                 onChange={handleChange}
@@ -133,7 +133,7 @@ const OtherDetailsForm: React.FC<OtherDetailsFormProps> = ({ user }) => {
                                 name="nationalIdNumber"
                                 id="nationalIdNumber"
                                 type="text"
-                                className="form-input ps-12 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-green-600 dark:border-gray-700 dark:focus:border-green-600 focus:ring-0"
+                                className="form-input ps-12 w-full py-2 px-3 h-10 dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-green-600 dark:border-gray-700 dark:focus:border-green-600 focus:ring-0"
                                 placeholder={t('national-id')}
                                 value={formData.nationalIdNumber}
                                 onChange={handleChange}
@@ -150,7 +150,7 @@ const OtherDetailsForm: React.FC<OtherDetailsFormProps> = ({ user }) => {
                             <input
                                 type="text"
                                 name="agencyName"
-                                className="form-input ps-12 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-green-600 dark:border-gray-700 dark:focus:border-green-600 focus:ring-0"
+                                className="form-input ps-12 w-full py-2 px-3 h-10 dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-green-600 dark:border-gray-700 dark:focus:border-green-600 focus:ring-0"
                                 placeholder={t('agency-name')}
                                 value={formData.agencyName}
                                 onChange={handleChange}
@@ -165,7 +165,7 @@ const OtherDetailsForm: React.FC<OtherDetailsFormProps> = ({ user }) => {
                             <input
                                 type="number"
                                 name="yearsOfExperience"
-                                className="form-input ps-12 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-green-600 dark:border-gray-700 dark:focus:border-green-600 focus:ring-0"
+                                className="form-input ps-12 w-full py-2 px-3 h-10 dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-green-600 dark:border-gray-700 dark:focus:border-green-600 focus:ring-0"
                                 placeholder={t('years-of-experience')}
                                 value={formData.yearsOfExperience}
                                 onChange={handleChange}

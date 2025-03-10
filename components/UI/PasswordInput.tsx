@@ -21,7 +21,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ label, name, value, place
                 <FiKey className="w-4 h-4 absolute top-3 start-4" />
                 <input
                     type={isVisible ? 'text' : 'password'}
-                    className="form-input ps-12 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-green-600 dark:border-gray-700 dark:focus:border-green-600 focus:ring-0"
+                    className="form-input ps-12 w-full py-2 px-3 h-10 dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-green-600 dark:border-gray-700 dark:focus:border-green-600 focus:ring-0"
                     placeholder={placeholder}
                     name={name}
                     value={value}
