@@ -21,7 +21,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ label, name, value, place
                 <FiKey className="w-4 h-4 absolute top-3 start-4" />
                 <input
                     type={isVisible ? 'text' : 'password'}
-                    className="form-input ps-12 w-full py-2 px-3 h-10 dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-green-600 dark:border-gray-700 dark:focus:border-green-600 focus:ring-0"
+                    className="form-input ps-12 w-full py-2 px-3 h-10 focus:border-green-600 dark:focus:border-green-600 focus:ring-0"
                     placeholder={placeholder}
                     name={name}
                     value={value}
@@ -29,7 +29,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ label, name, value, place
                 />
                 <button
                     type="button"
-                    className="absolute top-3 end-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+                    className="absolute top-3 end-4 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
                     onClick={() => setIsVisible(!isVisible)}
                 >
                     {isVisible ? <FiEyeOff className="w-5 h-5" /> : <FiEye className="w-5 h-5" />}
