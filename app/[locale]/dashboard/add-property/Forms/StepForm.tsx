@@ -9,13 +9,12 @@ import PropertyPayment from 'app/[locale]/dashboard/add-property/components/Prop
 import Success from '../components/Success'
 import { useAppDispatch, useAppSelector } from '@hooks/rtkHooks'
 import { goToNextStep } from '@store/slices/stepValidation'
-import StoreProvider from 'app/[locale]/StoreProvider'
 
 const StepForm = () => {
     const t = useTranslations()
     const dispatch = useAppDispatch()
     const currentStep = useAppSelector((state) => state.stepValidation.currentStep)
-    const isValidStep = useAppSelector((state) => state.stepValidation.isValidStep)
+    const stepsValidation = useAppSelector((state) => state.stepValidation.steps)
 
     const nextStep = () => dispatch(goToNextStep())
 
@@ -25,69 +24,67 @@ const StepForm = () => {
                 {[1, 2, 3].map((step) => (
                     <li
                         key={step}
-                        className={`flex w-full items-center ${isValidStep[step] ? 'text-green-600 dark:text-green-500' : 'text-gray-400'} after:w-full after:h-1 after:border-b after:border-4 ${
-                            isValidStep[step] || isValidStep[step + 1]
+                        className={`flex w-full items-center ${step <= currentStep && stepsValidation[step].isValid ? 'text-green-600 dark:text-green-500' : 'text-gray-400'} after:w-full after:h-1 after:border-b after:border-4 ${
+                            step < currentStep && stepsValidation[step].isValid
                                 ? 'after:border-green-600 dark:after:border-green-500'
                                 : 'after:border-gray-300 dark:after:border-gray-700'
                         } after:inline-block`}
                     >
                         <span
                             className={`flex items-center justify-center w-10 h-10 ${
-                                isValidStep[step] ? 'bg-green-100 dark:bg-green-800' : 'bg-gray-100 dark:bg-gray-700'
+                                step <= currentStep && stepsValidation[step].isValid
+                                    ? 'bg-green-100 dark:bg-green-800'
+                                    : 'bg-gray-100 dark:bg-gray-700'
                             } rounded-full lg:h-12 lg:w-12 shrink-0`}
                         >
                             {step === 1 && (
                                 <FaHome
-                                    className={`${isValidStep[step] ? 'text-green-600 dark:text-green-300' : 'text-gray-500 dark:text-gray-100'}`}
+                                    className={`${step <= currentStep && stepsValidation[step].isValid ? 'text-green-600 dark:text-green-300' : 'text-gray-500 dark:text-gray-100'}`}
                                 />
                             )}
                             {step === 2 && (
                                 <FaImage
-                                    className={`${isValidStep[step] ? 'text-green-600 dark:text-green-300' : 'text-gray-500 dark:text-gray-100'}`}
+                                    className={`${step <= currentStep && stepsValidation[step].isValid ? 'text-green-600 dark:text-green-300' : 'text-gray-500 dark:text-gray-100'}`}
                                 />
                             )}
                             {step === 3 && (
                                 <FaCreditCard
-                                    className={`${isValidStep[step] ? 'text-green-600 dark:text-green-300' : 'text-gray-500 dark:text-gray-100'}`}
+                                    className={`${step <= currentStep && stepsValidation[step].isValid ? 'text-green-600 dark:text-green-300' : 'text-gray-500 dark:text-gray-100'}`}
                                 />
                             )}
                         </span>
                     </li>
                 ))}
                 <li
-                    className={`flex items-center ${isValidStep[4] ? 'text-green-600 dark:text-green-500' : 'text-gray-400'}`}
+                    className={`flex items-center ${currentStep === 4 && stepsValidation[4].isValid ? 'text-green-600 dark:text-green-500' : 'text-gray-400'}`}
                 >
                     <span
                         className={`flex items-center justify-center w-10 h-10 ${
-                            isValidStep[4] ? 'bg-green-100 dark:bg-green-800' : 'bg-gray-100 dark:bg-gray-700'
+                            currentStep === 4 && stepsValidation[4].isValid
+                                ? 'bg-green-100 dark:bg-green-800'
+                                : 'bg-gray-100 dark:bg-gray-700'
                         } rounded-full lg:h-12 lg:w-12 shrink-0`}
                     >
                         <FaCheckCircle
-                            className={`${isValidStep[4] ? 'text-green-600 dark:text-green-300' : 'text-gray-500 dark:text-gray-100'}`}
+                            className={`${currentStep === 4 && stepsValidation[4].isValid ? 'text-green-600 dark:text-green-300' : 'text-gray-500 dark:text-gray-100'}`}
                         />
                     </span>
                 </li>
             </ol>
-
             <div className="w-full max-w-2xl mt-8">
                 {currentStep === 1 && <AddPropertyForm />}
-                {currentStep === 2 && (
-                    <StoreProvider key={'property-image-upload'}>
-                        <PropertyImageUpload />
-                    </StoreProvider>
-                )}
+                {currentStep === 2 && <PropertyImageUpload />}
                 {currentStep === 3 && <PropertyPayment />}
                 {currentStep === 4 && <Success />}
             </div>
-
             <div className="flex justify-between w-full max-w-2xl mt-6">
                 {currentStep < 4 && (
                     <button
                         onClick={nextStep}
                         className={`px-4 py-2 rounded text-white ${
-                            isValidStep[currentStep] ? 'bg-green-600' : 'bg-gray-400 cursor-not-allowed'
+                            stepsValidation[currentStep].isValid ? 'bg-green-600' : 'bg-gray-400 cursor-not-allowed'
                         }`}
-                        disabled={!isValidStep[currentStep]}
+                        disabled={!stepsValidation[currentStep].isValid}
                     >
                         {t('next')}
                     </button>

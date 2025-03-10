@@ -17,7 +17,7 @@ import isApiError from '@utils/isApiError'
 import showToast from '@utils/showToast'
 import { propertySchema } from 'schemas'
 import { useAppDispatch } from '@hooks/rtkHooks'
-import { setPropertyId, setStepValidity } from '@store/slices/stepValidation'
+import { updateStep } from '@store/slices/stepValidation'
 import { proprtyTypes } from '@lib/constants'
 import { AddPropertyForm as IAddPropertyForm } from '@models/properties/addPropertyForm'
 
@@ -115,19 +115,14 @@ const AddPropertyForm = () => {
 
             try {
                 const result = await addProperty(propertyData).unwrap()
+                dispatch(updateStep({ step: 1, isValid: true, data: { propertyId: result?.property?.id } }))
                 showToast('success', 'Property added successfully!')
-                dispatch(setStepValidity({ step: 1, isValid: true }))
-                if (result.property.id) {
-                    dispatch(setPropertyId(result.property.id))
-                }
-
-                setPropertyData(initialPropertyData)
                 setErrors({})
             } catch (err: Error | unknown) {
                 showToast('error', `Something went wrong! ${err}`)
             }
         },
-        [validateFields, addProperty, propertyData, dispatch, initialPropertyData],
+        [validateFields, addProperty, propertyData, dispatch],
     )
 
     return (

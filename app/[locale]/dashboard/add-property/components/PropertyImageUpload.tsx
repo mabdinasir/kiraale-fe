@@ -14,7 +14,7 @@ import { useAddMediaMutation } from '@store/services/media'
 import showToast from '@utils/showToast'
 import Button from '@components/UI/Button'
 import { useAppDispatch, useAppSelector } from '@hooks/rtkHooks'
-import { setImageUrls, setStepValidity } from '@store/slices/stepValidation'
+import { updateStep } from '@store/slices/stepValidation'
 import { useGetUserByIdQuery } from '@store/services/users'
 
 const ImageUpload = () => {
@@ -29,7 +29,7 @@ const ImageUpload = () => {
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
     const [addMedia, { isSuccess }] = useAddMediaMutation()
-    const propertyId = useAppSelector((state) => state.stepValidation.propertyId)
+    const propertyId = useAppSelector((state) => state.stepValidation.steps[1].propertyId)
 
     const handleUploadImages = async () => {
         setUploading(true)
@@ -80,8 +80,7 @@ const ImageUpload = () => {
                     setErrorMessage(t('signed-url-error', { fileName: file.name, error: signedURLResult.failure }))
                 }
             }
-            dispatch(setImageUrls(newUploadedMediaUrls))
-            dispatch(setStepValidity({ step: 2, isValid: true }))
+            dispatch(updateStep({ step: 2, isValid: true, data: { imageUrls: newUploadedMediaUrls } }))
         } catch (error) {
             setErrorMessage(t('unexpected-error', { error: (error as Error).message || 'Unknown error' }))
         } finally {

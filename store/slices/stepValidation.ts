@@ -1,22 +1,29 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
+interface StepData {
+    isValid: boolean
+    propertyId?: string
+    imageUrls?: string[]
+}
+
 interface StepValidationState {
     currentStep: number
-    isValidStep: { [key: number]: boolean }
-    propertyId: string
-    imageUrls: string[]
+    steps: Record<number, StepData> & {
+        1: { isValid: boolean; propertyId: string }
+        2: { isValid: boolean; imageUrls: string[] }
+        3: { isValid: boolean }
+        4: { isValid: boolean }
+    }
 }
 
 const initialState: StepValidationState = {
     currentStep: 1,
-    isValidStep: {
-        1: false,
-        2: false,
-        3: false,
-        4: false,
+    steps: {
+        1: { isValid: false, propertyId: '' },
+        2: { isValid: false, imageUrls: [] },
+        3: { isValid: false },
+        4: { isValid: false },
     },
-    propertyId: '',
-    imageUrls: [],
 }
 
 const stepValidationSlice = createSlice({
@@ -24,7 +31,7 @@ const stepValidationSlice = createSlice({
     initialState,
     reducers: {
         goToNextStep(state) {
-            if (state.currentStep < 4 && state.isValidStep[state.currentStep]) {
+            if (state.currentStep < 4 && state.steps[state.currentStep].isValid) {
                 state.currentStep += 1
             }
         },
@@ -33,27 +40,21 @@ const stepValidationSlice = createSlice({
                 state.currentStep -= 1
             }
         },
-        setStepValidity(state, action: PayloadAction<{ step: number; isValid: boolean }>) {
-            const { step, isValid } = action.payload
-            if (step >= 1 && step <= 4) {
-                state.isValidStep[step] = isValid
+        updateStep<K extends keyof StepValidationState['steps']>(
+            state: { steps: StepValidationState['steps'] },
+            action: PayloadAction<{ step: K; isValid: boolean; data?: Partial<StepValidationState['steps'][K]> }>,
+        ) {
+            const { step, isValid, data } = action.payload
+            if (state.steps[step]) {
+                state.steps[step] = { ...state.steps[step], isValid, ...data }
             }
-        },
-        setPropertyId(state, action: PayloadAction<string>) {
-            state.propertyId = action.payload
-        },
-        setImageUrls(state, action: PayloadAction<string[]>) {
-            state.imageUrls = action.payload
         },
         resetSteps(state) {
             state.currentStep = 1
-            state.isValidStep = initialState.isValidStep
-            state.propertyId = ''
-            state.imageUrls = []
+            state.steps = initialState.steps
         },
     },
 })
 
-export const { goToNextStep, goToPrevStep, setStepValidity, setPropertyId, setImageUrls, resetSteps } =
-    stepValidationSlice.actions
+export const { goToNextStep, goToPrevStep, updateStep, resetSteps } = stepValidationSlice.actions
 export default stepValidationSlice.reducer
