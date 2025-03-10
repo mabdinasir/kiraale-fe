@@ -3,7 +3,7 @@
 import React, { useCallback, useState, useMemo } from 'react'
 import { useTranslations } from 'next-intl'
 
-import { FiHome, FiDollarSign } from 'react-icons/fi'
+import { FiHome, FiDollarSign, FiMapPin } from 'react-icons/fi'
 import { FaBath, FaBed, FaParking } from 'react-icons/fa'
 import { CgDetailsMore } from 'react-icons/cg'
 import { IoCalendarNumber, IoExpandOutline } from 'react-icons/io5'
@@ -16,7 +16,6 @@ import Error from '@components/UI/Error'
 import isApiError from '@utils/isApiError'
 import showToast from '@utils/showToast'
 import { propertySchema } from 'schemas'
-import GoogleMaps from './GoogleMaps'
 import { useAppDispatch } from '@hooks/rtkHooks'
 import { setPropertyId, setStepValidity } from '@store/slices/stepValidation'
 import { proprtyTypes } from '@lib/constants'
@@ -175,12 +174,24 @@ const AddPropertyForm = () => {
                     </div>
 
                     {/* Address */}
-                    <GoogleMaps
-                        propertyData={propertyData}
-                        errors={errors}
-                        handleChange={handleChange}
-                        hasMap={false}
-                    />
+                    <div className="col-span-12">
+                        <label htmlFor="address" className="font-medium">
+                            {t('address')}:
+                        </label>
+                        <div className="form-icon relative mt-2">
+                            <FiMapPin className="w-4 h-4 absolute top-3 start-4 text-green-600" />
+                            <input
+                                name="address"
+                                id="address"
+                                type="text"
+                                className="form-input ps-11"
+                                placeholder={t('address')}
+                                value={propertyData.address}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        {errors.address && <Error error={errors.address} />}
+                    </div>
 
                     {/* Property Type */}
                     <div className="col-span-12">

@@ -78,7 +78,11 @@ const ProfileSettings = () => {
                                 <h5 className="text-lg font-semibold mb-4 text-red-600">{t('deactivate-account')} :</h5>
                                 <p className="text-slate-400 mb-4">{t('deactivate-account-desc')} </p>
                                 <Button
-                                    title={isLoading ? t('deactivating-account') : t('deactivate-account')}
+                                    title={
+                                        isDeactivating || isSigningOut
+                                            ? t('deactivating-account')
+                                            : t('deactivate-account')
+                                    }
                                     isLoading={isDeactivating || isSigningOut}
                                     disabled={isDeactivating || isSigningOut}
                                     fullWidth={false}
