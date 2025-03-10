@@ -44,7 +44,18 @@ export const usersApi = createApi({
                 },
             }),
         }),
+        deactivateUserAccount: builder.mutation<void, string>({
+            query: (userId) => ({
+                url: `/deactivateUserAccount/${userId}`,
+                method: 'PUT',
+            }),
+        }),
     }),
 })
 
-export const { useGetUserByIdQuery, useUpdateUserProfileMutation, useUpdateUserPasswordMutation } = usersApi
+export const {
+    useGetUserByIdQuery,
+    useUpdateUserProfileMutation,
+    useUpdateUserPasswordMutation,
+    useDeactivateUserAccountMutation,
+} = usersApi

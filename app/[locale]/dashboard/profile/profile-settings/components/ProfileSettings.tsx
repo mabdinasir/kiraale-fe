@@ -5,18 +5,32 @@ import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import UplodProfileImg from '@components/UI/UploadProfileImg'
 import useCurrentUser from '@hooks/useCurrentUser'
-import { useGetUserByIdQuery } from '@store/services/users'
+import { useDeactivateUserAccountMutation, useGetUserByIdQuery } from '@store/services/users'
 import LoadingIndicator from '@components/UI/LoadingIndicator'
 import Button from '@components/UI/Button'
 import PersonalDetailsForm from '../Forms/PersonalDetailsForm'
 import OtherDetailsForm from '../Forms/OtherDetailsForm'
 import ChangePasswordForm from '../Forms/ChangePasswordForm'
+import { useSignOutMutation } from '@store/services/auth'
+import { useAppDispatch } from '@hooks/rtkHooks'
+import { clearToken } from '@store/slices/tokenSlice'
 
 const ProfileSettings = () => {
     const t = useTranslations()
     const currentUser = useCurrentUser()
     const id = currentUser?.id
     const { data: userData, isLoading } = useGetUserByIdQuery(id || '')
+    const [deactivateUserAccount, { isLoading: isDeactivating }] = useDeactivateUserAccountMutation()
+    const [signout, { isLoading: isSigningOut }] = useSignOutMutation()
+    const dispatch = useAppDispatch()
+
+    const handleDeactivateAccount = async () => {
+        if (id) {
+            await deactivateUserAccount(id).unwrap()
+            await signout()
+            dispatch(clearToken())
+        }
+    }
 
     if (isLoading) return <LoadingIndicator />
 
@@ -65,10 +79,11 @@ const ProfileSettings = () => {
                                 <p className="text-slate-400 mb-4">{t('deactivate-account-desc')} </p>
                                 <Button
                                     title={isLoading ? t('deactivating-account') : t('deactivate-account')}
-                                    isLoading={false}
-                                    disabled={false}
+                                    isLoading={isDeactivating || isSigningOut}
+                                    disabled={isDeactivating || isSigningOut}
                                     fullWidth={false}
                                     redVariant
+                                    onClick={handleDeactivateAccount}
                                 />
                             </div>
                         </div>
