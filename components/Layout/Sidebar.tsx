@@ -24,6 +24,8 @@ const Sidebar = () => {
     }, [current])
 
     const closeSidebar = () => {
+        const isDesktop = window.matchMedia('(min-width: 992px)').matches
+        if (isDesktop) return
         const sidebar = document.querySelector('.page-wrapper')
         sidebar?.classList.toggle('toggled')
     }

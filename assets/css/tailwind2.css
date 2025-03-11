@@ -2487,20 +2487,7 @@ h6,
         inset-inline-start: -300px;
     }
 }
-@media (min-width: 1024px) {
-    /* Ensure the sidebar is always visible and fixed on desktop */
-    .page-wrapper .sidebar-wrapper {
-        inset-inline-start: 0 !important; /* Force the sidebar to stay open */
-        transform: none !important; /* Disable any transformations */
-        transition: none !important; /* Disable transitions */
-    }
-    .top-header {
-        inset-inline-start: 300px !important; /* Ensure the top header is always visible */
-    }
-    .page-content {
-        padding-inline-start: 300px !important; /* Ensure the content is always visible */
-    }
-}
+
 .sidebar-footer {
     position: absolute;
     bottom: 0px;
