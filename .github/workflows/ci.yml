@@ -20,6 +20,8 @@ jobs:
               run: |
                   curl -fsSL https://bun.sh/install | bash
                   echo "/home/runner/.bun/bin" >> $GITHUB_PATH
+                  echo "Bun installation directory: /home/runner/.bun/bin"
+                  export PATH="/home/runner/.bun/bin:$PATH"
               env:
                   BUN_INSTALL: /home/runner/.bun
 
