@@ -9,13 +9,14 @@ interface ReusableLinkProps extends LinkProps {
     title?: string
     children?: ReactNode
     className?: string
+    onClick?: () => void
 }
 
-const ReusableLink: React.FC<ReusableLinkProps> = ({ href, title, children, className }) => {
+const ReusableLink: React.FC<ReusableLinkProps> = ({ href, title, children, className, onClick }) => {
     const { locale } = useParams()
 
     return (
-        <Link href={`/${locale}${href}`} className={className}>
+        <Link href={`/${locale}${href}`} className={className} onClick={onClick}>
             {children || title}
         </Link>
     )

@@ -23,6 +23,11 @@ const Sidebar = () => {
         setMenu(current)
     }, [current])
 
+    const closeSidebar = () => {
+        const sidebar = document.querySelector('.page-wrapper')
+        sidebar?.classList.remove('toggled')
+    }
+
     return (
         <nav id="sidebar" className="sidebar-wrapper sidebar-dark">
             <div className="sidebar-content">
@@ -34,35 +39,35 @@ const Sidebar = () => {
                 <SimpleBar style={{ height: 'calc(100% - 70px)' }}>
                     <ul className="sidebar-menu border-t border-white/10">
                         <li className={`${menu === `/${locale}/dashboard` ? 'active' : ''} ms-0`}>
-                            <ReusableLink href="/dashboard">
+                            <ReusableLink href="/dashboard" onClick={closeSidebar}>
                                 <i className="mdi mdi-chart-bell-curve-cumulative me-2"></i>
                                 {t('dashboard')}
                             </ReusableLink>
                         </li>
 
                         <li className={`${menu === `/${locale}/dashboard/add-property` ? 'active' : ''} ms-0`}>
-                            <ReusableLink href="/dashboard/add-property">
+                            <ReusableLink href="/dashboard/add-property" onClick={closeSidebar}>
                                 <i className="mdi mdi-home-plus me-2"></i>
                                 {t('add-property')}
                             </ReusableLink>
                         </li>
 
                         <li className={`${menu === '/favorite-property' ? 'active' : ''} ms-0`}>
-                            <ReusableLink href="/dashboard/favorite-properties">
+                            <ReusableLink href="/dashboard/favorite-properties" onClick={closeSidebar}>
                                 <i className="mdi mdi-home-heart me-2"></i>
                                 {t('favorite-properties')}
                             </ReusableLink>
                         </li>
 
                         <li className={`${menu === '/chat' ? 'active' : ''} ms-0`}>
-                            <ReusableLink href="/dashboard/notifications">
+                            <ReusableLink href="/dashboard/notifications" onClick={closeSidebar}>
                                 <i className="mdi mdi-bell-outline me-2"></i>
                                 {t('notifications')}
                             </ReusableLink>
                         </li>
 
                         <li className={`${menu === '/chat' ? 'active' : ''} ms-0`}>
-                            <ReusableLink href="/dashboard/settings">
+                            <ReusableLink href="/dashboard/settings" onClick={closeSidebar}>
                                 <i className="mdi mdi-chat-outline me-2"></i>
                                 {t('settings')}
                             </ReusableLink>
@@ -104,12 +109,14 @@ const Sidebar = () => {
                             >
                                 <ul>
                                     <li className={`${menu === `/${locale}/dashboard/profile` ? 'active' : ''} ms-0`}>
-                                        <ReusableLink href="/dashboard/profile">{t('profile')}</ReusableLink>
+                                        <ReusableLink href="/dashboard/profile" onClick={closeSidebar}>
+                                            {t('profile')}
+                                        </ReusableLink>
                                     </li>
                                     <li
                                         className={`${menu === `/${locale}/dashboard/profile/profile-settings` ? 'active' : ''} ms-0`}
                                     >
-                                        <ReusableLink href="/dashboard/profile/profile-settings">
+                                        <ReusableLink href="/dashboard/profile/profile-settings" onClick={closeSidebar}>
                                             {t('profile-settings')}
                                         </ReusableLink>
                                     </li>
