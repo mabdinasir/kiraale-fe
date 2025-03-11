@@ -5,6 +5,10 @@ export type SignedURLResponse = Promise<
 >
 
 export type GetSignedURLParams = {
+    bucketName: string
+    bucketRegion: string
+    accessKeyId: string
+    secretAccessKey: string
     fileType: string
     fileSize: number
     checksum: string

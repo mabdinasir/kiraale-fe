@@ -8,7 +8,16 @@ import { createS3Client, createPutObjectCommand } from '@utils/s3Client'
 
 const generateFileName = (bytes = 32) => crypto.randomBytes(bytes).toString('hex')
 
-const getSignedURL = async ({ fileType, fileSize, checksum, user }: GetSignedURLParams): SignedURLResponse => {
+const getSignedURL = async ({
+    bucketName,
+    bucketRegion,
+    accessKeyId,
+    secretAccessKey,
+    fileType,
+    fileSize,
+    checksum,
+    user,
+}: GetSignedURLParams): SignedURLResponse => {
     if (!allowedFileTypes.includes(fileType)) {
         return { failure: `File type ${fileType} is not allowed` }
     }
@@ -20,12 +29,8 @@ const getSignedURL = async ({ fileType, fileSize, checksum, user }: GetSignedURL
     const fileName = generateFileName()
 
     const url = await getSignedUrl(
-        createS3Client(
-            process.env.AWS_BUCKET_REGION!,
-            process.env.AWS_ACCESS_KEY_ID!,
-            process.env.AWS_SECRET_ACCESS_KEY!,
-        ),
-        createPutObjectCommand(process.env.AWS_BUCKET_NAME!, fileName, fileType, fileSize, checksum, user.id),
+        createS3Client(bucketRegion, accessKeyId, secretAccessKey),
+        createPutObjectCommand(bucketName, fileName, fileType, fileSize, checksum, user.id),
         { expiresIn: 3600 }, // 1 hour expiry
     )
 
