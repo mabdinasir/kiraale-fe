@@ -2067,7 +2067,11 @@ h6,
 }
 @media (max-width: 1024px) {
     .page-wrapper .sidebar-wrapper {
-        inset-inline-start: 0px;
+        inset-inline-start: -301px;
+    }
+
+    .page-wrapper.toggled .sidebar-wrapper {
+        inset-inline-start: 0;
     }
 }
 @media (max-width: 425px) {
@@ -2476,7 +2480,7 @@ h6,
     }
 }
 .page-wrapper.toggled .sidebar-wrapper {
-    inset-inline-start: 0px;
+    transform: translateX(300px);
 }
 @media (max-width: 1024px) {
     .page-wrapper.toggled .sidebar-wrapper {
