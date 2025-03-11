@@ -25,7 +25,7 @@ const Sidebar = () => {
 
     const closeSidebar = () => {
         const sidebar = document.querySelector('.page-wrapper')
-        sidebar?.classList.remove('toggled')
+        sidebar?.classList.toggle('toggled')
     }
 
     return (
