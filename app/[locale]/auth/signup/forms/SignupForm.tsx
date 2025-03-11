@@ -246,6 +246,7 @@ const SignupForm = () => {
                     <div className="my-4">
                         <Button
                             isLoading={isLoading}
+                            fullWidth
                             title={isLoading ? t('registering') : t('register')}
                             disabled={Object.values(errors).some((err) => !!err)}
                         />

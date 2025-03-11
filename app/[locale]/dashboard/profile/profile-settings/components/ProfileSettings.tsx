@@ -3,7 +3,6 @@
 import React from 'react'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
-import UplodProfileImg from '@components/UI/UploadProfileImg'
 import useCurrentUser from '@hooks/useCurrentUser'
 import { useDeactivateUserAccountMutation, useGetUserByIdQuery } from '@store/services/users'
 import LoadingIndicator from '@components/UI/LoadingIndicator'
@@ -14,6 +13,7 @@ import ChangePasswordForm from '../Forms/ChangePasswordForm'
 import { useSignOutMutation } from '@store/services/auth'
 import { useAppDispatch } from '@hooks/rtkHooks'
 import { clearToken } from '@store/slices/tokenSlice'
+import ProfilePic from '../../components/ProfilePic'
 
 const ProfileSettings = () => {
     const t = useTranslations()
@@ -60,7 +60,7 @@ const ProfileSettings = () => {
                 <div className="grid md:grid-cols-12 grid-cols-1 gap-6 mt-6">
                     <div className="xl:col-span-3 lg:col-span-4 md:col-span-4">
                         <div className="p-6 relative rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
-                            <UplodProfileImg hasInput user={userData?.user} />
+                            <ProfilePic user={userData?.user} hasEditButton />
                         </div>
                     </div>
 
@@ -85,7 +85,6 @@ const ProfileSettings = () => {
                                     }
                                     isLoading={isDeactivating || isSigningOut}
                                     disabled={isDeactivating || isSigningOut}
-                                    fullWidth={false}
                                     redVariant
                                     onClick={handleDeactivateAccount}
                                 />

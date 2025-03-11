@@ -162,6 +162,7 @@ const LoginForm = () => {
                     <div className="mb-4 mt-4">
                         <Button
                             isLoading={isLoading}
+                            fullWidth
                             title={isLoading ? t('login-in') : t('login-sign-in')}
                             disabled={Object.values(errors).some((err) => !!err)}
                         />

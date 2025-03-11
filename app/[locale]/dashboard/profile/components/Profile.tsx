@@ -13,8 +13,8 @@ import { RiEyeOffLine } from 'react-icons/ri'
 import { RiRadioButtonLine } from 'react-icons/ri'
 import Property from '@components/UI/Property/Property'
 import { useGetPropertiesByUserQuery } from '@store/services/properties'
-import UplodProfileImg from '@components/UI/UploadProfileImg'
 import LoadingIndicator from '@components/UI/LoadingIndicator'
+import ProfilePic from './ProfilePic'
 
 const Profile = () => {
     const t = useTranslations()
@@ -50,7 +50,14 @@ const Profile = () => {
                 <div className="grid md:grid-cols-12 grid-cols-1">
                     <div className="xl:col-span-3 lg:col-span-4 md:col-span-4 mx-6">
                         <div className="p-6 relative rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900 -mt-48">
-                            <UplodProfileImg user={userData?.user} />
+                            <ProfilePic user={userData?.user} />
+
+                            <div className="mt-4 text-center">
+                                <h5 className="text-lg font-semibold">
+                                    {userData?.user?.firstName} {userData?.user?.lastName}
+                                </h5>
+                                <p className="text-slate-400">{userData?.user?.email}</p>
+                            </div>
 
                             <div className="border-t border-gray-100 dark:border-gray-700">
                                 <h5 className="text-xl font-semibold mt-4">{t('personal-details')} :</h5>

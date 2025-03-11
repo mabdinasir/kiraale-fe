@@ -19,7 +19,7 @@ const Button: React.FC<Props> = ({
     className = '',
     redVariant,
     icon,
-    fullWidth = true,
+    fullWidth,
 }) => (
     <button
         type="submit"

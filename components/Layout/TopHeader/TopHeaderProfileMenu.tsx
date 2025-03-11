@@ -79,21 +79,19 @@ const TopHeaderProfileMenu = () => {
                         </ReusableLink>
                     </li>
                     <li className="border-t border-gray-100 dark:border-gray-800 my-2"></li>
-                    <div className="py-2">
-                        <Button
-                            className="flex items-center px-4 text-base font-medium hover:bg-red-100 hover:text-red-600 dark:hover:bg-red-600 dark:hover:text-red-600 rounded w-full text-left"
-                            isLoading={isLoading}
-                            title={isLoading ? t('signing-out') : t('sign-out')}
-                            redVariant
-                            onClick={async () => {
-                                if (userData?.user?.id && userData?.user?.isSignedIn) {
-                                    await signout()
-                                    dispatch(clearToken())
-                                }
-                            }}
-                            icon={<i className="mdi mdi-logout me-1"></i>}
-                        />
-                    </div>
+                    <Button
+                        className="flex items-center px-4 py-1 text-base font-medium hover:bg-red-100 hover:text-red-600 dark:hover:bg-red-600 dark:hover:text-red-600 rounded w-full text-left"
+                        isLoading={isLoading}
+                        title={isLoading ? t('signing-out') : t('sign-out')}
+                        redVariant
+                        onClick={async () => {
+                            if (userData?.user?.id && userData?.user?.isSignedIn) {
+                                await signout()
+                                dispatch(clearToken())
+                            }
+                        }}
+                        icon={<i className="mdi mdi-logout me-1"></i>}
+                    />
                 </ul>
             </div>
         </li>

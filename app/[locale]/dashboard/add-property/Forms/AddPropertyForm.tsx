@@ -488,6 +488,7 @@ const AddPropertyForm = () => {
                     <Button
                         id="add-property"
                         name="add-property"
+                        fullWidth
                         title={isLoading ? t('adding-property') : t('add-property')}
                         isLoading={isLoading}
                         disabled={Object.values(errors).some((err) => !!err) || isSuccess}
