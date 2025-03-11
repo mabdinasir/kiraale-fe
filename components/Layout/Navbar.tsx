@@ -50,6 +50,19 @@ const Navbar: React.FC<NavbarProps> = ({ navClass, topnavClass, tagline }) => {
         setShowNav(!(hideNavPaths.includes(currentPath) || isDashboardRoute))
     }, [currentPath, locale])
 
+    const handleClickOutside = (event: MouseEvent) => {
+        if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+            setIsOpen(false)
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
+    }, [isOpen])
+
     if (!mounted || !showNav) return null
 
     return (
