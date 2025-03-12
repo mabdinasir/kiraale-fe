@@ -102,7 +102,7 @@ const ProfilePic: FC<ProfilePicProps> = ({ user, hasEditButton }) => {
             <div className="relative flex-shrink-0 mb-3">
                 <div className="relative h-32 w-32 rounded-full overflow-hidden border-4 border-white shadow-lg">
                     <Image
-                        src={file ?? user?.profilePicture}
+                        src={file ?? (user?.profilePicture || '/images/profile/profile-picture-3.jpg')}
                         width={128}
                         height={128}
                         className="object-cover w-full h-full"
