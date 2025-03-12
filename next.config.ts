@@ -5,7 +5,18 @@ const withNextIntl = createNextIntlPlugin()
 
 const nextConfig: NextConfig = {
     images: {
-        domains: ['eastleigh-real-estate-properties.s3.ap-southeast-2.amazonaws.com'],
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'eastleigh-real-estate-properties.s3.ap-southeast-2.amazonaws.com',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'eastleigh-real-estate-profile-pic-bucket.s3.ap-southeast-2.amazonaws.com',
+                pathname: '/**',
+            },
+        ],
     },
 }
 

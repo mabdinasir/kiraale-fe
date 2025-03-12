@@ -190,6 +190,7 @@
     "select-images-info": "Select images to upload",
     "upload-images-info": "Upload images to server",
     "saving-images": "Saving Images...",
+    "uploading": "Uploading...",
     "uploaded": "Uploaded",
     "save-images": "Save Images",
     "upload-property-image": "Upload Your Property Images Here. (Min 4 images/Videos)",
@@ -332,5 +333,6 @@
     "profile-details-updated-successfully": "Profile details updated successfully.",
     "something-went-wrong": "Something went wrong. Please try again later.",
     "password-updated-successfully": "Password updated successfully.",
-    "account-deactivation-successfully": "Account successfully deactivate. You can reactivate by logging back in."
+    "account-deactivation-successfully": "Account successfully deactivate. You can reactivate by logging back in.",
+    "invalid-file-type": "Invalid file type. Please upload a valid image file."
 }
