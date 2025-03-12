@@ -4,11 +4,11 @@ import { useTranslations } from 'next-intl'
 import React from 'react'
 import { FaHome, FaImage, FaCreditCard, FaCheckCircle } from 'react-icons/fa'
 import AddPropertyForm from 'app/[locale]/dashboard/add-property/Forms/AddPropertyForm'
-import PropertyImageUpload from 'app/[locale]/dashboard/add-property/components/PropertyImageUpload'
 import PropertyPayment from 'app/[locale]/dashboard/add-property/components/PropertyPayment'
 import Success from '../components/Success'
 import { useAppDispatch, useAppSelector } from '@hooks/rtkHooks'
 import { goToNextStep } from '@store/slices/stepValidation'
+import PropertyMediaUpload from '../components/PropertyMediaUpload'
 
 const StepForm = () => {
     const t = useTranslations()
@@ -73,7 +73,7 @@ const StepForm = () => {
             </ol>
             <div className="w-full max-w-2xl mt-8">
                 {currentStep === 1 && <AddPropertyForm />}
-                {currentStep === 2 && <PropertyImageUpload />}
+                {currentStep === 2 && <PropertyMediaUpload />}
                 {currentStep === 3 && <PropertyPayment />}
                 {currentStep === 4 && <Success />}
             </div>

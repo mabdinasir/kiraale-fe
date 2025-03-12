@@ -4,31 +4,22 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { MdDeleteForever } from 'react-icons/md'
-import getSignedURL from 'app/actions/getSignedUrl'
-import computeSHA256 from '@utils/computeSHA256'
 import isValidFile from '@utils/isValidFile'
 import Error from '@components/UI/Error'
-import useCurrentUser from '@hooks/useCurrentUser'
-import { User } from '@models/user'
-import { useAddMediaMutation } from '@store/services/media'
 import showToast from '@utils/showToast'
 import Button from '@components/UI/Button'
 import { useAppDispatch, useAppSelector } from '@hooks/rtkHooks'
 import { updateStep } from '@store/slices/stepValidation'
-import { useGetUserByIdQuery } from '@store/services/users'
-
-const ImageUpload = () => {
+import { useUploadPropertiesMutation } from '@store/services/fileUploads'
+const PropertyMediaUpload = () => {
     const t = useTranslations()
     const dispatch = useAppDispatch()
-    const currentUser = useCurrentUser()
-    const id = currentUser?.id
-    const { data } = useGetUserByIdQuery(id || '')
 
     const [files, setFiles] = useState<File[]>([])
     const [uploading, setUploading] = useState(false)
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
-    const [addMedia, { isSuccess }] = useAddMediaMutation()
+    const [uploadProperties, { isSuccess }] = useUploadPropertiesMutation()
     const propertyId = useAppSelector((state) => state.stepValidation.steps[1].propertyId)
 
     const handleUploadImages = async () => {
@@ -37,55 +28,25 @@ const ImageUpload = () => {
         const newUploadedMediaUrls: string[] = []
 
         try {
-            for (const file of files) {
-                const checksum = await computeSHA256(file)
+            const formData = new FormData()
+            formData.append('propertyId', propertyId)
+            files.forEach((file) => {
+                formData.append('file', file)
+            })
 
-                const signedURLResult = await getSignedURL({
-                    bucketName: process.env.PROPERTIES_BUCKET_NAME!,
-                    bucketRegion: process.env.PROPERTIES_BUCKET_REGION!,
-                    accessKeyId: process.env.PROPERTIES_ACCESS_KEY_ID!,
-                    secretAccessKey: process.env.PROPERTIES_SECRET_ACCESS_KEY!,
-                    fileSize: file.size,
-                    fileType: file.type,
-                    checksum,
-                    user: data?.user as User,
-                })
+            const uploadResponse = await uploadProperties(formData).unwrap()
 
-                if (signedURLResult.success) {
-                    const { url } = signedURLResult.success
-
-                    const uploadResponse = await fetch(url, {
-                        method: 'PUT',
-                        body: file,
-                        headers: {
-                            'Content-Type': file.type,
-                        },
-                    })
-
-                    if (!uploadResponse.ok) {
-                        setErrorMessage(t('upload-error', { fileName: file.name }))
-                    }
-
-                    const mediaUrl = signedURLResult.success.url.split('?')[0]
-
-                    const addMediaResponse = await addMedia({
-                        propertyId,
-                        url: mediaUrl,
-                        type: file.type.includes('video') ? 'VIDEO' : 'IMAGE',
-                    }).unwrap()
-
-                    if (addMediaResponse.success) {
-                        showToast('success', t('image-uploaded'))
-                        newUploadedMediaUrls.push(mediaUrl)
-                    } else {
-                        setErrorMessage(t('database-save-error', { fileName: file.name }))
-                    }
-                } else if (signedURLResult.failure) {
-                    setErrorMessage(t('signed-url-error', { fileName: file.name, error: signedURLResult.failure }))
-                }
+            if (uploadResponse.success) {
+                showToast('success', t('property-uploaded'))
+                newUploadedMediaUrls.push(...uploadResponse.propertyPictures)
+            } else {
+                setErrorMessage(t('upload-error', { fileName: files[0].name }))
+                return
             }
+
             dispatch(updateStep({ step: 2, isValid: true, data: { imageUrls: newUploadedMediaUrls } }))
         } catch (error) {
+            showToast('error', t('upload-error', { fileName: files[0].name }))
             setErrorMessage(t('unexpected-error', { error: (error as Error).message || 'Unknown error' }))
         } finally {
             setUploading(false)
@@ -95,7 +56,7 @@ const ImageUpload = () => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
             const uploadedFiles = Array.from(e.target.files)
-            setFiles((prevFiles) => [...prevFiles, ...uploadedFiles])
+            setFiles(uploadedFiles)
         }
     }
 
@@ -104,7 +65,7 @@ const ImageUpload = () => {
     }
 
     const isUploadDisabled =
-        files.length < 4 || files.length > 10 || uploading || !!errorMessage || files.some((file) => !isValidFile(file))
+        files.length < 4 || files.length > 10 || uploading || files.some((file) => !isValidFile(file))
 
     return (
         <div>
@@ -185,4 +146,4 @@ const ImageUpload = () => {
     )
 }
 
-export default ImageUpload
+export default PropertyMediaUpload

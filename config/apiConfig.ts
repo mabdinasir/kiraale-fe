@@ -8,6 +8,7 @@ const apiConfig = {
     mediaApi: `${baseUrl}/media`,
     subscriberApi: `${baseUrl}/subscriber`,
     contactAPi: `${baseUrl}/contact`,
+    fileUploadsApi: `${baseUrl}/fileUploads`,
 }
 
 export default apiConfig

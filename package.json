@@ -11,12 +11,9 @@
         "fmt": "prettier --write ."
     },
     "dependencies": {
-        "@aws-sdk/client-s3": "^3.744.0",
-        "@aws-sdk/s3-request-presigner": "^3.744.0",
         "@react-google-maps/api": "^2.20.5",
         "@reduxjs/toolkit": "^2.5.1",
         "@vercel/analytics": "^1.4.1",
-        "crypto": "^1.0.1",
         "date-fns": "^4.1.0",
         "js-cookie": "^3.0.5",
         "jwt-decode": "^4.0.0",

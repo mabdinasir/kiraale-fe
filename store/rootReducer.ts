@@ -8,6 +8,7 @@ import { mediaAPi } from './services/media'
 import stepValidationReducer from '@store/slices/stepValidation'
 import { subscriberApi } from './services/subscriber'
 import { contactAPi } from './services/contact'
+import { fileUploadsApi } from './services/fileUploads'
 
 const rootReducer = combineReducers({
     [todosApi.reducerPath]: todosApi.reducer,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
     [mediaAPi.reducerPath]: mediaAPi.reducer,
     [subscriberApi.reducerPath]: subscriberApi.reducer,
     [contactAPi.reducerPath]: contactAPi.reducer,
+    [fileUploadsApi.reducerPath]: fileUploadsApi.reducer,
     token: tokenSlice,
     stepValidation: stepValidationReducer,
 })
