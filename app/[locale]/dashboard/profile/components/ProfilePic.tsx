@@ -43,10 +43,10 @@ const ProfilePic: FC<ProfilePicProps> = ({ user, hasEditButton }) => {
 
                 // Get signed URL for S3 upload
                 const signedURLResult = await getSignedURL({
-                    bucketName: process.env.PROFILE_PIC_BUCKET_NAME!,
-                    bucketRegion: process.env.PROFILE_PIC_BUCKET_REGION!,
-                    accessKeyId: process.env.PROFILE_PIC_ACCESS_KEY_ID!,
-                    secretAccessKey: process.env.PROFILE_PIC_SECRET_ACCESS_KEY!,
+                    bucketName: process.env.NEXT_PUBLIC_PROFILE_PIC_BUCKET_NAME!,
+                    bucketRegion: process.env.NEXT_PUBLIC_PROFILE_PIC_BUCKET_REGION!,
+                    accessKeyId: process.env.NEXT_PUBLIC_PROFILE_PIC_ACCESS_KEY_ID!,
+                    secretAccessKey: process.env.NEXT_PUBLIC_PROFILE_PIC_SECRET_ACCESS_KEY!,
                     fileSize: selectedFile.size,
                     fileType: selectedFile.type,
                     checksum,
