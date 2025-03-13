@@ -33,9 +33,17 @@ const ProfileMenu = () => {
         }
     }
 
+    const closeSidebar = () => {
+        const isDesktop = window.matchMedia('(min-width: 992px)').matches
+        if (isDesktop) return
+        const sidebar = document.querySelector('.page-wrapper')
+        sidebar?.classList.remove('toggled')
+    }
+
     useEffect(() => {
         document.addEventListener('mousedown', handleClickOutside)
         return () => {
+            closeSidebar()
             document.removeEventListener('mousedown', handleClickOutside)
         }
     }, [isOpen])
@@ -84,6 +92,7 @@ const ProfileMenu = () => {
                             <ReusableLink
                                 href={'/dashboard'}
                                 className="block px-4 py-2 hover:bg-green-100 hover:text-green-700 dark:hover:bg-gray-700 dark:hover:text-green-600 rounded"
+                                onClick={closeSidebar}
                             >
                                 <i className="mdi mdi-view-dashboard me-2"></i>
                                 {t('dashboard')}
@@ -93,6 +102,7 @@ const ProfileMenu = () => {
                             <ReusableLink
                                 href={'/dashboard/profile'}
                                 className="block px-3 py-2 hover:bg-green-100 hover:text-green-700 dark:hover:bg-gray-700 dark:hover:text-green-600 rounded"
+                                onClick={closeSidebar}
                             >
                                 <i className="mdi mdi-account me-2"></i>
                                 {t('profile')}
@@ -102,6 +112,7 @@ const ProfileMenu = () => {
                             <ReusableLink
                                 href={'/dashboard/add-property'}
                                 className="block px-3 py-2 hover:bg-green-100 hover:text-green-700 dark:hover:bg-gray-700 dark:hover:text-green-600 rounded"
+                                onClick={closeSidebar}
                             >
                                 <i className="mdi mdi-home me-2"></i>
                                 {t('add-property')}
@@ -111,6 +122,7 @@ const ProfileMenu = () => {
                             <ReusableLink
                                 href={'/dashboard/notifications'}
                                 className="block px-3 py-2 hover:bg-green-100 hover:text-green-700 dark:hover:bg-gray-700 dark:hover:text-green-400 rounded"
+                                onClick={closeSidebar}
                             >
                                 <i className="mdi mdi-bell me-2"></i>
                                 {t('notifications')}
@@ -120,6 +132,7 @@ const ProfileMenu = () => {
                             <ReusableLink
                                 href={'/dashboard/settings'}
                                 className="block px-3 py-2 hover:bg-green-100 hover:text-green-700 dark:hover:bg-gray-700 dark:hover:text-green-600 rounded"
+                                onClick={closeSidebar}
                             >
                                 <i className="mdi mdi-cog me-2"></i>
                                 {t('settings')}
