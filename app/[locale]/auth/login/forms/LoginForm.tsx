@@ -13,6 +13,7 @@ import { z } from 'zod'
 import { loginSchema } from 'schemas'
 import type { LoginForm } from '@models/auth/loginForm'
 import isApiError from '@utils/isApiError'
+import PasswordInput from '@components/UI/PasswordInput'
 
 type FormErrors = Record<keyof LoginForm, string>
 
@@ -103,17 +104,11 @@ const LoginForm = () => {
 
                     {/* Password Input */}
                     <div className="mb-4 relative">
-                        <label className="font-semibold" htmlFor="LoginPassword">
-                            {t('password')}
-                        </label>
-                        <input
-                            id="LoginPassword"
-                            type="password"
+                        <PasswordInput
+                            label={t('password')}
                             name="password"
-                            autoComplete="current-password"
                             aria-invalid={!!errors.password}
                             aria-describedby="password-error"
-                            className={`form-input pr-10 ${errors.password ? 'border-red-500' : ''}`}
                             placeholder={t('password')}
                             value={userData.password}
                             onChange={handleChange}

@@ -11,6 +11,7 @@ import { z } from 'zod'
 import type { SignupForm } from '@models/auth/signupForm'
 import isApiError from '@utils/isApiError'
 import { signUpSchema } from 'schemas'
+import PasswordInput from '@components/UI/PasswordInput'
 
 type FormErrors = Record<keyof SignupForm, string>
 
@@ -160,16 +161,11 @@ const SignupForm = () => {
 
                     {/* Password Input */}
                     <div className="mb-4">
-                        <label className="font-semibold" htmlFor="LoginPassword">
-                            {t('password')}
-                        </label>
-                        <input
-                            id="LoginPassword"
-                            type="password"
+                        <PasswordInput
+                            label={t('password')}
                             name="password"
                             aria-invalid={!!errors.password}
                             aria-describedby="password-error"
-                            className={`form-input ${errors.password ? 'border-red-500' : ''}`}
                             placeholder={t('password')}
                             value={userData.password}
                             onChange={handleChange}

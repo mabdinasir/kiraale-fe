@@ -22,7 +22,7 @@ const PropertyMediaUpload = () => {
     const [uploadProperties, { isSuccess }] = useUploadPropertiesMutation()
     const propertyId = useAppSelector((state) => state.stepValidation.steps[1].propertyId)
 
-    const handleUploadImages = async () => {
+    const handleUploadMedia = async () => {
         setUploading(true)
         setErrorMessage(null)
         const newUploadedMediaUrls: string[] = []
@@ -56,7 +56,7 @@ const PropertyMediaUpload = () => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
             const uploadedFiles = Array.from(e.target.files)
-            setFiles(uploadedFiles)
+            setFiles((prevFiles) => [...prevFiles, ...uploadedFiles])
         }
     }
 
@@ -66,6 +66,7 @@ const PropertyMediaUpload = () => {
 
     const isUploadDisabled =
         files.length < 4 || files.length > 10 || uploading || files.some((file) => !isValidFile(file))
+    const isSelectDisabled = isSuccess || uploading
 
     return (
         <div>
@@ -95,14 +96,16 @@ const PropertyMediaUpload = () => {
                                     className="preview-content rounded-md"
                                 />
                             )}
-                            <button
-                                type="button"
-                                onClick={() => handleRemove(index)}
-                                className="absolute top-1 right-1 bg-white p-1 rounded-full text-red-500 shadow-md group-hover:opacity-100 opacity-0 transition-opacity"
-                                disabled={uploading}
-                            >
-                                <MdDeleteForever className="text-xl hover:text-red-700" />
-                            </button>
+                            {!isSuccess && (
+                                <button
+                                    type="button"
+                                    onClick={() => handleRemove(index)}
+                                    className="absolute top-1 right-1 bg-white p-1 rounded-full text-red-500 shadow-md group-hover:opacity-100 opacity-0 transition-opacity"
+                                    disabled={uploading}
+                                >
+                                    <MdDeleteForever className="text-xl hover:text-red-700" />
+                                </button>
+                            )}
                         </div>
                     ))}
                 </div>
@@ -112,6 +115,9 @@ const PropertyMediaUpload = () => {
                 </div>
             )}
 
+            <div className="mt-5">{errorMessage && <Error error={errorMessage} />}</div>
+            {isSuccess && <p className="text-green-600">{t('images-saved-go-to-payment')}</p>}
+
             <input
                 id="input-file"
                 type="file"
@@ -120,14 +126,14 @@ const PropertyMediaUpload = () => {
                 multiple
                 onChange={handleChange}
                 hidden
+                disabled={isSelectDisabled}
             />
-
-            <div className="mt-5">{errorMessage && <Error error={errorMessage} />}</div>
-
             <div className="flex flex-row justify-between gap-4 mt-6">
                 <div>
                     <label
-                        className="btn-upload btn bg-blue-600 hover:bg-blue-700 border-blue-600 hover:border-blue-700 text-white rounded-md cursor-pointer px-4 py-2"
+                        className={`btn-upload btn bg-blue-600 hover:bg-blue-700 border-blue-600 hover:border-blue-700 text-white rounded-md cursor-pointer px-4 py-2 ${
+                            isSelectDisabled ? 'opacity-50 cursor-not-allowed' : ''
+                        }`}
                         htmlFor="input-file"
                     >
                         {t('select-images')}
@@ -136,7 +142,7 @@ const PropertyMediaUpload = () => {
                 <div>
                     <Button
                         title={uploading ? t('saving-images') : t('save-images')}
-                        onClick={handleUploadImages}
+                        onClick={handleUploadMedia}
                         isLoading={uploading}
                         disabled={isUploadDisabled || isSuccess}
                     />

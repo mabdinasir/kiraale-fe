@@ -87,13 +87,12 @@ const AddPropertyForm = () => {
         ) => {
             const { name, value, type, checked } = e.target as HTMLInputElement
 
-            let fieldValue
+            let fieldValue: string | number | boolean = value
+
             if (type === 'checkbox') {
                 fieldValue = checked
             } else if (type === 'number') {
-                fieldValue = Number(value)
-            } else {
-                fieldValue = value
+                fieldValue = value === '' ? '' : Number(value)
             }
 
             setPropertyData(
