@@ -80,7 +80,7 @@ const TopHeaderProfileMenu = () => {
                     </li>
                     <li className="border-t border-gray-100 dark:border-gray-800 my-2"></li>
                     <Button
-                        className="flex items-center px-4 py-1 text-base font-medium hover:bg-red-100 hover:text-red-600 dark:hover:bg-red-600 dark:hover:text-red-600 rounded w-full text-left"
+                        className="flex items-center px-4 py-1 text-base font-medium hover:bg-red-100 dark:hover:bg-red-600 rounded w-full text-left"
                         isLoading={isLoading}
                         title={isLoading ? t('signing-out') : t('sign-out')}
                         redVariant
