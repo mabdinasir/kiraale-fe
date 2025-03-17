@@ -3,12 +3,12 @@
 import { useTranslations } from 'next-intl'
 import React from 'react'
 import { FaHome, FaImage, FaCreditCard, FaCheckCircle } from 'react-icons/fa'
-import AddPropertyForm from 'app/[locale]/dashboard/add-property/Forms/AddPropertyForm'
-import PropertyPayment from 'app/[locale]/dashboard/add-property/components/PropertyPayment'
 import Success from '../components/Success'
 import { useAppDispatch, useAppSelector } from '@hooks/rtkHooks'
 import { goToNextStep } from '@store/slices/stepValidation'
 import PropertyMediaUpload from '../components/PropertyMediaUpload'
+import AddPropertyForm from './AddPropertyForm'
+import PropertyPayment from '../components/PropertyPayment'
 
 const StepForm = () => {
     const t = useTranslations()

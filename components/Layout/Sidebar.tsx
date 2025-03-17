@@ -46,19 +46,70 @@ const Sidebar = () => {
                                 {t('dashboard')}
                             </ReusableLink>
                         </li>
-
-                        <li className={`${menu === `/${locale}/dashboard/add-property` ? 'active' : ''} ms-0`}>
-                            <ReusableLink href="/dashboard/add-property" onClick={closeSidebar}>
-                                <i className="mdi mdi-home-plus me-2"></i>
-                                {t('add-property')}
-                            </ReusableLink>
-                        </li>
-
-                        <li className={`${menu === '/favorite-property' ? 'active' : ''} ms-0`}>
-                            <ReusableLink href="/dashboard/favorite-properties" onClick={closeSidebar}>
-                                <i className="mdi mdi-home-heart me-2"></i>
-                                {t('favorite-properties')}
-                            </ReusableLink>
+                        <li
+                            className={`sidebar-dropdown ms-0 ${
+                                [
+                                    `/${locale}/dashboard/favorite-properties`,
+                                    `/${locale}/dashboard/properties/add-property`,
+                                    `/${locale}/dashboard/properties/my-properties`,
+                                ].includes(menu)
+                                    ? 'active'
+                                    : ''
+                            }`}
+                        >
+                            <Link
+                                href="#"
+                                onClick={() => {
+                                    setSubMenu(
+                                        subMenu === `/${locale}/dashboard/properties/my-properties` ||
+                                            subMenu === `/${locale}/dashboard/properties/favorite-properties` ||
+                                            subMenu === `/${locale}/dashboard/properties/add-property`
+                                            ? ''
+                                            : `/${locale}/dashboard/properties/my-properties`,
+                                    )
+                                }}
+                            >
+                                <i className="mdi mdi-home-edit me-2"></i>
+                                {t('properties')}
+                            </Link>
+                            <div
+                                className={`sidebar-submenu ${
+                                    [
+                                        `/${locale}/dashboard/properties/my-properties`,
+                                        `/${locale}/dashboard/properties/favorite-properties`,
+                                        `/${locale}/dashboard/properties/add-property`,
+                                    ].includes(subMenu)
+                                        ? 'block'
+                                        : ''
+                                }`}
+                            >
+                                <ul>
+                                    <li
+                                        className={`${menu === `/${locale}/dashboard/properties/my-properties` ? 'active' : ''} ms-0`}
+                                    >
+                                        <ReusableLink href="/dashboard/properties/my-properties" onClick={closeSidebar}>
+                                            {t('my-properties')}
+                                        </ReusableLink>
+                                    </li>
+                                    <li
+                                        className={`${menu === `/${locale}/dashboard/properties/favorite-properties` ? 'active' : ''} ms-0`}
+                                    >
+                                        <ReusableLink
+                                            href="/dashboard/properties/favorite-properties"
+                                            onClick={closeSidebar}
+                                        >
+                                            {t('favorite-properties')}
+                                        </ReusableLink>
+                                    </li>
+                                    <li
+                                        className={`${menu === `/${locale}/dashboard/properties/add-property` ? 'active' : ''} ms-0`}
+                                    >
+                                        <ReusableLink href="/dashboard/properties/add-property" onClick={closeSidebar}>
+                                            {t('add-property')}
+                                        </ReusableLink>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
 
                         <li className={`${menu === '/chat' ? 'active' : ''} ms-0`}>
@@ -133,7 +184,7 @@ const Sidebar = () => {
                                 <span className="text-slate-400 mt-3 mb-5 block">{t('add-property-desc')}</span>
 
                                 <ReusableLink
-                                    href="/dashboard/add-property"
+                                    href="/dashboard/properties/add-property"
                                     className="py-2 px-5 inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center bg-gray-500/5 hover:bg-gray-500 border-gray-500/10 hover:border-gray-500 text-white rounded-md"
                                 >
                                     {t('add-now')}

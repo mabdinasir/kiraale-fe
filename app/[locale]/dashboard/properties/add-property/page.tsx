@@ -1,8 +1,8 @@
 import ReusableLink from '@components/Links/ReusableLink'
 import React from 'react'
 import { useTranslations } from 'next-intl'
-import StepForm from 'app/[locale]/dashboard/add-property/Forms/StepForm'
 import StoreProvider from 'app/[locale]/StoreProvider'
+import StepForm from './Forms/StepForm'
 
 const AddProperty = () => {
     const t = useTranslations()

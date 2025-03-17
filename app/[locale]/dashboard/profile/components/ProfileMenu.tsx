@@ -110,12 +110,12 @@ const ProfileMenu = () => {
                         </li>
                         <li>
                             <ReusableLink
-                                href={'/dashboard/add-property'}
+                                href={'/dashboard/properties/my-properties'}
                                 className="block px-3 py-2 hover:bg-green-100 hover:text-green-700 dark:hover:bg-gray-700 dark:hover:text-green-600 rounded"
                                 onClick={closeSidebar}
                             >
                                 <i className="mdi mdi-home me-2"></i>
-                                {t('add-property')}
+                                {t('my-properties')}
                             </ReusableLink>
                         </li>
                         <li>
