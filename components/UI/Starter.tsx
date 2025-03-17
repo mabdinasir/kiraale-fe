@@ -4,9 +4,10 @@ import Link from 'next/link'
 type StarterProps = {
     title: string
     description?: string
+    children?: React.ReactNode
 }
 
-const Starter: FC<StarterProps> = ({ title, description }) => (
+const Starter: FC<StarterProps> = ({ title, description, children }) => (
     <div className="container-fluid relative px-3">
         <div className="layout-specing">
             <div className="md:flex justify-between items-center">
@@ -33,6 +34,7 @@ const Starter: FC<StarterProps> = ({ title, description }) => (
                     <p className="text-slate-400">{description}</p>
                 </div>
             </div>
+            {children}
         </div>
     </div>
 )

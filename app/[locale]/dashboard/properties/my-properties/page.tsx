@@ -1,26 +1,22 @@
+'use client' // This is a client component 👈🏽
+
 import React from 'react'
+import { useTranslations } from 'next-intl'
 
-const MyProperties = () => (
-    <div>
-        <h1>My Properties Page</h1>
-        <h1>My Properties Page</h1>
-        <h1>My Properties Page</h1>
-        <h1>My Properties Page</h1>
-        <h1>My Properties Page</h1>
-        <h1>My Properties Page</h1>
-        <h1>My Properties Page</h1>
-        <h1>My Properties Page</h1>
-        <h1>My Properties Page</h1>
-        <h1>My Properties Page</h1>
-        <h1>My Properties Page</h1>
-        <h1>My Properties Page</h1>
-        <h1>My Properties Page</h1>
-        <h1>My Properties Page</h1>
-        <h1>My Properties Page</h1>
-        <h1>My Properties Page</h1>
-        <h1>My Properties Page</h1>
-        <h1>My Properties Page</h1>
-    </div>
-)
+import StoreProvider from 'app/[locale]/StoreProvider'
+import Starter from '@components/UI/Starter'
+import MyProperties from './Components/MyProperties'
 
-export default MyProperties
+const Page = () => {
+    const t = useTranslations()
+
+    return (
+        <Starter title={t('my-properties')} description={t('my-properties-description')}>
+            <StoreProvider>
+                <MyProperties />
+            </StoreProvider>
+        </Starter>
+    )
+}
+
+export default Page

@@ -5,6 +5,8 @@ import { FaCalendarAlt } from 'react-icons/fa'
 import { LuBath, LuBedDouble } from 'react-icons/lu'
 import Image from 'next/image'
 import { Property as IProperty } from '@models/properties/property'
+import EmptyState from '../EmptyState'
+import { PiBuildingApartmentFill } from '@node_modules/react-icons/pi'
 
 interface PropertyProps {
     properties: IProperty[]
@@ -12,6 +14,15 @@ interface PropertyProps {
 
 const Property: React.FC<PropertyProps> = ({ properties }) => {
     const t = useTranslations()
+
+    if (!properties || properties.length === 0)
+        return (
+            <EmptyState
+                icon={<PiBuildingApartmentFill size={98} />}
+                title={t('no-properties-found')}
+                description={t('no-properties-description')}
+            />
+        )
 
     return (
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-8 gap-[30px]">

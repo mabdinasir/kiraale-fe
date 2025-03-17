@@ -39,10 +39,13 @@ export const propertiesAPi = createApi({
             query: (id) => `/getPropertyById/${id}`,
         }),
         getFeaturedProperties: builder.query<PropertiesResponse, void>({
-            query: () => '/featuredProperties',
+            query: () => '/getFeaturedProperties',
         }),
         getPropertiesByUser: builder.query<PropertiesResponse, string>({
             query: (userId) => `/getPropertiesByUser/${userId}`,
+        }),
+        getMyProperties: builder.query<PropertiesResponse, void>({
+            query: () => '/getMyProperties',
         }),
     }),
 })
@@ -53,4 +56,5 @@ export const {
     useGetPropertyByIdQuery,
     useGetFeaturedPropertiesQuery,
     useGetPropertiesByUserQuery,
+    useGetMyPropertiesQuery,
 } = propertiesAPi

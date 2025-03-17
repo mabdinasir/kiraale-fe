@@ -319,6 +319,7 @@
     "passport-number": "Passport Number",
     "agency-name": "Agency Name",
     "my-properties": "My Properties",
+    "my-properties-description": "Manage your property listings, favorite them, mark them as sold or leased, and edit or delete them.",
     "profile-desc": "Profile Description",
     "save-changes": "Save Changes",
     "saving-changes": "Saving Changes...",
