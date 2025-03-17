@@ -47,6 +47,15 @@ export const propertiesAPi = createApi({
         getMyProperties: builder.query<PropertiesResponse, void>({
             query: () => '/getMyProperties',
         }),
+        getFavoriteProperties: builder.query<PropertiesResponse, void>({
+            query: () => '/getFavoriteProperties',
+        }),
+        toggleFavoriteProperty: builder.mutation<PropertyResponse, string>({
+            query: (propertyId) => ({
+                url: `/toggleFavoriteProperty/${propertyId}`,
+                method: 'POST',
+            }),
+        }),
     }),
 })
 
@@ -57,4 +66,6 @@ export const {
     useGetFeaturedPropertiesQuery,
     useGetPropertiesByUserQuery,
     useGetMyPropertiesQuery,
+    useGetFavoritePropertiesQuery,
+    useToggleFavoritePropertyMutation,
 } = propertiesAPi
