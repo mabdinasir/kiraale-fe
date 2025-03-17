@@ -6,11 +6,10 @@ export interface AddPropertyForm {
     price: number
     propertyType: 'RESIDENTIAL' | 'COMMERCIAL' | 'LAND'
     listingType: 'SALE' | 'RENT'
-    status: 'PENDING' | 'APPROVED' | 'REJECTED' | 'EXPIRED'
+    status: 'PENDING' | 'REJECTED' | 'EXPIRED' | 'AVAILABLE' | 'SOLD' | 'LEASED'
     approvedAt?: string | null
     expiredAt?: string | null
     approvedBy?: string | null
-    isActive: boolean
     bedrooms?: number
     bathrooms?: number
     parking?: number

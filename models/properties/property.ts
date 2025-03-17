@@ -37,10 +37,9 @@ export interface Property {
     price: number
     createdAt?: string
     updatedAt?: string
-    isActive?: boolean
     propertyType: 'RESIDENTIAL' | 'COMMERCIAL' | 'LAND'
     listingType: 'SALE' | 'RENT'
-    status: 'PENDING' | 'APPROVED' | 'REJECTED' | 'EXPIRED'
+    status: 'PENDING' | 'REJECTED' | 'EXPIRED' | 'AVAILABLE' | 'SOLD' | 'LEASED'
     approvedAt?: string | null
     expiresAt?: string | null
     approvedBy?: string | null

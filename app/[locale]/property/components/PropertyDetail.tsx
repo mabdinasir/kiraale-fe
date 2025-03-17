@@ -12,11 +12,13 @@ import { useGetPropertyByIdQuery } from '@store/services/properties'
 import { useParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 
-type PropertyStatus = 'pending' | 'approved' | 'rejected' | 'expired'
+type PropertyStatus = 'pending' | 'rejected' | 'expired' | 'available' | 'sold' | 'leased'
 
 const propertyStatusColor: Record<PropertyStatus, string> = {
     pending: 'text-yellow-600',
-    approved: 'text-green-600',
+    available: 'text-green-600',
+    sold: 'text-blue-600',
+    leased: 'text-purple-600',
     rejected: 'text-red-600',
     expired: 'text-gray-600',
 }

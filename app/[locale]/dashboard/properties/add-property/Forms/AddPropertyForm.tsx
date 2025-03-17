@@ -41,7 +41,6 @@ const AddPropertyForm = () => {
             propertyType: 'RESIDENTIAL',
             listingType: 'SALE',
             status: 'PENDING',
-            isActive: false,
             bedrooms: 0,
             bathrooms: 0,
             parking: 0,
