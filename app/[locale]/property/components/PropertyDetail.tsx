@@ -11,6 +11,8 @@ import LoadingIndicator from '@components/UI/LoadingIndicator'
 import { useGetPropertyByIdQuery } from '@store/services/properties'
 import { useParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
+import EmptyState from '@components/UI/EmptyState'
+import { PiBuildingApartmentFill } from '@node_modules/react-icons/pi'
 
 type PropertyStatus = 'pending' | 'rejected' | 'expired' | 'available' | 'sold' | 'leased'
 
@@ -31,7 +33,16 @@ const PropertyDetail = () => {
     const property = data?.property
 
     if (isLoading) return <LoadingIndicator />
-    if (!property) return null
+    if (!property)
+        return (
+            <div className="py-24">
+                <EmptyState
+                    icon={<PiBuildingApartmentFill size={98} />}
+                    title={t('property-not-found')}
+                    description={t('property-not-found-description')}
+                />
+            </div>
+        )
 
     return (
         <section className="relative md:py-24 pt-24 pb-16">
