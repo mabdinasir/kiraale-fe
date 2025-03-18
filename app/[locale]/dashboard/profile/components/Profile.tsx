@@ -21,7 +21,7 @@ const Profile = () => {
     const currentUser = useCurrentUser()
     const id = currentUser?.id
     const { data: userData, isLoading } = useGetUserByIdQuery(id || '')
-    const { data: propertiesData, isLoading: isPropertiesLoading } = useGetPropertiesByUserQuery(id || '')
+    const { data: propertiesData, isLoading: isPropertiesLoading } = useGetPropertiesByUserQuery()
 
     if (isLoading || isPropertiesLoading) return <LoadingIndicator />
 

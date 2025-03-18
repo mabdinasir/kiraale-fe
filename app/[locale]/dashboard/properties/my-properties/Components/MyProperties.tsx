@@ -2,12 +2,12 @@
 
 import React from 'react'
 
-import { useGetMyPropertiesQuery } from '@store/services/properties'
+import { useGetPropertiesByUserQuery } from '@store/services/properties'
 import LoadingIndicator from '@components/UI/LoadingIndicator'
 import Property from '@components/UI/Property/Property'
 
 const MyProperties = () => {
-    const { data, isLoading } = useGetMyPropertiesQuery()
+    const { data, isLoading } = useGetPropertiesByUserQuery()
 
     if (isLoading) return <LoadingIndicator />
 

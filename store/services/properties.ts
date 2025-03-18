@@ -41,11 +41,8 @@ export const propertiesAPi = createApi({
         getFeaturedProperties: builder.query<PropertiesResponse, void>({
             query: () => '/getFeaturedProperties',
         }),
-        getPropertiesByUser: builder.query<PropertiesResponse, string>({
-            query: (userId) => `/getPropertiesByUser/${userId}`,
-        }),
-        getMyProperties: builder.query<PropertiesResponse, void>({
-            query: () => '/getMyProperties',
+        getPropertiesByUser: builder.query<PropertiesResponse, void>({
+            query: () => `/getPropertiesByUser`,
         }),
         getFavoriteProperties: builder.query<PropertiesResponse, void>({
             query: () => '/getFavoriteProperties',
@@ -65,7 +62,6 @@ export const {
     useGetPropertyByIdQuery,
     useGetFeaturedPropertiesQuery,
     useGetPropertiesByUserQuery,
-    useGetMyPropertiesQuery,
     useGetFavoritePropertiesQuery,
     useToggleFavoritePropertyMutation,
 } = propertiesAPi
