@@ -13,10 +13,28 @@ interface PropertyProps {
     properties: IProperty[]
 }
 
-const Property: React.FC<PropertyProps> = ({ properties }) => {
+const Property: React.FC<PropertyProps> = ({ properties: initialProperties }) => {
     const t = useTranslations()
     const [toggleFavoriteProperty] = useToggleFavoritePropertyMutation()
-    const [isPropertyFavorited, setIsPropertyFavorited] = React.useState(false)
+    const [properties, setProperties] = React.useState(initialProperties)
+
+    const handleToggleFavorite = async (propertyId: string) => {
+        // Find the property to update
+        const updatedProperties = properties.map((property) =>
+            property.id === propertyId
+                ? { ...property, isFavorited: !property.isFavorited } // Toggle favorite status
+                : property,
+        )
+
+        // Optimistically update the UI
+        setProperties(updatedProperties)
+
+        try {
+            await toggleFavoriteProperty(propertyId).unwrap()
+        } catch {
+            setProperties(properties)
+        }
+    }
 
     if (!properties || properties.length === 0)
         return (
@@ -52,8 +70,7 @@ const Property: React.FC<PropertyProps> = ({ properties }) => {
                                     } focus:text-red-600 dark:focus:text-red-600 hover:text-red-600 dark:hover:text-red-600`}
                                     onClick={(e) => {
                                         e.preventDefault()
-                                        toggleFavoriteProperty(property.id)
-                                        setIsPropertyFavorited(!isPropertyFavorited)
+                                        handleToggleFavorite(property.id)
                                     }}
                                 >
                                     <i className="mdi mdi-heart mdi-18px"></i>

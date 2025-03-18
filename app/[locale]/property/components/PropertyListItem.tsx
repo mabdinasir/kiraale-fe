@@ -21,7 +21,6 @@ const PropertyListItem = () => {
     const propertyType = searchParams.get('propertyType') || ''
     const listingType = searchParams.get('listingType') || ''
 
-    const [isPropertyFavorited, setIsPropertyFavorited] = React.useState(false)
     const [toggleFavoriteProperty] = useToggleFavoritePropertyMutation()
     const { data, isLoading } = useSearchPropertiesQuery(
         {
@@ -33,6 +32,28 @@ const PropertyListItem = () => {
         },
         { refetchOnMountOrArgChange: true },
     )
+
+    // Local state to track favorite status
+    const [favoritedProperties, setFavoritedProperties] = React.useState<Record<string, boolean>>({})
+
+    const handleToggleFavorite = async (propertyId: string, isCurrentlyFavorited: boolean) => {
+        // Optimistically update the UI
+        setFavoritedProperties((prev) => ({
+            ...prev,
+            [propertyId]: !isCurrentlyFavorited,
+        }))
+
+        try {
+            // Make the API call to toggle the favorite status
+            await toggleFavoriteProperty(propertyId).unwrap()
+        } catch {
+            // Revert the UI if the API call fails
+            setFavoritedProperties((prev) => ({
+                ...prev,
+                [propertyId]: isCurrentlyFavorited,
+            }))
+        }
+    }
 
     if (isLoading) return <LoadingIndicator />
 
@@ -48,147 +69,92 @@ const PropertyListItem = () => {
     return (
         <div className="lg:col-span-8 md:col-span-6">
             <div className="grid grid-cols-1 gap-[30px]">
-                {data?.properties?.map((property) => (
-                    <ReusableLink key={property.id} href={`/property/${property.id}`}>
-                        <div
-                            key={property.id}
-                            className="group rounded-xl bg-white dark:bg-slate-900 shadow hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden ease-in-out duration-500 w-full mx-auto xl:max-w-4xl"
-                        >
-                            <div className="md:flex">
-                                <div className="relative">
-                                    <Image
-                                        className="h-full w-full object-cover lg:w-64"
-                                        src={property?.media[0]?.url || '/images/property/1.jpg'}
-                                        alt=""
-                                        width={0}
-                                        height={0}
-                                        sizes="100vw"
-                                        style={{ width: '100%', height: 'auto' }}
-                                    />
-                                    <div className="absolute top-4 end-4">
-                                        <div
-                                            className={`btn btn-icon bg-white dark:bg-slate-900 shadow dark:shadow-gray-700 rounded-full ${
-                                                property.isFavorited
-                                                    ? 'text-red-600 dark:text-red-600'
-                                                    : 'text-slate-100 dark:text-slate-700'
-                                            } focus:text-red-600 dark:focus:text-red-600 hover:text-red-600 dark:hover:text-red-600`}
-                                            onClick={(e) => {
-                                                e.preventDefault()
-                                                toggleFavoriteProperty(property.id)
-                                                setIsPropertyFavorited(!isPropertyFavorited)
-                                            }}
-                                        >
-                                            <i className="mdi mdi-heart mdi-18px"></i>
+                {data?.properties?.map((property) => {
+                    // Derive the favorite status from the local state or the property's initial state
+                    const isFavorited = favoritedProperties[property.id] ?? property.isFavorited
+
+                    return (
+                        <ReusableLink key={property.id} href={`/property/${property.id}`}>
+                            <div
+                                key={property.id}
+                                className="group rounded-xl bg-white dark:bg-slate-900 shadow hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden ease-in-out duration-500 w-full mx-auto xl:max-w-4xl"
+                            >
+                                <div className="md:flex">
+                                    <div className="relative">
+                                        <Image
+                                            className="h-full w-full object-cover lg:w-64"
+                                            src={property?.media[0]?.url || '/images/property/1.jpg'}
+                                            alt=""
+                                            width={0}
+                                            height={0}
+                                            sizes="100vw"
+                                            style={{ width: '100%', height: 'auto' }}
+                                        />
+                                        <div className="absolute top-4 end-4">
+                                            <div
+                                                className={`btn btn-icon bg-white dark:bg-slate-900 shadow dark:shadow-gray-700 rounded-full ${
+                                                    isFavorited
+                                                        ? 'text-red-600 dark:text-red-600'
+                                                        : 'text-slate-100 dark:text-slate-700'
+                                                } focus:text-red-600 dark:focus:text-red-600 hover:text-red-600 dark:hover:text-red-600`}
+                                                onClick={(e) => {
+                                                    e.preventDefault()
+                                                    handleToggleFavorite(property.id, isFavorited)
+                                                }}
+                                            >
+                                                <i className="mdi mdi-heart mdi-18px"></i>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="p-6 w-full">
-                                    <div className="md:pb-4 pb-6">{property.title}</div>
+                                    <div className="p-6 w-full">
+                                        <div className="md:pb-4 pb-6">{property.title}</div>
 
-                                    <ul className="md:py-4 py-6 border-y border-slate-100 dark:border-gray-800 flex items-center list-none justify-between">
-                                        <li className="flex items-center me-4">
-                                            <FaCalendarAlt width={20} className="me-2 text-green-600 text-2xl" />
-                                            <span>{property?.features?.yearBuilt}</span>
-                                        </li>
+                                        <ul className="md:py-4 py-6 border-y border-slate-100 dark:border-gray-800 flex items-center list-none justify-between">
+                                            <li className="flex items-center me-4">
+                                                <FaCalendarAlt width={20} className="me-2 text-green-600 text-2xl" />
+                                                <span>{property?.features?.yearBuilt}</span>
+                                            </li>
 
-                                        <li className="flex items-center me-4">
-                                            <LuBedDouble width={20} className="me-2 text-green-600 text-2xl" />
-                                            <span>
-                                                {property.features.bedrooms}{' '}
-                                                {property.features.bedrooms <= 1 ? t('bed') : t('beds')}
-                                            </span>
-                                        </li>
+                                            <li className="flex items-center me-4">
+                                                <LuBedDouble width={20} className="me-2 text-green-600 text-2xl" />
+                                                <span>
+                                                    {property.features.bedrooms}{' '}
+                                                    {property.features.bedrooms <= 1 ? t('bed') : t('beds')}
+                                                </span>
+                                            </li>
 
-                                        <li className="flex items-center">
-                                            <LuBath width={20} className="me-2 text-green-600 text-2xl" />
-                                            <span>
-                                                {property.features.bathrooms}{' '}
-                                                {property.features.bathrooms <= 1 ? t('bath') : t('baths')}
-                                            </span>
-                                        </li>
-                                    </ul>
+                                            <li className="flex items-center">
+                                                <LuBath width={20} className="me-2 text-green-600 text-2xl" />
+                                                <span>
+                                                    {property.features.bathrooms}{' '}
+                                                    {property.features.bathrooms <= 1 ? t('bath') : t('baths')}
+                                                </span>
+                                            </li>
+                                        </ul>
 
-                                    <ul className="md:pt-4 pt-6 flex justify-between items-center list-none">
-                                        <li>
-                                            <span className="text-slate-400">{t('price')}</span>
-                                            <p className="text-lg font-medium">
-                                                {new Intl.NumberFormat('en-US', {
-                                                    style: 'currency',
-                                                    currency: 'USD',
-                                                    minimumFractionDigits: 0,
-                                                    maximumFractionDigits: 0,
-                                                    currencyDisplay: 'narrowSymbol',
-                                                })
-                                                    .format(property?.price || 0)
-                                                    .replace('$', '$ ')}
-                                            </p>
-                                        </li>
-                                    </ul>
+                                        <ul className="md:pt-4 pt-6 flex justify-between items-center list-none">
+                                            <li>
+                                                <span className="text-slate-400">{t('price')}</span>
+                                                <p className="text-lg font-medium">
+                                                    {new Intl.NumberFormat('en-US', {
+                                                        style: 'currency',
+                                                        currency: 'USD',
+                                                        minimumFractionDigits: 0,
+                                                        maximumFractionDigits: 0,
+                                                        currencyDisplay: 'narrowSymbol',
+                                                    })
+                                                        .format(property?.price || 0)
+                                                        .replace('$', '$ ')}
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </ReusableLink>
-                ))}
+                        </ReusableLink>
+                    )
+                })}
             </div>
-
-            {/* pagination */}
-            {/* <div className="grid md:grid-cols-12 grid-cols-1 mt-8">
-                <div className="md:col-span-12 text-center">
-                    <nav>
-                        <ul className="inline-flex items-center -space-x-px">
-                            <li>
-                                <ReusableLink
-                                    href="#"
-                                    className="w-10 h-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 bg-white dark:bg-slate-900 hover:text-white shadow-sm dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600"
-                                >
-                                    <FiChevronLeft className="text-[20px]" />
-                                </ReusableLink>
-                            </li>
-                            <li>
-                                <ReusableLink
-                                    href="#"
-                                    className="w-10 h-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 hover:text-white bg-white dark:bg-slate-900 shadow-sm dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600"
-                                >
-                                    1
-                                </ReusableLink>
-                            </li>
-                            <li>
-                                <ReusableLink
-                                    href="#"
-                                    className="w-10 h-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 hover:text-white bg-white dark:bg-slate-900 shadow-sm dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600"
-                                >
-                                    2
-                                </ReusableLink>
-                            </li>
-                            <li>
-                                <ReusableLink
-                                    href="#"
-                                    aria-current="page"
-                                    className="z-10 w-10 h-10 inline-flex justify-center items-center mx-1 rounded-full text-white bg-green-600 shadow-sm dark:shadow-gray-700"
-                                >
-                                    3
-                                </ReusableLink>
-                            </li>
-                            <li>
-                                <ReusableLink
-                                    href="#"
-                                    className="w-10 h-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 hover:text-white bg-white dark:bg-slate-900 shadow-sm dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600"
-                                >
-                                    4
-                                </ReusableLink>
-                            </li>
-                            <li>
-                                <ReusableLink
-                                    href="#"
-                                    className="w-10 h-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 bg-white dark:bg-slate-900 hover:text-white shadow-sm dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600"
-                                >
-                                    <FiChevronRight className="text-[20px]" />
-                                </ReusableLink>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div> */}
         </div>
     )
 }
