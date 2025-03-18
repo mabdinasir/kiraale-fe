@@ -1,40 +1,52 @@
 import React from 'react'
 import { useTranslations } from 'next-intl'
 import ReusableLink from '@components/Links/ReusableLink'
-import { FaCalendarAlt } from 'react-icons/fa'
+import { FaBan, FaCalendarAlt, FaHourglassHalf } from 'react-icons/fa'
 import { LuBath, LuBedDouble } from 'react-icons/lu'
 import Image from 'next/image'
 import { Property as IProperty } from '@models/properties/property'
 import EmptyState from '../EmptyState'
 import { PiBuildingApartmentFill } from '@node_modules/react-icons/pi'
-import { useToggleFavoritePropertyMutation } from '@store/services/properties'
+import { RiRadioButtonLine, RiMoneyDollarBoxFill } from 'react-icons/ri'
+import { GiCarKey } from 'react-icons/gi'
+import { AiOutlineExclamationCircle } from 'react-icons/ai'
+import FavoriteButton from './FavoriteButton'
 
 interface PropertyProps {
     properties: IProperty[]
 }
 
-const Property: React.FC<PropertyProps> = ({ properties: initialProperties }) => {
+// we need a mapping for all statuses - available, sold, rented, pending, etc. and their icons
+
+const statuses = {
+    AVAILABLE: {
+        icon: <RiRadioButtonLine className="fea icon-ex-md text-green-600 me-3 w-6 h-6" />,
+        color: 'text-green-600',
+    },
+    SOLD: {
+        icon: <RiMoneyDollarBoxFill className="fea icon-ex-md text-red-600 me-3 w-6 h-6" />,
+        color: 'text-red-600',
+    },
+    LEASED: {
+        icon: <GiCarKey className="fea icon-ex-md text-purple-600 me-3 w-6 h-6" />,
+        color: 'text-purple-600',
+    },
+    PENDING: {
+        icon: <FaHourglassHalf className="fea icon-ex-md text-yellow-600 me-3 w-6 h-6" />,
+        color: 'text-yellow-600',
+    },
+    REJECTED: {
+        icon: <FaBan className="fea icon-ex-md text-red-600 me-3 w-6 h-6" />,
+        color: 'text-red-600',
+    },
+    EXPIRED: {
+        icon: <AiOutlineExclamationCircle className="fea icon-ex-md text-gray-600 me-3 w-6 h-6" />,
+        color: 'text-gray-600',
+    },
+}
+
+const Property: React.FC<PropertyProps> = ({ properties }) => {
     const t = useTranslations()
-    const [toggleFavoriteProperty] = useToggleFavoritePropertyMutation()
-    const [properties, setProperties] = React.useState(initialProperties)
-
-    const handleToggleFavorite = async (propertyId: string) => {
-        // Find the property to update
-        const updatedProperties = properties.map((property) =>
-            property.id === propertyId
-                ? { ...property, isFavorited: !property.isFavorited } // Toggle favorite status
-                : property,
-        )
-
-        // Optimistically update the UI
-        setProperties(updatedProperties)
-
-        try {
-            await toggleFavoriteProperty(propertyId).unwrap()
-        } catch {
-            setProperties(properties)
-        }
-    }
 
     if (!properties || properties.length === 0)
         return (
@@ -61,21 +73,7 @@ const Property: React.FC<PropertyProps> = ({ properties: initialProperties }) =>
                                 priority
                             />
 
-                            <div className="absolute top-4 end-4">
-                                <div
-                                    className={`btn btn-icon bg-white dark:bg-slate-900 shadow dark:shadow-gray-700 rounded-full ${
-                                        property.isFavorited
-                                            ? 'text-red-600 dark:text-red-600'
-                                            : 'text-slate-100 dark:text-slate-700'
-                                    } focus:text-red-600 dark:focus:text-red-600 hover:text-red-600 dark:hover:text-red-600`}
-                                    onClick={(e) => {
-                                        e.preventDefault()
-                                        handleToggleFavorite(property.id)
-                                    }}
-                                >
-                                    <i className="mdi mdi-heart mdi-18px"></i>
-                                </div>
-                            </div>
+                            <FavoriteButton propertyId={property.id} isFavorited={property.isFavorited ?? false} />
                         </div>
 
                         <div className="p-6">
@@ -118,6 +116,17 @@ const Property: React.FC<PropertyProps> = ({ properties: initialProperties }) =>
                                             .format(property?.price || 0)
                                             .replace('$', '$ ')}
                                     </p>
+                                </li>
+                                <li>
+                                    <span className="text-slate-400">{t('status')} :</span>
+                                    <div className="flex items-center text-sm">
+                                        <span className={`${statuses[property.status]?.color} me-2`}>
+                                            {property?.status}
+                                        </span>
+                                        <span className={`${statuses[property.status]?.color}`}>
+                                            {statuses[property.status]?.icon}
+                                        </span>
+                                    </div>
                                 </li>
                             </ul>
                         </div>
