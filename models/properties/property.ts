@@ -40,6 +40,7 @@ export interface Property {
     propertyType: 'RESIDENTIAL' | 'COMMERCIAL' | 'LAND'
     listingType: 'SALE' | 'RENT'
     status: 'PENDING' | 'REJECTED' | 'EXPIRED' | 'AVAILABLE' | 'SOLD' | 'LEASED'
+    isFavorited: boolean
     approvedAt?: string | null
     expiresAt?: string | null
     approvedBy?: string | null

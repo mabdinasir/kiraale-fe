@@ -1,9 +1,10 @@
 'use client' // This is a client component 👈🏽
 
+import React from 'react'
 import ReusableLink from '@components/Links/ReusableLink'
 import EmptyState from '@components/UI/EmptyState'
 import LoadingIndicator from '@components/UI/LoadingIndicator'
-import { useSearchPropertiesQuery } from '@store/services/properties'
+import { useSearchPropertiesQuery, useToggleFavoritePropertyMutation } from '@store/services/properties'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
@@ -20,6 +21,8 @@ const PropertyListItem = () => {
     const propertyType = searchParams.get('propertyType') || ''
     const listingType = searchParams.get('listingType') || ''
 
+    const [isPropertyFavorited, setIsPropertyFavorited] = React.useState(false)
+    const [toggleFavoriteProperty] = useToggleFavoritePropertyMutation()
     const { data, isLoading } = useSearchPropertiesQuery(
         {
             query,
@@ -45,17 +48,17 @@ const PropertyListItem = () => {
     return (
         <div className="lg:col-span-8 md:col-span-6">
             <div className="grid grid-cols-1 gap-[30px]">
-                {data?.properties?.map((item) => (
-                    <ReusableLink key={item.id} href={`/property/${item.id}`}>
+                {data?.properties?.map((property) => (
+                    <ReusableLink key={property.id} href={`/property/${property.id}`}>
                         <div
-                            key={item.id}
+                            key={property.id}
                             className="group rounded-xl bg-white dark:bg-slate-900 shadow hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden ease-in-out duration-500 w-full mx-auto xl:max-w-4xl"
                         >
                             <div className="md:flex">
                                 <div className="relative">
                                     <Image
                                         className="h-full w-full object-cover lg:w-64"
-                                        src={item?.media[0]?.url || '/images/property/1.jpg'}
+                                        src={property?.media[0]?.url || '/images/property/1.jpg'}
                                         alt=""
                                         width={0}
                                         height={0}
@@ -64,10 +67,15 @@ const PropertyListItem = () => {
                                     />
                                     <div className="absolute top-4 end-4">
                                         <div
-                                            className="btn btn-icon bg-white dark:bg-slate-900 shadow dark:shadow-gray-700 rounded-full text-slate-100 dark:text-slate-700 focus:text-red-600 dark:focus:text-red-600 hover:text-red-600 dark:hover:text-red-600"
+                                            className={`btn btn-icon bg-white dark:bg-slate-900 shadow dark:shadow-gray-700 rounded-full ${
+                                                property.isFavorited
+                                                    ? 'text-red-600 dark:text-red-600'
+                                                    : 'text-slate-100 dark:text-slate-700'
+                                            } focus:text-red-600 dark:focus:text-red-600 hover:text-red-600 dark:hover:text-red-600`}
                                             onClick={(e) => {
                                                 e.preventDefault()
-                                                //favoriteProperty(item.id)
+                                                toggleFavoriteProperty(property.id)
+                                                setIsPropertyFavorited(!isPropertyFavorited)
                                             }}
                                         >
                                             <i className="mdi mdi-heart mdi-18px"></i>
@@ -75,27 +83,27 @@ const PropertyListItem = () => {
                                     </div>
                                 </div>
                                 <div className="p-6 w-full">
-                                    <div className="md:pb-4 pb-6">{item.title}</div>
+                                    <div className="md:pb-4 pb-6">{property.title}</div>
 
                                     <ul className="md:py-4 py-6 border-y border-slate-100 dark:border-gray-800 flex items-center list-none justify-between">
                                         <li className="flex items-center me-4">
                                             <FaCalendarAlt width={20} className="me-2 text-green-600 text-2xl" />
-                                            <span>{item?.features?.yearBuilt}</span>
+                                            <span>{property?.features?.yearBuilt}</span>
                                         </li>
 
                                         <li className="flex items-center me-4">
                                             <LuBedDouble width={20} className="me-2 text-green-600 text-2xl" />
                                             <span>
-                                                {item.features.bedrooms}{' '}
-                                                {item.features.bedrooms <= 1 ? t('bed') : t('beds')}
+                                                {property.features.bedrooms}{' '}
+                                                {property.features.bedrooms <= 1 ? t('bed') : t('beds')}
                                             </span>
                                         </li>
 
                                         <li className="flex items-center">
                                             <LuBath width={20} className="me-2 text-green-600 text-2xl" />
                                             <span>
-                                                {item.features.bathrooms}{' '}
-                                                {item.features.bathrooms <= 1 ? t('bath') : t('baths')}
+                                                {property.features.bathrooms}{' '}
+                                                {property.features.bathrooms <= 1 ? t('bath') : t('baths')}
                                             </span>
                                         </li>
                                     </ul>
@@ -111,7 +119,7 @@ const PropertyListItem = () => {
                                                     maximumFractionDigits: 0,
                                                     currencyDisplay: 'narrowSymbol',
                                                 })
-                                                    .format(item?.price || 0)
+                                                    .format(property?.price || 0)
                                                     .replace('$', '$ ')}
                                             </p>
                                         </li>
