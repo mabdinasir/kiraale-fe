@@ -1,4 +1,4 @@
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? process.env.NEXT_PUBLIC_LOCAL_URL
+const baseUrl = `${process.env.NEXT_PUBLIC_BASE_URL ?? process.env.NEXT_PUBLIC_LOCAL_URL}/api`
 
 const apiConfig = {
     baseUrl,
