@@ -65,7 +65,7 @@ const PropertyDetail = () => {
                             </div>
                         </div>
 
-                        <h4 className="text-2xl font-medium mt-6 mb-3">{property?.title}</h4>
+                        <h4 className="text-2xl font-medium mt-6 mb-3 text-slate-400">{property?.title}</h4>
                         <span className="text-slate-400 flex items-center">
                             <FiMapPin className="size-5 me-2" /> {property?.address}
                         </span>
@@ -73,14 +73,14 @@ const PropertyDetail = () => {
                         <ul className="py-6 flex items-center list-none">
                             <li className="flex items-center lg:me-6 me-4">
                                 <LiaCompressArrowsAltSolid className="lg:text-3xl text-2xl me-2 text-green-600" />
-                                <span className="lg:text-xl">
+                                <span className="lg:text-xl text-slate-400">
                                     {property?.features.area} {t('sqf')}
                                 </span>
                             </li>
 
                             <li className="flex items-center lg:me-6 me-4">
                                 <LuBedDouble className="lg:text-3xl text-2xl me-2 text-green-600" />
-                                <span className="lg:text-xl">
+                                <span className="lg:text-xl text-slate-400">
                                     {property?.features.bedrooms}{' '}
                                     {property?.features.bedrooms <= 1 ? t('bed') : t('beds')}
                                 </span>
@@ -88,7 +88,7 @@ const PropertyDetail = () => {
 
                             <li className="flex items-center">
                                 <LuBath className="lg:text-3xl text-2xl me-2 text-green-600" />
-                                <span className="lg:text-xl">
+                                <span className="lg:text-xl text-slate-400">
                                     {property?.features.bathrooms}{' '}
                                     {property?.features.bathrooms <= 1 ? t('bath') : t('baths')}
                                 </span>
