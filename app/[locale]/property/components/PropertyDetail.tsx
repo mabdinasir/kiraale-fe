@@ -110,7 +110,7 @@ const PropertyDetail = () => {
 
                     <div className="lg:col-span-4 md:col-span-5">
                         <div className="sticky top-20">
-                            <div className="rounded-md bg-slate-50 dark:bg-slate-800 shadow dark:shadow-gray-700">
+                            <div className="rounded-md bg-white dark:bg-slate-800 shadow dark:shadow-gray-700">
                                 <div className="p-6">
                                     <div className="text-2xl font-medium">
                                         <h5 className="text-2xl font-medium">{t('price')}:</h5>
