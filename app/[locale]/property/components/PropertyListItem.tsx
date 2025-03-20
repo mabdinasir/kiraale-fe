@@ -11,7 +11,7 @@ import { useSearchParams } from 'next/navigation'
 import { FaCalendarAlt } from 'react-icons/fa'
 import { LuBedDouble, LuBath } from 'react-icons/lu'
 import { PiBuildingApartmentFill } from 'react-icons/pi'
-import FavoriteButton from '@components/UI/Property/FavoriteButton'
+import FavoriteButton from './FavoriteButton'
 
 const PropertyListItem = () => {
     const t = useTranslations()
