@@ -290,13 +290,13 @@
     "decline": "Decline",
     "pricing-title": "Our Pricing Plans",
     "pricing-rental-title": "Rental Listing",
-    "pricing-rental-price": "$20 per listing",
+    "pricing-rental-price": "$15 per listing",
     "pricing-duration": "Active for 30 days",
     "pricing-feature-1": "Upload unlimited high-quality images",
     "pricing-rental-feature-2": "Easily edit or remove property details",
     "pricing-rental-feature-3": "Gain visibility among active renters",
     "pricing-sale-title": "Sale Listing",
-    "pricing-sale-price": "$150 per listing",
+    "pricing-sale-price": "$15 per listing",
     "pricing-sale-feature-2": "Easily edit or remove property details",
     "pricing-sale-feature-3": "Connect with serious buyers",
     "pricing-management-title": "Property Management",
@@ -343,5 +343,35 @@
     "password-updated-successfully": "Password updated successfully.",
     "account-deactivation-successfully": "Account successfully deactivate. You can reactivate by logging back in.",
     "invalid-file-type": "Invalid file type. Please upload a valid image file.",
-    "images-saved-go-to-payment": "Images saved successfully. You can now proceed to payment. If you want to add more images, you can do so after payment in \"My property\" page in the dashboard"
+    "images-saved-go-to-payment": "Images saved successfully. You can now proceed to payment. If you want to add more images, you can do so after payment in \"My property\" page in the dashboard",
+    "payment": {
+        "title": "Payment for: ",
+        "payment-method-select": "Select your preferred payment option",
+        "total": "Total Amount",
+        "subtotal": "Subtotal",
+        "discount": "Discount",
+        "property": "Property Name",
+        "mpesa": {
+            "title": "M-Pesa",
+            "description": "Lipa na M-Pesa",
+            "phone": "Phone Number",
+            "phone-placeholder": "Enter your M-Pesa phone number",
+            "phone-invalid": "Invalid M-Pesa phone number.",
+            "pay": "Lipa na M-Pesa",
+            "paying": "Paying...",
+            "success": "Payment successful. You will receive a confirmation message shortly.",
+            "error": "An error occurred while processing your payment. Please try again later."
+        },
+        "evc": {
+            "title": "EVC Plus",
+            "description": "Ku Bixi EVC Plus",
+            "phone": "Phone Number",
+            "phone-placeholder": "Enter your EVC Plus phone number",
+            "phone-invalid": "Invalid EVC Plus phone number.",
+            "pay": "Ku Bixi EVC Plus",
+            "paying": "Paying...",
+            "success": "Payment successful. You will receive a confirmation message shortly.",
+            "error": "An error occurred while processing your payment. Please try again later."
+        }
+    }
 }
