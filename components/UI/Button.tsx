@@ -1,5 +1,6 @@
 import React from 'react'
 import LoadingIndicator from '@components/UI/LoadingIndicator'
+import clsx from 'clsx'
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     title: string
@@ -24,12 +25,16 @@ const Button: React.FC<Props> = ({
     <button
         type="submit"
         onClick={onClick}
-        className={
-            className ||
-            `btn rounded-md text-white ${
-                isLoading || disabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700'
-            } ${fullWidth ? 'w-full' : ''} ${redVariant ? 'bg-red-600 hover:bg-red-700' : ''}`
-        }
+        className={clsx(
+            'btn rounded-md text-white',
+            {
+                'bg-gray-400 cursor-not-allowed': isLoading || disabled,
+                'bg-green-600 hover:bg-green-700': !redVariant && !(isLoading || disabled),
+                'bg-red-600 hover:bg-red-700': redVariant,
+                'w-full': fullWidth,
+            },
+            className,
+        )}
         disabled={isLoading || disabled}
     >
         <div className="flex items-center w-full">

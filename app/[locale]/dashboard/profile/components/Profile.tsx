@@ -11,10 +11,10 @@ import { FaPassport } from 'react-icons/fa6'
 import { FaIdCard } from 'react-icons/fa'
 import { RiEyeOffLine } from 'react-icons/ri'
 import { RiRadioButtonLine } from 'react-icons/ri'
-import Property from '@components/UI/Property/Property'
 import { useGetPropertiesByUserQuery } from '@store/services/properties'
 import LoadingIndicator from '@components/UI/LoadingIndicator'
 import ProfilePic from './ProfilePic'
+import Property from 'app/[locale]/property/components/Property'
 
 const Profile = () => {
     const t = useTranslations()

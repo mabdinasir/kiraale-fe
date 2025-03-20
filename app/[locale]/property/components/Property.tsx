@@ -5,18 +5,16 @@ import { FaBan, FaCalendarAlt, FaHourglassHalf } from 'react-icons/fa'
 import { LuBath, LuBedDouble } from 'react-icons/lu'
 import Image from 'next/image'
 import { Property as IProperty } from '@models/properties/property'
-import EmptyState from '../EmptyState'
 import { PiBuildingApartmentFill } from '@node_modules/react-icons/pi'
 import { RiRadioButtonLine, RiMoneyDollarBoxFill } from 'react-icons/ri'
 import { GiCarKey } from 'react-icons/gi'
 import { AiOutlineExclamationCircle } from 'react-icons/ai'
 import FavoriteButton from './FavoriteButton'
+import EmptyState from '@components/UI/EmptyState'
 
 interface PropertyProps {
     properties: IProperty[]
 }
-
-// we need a mapping for all statuses - available, sold, rented, pending, etc. and their icons
 
 const statuses = {
     AVAILABLE: {

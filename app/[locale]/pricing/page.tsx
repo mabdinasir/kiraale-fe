@@ -76,7 +76,7 @@ export default function Pricing() {
                                             ))}
                                         </ul>
                                         <Link
-                                            href="#"
+                                            href="/dashboard"
                                             className="btn bg-green-600 hover:bg-green-700 border-green-600 dark:border-green-600 text-white rounded-md w-full mt-4"
                                         >
                                             {t('pricing-get-started')}

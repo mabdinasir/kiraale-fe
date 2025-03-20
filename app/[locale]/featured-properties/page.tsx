@@ -1,4 +1,4 @@
-import FeaturedProperties from '@components/UI/FeaturedProperties'
+import FeaturedProperties from 'app/[locale]/property/components/FeaturedProperties'
 import React from 'react'
 import StoreProvider from '../StoreProvider'
 import { useTranslations } from 'next-intl'

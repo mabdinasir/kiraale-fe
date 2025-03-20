@@ -3,7 +3,7 @@
 import React from 'react'
 import Feature from '@components/UI/Feature'
 import GetInTuch from '@components/UI/GetInTouch'
-import FeaturedProperties from '@components/UI/FeaturedProperties'
+import FeaturedProperties from 'app/[locale]/property/components/FeaturedProperties'
 import { Search } from 'react-feather'
 import BuyTab from '@components/UI/BuyTab'
 import { useTranslations } from 'next-intl'

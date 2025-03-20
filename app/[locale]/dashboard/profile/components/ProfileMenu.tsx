@@ -142,9 +142,9 @@ const ProfileMenu = () => {
                 </div>
 
                 {/* Sign-Out */}
-                <div className="py-2">
+                <div className="p-2">
                     <Button
-                        className="block px-4 py-2 text-base font-medium hover:bg-red-100 dark:hover:bg-red-600 rounded w-full text-left"
+                        className="block px-3 text-base font-medium hover:bg-red-100 dark:hover:bg-red-600 rounded w-full text-left"
                         isLoading={isLoading}
                         title={isLoading ? t('signing-out') : t('sign-out')}
                         redVariant

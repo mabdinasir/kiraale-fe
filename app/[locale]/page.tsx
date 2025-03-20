@@ -6,7 +6,7 @@ import GetInTuch from '@components/UI/GetInTouch'
 import ClientTwo from '@components/UI/ClientTwo'
 import PropertySearch from './property/page'
 import StoreProvider from './StoreProvider'
-import FeaturedProperties from '@components/UI/FeaturedProperties'
+import FeaturedProperties from 'app/[locale]/property/components/FeaturedProperties'
 
 const Home = () => {
     const t = useTranslations()

@@ -6,7 +6,7 @@ import LoadingIndicator from '@components/UI/LoadingIndicator'
 import { PiBuildingApartmentFill } from '@node_modules/react-icons/pi'
 import { useGetFavoritePropertiesQuery } from '@store/services/properties'
 import { useTranslations } from 'next-intl'
-import Property from '@components/UI/Property/Property'
+import Property from 'app/[locale]/property/components/Property'
 
 const FavoriteProperties = () => {
     const { data, isLoading } = useGetFavoritePropertiesQuery()

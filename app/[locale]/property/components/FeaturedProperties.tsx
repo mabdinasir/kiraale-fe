@@ -4,8 +4,8 @@ import React from 'react'
 
 import { useTranslations } from 'next-intl'
 import { useGetFeaturedPropertiesQuery } from '@store/services/properties'
-import LoadingIndicator from './LoadingIndicator'
-import Property from './Property/Property'
+import LoadingIndicator from '../../../../components/UI/LoadingIndicator'
+import Property from './Property'
 
 const FeaturedProperties = () => {
     const t = useTranslations()
