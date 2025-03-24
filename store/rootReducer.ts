@@ -9,6 +9,7 @@ import stepValidationReducer from '@store/slices/stepValidation'
 import { subscriberApi } from './services/subscriber'
 import { contactAPi } from './services/contact'
 import { fileUploadsApi } from './services/fileUploads'
+import { paymentsAPi } from './services/payments'
 
 const rootReducer = combineReducers({
     [todosApi.reducerPath]: todosApi.reducer,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
     [subscriberApi.reducerPath]: subscriberApi.reducer,
     [contactAPi.reducerPath]: contactAPi.reducer,
     [fileUploadsApi.reducerPath]: fileUploadsApi.reducer,
+    [paymentsAPi.reducerPath]: paymentsAPi.reducer,
     token: tokenSlice,
     stepValidation: stepValidationReducer,
 })

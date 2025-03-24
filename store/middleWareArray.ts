@@ -2,6 +2,7 @@ import { authApi } from './services/auth'
 import { contactAPi } from './services/contact'
 import { fileUploadsApi } from './services/fileUploads'
 import { mediaAPi } from './services/media'
+import { paymentsAPi } from './services/payments'
 import { propertiesAPi } from './services/properties'
 import { subscriberApi } from './services/subscriber'
 import { todosApi } from './services/todos'
@@ -16,6 +17,7 @@ const middlewareArray = [
     subscriberApi.middleware,
     contactAPi.middleware,
     fileUploadsApi.middleware,
+    paymentsAPi.middleware,
 ]
 
 export default middlewareArray

@@ -4,6 +4,10 @@ import React, { useState, useCallback } from 'react'
 import { useTranslations } from 'next-intl'
 import clsx from 'clsx'
 import { validateKenyanNumber, validateSomaliNumber } from '@utils/validatePhoneNumber'
+import { useStkPushMutation } from '@store/services/payments'
+import { useAppSelector } from '@hooks/rtkHooks'
+import useCurrentUser from '@hooks/useCurrentUser'
+import { useGetUserByIdQuery } from '@store/services/users'
 
 type FormErrors = {
     phoneNumber: string
@@ -11,6 +15,10 @@ type FormErrors = {
 
 const PropertyPayment = () => {
     const t = useTranslations()
+    const propertyId = useAppSelector((state) => state.stepValidation.steps[1].propertyId)
+    const currentUser = useCurrentUser()
+    const id = currentUser?.id
+    const { data: userData } = useGetUserByIdQuery(id || '')
 
     const initialPaymentData = React.useMemo(
         () => ({
@@ -25,6 +33,7 @@ const PropertyPayment = () => {
         initialPaymentData,
     )
     const [errors, setErrors] = useState<FormErrors>({ phoneNumber: '' })
+    const [stkPush] = useStkPushMutation()
 
     const property = 'Sample Property'
     const kenyaSubtotal = 2000
@@ -65,13 +74,23 @@ const PropertyPayment = () => {
         [paymentData, selectedPaymentMethod, t],
     )
 
-    const handleSubmit = useCallback(async (e: React.FormEvent) => {
-        e.preventDefault()
+    const handleSubmit = useCallback(
+        async (e: React.FormEvent) => {
+            e.preventDefault()
 
-        setTimeout(() => {
-            // Redirect to success page
-        }, 1500)
-    }, [])
+            const { mpesaPhoneNumber } = paymentData
+            if (selectedPaymentMethod === 'mpesa') {
+                await stkPush({
+                    phoneNumber: mpesaPhoneNumber,
+                    userId: userData?.user.id || '',
+                    propertyId,
+                }).unwrap()
+                // const { data: paymentStatusResponse } = useCheckMpesaPaymentStatusQuery(response?.data?.checkoutRequestId)
+                // console.log(paymentStatusResponse)
+            }
+        },
+        [paymentData, selectedPaymentMethod, stkPush, userData, propertyId],
+    )
 
     return (
         <>

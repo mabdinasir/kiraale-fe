@@ -9,6 +9,7 @@ const apiConfig = {
     subscriberApi: `${baseUrl}/subscriber`,
     contactAPi: `${baseUrl}/contact`,
     fileUploadsApi: `${baseUrl}/fileUploads`,
+    paymentsApi: `${baseUrl}/payments`,
 }
 
 export default apiConfig
