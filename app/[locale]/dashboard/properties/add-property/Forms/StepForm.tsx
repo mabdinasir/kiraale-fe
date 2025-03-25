@@ -3,12 +3,12 @@
 import { useTranslations } from 'next-intl'
 import React from 'react'
 import { FaHome, FaImage, FaCreditCard, FaCheckCircle } from 'react-icons/fa'
-import Success from '../components/Success'
 import { useAppDispatch, useAppSelector } from '@hooks/rtkHooks'
 import { goToNextStep } from '@store/slices/stepValidation'
 import PropertyMediaUpload from '../components/PropertyMediaUpload'
 import AddPropertyForm from './AddPropertyForm'
 import PropertyPayment from '../components/PropertyPayment'
+import Receipt from '../components/Receipt'
 
 const StepForm = () => {
     const t = useTranslations()
@@ -75,7 +75,7 @@ const StepForm = () => {
                 {currentStep === 1 && <AddPropertyForm />}
                 {currentStep === 2 && <PropertyMediaUpload />}
                 {currentStep === 3 && <PropertyPayment />}
-                {currentStep === 4 && <Success />}
+                {currentStep === 4 && <Receipt />}
             </div>
             <div className="flex justify-between w-full max-w-2xl mt-6">
                 {currentStep < 4 && (

@@ -168,7 +168,9 @@ const PropertyPayment = () => {
                             <button
                                 onClick={handleSubmit}
                                 className={clsx(
-                                    'hover:bg-[#2E9E2B] px-4 py-2 rounded-md h-10',
+                                    selectedPaymentMethod === 'mpesa'
+                                        ? 'hover:bg-[#2E9E2B] px-4 py-2 rounded-md h-10'
+                                        : 'hover:bg-[#0098D4] px-4 py-2 rounded-md h-10',
                                     selectedPaymentMethod === 'mpesa'
                                         ? 'bg-[#34B233] text-white'
                                         : 'bg-[#00AEEF] text-white',

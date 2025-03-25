@@ -35,7 +35,7 @@ const About = () => {
                                     onClick={() => setOpen(true)}
                                     data-type="youtube"
                                     data-id="S_CGed6E610"
-                                    className="lightbox h-20 w-20 rounded-full shadow-md dark:shadow-gyay-700 inline-flex items-center justify-center bg-white dark:bg-slate-900 text-green-600"
+                                    className="lightbox h-20 w-20 rounded-full shadow-md dark:shadow-gray-700 inline-flex items-center justify-center bg-white dark:bg-slate-900 text-green-600"
                                 >
                                     <i className="mdi mdi-play inline-flex items-center justify-center text-2xl"></i>
                                 </Link>
