@@ -16,6 +16,12 @@ const nextConfig: NextConfig = {
                 hostname: 'eastleigh-real-estate-profile-pic-bucket.s3.ap-southeast-2.amazonaws.com',
                 pathname: '/**',
             },
+            {
+                protocol: 'http',
+                hostname: '13.211.213.213',
+                port: '8080',
+                pathname: '/**',
+            },
         ],
     },
 }
