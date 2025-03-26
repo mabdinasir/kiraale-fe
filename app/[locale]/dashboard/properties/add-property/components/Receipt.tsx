@@ -43,7 +43,7 @@ const PaymentReceipt = () => {
     }
 
     const handleDownload = () => {
-        console.log('Downloading PDF...')
+        // console.log('Downloading PDF...')
     }
 
     return (
