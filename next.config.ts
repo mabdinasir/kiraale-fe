@@ -18,24 +18,11 @@ const nextConfig: NextConfig = {
             },
         ],
     },
-    async headers() {
+    async rewrites() {
         return [
             {
-                source: '/(.*)',
-                headers: [
-                    {
-                        key: 'Access-Control-Allow-Origin',
-                        value: 'http://3.25.52.143:8080',
-                    },
-                    {
-                        key: 'Access-Control-Allow-Methods',
-                        value: 'GET, POST, PUT, DELETE, OPTIONS',
-                    },
-                    {
-                        key: 'Access-Control-Allow-Headers',
-                        value: 'X-Requested-With, Content-Type, application/json',
-                    },
-                ],
+                source: '/api/:path*',
+                destination: 'http://3.25.52.143:8080/api/:path*',
             },
         ]
     },
