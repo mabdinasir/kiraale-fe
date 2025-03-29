@@ -120,7 +120,7 @@ export const reviews = [
         name: 'Amina Ali',
         designation: 'Business Owner',
         description:
-            'This platform made finding a property in Eastleigh so easy! I quickly found a shop in the perfect location for my business.',
+            'This platform made finding a property in my city so easy! I quickly found a shop in the perfect location for my business.',
     },
     {
         id: '2',
@@ -128,7 +128,7 @@ export const reviews = [
         name: 'Mohamed Hassan',
         designation: 'Real Estate Agent',
         description:
-            'As an agent, I appreciate how simple it is to list properties and connect with buyers and renters in Eastleigh and beyond.',
+            'As an agent, I appreciate how simple it is to list properties and connect with buyers and renters at any time.',
     },
     {
         id: '3',

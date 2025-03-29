@@ -1,6 +1,6 @@
-# Eastleigh Real Estate Frontend
+# Kiraale Frontend
 
-This project is the frontend for the Eastleigh Real Estate application. It is built using [Next.js](https://nextjs.org/) with [React](https://react.dev/), styled using [Tailwind CSS](https://tailwindcss.com/), and utilizes [TypeScript](https://www.typescriptlang.org/) for type safety. The project uses [Bun](https://bun.sh/) as the package manager and runtime for improved performance and developer experience.
+This project is the frontend for the Kiraale application. It is built using [Next.js](https://nextjs.org/) with [React](https://react.dev/), styled using [Tailwind CSS](https://tailwindcss.com/), and utilizes [TypeScript](https://www.typescriptlang.org/) for type safety. The project uses [Bun](https://bun.sh/) as the package manager and runtime for improved performance and developer experience.
 
 ## Features
 
@@ -24,7 +24,7 @@ Clone the repository and install the dependencies:
 
 ```bash
 git clone <repository_url>
-cd eastleigh-realeastate-fe
+cd kiraale-fe
 bun install
 ```
 

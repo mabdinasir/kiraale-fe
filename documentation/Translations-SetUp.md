@@ -75,8 +75,8 @@ import { getMessages } from 'next-intl/server';
 import '../globals.css';
 
 export const metadata: Metadata = {
-    title: 'Eastleigh Real Estate',
-    description: 'Eastleigh Real Estate platform for property rentals and bookings in Kenya.',
+    title: 'Kiraale',
+    description: 'Kiraale is a platform for property rentals and bookings in Somalia and Kenya.',
 };
 
 const rubik = Rubik({

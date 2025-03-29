@@ -21,8 +21,8 @@ const league_Spartan = League_Spartan({
 })
 
 export const metadata: Metadata = {
-    title: 'Eastleigh Real Estate',
-    description: `Eastleigh Real Estate is a platform that connects property owners with renters and travelers in Kenya. We simplify the process of renting homes, finding tenants, and booking hotels, making it easier for everyone to find their perfect space.`,
+    title: 'Kiraale',
+    description: `Kiraale is a platform that connects property owners with renters and travelers in Somalia and Kenya. We simplify the process of renting homes, finding tenants, and booking hotels, making it easier for everyone to find their perfect space.`,
 }
 
 export default async function RootLayout({

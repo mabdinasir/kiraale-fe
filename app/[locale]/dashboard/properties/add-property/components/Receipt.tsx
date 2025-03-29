@@ -5,7 +5,7 @@ import { format } from 'date-fns'
 const PaymentReceipt = () => {
     const receiptData = {
         company: {
-            name: 'Eastleigh Real Estate',
+            name: 'Kiraale',
             address: '10th Street, Eastleigh, Nairobi',
             city: 'Nairobi',
             zip: '12345',
