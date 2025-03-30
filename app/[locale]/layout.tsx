@@ -42,10 +42,10 @@ export default async function RootLayout({
                     <Navbar />
                     {children}
                     <Switcher />
-                    <Analytics />
                     <Footer />
                     <Toaster position="bottom-left" />
                 </NextIntlClientProvider>
+                <Analytics />
             </body>
         </html>
     )
