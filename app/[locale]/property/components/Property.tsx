@@ -80,22 +80,22 @@ const Property: React.FC<PropertyProps> = ({ properties }) => {
                             <ul className="md:py-4 py-6 border-y border-slate-100 dark:border-gray-800 flex propertys-center list-none justify-between">
                                 <li className="flex propertys-center me-4">
                                     <FaCalendarAlt width={20} className="me-2 text-green-600 text-2xl" />
-                                    <span>{property?.features?.yearBuilt}</span>
+                                    <span>{property?.features?.yearBuilt ?? 'N/A'}</span>
                                 </li>
 
                                 <li className="flex propertys-center me-4">
                                     <LuBedDouble width={20} className="me-2 text-green-600 text-2xl" />
                                     <span>
-                                        {property.features.bedrooms}{' '}
-                                        {property.features.bedrooms <= 1 ? t('bed') : t('beds')}
+                                        {property?.features?.bedrooms ?? 0}{' '}
+                                        {property?.features?.bedrooms <= 1 ? t('bed') : t('beds')}
                                     </span>
                                 </li>
 
                                 <li className="flex propertys-center">
                                     <LuBath width={20} className="me-2 text-green-600 text-2xl" />
                                     <span>
-                                        {property.features.bathrooms}{' '}
-                                        {property.features.bathrooms <= 1 ? t('bath') : t('baths')}
+                                        {property?.features?.bathrooms ?? 0}{' '}
+                                        {property?.features?.bathrooms <= 1 ? t('bath') : t('baths')}
                                     </span>
                                 </li>
                             </ul>

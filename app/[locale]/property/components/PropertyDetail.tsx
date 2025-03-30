@@ -65,37 +65,37 @@ const PropertyDetail = () => {
                             </div>
                         </div>
 
-                        <h4 className="text-2xl font-medium mt-6 mb-3 ">{property?.title}</h4>
+                        <h4 className="text-2xl font-medium mt-6 mb-3 ">{property?.title ?? 'N/A'}</h4>
                         <span className=" flex items-center">
-                            <FiMapPin className="size-5 me-2" /> {property?.address}
+                            <FiMapPin className="size-5 me-2" /> {property?.address ?? 'N/A'}
                         </span>
 
                         <ul className="py-6 flex items-center list-none">
                             <li className="flex items-center lg:me-6 me-4">
                                 <LiaCompressArrowsAltSolid className="lg:text-3xl text-2xl me-2 text-green-600" />
                                 <span className="lg:text-xl ">
-                                    {property?.features.area} {t('sqf')}
+                                    {property?.features?.area ?? 'N/A'} {t('sqf')}
                                 </span>
                             </li>
 
                             <li className="flex items-center lg:me-6 me-4">
                                 <LuBedDouble className="lg:text-3xl text-2xl me-2 text-green-600" />
                                 <span className="lg:text-xl ">
-                                    {property?.features.bedrooms}{' '}
-                                    {property?.features.bedrooms <= 1 ? t('bed') : t('beds')}
+                                    {property?.features?.bedrooms ?? 0}{' '}
+                                    {property?.features?.bedrooms <= 1 ? t('bed') : t('beds')}
                                 </span>
                             </li>
 
                             <li className="flex items-center">
                                 <LuBath className="lg:text-3xl text-2xl me-2 text-green-600" />
                                 <span className="lg:text-xl ">
-                                    {property?.features.bathrooms}{' '}
-                                    {property?.features.bathrooms <= 1 ? t('bath') : t('baths')}
+                                    {property?.features?.bathrooms ?? 0}{' '}
+                                    {property?.features?.bathrooms <= 1 ? t('bath') : t('baths')}
                                 </span>
                             </li>
                         </ul>
 
-                        <p className="">{property?.description}</p>
+                        <p className="">{property?.description ?? 'N/A'}</p>
 
                         <div className="w-full leading-[0] border-0 mt-6">
                             <iframe
@@ -137,13 +137,15 @@ const PropertyDetail = () => {
                                     <ul className="list-none mt-4">
                                         <li className="flex justify-between items-center">
                                             <span className=" text-sm">{t('year-built')}:</span>
-                                            <span className="font-medium text-sm">{property?.features.yearBuilt}</span>
+                                            <span className="font-medium text-sm">
+                                                {property?.features?.yearBuilt ?? 'N/A'}
+                                            </span>
                                         </li>
 
                                         <li className="flex justify-between items-center mt-2 ms-0">
                                             <span className=" text-sm">{t('air-conditioning')}:</span>
                                             <span className="font-medium text-sm">
-                                                {property?.features.airConditioning ? t('yes') : t('no')}
+                                                {property?.features?.airConditioning ? t('yes') : t('no')}
                                             </span>
                                         </li>
 

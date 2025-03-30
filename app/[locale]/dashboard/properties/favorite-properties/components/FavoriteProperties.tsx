@@ -25,7 +25,7 @@ const FavoriteProperties = () => {
 
     return (
         <div>
-            <Property properties={data.properties} />
+            <Property properties={data.properties || []} />
         </div>
     )
 }
