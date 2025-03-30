@@ -14,6 +14,8 @@ import EmptyState from '@components/UI/EmptyState'
 
 interface PropertyProps {
     properties: IProperty[]
+    emptyStateTile?: string
+    emptyStateDescription?: string
 }
 
 const statuses = {
@@ -43,15 +45,15 @@ const statuses = {
     },
 }
 
-const Property: React.FC<PropertyProps> = ({ properties }) => {
+const Property: React.FC<PropertyProps> = ({ properties, emptyStateTile, emptyStateDescription }) => {
     const t = useTranslations()
 
     if (!properties || properties.length === 0)
         return (
             <EmptyState
                 icon={<PiBuildingApartmentFill size={98} />}
-                title={t('no-properties-found')}
-                description={t('no-properties-description')}
+                title={emptyStateTile ?? t('no-properties-found')}
+                description={emptyStateDescription ?? t('no-properties-description')}
             />
         )
 
