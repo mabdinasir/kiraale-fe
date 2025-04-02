@@ -280,7 +280,7 @@ const AddPropertyForm = () => {
                     {/* Area */}
                     <div className="col-span-6">
                         <label htmlFor="area" className="font-medium">
-                            {t('area')} (sq. ft.):
+                            {t('area')} ({t('meters')}):
                         </label>
                         <div className="form-icon relative mt-2">
                             <IoExpandOutline className="w-4 h-4 absolute top-3 start-4 text-green-600" />

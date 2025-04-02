@@ -82,7 +82,7 @@ const PropertyListItem = () => {
                                             <LuBedDouble width={20} className="me-2 text-green-600 text-2xl" />
                                             <span>
                                                 {property.features.bedrooms ?? 0}{' '}
-                                                {property.features.bedrooms <= 1 ? t('bed') : t('beds')}
+                                                {property.features.bedrooms === 1 ? t('bed') : t('beds')}
                                             </span>
                                         </li>
 
@@ -90,7 +90,7 @@ const PropertyListItem = () => {
                                             <LuBath width={20} className="me-2 text-green-600 text-2xl" />
                                             <span>
                                                 {property.features.bathrooms ?? 0}{' '}
-                                                {property.features.bathrooms <= 1 ? t('bath') : t('baths')}
+                                                {property.features.bathrooms === 1 ? t('bath') : t('baths')}
                                             </span>
                                         </li>
                                     </ul>

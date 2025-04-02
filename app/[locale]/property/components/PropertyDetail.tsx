@@ -74,7 +74,9 @@ const PropertyDetail = () => {
                             <li className="flex items-center lg:me-6 me-4">
                                 <LiaCompressArrowsAltSolid className="lg:text-3xl text-2xl me-2 text-green-600" />
                                 <span className="lg:text-xl ">
-                                    {property?.features?.area ?? 'N/A'} {t('sqf')}
+                                    {property?.features?.area === 1
+                                        ? ` ${property?.features?.area} ${t('meter')}`
+                                        : ` ${property?.features?.area} ${t('meters')}`}
                                 </span>
                             </li>
 
@@ -82,7 +84,7 @@ const PropertyDetail = () => {
                                 <LuBedDouble className="lg:text-3xl text-2xl me-2 text-green-600" />
                                 <span className="lg:text-xl ">
                                     {property?.features?.bedrooms ?? 0}{' '}
-                                    {property?.features?.bedrooms <= 1 ? t('bed') : t('beds')}
+                                    {property?.features?.bedrooms === 1 ? t('bed') : t('beds')}
                                 </span>
                             </li>
 
@@ -90,7 +92,7 @@ const PropertyDetail = () => {
                                 <LuBath className="lg:text-3xl text-2xl me-2 text-green-600" />
                                 <span className="lg:text-xl ">
                                     {property?.features?.bathrooms ?? 0}{' '}
-                                    {property?.features?.bathrooms <= 1 ? t('bath') : t('baths')}
+                                    {property?.features?.bathrooms === 1 ? t('bath') : t('baths')}
                                 </span>
                             </li>
                         </ul>
