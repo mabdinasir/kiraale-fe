@@ -1,13 +1,19 @@
 'use client' // This is a client component 👈🏽
 
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import { useTranslations } from 'next-intl'
 import clsx from 'clsx'
 import { validateKenyanNumber, validateSomaliNumber } from '@utils/validatePhoneNumber'
-import { useStkPushMutation } from '@store/services/payments'
-import { useAppSelector } from '@hooks/rtkHooks'
+import {
+    useCheckMpesaPaymentStatusQuery,
+    useEvcPlusPurchaseMutation,
+    useStkPushMutation,
+} from '@store/services/payments'
+import { useAppDispatch, useAppSelector } from '@hooks/rtkHooks'
 import useCurrentUser from '@hooks/useCurrentUser'
 import { useGetUserByIdQuery } from '@store/services/users'
+import { updateStep } from '@store/slices/stepValidation'
+import showToast from '@utils/showToast'
 
 type FormErrors = {
     phoneNumber: string
@@ -15,11 +21,11 @@ type FormErrors = {
 
 const PropertyPayment = () => {
     const t = useTranslations()
+    const dispatch = useAppDispatch()
     const propertyId = useAppSelector((state) => state.stepValidation.steps[1].propertyId)
     const currentUser = useCurrentUser()
     const id = currentUser?.id
     const { data: userData } = useGetUserByIdQuery(id || '')
-
     const initialPaymentData = React.useMemo(
         () => ({
             mpesaPhoneNumber: '',
@@ -27,21 +33,45 @@ const PropertyPayment = () => {
         }),
         [],
     )
-
     const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<'mpesa' | 'evc'>('mpesa')
     const [paymentData, setPaymentData] = useState<{ mpesaPhoneNumber: string; evcPhoneNumber: string }>(
         initialPaymentData,
     )
     const [errors, setErrors] = useState<FormErrors>({ phoneNumber: '' })
-    const [stkPush] = useStkPushMutation()
+    const [mpesaCheckoutRequestId, setMpesaCheckoutRequestId] = useState<string | null>(null)
+
+    const [stkPush, { isLoading: isMpesaLoading }] = useStkPushMutation()
+    const [evcPlusPurchase, { isLoading: isEvcLoading }] = useEvcPlusPurchaseMutation()
+    const { data: paymentStatusResponse, refetch } = useCheckMpesaPaymentStatusQuery(mpesaCheckoutRequestId || '', {
+        skip: !mpesaCheckoutRequestId,
+    })
 
     const property = 'Sample Property'
     const kenyaSubtotal = 2000
     const somaliSubtotal = 15
-    const percentageDiscount = 0.5
+    const percentageDiscount = 1
+
     const discount =
         selectedPaymentMethod === 'mpesa' ? kenyaSubtotal * percentageDiscount : somaliSubtotal * percentageDiscount
     const total = selectedPaymentMethod === 'mpesa' ? kenyaSubtotal - discount : somaliSubtotal - discount
+    const isFreePayment = discount === (selectedPaymentMethod === 'mpesa' ? kenyaSubtotal : somaliSubtotal)
+
+    const formatCurrency = (amount: number) =>
+        selectedPaymentMethod === 'mpesa' ? `KSH ${amount.toFixed(2)}` : `$${amount.toFixed(2)}`
+
+    const isLoading = selectedPaymentMethod === 'mpesa' ? isMpesaLoading : isEvcLoading
+
+    useEffect(() => {
+        if (paymentStatusResponse?.data?.paymentStatus === 'COMPLETED') {
+            dispatch(updateStep({ step: 3, isValid: true, data: { isPaymentSuccess: true } }))
+            dispatch(updateStep({ step: 4, isValid: true }))
+            showToast('success', t('payment.success'))
+            setMpesaCheckoutRequestId(null)
+        } else if (paymentStatusResponse?.data?.paymentStatus === 'FAILED') {
+            showToast('error', t('payment.mpesa.failed'))
+            setMpesaCheckoutRequestId(null)
+        }
+    }, [paymentStatusResponse, dispatch, t, isFreePayment])
 
     const handlePaymentMethodChange = useCallback((method: 'mpesa' | 'evc') => {
         setSelectedPaymentMethod(method)
@@ -78,18 +108,48 @@ const PropertyPayment = () => {
         async (e: React.FormEvent) => {
             e.preventDefault()
 
-            const { mpesaPhoneNumber } = paymentData
-            if (selectedPaymentMethod === 'mpesa') {
-                await stkPush({
-                    phoneNumber: mpesaPhoneNumber,
-                    userId: userData?.user.id || '',
-                    propertyId,
-                }).unwrap()
-                // const { data: paymentStatusResponse } = useCheckMpesaPaymentStatusQuery(response?.data?.checkoutRequestId)
-                // console.log(paymentStatusResponse)
+            try {
+                if (selectedPaymentMethod === 'mpesa') {
+                    const { mpesaPhoneNumber } = paymentData
+                    const response = await stkPush({
+                        phoneNumber: mpesaPhoneNumber,
+                        userId: userData?.user.id || '',
+                        propertyId,
+                    }).unwrap()
+
+                    if (response?.data?.CheckoutRequestID) {
+                        setMpesaCheckoutRequestId(response.data.CheckoutRequestID)
+                        showToast('success', t('payment.mpesa.initiated'))
+                        refetch()
+                    } else {
+                        showToast('error', t('payment.mpesa.initiation-failed'))
+                    }
+                } else {
+                    await evcPlusPurchase({
+                        phoneNumber: paymentData.evcPhoneNumber,
+                        userId: userData?.user.id || '',
+                        propertyId,
+                    }).unwrap()
+
+                    dispatch(updateStep({ step: 3, isValid: true, data: { isPaymentSuccess: true } }))
+                    dispatch(updateStep({ step: 4, isValid: true }))
+                    showToast('success', t('payment.evc.success'))
+                }
+            } catch {
+                showToast('error', t('payment.generic-error'))
             }
         },
-        [paymentData, selectedPaymentMethod, stkPush, userData, propertyId],
+        [
+            selectedPaymentMethod,
+            paymentData,
+            stkPush,
+            userData?.user.id,
+            propertyId,
+            t,
+            evcPlusPurchase,
+            dispatch,
+            refetch,
+        ],
     )
 
     return (
@@ -106,7 +166,7 @@ const PropertyPayment = () => {
                     <div className="flex justify-between font-medium mt-2">
                         <span className="text-blue-500">{t('payment.subtotal')}:</span>
                         <span className="font-semibold text-blue-500">
-                            {selectedPaymentMethod === 'mpesa' ? `KSH ${kenyaSubtotal}` : `$${somaliSubtotal}`}
+                            {formatCurrency(selectedPaymentMethod === 'mpesa' ? kenyaSubtotal : somaliSubtotal)}
                         </span>
                     </div>
                     <div className="flex justify-between font-medium mt-2">
@@ -115,9 +175,7 @@ const PropertyPayment = () => {
                     </div>
                     <div className="flex justify-between font-medium mt-2">
                         <span className="text-red-600">{t('payment.total')}:</span>
-                        <span className="font-bold text-red-600">
-                            {selectedPaymentMethod === 'mpesa' ? `KSH ${total}` : `$${total}`}
-                        </span>
+                        <span className="font-bold text-red-600">{formatCurrency(total)}</span>
                     </div>
                 </div>
 
@@ -175,15 +233,18 @@ const PropertyPayment = () => {
                                         ? 'bg-[#34B233] text-white'
                                         : 'bg-[#00AEEF] text-white',
                                     (!paymentData.mpesaPhoneNumber && !paymentData.evcPhoneNumber) ||
-                                        (!!errors.phoneNumber && 'bg-gray-400 cursor-not-allowed'),
+                                        !!errors.phoneNumber ||
+                                        (isFreePayment && 'bg-gray-400 cursor-not-allowed'),
                                 )}
                                 disabled={
                                     (selectedPaymentMethod === 'mpesa' && !paymentData.mpesaPhoneNumber) ||
                                     (selectedPaymentMethod === 'evc' && !paymentData.evcPhoneNumber) ||
-                                    !!errors.phoneNumber
+                                    !!errors.phoneNumber ||
+                                    isLoading ||
+                                    isFreePayment
                                 }
                             >
-                                {t(`payment.${selectedPaymentMethod}.pay`)}
+                                {isLoading ? t('payment.processing') : t(`payment.${selectedPaymentMethod}.pay`)}
                             </button>
                         </div>
                     </div>

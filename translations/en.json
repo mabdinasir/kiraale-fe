@@ -353,6 +353,8 @@
         "subtotal": "Subtotal",
         "discount": "Discount",
         "property": "Property Name",
+        "generic-error": "An error occurred while processing your payment. Please try again.",
+        "initiation-failed": "Failed to initiate M-Pesa payment. Please try again.",
         "mpesa": {
             "title": "M-Pesa",
             "description": "Lipa na M-Pesa",
@@ -361,8 +363,9 @@
             "phone-invalid": "Invalid M-Pesa phone number.",
             "pay": "Lipa na M-Pesa",
             "paying": "Paying...",
-            "success": "Payment successful. You will receive a confirmation message shortly.",
-            "error": "An error occurred while processing your payment. Please try again later."
+            "initiated": "Payment initiated. Please check your M-Pesa app to complete the payment.",
+            "success": "Payment successful. You will receive a confirmation email shortly.",
+            "failed": "Mpesa Payment failed. Please try again."
         },
         "evc": {
             "title": "EVC Plus",
@@ -372,8 +375,9 @@
             "phone-invalid": "Invalid EVC Plus phone number.",
             "pay": "Ku Bixi EVC Plus",
             "paying": "Paying...",
-            "success": "Payment successful. You will receive a confirmation message shortly.",
-            "error": "An error occurred while processing your payment. Please try again later."
+            "initiated": "Payment initiated. Please check your EVC Plus app to complete the payment.",
+            "success": "Payment successful. You will receive a confirmation email shortly.",
+            "failed": "EVC Plus Payment failed. Please try again."
         }
     },
     "not-found": {

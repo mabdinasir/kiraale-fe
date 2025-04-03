@@ -4,6 +4,7 @@ interface StepData {
     isValid: boolean
     propertyId?: string
     imageUrls?: string[]
+    isPaymentSuccess?: boolean
 }
 
 interface StepValidationState {
@@ -11,7 +12,7 @@ interface StepValidationState {
     steps: Record<number, StepData> & {
         1: { isValid: boolean; propertyId: string }
         2: { isValid: boolean; imageUrls: string[] }
-        3: { isValid: boolean }
+        3: { isValid: boolean; isPaymentSuccess?: boolean }
         4: { isValid: boolean }
     }
 }
