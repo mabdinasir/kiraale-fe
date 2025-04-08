@@ -14,6 +14,7 @@ import useCurrentUser from '@hooks/useCurrentUser'
 import { useGetUserByIdQuery } from '@store/services/users'
 import { updateStep } from '@store/slices/stepValidation'
 import showToast from '@utils/showToast'
+import { useGetPropertyByIdQuery } from '@store/services/properties'
 
 type FormErrors = {
     phoneNumber: string
@@ -46,15 +47,16 @@ const PropertyPayment = () => {
         skip: !mpesaCheckoutRequestId,
     })
 
-    const property = 'Sample Property'
+    const { data } = useGetPropertyByIdQuery(propertyId || '')
+    const property = data?.property?.title || 'Loading...'
     const kenyaSubtotal = 2000
     const somaliSubtotal = 15
-    const percentageDiscount = 1
+    const percentageDiscount: number = 1
 
     const discount =
         selectedPaymentMethod === 'mpesa' ? kenyaSubtotal * percentageDiscount : somaliSubtotal * percentageDiscount
     const total = selectedPaymentMethod === 'mpesa' ? kenyaSubtotal - discount : somaliSubtotal - discount
-    const isFreePayment = discount === (selectedPaymentMethod === 'mpesa' ? kenyaSubtotal : somaliSubtotal)
+    const isFullyDiscounted = percentageDiscount === 1
 
     const formatCurrency = (amount: number) =>
         selectedPaymentMethod === 'mpesa' ? `KSH ${amount.toFixed(2)}` : `$${amount.toFixed(2)}`
@@ -62,7 +64,10 @@ const PropertyPayment = () => {
     const isLoading = selectedPaymentMethod === 'mpesa' ? isMpesaLoading : isEvcLoading
 
     useEffect(() => {
-        if (paymentStatusResponse?.data?.paymentStatus === 'COMPLETED') {
+        if (isFullyDiscounted) {
+            dispatch(updateStep({ step: 3, isValid: true, data: { isPaymentSuccess: true } }))
+            dispatch(updateStep({ step: 4, isValid: true }))
+        } else if (paymentStatusResponse?.data?.paymentStatus === 'COMPLETED') {
             dispatch(updateStep({ step: 3, isValid: true, data: { isPaymentSuccess: true } }))
             dispatch(updateStep({ step: 4, isValid: true }))
             showToast('success', t('payment.success'))
@@ -71,7 +76,7 @@ const PropertyPayment = () => {
             showToast('error', t('payment.mpesa.failed'))
             setMpesaCheckoutRequestId(null)
         }
-    }, [paymentStatusResponse, dispatch, t, isFreePayment])
+    }, [paymentStatusResponse, dispatch, t, isFullyDiscounted])
 
     const handlePaymentMethodChange = useCallback((method: 'mpesa' | 'evc') => {
         setSelectedPaymentMethod(method)
@@ -80,6 +85,8 @@ const PropertyPayment = () => {
 
     const handlePhoneNumberChange = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
+            if (isFullyDiscounted) return
+
             const { value } = e.target
 
             setPaymentData({
@@ -101,12 +108,13 @@ const PropertyPayment = () => {
                 })
             }
         },
-        [paymentData, selectedPaymentMethod, t],
+        [paymentData, selectedPaymentMethod, t, isFullyDiscounted],
     )
 
     const handleSubmit = useCallback(
         async (e: React.FormEvent) => {
             e.preventDefault()
+            if (isFullyDiscounted) return
 
             try {
                 if (selectedPaymentMethod === 'mpesa') {
@@ -149,6 +157,7 @@ const PropertyPayment = () => {
             evcPlusPurchase,
             dispatch,
             refetch,
+            isFullyDiscounted,
         ],
     )
 
@@ -205,7 +214,12 @@ const PropertyPayment = () => {
 
                 {selectedPaymentMethod && (
                     <div className="mt-6">
-                        <label className="block text-sm font-medium text-slate-700 dark:text-white">
+                        <label
+                            className={clsx(
+                                'block text-sm font-medium',
+                                selectedPaymentMethod === 'mpesa' ? 'text-[#34B233]' : 'text-[#00AEEF]',
+                            )}
+                        >
                             {t(`payment.${selectedPaymentMethod}.phone`)}
                         </label>
                         <input
@@ -218,7 +232,11 @@ const PropertyPayment = () => {
                                     : paymentData.evcPhoneNumber
                             }
                             onChange={handlePhoneNumberChange}
-                            className="form-input w-full p-2 border rounded-md mt-2"
+                            className={clsx(
+                                'form-input w-full p-2 border rounded-md mt-2',
+                                isFullyDiscounted ? 'bg-gray-100 cursor-not-allowed' : '',
+                            )}
+                            disabled={isFullyDiscounted}
                         />
                         {errors.phoneNumber && <p className="text-red-500 text-sm mt-2">{errors.phoneNumber}</p>}
 
@@ -232,16 +250,17 @@ const PropertyPayment = () => {
                                     selectedPaymentMethod === 'mpesa'
                                         ? 'bg-[#34B233] text-white'
                                         : 'bg-[#00AEEF] text-white',
+                                    isFullyDiscounted && 'bg-gray-400 cursor-not-allowed',
                                     (!paymentData.mpesaPhoneNumber && !paymentData.evcPhoneNumber) ||
                                         !!errors.phoneNumber ||
-                                        (isFreePayment && 'bg-gray-400 cursor-not-allowed'),
+                                        (isFullyDiscounted && 'bg-gray-400 cursor-not-allowed'),
                                 )}
                                 disabled={
                                     (selectedPaymentMethod === 'mpesa' && !paymentData.mpesaPhoneNumber) ||
                                     (selectedPaymentMethod === 'evc' && !paymentData.evcPhoneNumber) ||
                                     !!errors.phoneNumber ||
                                     isLoading ||
-                                    isFreePayment
+                                    isFullyDiscounted
                                 }
                             >
                                 {isLoading ? t('payment.processing') : t(`payment.${selectedPaymentMethod}.pay`)}
