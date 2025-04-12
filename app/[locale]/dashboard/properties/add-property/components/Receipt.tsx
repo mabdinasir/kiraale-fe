@@ -1,8 +1,15 @@
 import React from 'react'
-import { FaPrint, FaDownload, FaQrcode } from 'react-icons/fa'
+import { FaPrint, FaDownload, FaQrcode, FaUser, FaEnvelope, FaPhone } from 'react-icons/fa'
 import { format } from 'date-fns'
+import { useAppSelector } from '@hooks/rtkHooks'
+import { useGetPaymentByPropertyIdQuery } from '@store/services/payments'
+import LoadingIndicator from '@components/UI/LoadingIndicator'
 
 const PaymentReceipt = () => {
+    const propertyId = useAppSelector((state) => state.stepValidation.steps[1].propertyId)
+    const { data, isLoading } = useGetPaymentByPropertyIdQuery(propertyId || '')
+    const paymentData = data?.payment
+
     const receiptData = {
         company: {
             name: 'Kiraale',
@@ -10,28 +17,27 @@ const PaymentReceipt = () => {
             city: 'Nairobi',
             zip: '12345',
             phone: '+1 (555) 123-4567',
-            email: 'contact@eastleighrealestate.com',
+            email: 'contact@kiraale.com',
         },
         receipt: {
-            number: 'INV-2024-001',
-            date: new Date(),
-            paymentMethod: 'Mpesa',
-            phoneNumber: '+254711234567',
-            transactionId: 'TXN789012345',
+            number: `INV-2024-${paymentData?.receiptNumber}`,
+            date: paymentData?.transactionDate,
+            paymentMethod: paymentData?.paymentMethod,
+            phoneNumber: paymentData?.phoneNumber,
+            transactionId: paymentData?.transactionId,
         },
         customer: {
-            name: 'Mohamed Abdinasir',
-            address: 'BBS Mall, 2nd Floor, Shop 12',
-            city: 'Eastleigh, Nairobi',
-            zip: '67890',
-            email: 'mabdinasira@gmail.com',
+            name: `${paymentData?.user.firstName} ${paymentData?.user.lastName}`,
+            email: paymentData?.user.email,
+            phone: paymentData?.user.mobile,
         },
         items: [
             {
                 id: 1,
-                title: 'Spacious 3-Bedroom Residential Apartment for Rent in Eastleigh, Nairobi',
+                title: paymentData?.property?.title,
+                description: paymentData?.property.description,
                 quantity: 1,
-                price: 2000,
+                price: paymentData?.amount,
             },
         ],
         discount: 0.5,
@@ -44,6 +50,10 @@ const PaymentReceipt = () => {
 
     const handleDownload = () => {
         // console.log('Downloading PDF...')
+    }
+
+    if (isLoading) {
+        return <LoadingIndicator />
     }
 
     return (
@@ -63,7 +73,9 @@ const PaymentReceipt = () => {
                         </div>
                         <div className="text-right">
                             <p className="font-bold">Receipt #{receiptData.receipt.number}</p>
-                            <p>{format(receiptData.receipt.date, 'PPP')}</p>
+                            <p>
+                                {receiptData.receipt.date ? format(new Date(receiptData.receipt.date), 'PPP') : 'N/A'}
+                            </p>
                         </div>
                     </div>
 
@@ -71,12 +83,18 @@ const PaymentReceipt = () => {
                         <div>
                             <h2 className="text-lg font-semibold mb-2">Billed To:</h2>
                             <div className={'p-4 rounded'}>
-                                <p className="font-medium">{receiptData.customer.name}</p>
-                                <p>{receiptData.customer.address}</p>
-                                <p>
-                                    {receiptData.customer.city}, {receiptData.customer.zip}
+                                <p className="font-medium flex items-center space-x-2">
+                                    <FaUser />
+                                    <span>{receiptData.customer.name}</span>
                                 </p>
-                                <p>{receiptData.customer.email}</p>
+                                <p className="flex items-center space-x-2">
+                                    <FaEnvelope />
+                                    <span>{receiptData.customer.email}</span>
+                                </p>
+                                <p className="flex items-center space-x-2">
+                                    <FaPhone />
+                                    <span>{receiptData.customer.phone}</span>
+                                </p>
                             </div>
                         </div>
                         <div>
@@ -111,9 +129,17 @@ const PaymentReceipt = () => {
                                     <tr key={item.id} className="border-b">
                                         <td className="py-2 px-2 md:p-4 break-words max-w-[200px]">{item.title}</td>
                                         <td className="text-center py-2 px-2 md:p-4">{item.quantity}</td>
-                                        <td className="text-right py-2 px-2 md:p-4">KSH {item.price}</td>
                                         <td className="text-right py-2 px-2 md:p-4">
-                                            KSH {item.quantity * item.price}
+                                            {new Intl.NumberFormat('en-US', {
+                                                style: 'currency',
+                                                currency: receiptData.receipt.paymentMethod === 'EVC' ? 'USD' : 'KES',
+                                            }).format(item.price || 0)}
+                                        </td>
+                                        <td className="text-right py-2 px-2 md:p-4">
+                                            {new Intl.NumberFormat('en-US', {
+                                                style: 'currency',
+                                                currency: receiptData.receipt.paymentMethod === 'EVC' ? 'USD' : 'KES',
+                                            }).format(item.quantity * (item.price || 0))}
                                         </td>
                                     </tr>
                                 ))}
@@ -125,7 +151,12 @@ const PaymentReceipt = () => {
                         <div className="w-64">
                             <div className="flex justify-between py-2">
                                 <span>Subtotal:</span>
-                                <span>KSH {receiptData.subTotal}</span>
+                                <span>
+                                    {new Intl.NumberFormat('en-US', {
+                                        style: 'currency',
+                                        currency: receiptData.receipt.paymentMethod === 'EVC' ? 'USD' : 'KES',
+                                    }).format(receiptData.subTotal)}
+                                </span>
                             </div>
                             <div className="flex justify-between py-2">
                                 <span>Discount:</span>
@@ -133,7 +164,12 @@ const PaymentReceipt = () => {
                             </div>
                             <div className="flex justify-between py-2 font-bold border-t">
                                 <span>Total:</span>
-                                <span>KSH {receiptData.subTotal - receiptData.discount * receiptData.subTotal}</span>
+                                <span>
+                                    {new Intl.NumberFormat('en-US', {
+                                        style: 'currency',
+                                        currency: receiptData.receipt.paymentMethod === 'EVC' ? 'USD' : 'KES',
+                                    }).format(receiptData.subTotal - receiptData.discount * receiptData.subTotal)}
+                                </span>
                             </div>
                         </div>
                     </div>

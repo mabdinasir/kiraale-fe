@@ -3,6 +3,7 @@ import apiConfig from '@config/apiConfig'
 import Cookies from 'js-cookie'
 import { StkPushRequest, StkPushResponse } from '@models/payments/stkPush'
 import { MpesaPaymentStatusResponse } from '@models/payments/mpesaPaymentStatusResponse'
+import { GetPaymentByPropertyIdResponse } from '@models/payments/getPaymentByPropertyId'
 
 const token = Cookies.get('authToken')
 
@@ -36,7 +37,15 @@ export const paymentsAPi = createApi({
                 body: { phoneNumber, userId, propertyId },
             }),
         }),
+        getPaymentByPropertyId: builder.query<GetPaymentByPropertyIdResponse, string>({
+            query: (propertyId) => `/getPaymentByPropertyId/${propertyId}`,
+        }),
     }),
 })
 
-export const { useStkPushMutation, useCheckMpesaPaymentStatusQuery, useEvcPlusPurchaseMutation } = paymentsAPi
+export const {
+    useStkPushMutation,
+    useCheckMpesaPaymentStatusQuery,
+    useEvcPlusPurchaseMutation,
+    useGetPaymentByPropertyIdQuery,
+} = paymentsAPi
