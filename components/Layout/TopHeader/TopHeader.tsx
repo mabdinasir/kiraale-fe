@@ -4,7 +4,7 @@ import React, { FC } from 'react'
 import Image from 'next/image'
 import { FiMenu } from 'react-icons/fi'
 import ReusableLink from '@components/Links/ReusableLink'
-import Notifications from '@components/Layout/TopHeader/Notifications'
+// import Notifications from '@components/Layout/TopHeader/Notifications'
 import LanguageSelector from '@components/Layout/TopHeader/LanguageSelector'
 import TopHeaderProfileMenu from './TopHeaderProfileMenu'
 import StoreProvider from 'app/[locale]/StoreProvider'
@@ -61,7 +61,7 @@ const TopHeader: FC = () => (
             <ul className="list-none mb-0 space-x-1">
                 <LanguageSelector />
 
-                <Notifications />
+                {/* <Notifications /> */}
 
                 <StoreProvider key={'profile'}>
                     <TopHeaderProfileMenu />

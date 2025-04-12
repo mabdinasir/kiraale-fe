@@ -346,6 +346,7 @@
     "account-deactivation-successfully": "Account successfully deactivate. You can reactivate by logging back in.",
     "invalid-file-type": "Invalid file type. Please upload a valid image file.",
     "images-saved-go-to-payment": "Images saved successfully. You can now proceed to payment. If you want to add more images, you can do so after payment in \"My property\" page in the dashboard",
+    "images-saved-go-to-my-properties": "Images saved successfully. You will be navigated to \"My properties\" page in the dashboard to view your property.",
     "payment": {
         "title": "Payment for: ",
         "payment-method-select": "Select your preferred payment option",

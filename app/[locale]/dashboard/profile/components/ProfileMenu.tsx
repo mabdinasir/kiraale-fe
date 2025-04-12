@@ -118,7 +118,7 @@ const ProfileMenu = () => {
                                 {t('my-properties')}
                             </ReusableLink>
                         </li>
-                        <li>
+                        {/* <li>
                             <ReusableLink
                                 href={'/dashboard/notifications'}
                                 className="block px-3 py-2 hover:bg-green-100 hover:text-green-700 dark:hover:bg-gray-700 dark:hover:text-green-400 rounded"
@@ -127,8 +127,8 @@ const ProfileMenu = () => {
                                 <i className="mdi mdi-bell me-2"></i>
                                 {t('notifications')}
                             </ReusableLink>
-                        </li>
-                        <li>
+                        </li> */}
+                        {/* <li>
                             <ReusableLink
                                 href={'/dashboard/settings'}
                                 className="block px-3 py-2 hover:bg-green-100 hover:text-green-700 dark:hover:bg-gray-700 dark:hover:text-green-600 rounded"
@@ -137,7 +137,7 @@ const ProfileMenu = () => {
                                 <i className="mdi mdi-cog me-2"></i>
                                 {t('settings')}
                             </ReusableLink>
-                        </li>
+                        </li> */}
                     </ul>
                 </div>
 

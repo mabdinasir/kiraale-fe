@@ -112,19 +112,19 @@ const Sidebar = () => {
                             </div>
                         </li>
 
-                        <li className={`${menu === '/chat' ? 'active' : ''} ms-0`}>
+                        {/* <li className={`${menu === '/chat' ? 'active' : ''} ms-0`}>
                             <ReusableLink href="/dashboard/notifications" onClick={closeSidebar}>
                                 <i className="mdi mdi-bell-outline me-2"></i>
                                 {t('notifications')}
                             </ReusableLink>
-                        </li>
+                        </li> */}
 
-                        <li className={`${menu === '/chat' ? 'active' : ''} ms-0`}>
+                        {/* <li className={`${menu === '/chat' ? 'active' : ''} ms-0`}>
                             <ReusableLink href="/dashboard/settings" onClick={closeSidebar}>
                                 <i className="mdi mdi-chat-outline me-2"></i>
                                 {t('settings')}
                             </ReusableLink>
-                        </li>
+                        </li> */}
 
                         <li
                             className={`sidebar-dropdown ms-0 ${

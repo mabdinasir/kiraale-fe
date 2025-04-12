@@ -11,9 +11,12 @@ import Button from '@components/UI/Button'
 import { useAppDispatch, useAppSelector } from '@hooks/rtkHooks'
 import { updateStep } from '@store/slices/stepValidation'
 import { useUploadPropertiesMutation } from '@store/services/fileUploads'
+import { useRouter } from 'next/navigation'
+
 const PropertyMediaUpload = () => {
     const t = useTranslations()
     const dispatch = useAppDispatch()
+    const router = useRouter()
 
     const [files, setFiles] = useState<File[]>([])
     const [uploading, setUploading] = useState(false)
@@ -45,6 +48,8 @@ const PropertyMediaUpload = () => {
             }
 
             dispatch(updateStep({ step: 2, isValid: true, data: { imageUrls: newUploadedMediaUrls } }))
+            showToast('success', t('images-saved-go-to-my-properties'))
+            router.push('/dashboard/properties/my-properties')
         } catch (error) {
             showToast('error', t('upload-error', { fileName: files[0].name }))
             setErrorMessage(t('unexpected-error', { error: (error as Error).message || 'Unknown error' }))
