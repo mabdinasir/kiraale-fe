@@ -135,7 +135,7 @@ const LoginForm = () => {
                             </label>
                         </div>
 
-                        <ReusableLink href="/auth/reset-password" className="text-slate-400">
+                        <ReusableLink href="/auth/reset-password/request-password-reset" className="text-slate-400">
                             {t('forgot-password')}
                         </ReusableLink>
                     </div>

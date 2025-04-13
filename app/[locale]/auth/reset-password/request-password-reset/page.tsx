@@ -1,9 +1,10 @@
+import React from 'react'
+import RequestResetPassword from '../Forms/RequestResetPasswordForm'
 import StoreProvider from 'app/[locale]/StoreProvider'
-import ResetPasswordForm from './Forms/ResetPasswordForm'
 
 const page = () => (
     <StoreProvider>
-        <ResetPasswordForm />
+        <RequestResetPassword />
     </StoreProvider>
 )
 

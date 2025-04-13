@@ -26,6 +26,7 @@
     "send": "Send",
     "sending": "Sending...",
     "already-have-account": "Already have an account ?",
+    "request-password-reset": "Request Password Reset",
     "reset-password": "Reset Your Password",
     "remember-password": "Remember your password ?",
     "reset-password-desc": "Please enter your email address. You will receive a link to create a new password via email.",
@@ -386,5 +387,12 @@
         "description1": "Whoops, this is embarassing.",
         "description2": "Looks like the page you were looking for wasn't found",
         "back-home": "Back to Home"
-    }
+    },
+    "password-reset-email-sent": "Password reset email sent successfully. Please check your inbox for further instructions.",
+    "password-reset-email-failed": "Failed to send password reset email. Please try again.",
+    "password-reset-instructions": "Please enter your new password below. Make sure to choose a strong password that you haven't used before, passpwords should match.",
+    "password-reset-success": "Password reset successfully. You can now log in with your new password.",
+    "password-reset-failed": "Failed to reset password. Please try again.",
+    "invalid-reset-token": "Invalid password reset token. Please request a new password reset link.",
+    "resetting-password": "Resetting Password..."
 }

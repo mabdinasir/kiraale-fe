@@ -4,6 +4,7 @@ import { SignupForm, SignupResponse } from '@models/auth/signupForm'
 import { LoginForm, LoginResponse } from '@models/auth/loginForm'
 import { SignOutResponse } from '@models/auth/signout'
 import Cookies from 'js-cookie'
+import { PasswordResetRequest, PasswordResetResponse } from '@models/auth/passwordReset'
 
 const token = Cookies.get('authToken')
 
@@ -40,7 +41,27 @@ export const authApi = createApi({
                 method: 'POST',
             }),
         }),
+        requestPasswordReset: builder.mutation<void, { email: string }>({
+            query: ({ email }) => ({
+                url: '/request-password-reset',
+                method: 'POST',
+                body: { email },
+            }),
+        }),
+        resetPassword: builder.mutation<PasswordResetResponse, PasswordResetRequest>({
+            query: (resetData) => ({
+                url: '/reset-password',
+                method: 'POST',
+                body: resetData,
+            }),
+        }),
     }),
 })
 
-export const { useSignUpMutation, useLoginMutation, useSignOutMutation } = authApi
+export const {
+    useSignUpMutation,
+    useLoginMutation,
+    useSignOutMutation,
+    useRequestPasswordResetMutation,
+    useResetPasswordMutation,
+} = authApi

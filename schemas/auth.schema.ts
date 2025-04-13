@@ -35,3 +35,13 @@ export const signUpSchema = z
         hasAcceptedTnC: z.boolean().refine((val) => val === true, 'Please accept the Terms and Conditions'),
     })
     .strict()
+
+export const passwordResetSchema = z
+    .object({
+        password: passwordSchema,
+        confirmPassword: passwordSchema,
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+        message: "Passwords don't match",
+        path: ['confirmPassword'],
+    })
