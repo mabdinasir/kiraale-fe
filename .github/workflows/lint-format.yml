@@ -16,14 +16,10 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v4
 
-            - name: Set up Bun
-              run: |
-                  curl -fsSL https://bun.sh/install | bash
-                  echo "/home/runner/.bun/bin" >> $GITHUB_PATH
-                  echo "Bun installation directory: /home/runner/.bun/bin"
-                  export PATH="/home/runner/.bun/bin:$PATH"
-              env:
-                  BUN_INSTALL: /home/runner/.bun
+            - name: Install Bun
+              uses: oven-sh/setup-bun@v1
+              with:
+                  bun-version: latest
 
             - name: Install dependencies
               run: bun install
