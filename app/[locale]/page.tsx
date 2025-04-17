@@ -3,7 +3,6 @@ import React from 'react'
 import About from './about/components/AboutUs'
 import Feature from '@components/UI/Feature'
 import GetInTuch from '@components/UI/GetInTouch'
-import ClientTwo from '@components/UI/ClientTwo'
 import PropertySearch from './property/page'
 import StoreProvider from './StoreProvider'
 import FeaturedProperties from 'app/[locale]/property/components/FeaturedProperties'
@@ -52,7 +51,6 @@ const Home = () => {
                 <StoreProvider key={'featured-properties-home'}>
                     <FeaturedProperties />
                 </StoreProvider>
-                <ClientTwo />
                 <GetInTuch />
             </section>
         </>

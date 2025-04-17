@@ -115,7 +115,7 @@ const Navbar: React.FC<NavbarProps> = ({ navClass, topnavClass, tagline }) => {
                             <ul
                                 className={`navigation-menu ${navClass === '' || navClass === undefined ? '' : 'nav-light'}`}
                             >
-                                {['home', 'buy', 'sell', 'contact'].map((path) => (
+                                {['home', 'buy', 'sell', 'contact-us'].map((path) => (
                                     <li
                                         key={path}
                                         className={

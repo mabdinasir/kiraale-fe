@@ -9,7 +9,7 @@ const intlMiddleware = createMiddleware({
 })
 
 // Define all base protected route prefixes
-const protectedRoutePrefixes = ['/dashboard', '/admin', '/notifications', '/settings']
+const protectedRoutePrefixes = ['/dashboard', '/admin']
 
 export default function middleware(request: NextRequest) {
     const token = request.cookies.get('authToken')?.value || null
@@ -37,13 +37,5 @@ export default function middleware(request: NextRequest) {
 }
 
 export const config = {
-    matcher: [
-        '/',
-        '/(en|so)/:path*',
-        '/auth/:path*',
-        '/profile/:path*',
-        '/dashboard/:path*',
-        '/admin/:path*',
-        '/settings/:path*',
-    ],
+    matcher: ['/', '/(en|so)/:path*', '/auth/:path*', '/profile/:path*', '/dashboard/:path*', '/admin/:path*'],
 }

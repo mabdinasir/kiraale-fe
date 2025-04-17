@@ -8,7 +8,6 @@ import Counter from '@components/UI/Counter'
 import GetInTuch from '@components/UI/GetInTouch'
 
 import { useTranslations } from 'next-intl'
-import ClientOne from '@components/UI/ClientOne'
 import { counterData } from '@data/data'
 
 const About = () => {
@@ -63,7 +62,7 @@ const About = () => {
                 </div>
             </section>
             <section className="md:pb-24 pb-16">
-                <ClientOne />
+                {/* <ClientOne /> */}
                 <GetInTuch />
             </section>
         </div>

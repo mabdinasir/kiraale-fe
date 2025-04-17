@@ -1,7 +1,6 @@
 import React from 'react'
 import { useTranslations } from 'next-intl'
 
-import Client from '@components/UI/ClientOne'
 import GetInTuch from '@components/UI/GetInTouch'
 
 import { servicesData } from '@data/data'
@@ -62,7 +61,7 @@ const Services = () => {
                     </div>
                 </div>
 
-                <Client />
+                {/* <Client /> */}
                 <GetInTuch />
             </section>
         </div>

@@ -16,7 +16,10 @@ const GetInTuch = () => {
                 <p className="text-slate-400 max-w-xl mx-auto">{t('have-a-question-subtitle')}</p>
 
                 <div className="mt-6">
-                    <ReusableLink href="/contact" className="btn bg-green-600 hover:bg-green-700 text-white rounded-md">
+                    <ReusableLink
+                        href="/contact-us"
+                        className="btn bg-green-600 hover:bg-green-700 text-white rounded-md"
+                    >
                         <FiPhone className="align-middle me-2" /> {t('contact-us')}
                     </ReusableLink>
                 </div>

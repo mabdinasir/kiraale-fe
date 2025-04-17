@@ -43,7 +43,7 @@ const Contact = () => {
                         <div className="lg:col-span-5 md:col-span-6">
                             <div className="lg:me-5">
                                 <div className="bg-white dark:bg-slate-900 rounded-md shadow dark:shadow-gray-700 p-6">
-                                    <h3 className="mb-6 text-2xl leading-normal font-medium">{t('get-in-touch')} !</h3>
+                                    <h3 className="mb-6 text-2xl leading-normal font-medium">{t('get-in-touch')}!</h3>
                                     <StoreProvider key={'contact-form'}>
                                         <ContactForm />
                                     </StoreProvider>

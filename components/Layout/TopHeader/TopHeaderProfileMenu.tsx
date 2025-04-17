@@ -48,7 +48,7 @@ const TopHeaderProfileMenu = () => {
 
             <div
                 ref={profileMenuRef}
-                className={`${isMenuOpen ? 'show' : 'hidden'} dropdown-menu absolute end-0 m-0 mt-4 z-10 w-44 rounded-md overflow-hidden bg-white dark:bg-slate-900 shadow dark:shadow-gray-700`}
+                className={`${isMenuOpen ? 'show' : 'hidden'} dropdown-menu absolute end-0 m-0 mt-4 z-10 w-52 rounded-md overflow-hidden bg-white dark:bg-slate-900 shadow dark:shadow-gray-700`}
             >
                 <ul className="py-2 text-start">
                     <li>
@@ -62,14 +62,23 @@ const TopHeaderProfileMenu = () => {
                     </li>
                     <li>
                         <ReusableLink
+                            href="/dashboard/my-properties"
+                            className="block py-1 px-4 hover:text-green-600 dark:hover:text-white"
+                        >
+                            <i className="mdi mdi-account-outline me-2"></i>
+                            {t('my-properties')}
+                        </ReusableLink>
+                    </li>
+                    {/* <li>
+                        <ReusableLink
                             href="/dashboard/notifications"
                             className="block py-1 px-3 hover:text-green-600 dark:hover:text-white"
                         >
                             <i className="mdi mdi-bell-outline me-2"></i>
                             {t('notifications')}
                         </ReusableLink>
-                    </li>
-                    <li>
+                    </li> */}
+                    {/* <li>
                         <ReusableLink
                             href="/dashboard/settings"
                             className="block py-1 px-3 hover:text-green-600 dark:hover:text-white"
@@ -77,7 +86,7 @@ const TopHeaderProfileMenu = () => {
                             <i className="mdi mdi-cog-outline me-2"></i>
                             {t('settings')}
                         </ReusableLink>
-                    </li>
+                    </li> */}
                     <li className="border-t border-gray-100 dark:border-gray-800 my-2"></li>
                     <div className={`${!isLoading ? 'px-3' : ''}`}>
                         <Button

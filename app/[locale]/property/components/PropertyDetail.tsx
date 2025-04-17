@@ -183,7 +183,7 @@ const PropertyDetail = () => {
 
                                 <div className="mt-6">
                                     <Link
-                                        href={`/${locale}/contact`}
+                                        href={`/${locale}/contact-us`}
                                         className="btn bg-transparent hover:bg-green-600 border border-green-600 text-green-600 hover:text-white rounded-md"
                                     >
                                         <FiPhone className="align-middle me-2" /> {t('contact-us')}
