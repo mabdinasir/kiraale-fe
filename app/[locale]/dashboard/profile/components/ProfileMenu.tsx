@@ -69,7 +69,7 @@ const ProfileMenu = () => {
             {/* Dropdown menu */}
             <div
                 id="dropdownAvatar"
-                className={`z-50 bg-white dark:bg-slate-900 divide-y divide-gray-200 rounded-lg shadow-lg w-48 absolute right-0 mt-2 ${
+                className={`z-50 bg-white dark:bg-slate-900 divide-y divide-gray-200 rounded-lg shadow-lg w-52 absolute right-0 mt-2 ${
                     isOpen ? 'block' : 'hidden'
                 }`}
             >

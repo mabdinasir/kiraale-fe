@@ -18,11 +18,11 @@ const Contact = () => {
                 <div className="grid grid-cols-1">
                     <div className="w-full leading-[0] border-0">
                         <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.827911365735!2d36.848753375350285!3d-1.2766661356164641!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f16b47065c4bb%3A0xfae5e7e1346150e8!2sTenth%20St%2C%20Nairobi%2C%20Kenya!5e0!3m2!1sen!2sin!4v1736576850213!5m2!1sen!2sin"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.656214386988!2d45.31652737480073!3d2.0389624979551057!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3d58f5b24e7d19d1%3A0xe17a0b1f7cc84d4a!2sMakka%20Al%20Mukarrama%20Rd%2C%20Mogadishu%2C%20Somalia!5e0!3m2!1sen!2sso!4v1713342048243!5m2!1sen!2sso"
                             className="w-full h-[500px]"
                             allowFullScreen
                             loading="lazy"
-                        ></iframe>
+                        />
                     </div>
                 </div>
             </div>

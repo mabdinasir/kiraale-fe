@@ -145,7 +145,7 @@ const Footer = () => {
                                             <div className="">
                                                 <h6 className="text-gray-300 mb-2">{t('address-info')}</h6>
                                                 <Link
-                                                    href="https://maps.app.goo.gl/A629QdF68idAcHGL6"
+                                                    href="https://maps.app.goo.gl/tbtgQDP6Czta5f6Q9"
                                                     target="_blank"
                                                     className="text-green-600 hover:text-green-700 duration-500 ease-in-out lightbox"
                                                 >
