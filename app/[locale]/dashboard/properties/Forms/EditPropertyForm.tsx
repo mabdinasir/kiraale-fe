@@ -533,7 +533,19 @@ const EditPropertyForm = () => {
                         fullWidth
                         title={isLoading ? t('updating-property') : t('update-property')}
                         isLoading={isLoading}
-                        disabled={Object.values(errors).some((err) => !!err) || isSuccess}
+                        disabled={
+                            Object.values(errors).some((err) => !!err) ||
+                            isSuccess ||
+                            JSON.stringify(propertyData) ===
+                                JSON.stringify({
+                                    ...initialPropertyData,
+                                    ...data.property,
+                                    features: {
+                                        ...initialPropertyData.features,
+                                        ...data.property.features,
+                                    },
+                                })
+                        }
                     />
                 </div>
             </fieldset>
