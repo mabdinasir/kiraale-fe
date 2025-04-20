@@ -23,14 +23,25 @@ export const fileUploadsApi = createApi({
                 body: formData,
             }),
         }),
-        uploadProperties: builder.mutation<{ success: boolean; propertyPictures: string[] }, FormData>({
+        uploadPropertyMedia: builder.mutation<{ success: boolean; propertyPictures: string[] }, FormData>({
             query: (formData) => ({
-                url: '/uploadProperties',
+                url: '/uploadPropertyMedia',
                 method: 'POST',
                 body: formData,
+            }),
+        }),
+        deletePropertyMedia: builder.mutation<
+            { success: boolean; message: string; deleteCount: number },
+            { propertyId: string; mediaIds: string[] }
+        >({
+            query: ({ propertyId, mediaIds }) => ({
+                url: `/deletePropertyMedia`,
+                method: 'DELETE',
+                body: { propertyId, mediaIds },
             }),
         }),
     }),
 })
 
-export const { useUploadProfilePicMutation, useUploadPropertiesMutation } = fileUploadsApi
+export const { useUploadProfilePicMutation, useUploadPropertyMediaMutation, useDeletePropertyMediaMutation } =
+    fileUploadsApi

@@ -202,6 +202,9 @@
     "upload-error": "Khalad ayaa dhacay markii la soo gudbinayay sawirka: {fileName}.",
     "unexpected-error": "Khalad aan la filayn ayaa dhacay: {error}.",
     "property-uploaded": "Sawirrada hantida si guul leh ayaa loo soo gudbiyey.",
+    "media-deleted": "Sawirrada ama sawir-ka waa la tirtiray.",
+    "delete-error": "Khalad ayaa dhacay markii la tirtirayay sawirka: {fileName}.",
+    "minimum-4-images-required": "Ugu yaraan 4 sawir ayaa loo baahan yahay. Fadlan marka hore sawirro dheeraad ah soo geli, ka dib kuwa kale tirtir.",
     "profile-picture-updated": "Sawirka shaqsiga si guul leh ayaa loo cusboonaysiiyey.",
     "property-payment": "Lacag Bixinta Hantida",
     "back": "Dib u noqo",
@@ -343,7 +346,7 @@
     "password-updated-successfully": "Furaha si guul leh ayaa loo cusboonaysiiyey.",
     "account-deactivation-successfully": "Akoonka si guul leh ayaa loo xayiray. Waxaad dib uga qaadi kartaa xayiraadda marka aad rabto adigoo soo galaya akoonkaaga sida caadiga ah.",
     "invalid-file-type": "Nooca faylka ma ahan sax. Fadlan soo gudbi sawir sax ah.",
-    "images-saved-go-to-payment": "Sawirrada si guul leh ayaa loo keydiyey. Hadda waxaad u gudbi kartaa lacag bixinta. Haddii aad rabto inaad ku darto sawirro dheeraad ah, waxaad sameyn kartaa ka dib lacag bixinta, adoo aadaya dhinaca bogga \"Hantidayda\" ee dashboard-ka.",
+    "images-saved-go-to-payment": "Sawirrada si guul leh ayaa loo keydiyey. Hadda waxaad u gudbi kartaa lacag bixinta si aad u dhammaystirto liiskaaga.",
     "images-saved-go-to-my-properties": "Sawirrada si guul leh ayaa loo keydiyey. Waxaad u gudbin doontaa bogga \"Hantidayda\" ee dashboard-ka si aad u aragto hantidaada.",
     "payment": {
         "title": "Lacag bixinta: ",

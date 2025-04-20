@@ -5,7 +5,7 @@ import React from 'react'
 import { FaHome, FaImage, FaCreditCard, FaCheckCircle } from 'react-icons/fa'
 import { useAppDispatch, useAppSelector } from '@hooks/rtkHooks'
 import { goToNextStep } from '@store/slices/stepValidation'
-import PropertyMediaUpload from '../components/PropertyMediaUpload'
+import PropertyMedia from '../components/PropertyMedia'
 import AddPropertyForm from './AddPropertyForm'
 import PropertyPayment from '../components/PropertyPayment'
 import Receipt from '../components/Receipt'
@@ -78,7 +78,7 @@ const StepForm = () => {
             </ol>
             <div className="w-full max-w-2xl mt-8">
                 {currentStep === 1 && (isEditMode ? <EditPropertyForm /> : <AddPropertyForm />)}
-                {currentStep === 2 && <PropertyMediaUpload />}
+                {currentStep === 2 && <PropertyMedia />}
                 {currentStep === 3 && <PropertyPayment />}
                 {currentStep === 4 && <Receipt />}
             </div>

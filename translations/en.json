@@ -202,6 +202,9 @@
     "upload-error": "Failed to upload the image: {fileName}.",
     "unexpected-error": "An unexpected error occurred: {error}.",
     "property-uploaded": "Property images uploaded successfully.",
+    "media-deleted": "Media deleted successfully.",
+    "delete-error": "Failed to delete the media: {fileName}.",
+    "minimum-4-images-required": "At least 4 images are required. Please upload more images first then delete the others later.",
     "profile-picture-updated": "Profile picture updated successfully.",
     "property-payment": "Property Payment",
     "back": "Back",
@@ -343,7 +346,7 @@
     "password-updated-successfully": "Password updated successfully.",
     "account-deactivation-successfully": "Account successfully deactivate. You can reactivate by logging back in.",
     "invalid-file-type": "Invalid file type. Please upload a valid image file.",
-    "images-saved-go-to-payment": "Images saved successfully. You can now proceed to payment. If you want to add more images, you can do so after payment in \"My property\" page in the dashboard",
+    "images-saved-go-to-payment": "Images saved successfully. You can now proceed to payment to complete your listing.",
     "images-saved-go-to-my-properties": "Images saved successfully. You will be navigated to \"My properties\" page in the dashboard to view your property.",
     "payment": {
         "title": "Payment for: ",

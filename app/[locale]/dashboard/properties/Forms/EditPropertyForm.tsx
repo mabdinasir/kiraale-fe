@@ -81,7 +81,10 @@ const EditPropertyForm = () => {
                 },
             }))
         }
-    }, [data])
+        if (data?.property && data.property.id) {
+            dispatch(updateStep({ step: 1, isValid: true, data: { propertyId: data.property.id } }))
+        }
+    }, [data, dispatch])
 
     const validateFields = useCallback(async () => {
         try {
