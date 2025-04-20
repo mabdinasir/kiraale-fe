@@ -9,10 +9,15 @@ import PropertyMediaUpload from '../components/PropertyMediaUpload'
 import AddPropertyForm from './AddPropertyForm'
 import PropertyPayment from '../components/PropertyPayment'
 import Receipt from '../components/Receipt'
+import EditPropertyForm from './EditPropertyForm'
+import { useParams } from 'next/navigation'
 
 const StepForm = () => {
     const t = useTranslations()
     const dispatch = useAppDispatch()
+    const { propertyId } = useParams()
+    const isEditMode = !!propertyId
+
     const currentStep = useAppSelector((state) => state.stepValidation.currentStep)
     const stepsValidation = useAppSelector((state) => state.stepValidation.steps)
 
@@ -72,7 +77,7 @@ const StepForm = () => {
                 </li>
             </ol>
             <div className="w-full max-w-2xl mt-8">
-                {currentStep === 1 && <AddPropertyForm />}
+                {currentStep === 1 && (isEditMode ? <EditPropertyForm /> : <AddPropertyForm />)}
                 {currentStep === 2 && <PropertyMediaUpload />}
                 {currentStep === 3 && <PropertyPayment />}
                 {currentStep === 4 && <Receipt />}

@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl'
 
 import StoreProvider from 'app/[locale]/StoreProvider'
 import Starter from '@components/UI/Starter'
-import MyProperties from './Components/MyProperties'
+import MyProperties from '../components/MyProperties'
 
 const Page = () => {
     const t = useTranslations()

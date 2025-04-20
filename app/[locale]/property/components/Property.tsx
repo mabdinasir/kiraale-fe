@@ -5,12 +5,15 @@ import { FaBan, FaCalendarAlt, FaHourglassHalf } from 'react-icons/fa'
 import { LuBath, LuBedDouble } from 'react-icons/lu'
 import Image from 'next/image'
 import { Property as IProperty } from '@models/properties/property'
-import { PiBuildingApartmentFill } from '@node_modules/react-icons/pi'
+import { PiBuildingApartmentFill } from 'react-icons/pi'
 import { RiRadioButtonLine, RiMoneyDollarBoxFill } from 'react-icons/ri'
 import { GiCarKey } from 'react-icons/gi'
 import { AiOutlineExclamationCircle } from 'react-icons/ai'
 import FavoriteButton from './FavoriteButton'
 import EmptyState from '@components/UI/EmptyState'
+import EditButton from './EditButton'
+import useCurrentUser from '@hooks/useCurrentUser'
+import { useGetUserByIdQuery } from '@store/services/users'
 
 interface PropertyProps {
     properties: IProperty[]
@@ -47,6 +50,9 @@ const statuses = {
 
 const Property: React.FC<PropertyProps> = ({ properties, emptyStateTile, emptyStateDescription }) => {
     const t = useTranslations()
+    const currentUser = useCurrentUser()
+    const id = currentUser?.id
+    const { data: userData } = useGetUserByIdQuery(id || '')
 
     if (!properties || properties.length === 0)
         return (
@@ -64,7 +70,7 @@ const Property: React.FC<PropertyProps> = ({ properties, emptyStateTile, emptySt
                     <div className="group rounded-xl bg-white dark:bg-slate-900 shadow hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden ease-in-out duration-500">
                         <div className="relative">
                             <Image
-                                src={property?.media[0]?.url || '/images/property/single/1.jpg'}
+                                src={property.media[0]?.url || '/images/property/single/1.jpg'}
                                 alt=""
                                 width={0}
                                 height={0}
@@ -72,20 +78,20 @@ const Property: React.FC<PropertyProps> = ({ properties, emptyStateTile, emptySt
                                 style={{ width: '100%', height: '250px' }}
                                 priority
                             />
-
+                            {userData?.user?.email === property.user?.email && <EditButton propertyId={property.id} />}
                             <FavoriteButton propertyId={property.id} isFavorited={property.isFavorited ?? false} />
                         </div>
 
                         <div className="p-6">
                             <div className="pb-6">{property.title}</div>
 
-                            <ul className="md:py-4 py-6 border-y border-slate-100 dark:border-gray-800 flex propertys-center list-none justify-between">
-                                <li className="flex propertys-center me-4">
+                            <ul className="md:py-4 py-6 border-y border-slate-100 dark:border-gray-800 flex items-center list-none justify-between">
+                                <li className="flex items-center me-4">
                                     <FaCalendarAlt width={20} className="me-2 text-green-600 text-2xl" />
                                     <span>{property?.features?.yearBuilt ?? 'N/A'}</span>
                                 </li>
 
-                                <li className="flex propertys-center me-4">
+                                <li className="flex items-center me-4">
                                     <LuBedDouble width={20} className="me-2 text-green-600 text-2xl" />
                                     <span>
                                         {property?.features?.bedrooms ?? 0}{' '}
@@ -93,7 +99,7 @@ const Property: React.FC<PropertyProps> = ({ properties, emptyStateTile, emptySt
                                     </span>
                                 </li>
 
-                                <li className="flex propertys-center">
+                                <li className="flex items-center">
                                     <LuBath width={20} className="me-2 text-green-600 text-2xl" />
                                     <span>
                                         {property?.features?.bathrooms ?? 0}{' '}
@@ -102,7 +108,7 @@ const Property: React.FC<PropertyProps> = ({ properties, emptyStateTile, emptySt
                                 </li>
                             </ul>
 
-                            <ul className="md:pt-4 pt-6 flex justify-between propertys-center list-none">
+                            <ul className="md:pt-4 pt-6 flex justify-between items-center list-none">
                                 <li>
                                     <span className="text-slate-400">{t('price')}</span>
                                     <p className="text-lg font-medium">

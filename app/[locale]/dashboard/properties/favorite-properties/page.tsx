@@ -1,5 +1,5 @@
 import React from 'react'
-import FavoriteProperties from './components/FavoriteProperties'
+import FavoriteProperties from '../components/FavoriteProperties'
 import StoreProvider from 'app/[locale]/StoreProvider'
 import Starter from '@components/UI/Starter'
 import { useTranslations } from 'next-intl'

@@ -1,13 +1,18 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import apiConfig from '@config/apiConfig'
 import Cookies from 'js-cookie'
-import { AddPropertyForm } from '@models/properties/addPropertyForm'
-import { PropertiesResponse, PropertyResponse, PropertySearchParams } from '@models/properties/property'
+import {
+    PropertyFormData,
+    PropertiesResponse,
+    PropertyResponse,
+    PropertySearchParams,
+    Property,
+} from '@models/properties/property'
 
 const token = Cookies.get('authToken')
 
-export const propertiesAPi = createApi({
-    reducerPath: 'propertiesAPi',
+export const propertiesApi = createApi({
+    reducerPath: 'propertiesApi',
     baseQuery: fetchBaseQuery({
         baseUrl: apiConfig.propertiesApi,
         prepareHeaders: (headers) => {
@@ -19,7 +24,7 @@ export const propertiesAPi = createApi({
         },
     }),
     endpoints: (builder) => ({
-        addProperty: builder.mutation<PropertyResponse, AddPropertyForm>({
+        addProperty: builder.mutation<{ success: boolean; property: Property }, PropertyFormData>({
             query: (body) => ({
                 url: '/addProperty',
                 method: 'POST',
@@ -38,19 +43,34 @@ export const propertiesAPi = createApi({
         getPropertyById: builder.query<PropertyResponse, string>({
             query: (id) => `/getPropertyById/${id}`,
         }),
+
         getFeaturedProperties: builder.query<PropertiesResponse, void>({
             query: () => '/getFeaturedProperties',
         }),
+
         getPropertiesByUser: builder.query<PropertiesResponse, void>({
             query: () => `/getPropertiesByUser`,
         }),
+
         getFavoriteProperties: builder.query<PropertiesResponse, void>({
             query: () => '/getFavoriteProperties',
         }),
-        toggleFavoriteProperty: builder.mutation<PropertyResponse, string>({
+
+        toggleFavoriteProperty: builder.mutation<{ success: boolean }, string>({
             query: (propertyId) => ({
                 url: `/toggleFavoriteProperty/${propertyId}`,
                 method: 'POST',
+            }),
+        }),
+
+        updateProperty: builder.mutation<
+            { success: boolean; property: Property },
+            { id: string; body: Partial<PropertyFormData> }
+        >({
+            query: ({ id, body }) => ({
+                url: `/updateProperty/${id}`,
+                method: 'PUT',
+                body,
             }),
         }),
     }),
@@ -64,4 +84,5 @@ export const {
     useGetPropertiesByUserQuery,
     useGetFavoritePropertiesQuery,
     useToggleFavoritePropertyMutation,
-} = propertiesAPi
+    useUpdatePropertyMutation,
+} = propertiesApi

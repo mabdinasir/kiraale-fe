@@ -1,20 +1,14 @@
+// property.schema.ts
 import { z } from 'zod'
 
-export const propertySchema = z.object({
-    title: z.string().min(3, 'Title must be at least 3 characters'),
-    description: z.string().optional(),
-    address: z.string().min(5, 'Address must be at least 5 characters'),
-    price: z.number().min(1, 'Price must be a positive number'),
-    listingType: z.enum(['SALE', 'RENT']),
-    propertyType: z.enum(['RESIDENTIAL', 'COMMERCIAL', 'LAND']),
-    status: z.enum(['PENDING', 'APPROVED', 'REJECTED', 'EXPIRED']).optional(),
-    approvedAt: z.date().optional(),
-    expiresAt: z.date().optional(),
-    approvedBy: z.string().optional(),
-    bedrooms: z.number().optional(),
-    bathrooms: z.number().optional(),
-    parking: z.number().optional(),
-    area: z.number().optional(),
+const propertyStatusEnum = z.enum(['PENDING', 'REJECTED', 'EXPIRED', 'AVAILABLE', 'SOLD', 'LEASED'])
+
+// Features schema
+export const propertyFeaturesSchema = z.object({
+    bedrooms: z.number().min(0, 'Bedrooms must be a positive number').optional(),
+    bathrooms: z.number().min(0, 'Bathrooms must be a positive number').optional(),
+    parking: z.number().min(0, 'Parking must be a positive number').optional(),
+    area: z.number().min(0, 'Area must be a positive number').optional(),
     yearBuilt: z
         .number()
         .int()
@@ -30,6 +24,22 @@ export const propertySchema = z.object({
     oven: z.boolean().optional(),
 })
 
+// Main property schema (matches backend Prisma model)
+export const propertySchema = z.object({
+    title: z.string().min(3, 'Title must be at least 3 characters'),
+    description: z.string().optional(),
+    address: z.string().min(5, 'Address must be at least 5 characters'),
+    price: z.number().min(1, 'Price must be a positive number'),
+    listingType: z.enum(['SALE', 'RENT']),
+    propertyType: z.enum(['RESIDENTIAL', 'COMMERCIAL', 'LAND']),
+    status: propertyStatusEnum.optional(),
+    features: propertyFeaturesSchema.optional(), // Nested features
+})
+
+// Form schema should match the API request structure
+export const propertyFormSchema = propertySchema
+
+// Search query schema remains the same
 export const propertySearchQuerySchema = z.object({
     query: z.string().optional(),
     minPrice: z
@@ -45,5 +55,3 @@ export const propertySearchQuerySchema = z.object({
     propertyType: z.enum(['RESIDENTIAL', 'COMMERCIAL', 'LAND']).optional(),
     listingType: z.enum(['SALE', 'RENT']).optional(),
 })
-
-export default propertySchema
