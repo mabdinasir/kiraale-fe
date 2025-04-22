@@ -151,7 +151,7 @@
     "add-property": "Add Property",
     "add-property-desc": "Add your properties to reach more buyers and renters.",
     "property-added-successfully": "Property added successfully.",
-    "property-added-failed": "Failed to add property. Please try again.",
+    "property-add-failed": "Failed to add property. Please try again.",
     "add-now": "Add Now",
     "adding-property": "Adding Property...",
     "edit-property": "Edit Property",

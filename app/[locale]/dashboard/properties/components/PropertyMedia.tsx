@@ -140,8 +140,7 @@ const PropertyMedia = () => {
         mediaFiles.some((media) => media.file && !isValidFile(media.file)) ||
         mediaFiles.every((media) => media.id || !media.file)
 
-    const isSelectDisabled =
-        isSuccess || uploading || mediaFiles.length < 4 || mediaFiles.length > 10 || isDeletingMedia
+    const isSelectDisabled = isSuccess || uploading || mediaFiles.length > 10 || isDeletingMedia
 
     return (
         <div>
