@@ -17,7 +17,7 @@ import showToast from '@utils/showToast'
 import { useAppDispatch } from '@hooks/rtkHooks'
 import { updateStep } from '@store/slices/stepValidation'
 import { proprtyTypes } from '@lib/constants'
-import { propertyFormSchema } from 'schemas'
+import { propertySchema } from 'schemas'
 import { PropertyFormData } from '@models/properties/property'
 
 export type FormErrors = Partial<
@@ -28,10 +28,14 @@ const AddPropertyForm = () => {
     const t = useTranslations()
     const dispatch = useAppDispatch()
 
-    const translatedPropertyTypes = proprtyTypes.map(({ label, value }) => ({
-        label: t(label),
-        value,
-    }))
+    const translatedPropertyTypes = useMemo(
+        () =>
+            proprtyTypes.map(({ label, value }) => ({
+                label: t(label),
+                value,
+            })),
+        [t],
+    )
 
     const initialPropertyData = useMemo<PropertyFormData>(
         () => ({
@@ -67,16 +71,18 @@ const AddPropertyForm = () => {
     const [propertyData, setPropertyData] = useState<PropertyFormData>(initialPropertyData)
     const [errors, setErrors] = useState<FormErrors>({})
 
-    const validateFields = useCallback(async () => {
+    const validateFields = useCallback(() => {
         try {
-            await propertyFormSchema.parseAsync(propertyData)
+            propertySchema.parse(propertyData)
+            setErrors({})
             return true
         } catch (err) {
             if (err instanceof z.ZodError) {
                 const newErrors = {} as FormErrors
                 err.issues.forEach((issue) => {
-                    const field = issue.path[0] as keyof FormErrors
-                    newErrors[field] = issue.message
+                    // Handle both top-level and nested feature fields
+                    const path = issue.path.join('.')
+                    newErrors[path as keyof FormErrors] = issue.message
                 })
                 setErrors(newErrors)
             }
@@ -117,8 +123,12 @@ const AddPropertyForm = () => {
                 }))
             }
 
-            // Clear any existing error for this field
-            setErrors((prev) => ({ ...prev, [name]: '' }))
+            // Clear the specific error for this field
+            setErrors((prev) => {
+                const newErrors = { ...prev }
+                delete newErrors[name as keyof FormErrors]
+                return newErrors
+            })
         },
         [],
     )
@@ -126,7 +136,7 @@ const AddPropertyForm = () => {
     const handleSubmit = useCallback(
         async (e: React.FormEvent) => {
             e.preventDefault()
-            if (!(await validateFields())) return
+            if (!validateFields()) return
 
             try {
                 const result = await addProperty(propertyData).unwrap()
@@ -134,7 +144,7 @@ const AddPropertyForm = () => {
                 dispatch(updateStep({ step: 1, isValid: true, data: { propertyId } }))
                 showToast('success', t('property-added-successfully'))
                 setErrors({})
-            } catch (err: Error | unknown) {
+            } catch (err) {
                 showToast('error', `${t('property-add-failed')} ${err}`)
             }
         },
@@ -177,11 +187,11 @@ const AddPropertyForm = () => {
                                 id="description"
                                 className="form-input ps-11 h-28"
                                 placeholder={t('description')}
-                                value={propertyData.description}
+                                value={propertyData.description || ''}
                                 onChange={handleChange}
                             />
                         </div>
-                        {errors['description'] && <Error error={errors['description']} />}
+                        {errors.description && <Error error={errors.description} />}
                     </div>
 
                     {/* Address */}
@@ -201,7 +211,7 @@ const AddPropertyForm = () => {
                                 onChange={handleChange}
                             />
                         </div>
-                        {errors['address'] && <Error error={errors['address']} />}
+                        {errors.address && <Error error={errors.address} />}
                     </div>
 
                     {/* Property Type */}
@@ -225,7 +235,7 @@ const AddPropertyForm = () => {
                                 ))}
                             </select>
                         </div>
-                        {errors['propertyType'] && <Error error={errors['propertyType']} />}
+                        {errors.propertyType && <Error error={errors.propertyType} />}
                     </div>
 
                     {/* Listing Type */}
@@ -246,7 +256,7 @@ const AddPropertyForm = () => {
                                 <option value="RENT">{t('rent')}</option>
                             </select>
                         </div>
-                        {errors['listingType'] && <Error error={errors['listingType']} />}
+                        {errors.listingType && <Error error={errors.listingType} />}
                     </div>
 
                     {/* Price */}
@@ -267,12 +277,12 @@ const AddPropertyForm = () => {
                                 onChange={handleChange}
                             />
                         </div>
-                        {errors['price'] && <Error error={errors['price']} />}
+                        {errors.price && <Error error={errors.price} />}
                     </div>
 
                     {/* yearBuilt */}
                     <div className="col-span-6">
-                        <label htmlFor="yearBuilt" className="font-medium">
+                        <label htmlFor="features.yearBuilt" className="font-medium">
                             {t('year-built')}:
                         </label>
                         <div className="form-icon relative mt-2">
@@ -326,7 +336,7 @@ const AddPropertyForm = () => {
                                 type="number"
                                 className="form-input ps-11"
                                 placeholder={t('bedrooms')}
-                                min={1}
+                                min={0}
                                 value={propertyData.features.bedrooms}
                                 onChange={handleChange}
                             />
@@ -347,7 +357,7 @@ const AddPropertyForm = () => {
                                 type="number"
                                 className="form-input ps-11"
                                 placeholder={t('bathrooms')}
-                                min={1}
+                                min={0}
                                 value={propertyData.features.bathrooms}
                                 onChange={handleChange}
                             />
@@ -485,11 +495,8 @@ const AddPropertyForm = () => {
 
                 {/* Error Message */}
                 {error && isApiError(error) && (
-                    <div>
-                        {/* Display the generic error message */}
+                    <div className="mt-4">
                         <Error error={error.data.message} />
-
-                        {/* Display field-specific validation errors (if they exist) */}
                         {error.data.errors?.map((err, index) => (
                             <Error key={index} error={`${err.field}: ${err.message}`} />
                         ))}
@@ -504,7 +511,7 @@ const AddPropertyForm = () => {
                         fullWidth
                         title={isLoading ? t('adding-property') : t('add-property')}
                         isLoading={isLoading}
-                        disabled={Object.values(errors).some((err) => !!err) || isSuccess}
+                        disabled={Object.keys(errors).length > 0 || isSuccess}
                     />
                 </div>
             </fieldset>

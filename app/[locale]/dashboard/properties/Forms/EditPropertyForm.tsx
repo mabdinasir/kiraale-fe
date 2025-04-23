@@ -11,6 +11,7 @@ import { MdHolidayVillage } from 'react-icons/md'
 import { PiBuildingApartmentFill } from 'react-icons/pi'
 import Button from '@components/UI/Button'
 import { useUpdatePropertyMutation, useGetPropertyByIdQuery } from '@store/services/properties'
+import { isEqual } from 'lodash'
 import { z } from 'zod'
 import Error from '@components/UI/Error'
 import isApiError from '@utils/isApiError'
@@ -31,13 +32,18 @@ const EditPropertyForm = () => {
     const t = useTranslations()
     const dispatch = useAppDispatch()
 
+    // Get property data
     const { data, isLoading: isPropertyLoading } = useGetPropertyByIdQuery(propertyId as string)
 
-    const [updateProperty, { isLoading, isSuccess, error }] = useUpdatePropertyMutation()
-    const translatedPropertyTypes = proprtyTypes.map(({ label, value }) => ({
-        label: t(label),
-        value,
-    }))
+    const [updateProperty, { isLoading, error }] = useUpdatePropertyMutation()
+    const translatedPropertyTypes = useMemo(
+        () =>
+            proprtyTypes.map(({ label, value }) => ({
+                label: t(label),
+                value,
+            })),
+        [t],
+    )
 
     const initialPropertyData = useMemo<PropertyFormData>(
         () => ({
@@ -69,33 +75,30 @@ const EditPropertyForm = () => {
 
     const [propertyData, setPropertyData] = useState<PropertyFormData>(initialPropertyData)
     const [errors, setErrors] = useState<FormErrors>({})
+    const [formTouched, setFormTouched] = useState(false)
 
+    // Initialize form with data when it's loaded
     useEffect(() => {
         if (data?.property) {
-            setPropertyData((prev) => ({
-                ...prev,
-                ...data.property,
-                features: {
-                    ...prev.features,
-                    ...data.property.features,
-                },
-            }))
-        }
-        if (data?.property && data.property.id) {
-            dispatch(updateStep({ step: 1, isValid: true, data: { propertyId: data.property.id } }))
+            setPropertyData(data.property)
+            if (data.property.id) {
+                dispatch(updateStep({ step: 1, isValid: true, data: { propertyId: data.property.id } }))
+            }
         }
     }, [data, dispatch])
 
-    const validateFields = useCallback(async () => {
+    const validateFields = useCallback(() => {
         try {
-            await propertySchema.parseAsync(propertyData)
+            propertySchema.parse(propertyData)
+            setErrors({})
             return true
         } catch (err) {
             if (err instanceof z.ZodError) {
                 const newErrors = {} as FormErrors
                 err.issues.forEach((issue) => {
-                    const field = issue.path[0] as keyof FormErrors
-                    newErrors[field] = issue.message
+                    // Handle both top-level and nested feature fields
+                    const path = issue.path.join('.')
+                    newErrors[path as keyof FormErrors] = issue.message
                 })
                 setErrors(newErrors)
             }
@@ -117,6 +120,9 @@ const EditPropertyForm = () => {
                 fieldValue = value
             }
 
+            // Mark form as touched to indicate changes
+            setFormTouched(true)
+
             // Handle nested features fields
             if (name.startsWith('features.')) {
                 const featureName = name.split('.')[1] as keyof PropertyFormData['features']
@@ -136,8 +142,12 @@ const EditPropertyForm = () => {
                 }))
             }
 
-            // Clear any existing error for this field
-            setErrors((prev) => ({ ...prev, [name]: '' }))
+            // Clear the specific error for this field
+            setErrors((prev) => {
+                const newErrors = { ...prev }
+                delete newErrors[name as keyof FormErrors]
+                return newErrors
+            })
         },
         [],
     )
@@ -145,27 +155,35 @@ const EditPropertyForm = () => {
     const handleSubmit = useCallback(
         async (e: React.FormEvent) => {
             e.preventDefault()
-            if (!(await validateFields())) return
+
+            if (!validateFields()) return
 
             try {
                 const result = await updateProperty({
                     id: propertyId as string,
-                    body: {
-                        ...propertyData,
-                        features: propertyData.features,
-                    },
+                    body: propertyData,
                 }).unwrap()
+
                 dispatch(updateStep({ step: 1, isValid: true, data: { propertyId: result?.property.id } }))
                 showToast('success', t('property-updated-successfully'))
                 setErrors({})
-            } catch (err: Error | unknown) {
+                setFormTouched(false)
+            } catch (err) {
                 showToast('error', `Something went wrong! ${err}`)
             }
         },
         [validateFields, updateProperty, propertyId, propertyData, dispatch, t],
     )
 
-    if (isPropertyLoading || !propertyData.id) {
+    // Check if form is different from original data
+    const hasFormChanged = useMemo(() => {
+        if (!data?.property) return false
+        return !isEqual(data.property, propertyData)
+    }, [data?.property, propertyData])
+
+    const isUpdateDisabled = isLoading || Object.keys(errors).length > 0 || !hasFormChanged || !formTouched
+
+    if (isPropertyLoading) {
         return <LoadingIndicator />
     }
 
@@ -238,7 +256,7 @@ const EditPropertyForm = () => {
 
                     {/* Property Type */}
                     <div className="col-span-12">
-                        <label htmlFor="" className="form-label text-slate-900 dark:text-white font-medium">
+                        <label htmlFor="propertyType" className="form-label text-slate-900 dark:text-white font-medium">
                             {t('property-type')}:
                         </label>
                         <div className="filter-search-form relative filter-border mt-2">
@@ -357,8 +375,8 @@ const EditPropertyForm = () => {
                                 id="features.bedrooms"
                                 type="number"
                                 className="form-input ps-11"
+                                min={0}
                                 placeholder={t('bedrooms')}
-                                min={1}
                                 value={propertyData.features.bedrooms}
                                 onChange={handleChange}
                             />
@@ -379,7 +397,7 @@ const EditPropertyForm = () => {
                                 type="number"
                                 className="form-input ps-11"
                                 placeholder={t('bathrooms')}
-                                min={1}
+                                min={0}
                                 value={propertyData.features.bathrooms}
                                 onChange={handleChange}
                             />
@@ -517,7 +535,7 @@ const EditPropertyForm = () => {
 
                 {/* Error Message */}
                 {error && isApiError(error) && (
-                    <div>
+                    <div className="mt-4">
                         <Error error={error.data.message} />
                         {error.data.errors?.map((err, index) => (
                             <Error key={index} error={`${err.field}: ${err.message}`} />
@@ -533,19 +551,7 @@ const EditPropertyForm = () => {
                         fullWidth
                         title={isLoading ? t('updating-property') : t('update-property')}
                         isLoading={isLoading}
-                        disabled={
-                            Object.values(errors).some((err) => !!err) ||
-                            isSuccess ||
-                            JSON.stringify(propertyData) ===
-                                JSON.stringify({
-                                    ...initialPropertyData,
-                                    ...data.property,
-                                    features: {
-                                        ...initialPropertyData.features,
-                                        ...data.property.features,
-                                    },
-                                })
-                        }
+                        disabled={isUpdateDisabled}
                     />
                 </div>
             </fieldset>

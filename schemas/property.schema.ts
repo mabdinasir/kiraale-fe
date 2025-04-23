@@ -1,8 +1,6 @@
 // property.schema.ts
 import { z } from 'zod'
 
-const propertyStatusEnum = z.enum(['PENDING', 'REJECTED', 'EXPIRED', 'AVAILABLE', 'SOLD', 'LEASED'])
-
 // Features schema
 export const propertyFeaturesSchema = z.object({
     bedrooms: z.number().min(0, 'Bedrooms must be a positive number').optional(),
@@ -32,12 +30,8 @@ export const propertySchema = z.object({
     price: z.number().min(1, 'Price must be a positive number'),
     listingType: z.enum(['SALE', 'RENT']),
     propertyType: z.enum(['RESIDENTIAL', 'COMMERCIAL', 'LAND']),
-    status: propertyStatusEnum.optional(),
     features: propertyFeaturesSchema.optional(), // Nested features
 })
-
-// Form schema should match the API request structure
-export const propertyFormSchema = propertySchema
 
 // Search query schema remains the same
 export const propertySearchQuerySchema = z.object({

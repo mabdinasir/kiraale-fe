@@ -13,6 +13,7 @@ export interface PropertyBase {
 export interface PropertyDetails extends PropertyBase {
     createdAt: string
     updatedAt: string
+    updatedBy: string
     isFavorited: boolean
     approvedAt: string | null
     expiresAt: string | null
