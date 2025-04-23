@@ -4,6 +4,7 @@ export enum Role {
     USER,
     MODERATOR,
     AGENT,
+    ADMIN,
 }
 
 export interface User {
@@ -16,7 +17,7 @@ export interface User {
     hasAcceptedTnC: boolean
     isSignedIn: boolean
     isDeleted: boolean
-    role: Role[]
+    role: Role
     createdAt: Date
     updatedAt: Date
     profilePicture?: string

@@ -46,6 +46,7 @@ export interface PropertyMedia {
 }
 
 export interface PropertyUser {
+    id: string
     firstName: string
     lastName: string
     mobile: string

@@ -14,6 +14,7 @@ import EmptyState from '@components/UI/EmptyState'
 import EditButton from './EditButton'
 import useCurrentUser from '@hooks/useCurrentUser'
 import { useGetUserByIdQuery } from '@store/services/users'
+import { Role } from '@models/user'
 
 interface PropertyProps {
     properties: IProperty[]
@@ -78,7 +79,10 @@ const Property: React.FC<PropertyProps> = ({ properties, emptyStateTile, emptySt
                                 style={{ width: '100%', height: '250px' }}
                                 priority
                             />
-                            {userData?.user?.email === property.user?.email && <EditButton propertyId={property.id} />}
+                            {userData?.user?.id === property.user?.id ||
+                            (userData?.user?.role && userData?.user?.role in [Role.MODERATOR, Role.ADMIN]) ? (
+                                <EditButton propertyId={property.id} />
+                            ) : null}
                             <FavoriteButton propertyId={property.id} isFavorited={property.isFavorited ?? false} />
                         </div>
 
