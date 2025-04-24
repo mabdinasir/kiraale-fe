@@ -212,6 +212,7 @@
     "previous": "Kii Hore",
     "payment-successful": "Lacag bixintii waa lagu guulaystay",
     "property-listings": "Liistada Hantida",
+    "property-filters": "Shaandhaynta Hantida",
     "apply-filters": "Dhabakh Shaandhaynta",
     "no-properties-found": "Lama helin hantida!",
     "no-properties-description": "Lama helin hantida ku habboon raadintaada. Fadlan dib u habee ereyga raadinta iyo shuruudaha ka dibna isku day mar kale.",
@@ -394,5 +395,9 @@
     "password-reset-success": "Furaha si guul leh ayaa dib loogu saxay. Hadda waxaad ku geli kartaa akoonkaaga iyadoo add adeegsanayso furaha cusub.",
     "password-reset-failed": "Khalad ayaa dhacay markii dib loo saxayay furaha. Fadlan isku day mar labaad.",
     "invalid-reset-token": "Tokenka dib u sixidda furaha sax ma ahan. Fadlan codso dib u sixid fure cusub mar kale.",
-    "resetting-password": "Dib u saxayaa furaha..."
+    "resetting-password": "Dib u saxayaa furaha...",
+    "admin": "Maamul",
+    "pending-properties": "Hantida Sugaysa Ansixinta",
+    "rejected-properties": "Hantida La Diiday",
+    "country": "Wadanka"
 }

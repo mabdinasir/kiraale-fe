@@ -24,3 +24,8 @@ export const minPrice = [
 ]
 
 export const maxPrice = [...minPrice]
+
+export const countries = [
+    { value: 'SOMALIA', label: 'Somalia' },
+    { value: 'KENYA', label: 'Kenya' },
+]

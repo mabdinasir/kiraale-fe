@@ -1,27 +1,31 @@
 'use client' // This is a client component 👈🏽
 
 import React from 'react'
-import { FiSearch } from 'react-icons/fi'
 import { useTranslations } from 'next-intl'
+import Accordion from '@components/UI/Accordion'
+import PropertyFilters from '../components/PropertyFilters'
 import StoreProvider from 'app/[locale]/StoreProvider'
 import PropertyListItem from '../components/PropertyListItem'
-import { maxPrice, proprtyTypes } from '@lib/constants'
-import { useSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 const PropertyList = () => {
     const t = useTranslations()
-    const searchParams = useSearchParams()
+    const [isDesktop, setIsDesktop] = useState(false)
 
-    const query = searchParams.get('query') || ''
-    const minPriceValue = searchParams.get('minPrice') || ''
-    const maxPriceValue = searchParams.get('maxPrice') || ''
-    const propertyType = searchParams.get('propertyType') || ''
-    const listingType = searchParams.get('listingType') || ''
+    useEffect(() => {
+        const checkScreenSize = () => {
+            setIsDesktop(window.innerWidth >= 992)
+        }
 
-    const translatedPropertyTypes = proprtyTypes.map(({ label, value }) => ({
-        label: t(label),
-        value,
-    }))
+        // Set initial value
+        checkScreenSize()
+
+        // Add event listener
+        window.addEventListener('resize', checkScreenSize)
+
+        // Clean up
+        return () => window.removeEventListener('resize', checkScreenSize)
+    }, [])
 
     return (
         <div className="mt-20">
@@ -47,103 +51,33 @@ const PropertyList = () => {
             </div>
             <section className="relative lg:py-24 py-16">
                 <div className="container">
-                    <div className="grid lg:grid-cols-12 md:grid-cols-8 grid-cols-1 gap-[30px]">
-                        <div className="lg:col-span-4 md:col-span-6">
-                            <div className="shadow dark:shadow-gray-700 p-6 rounded-xl bg-white dark:bg-slate-900 sticky top-20">
-                                <form>
-                                    <div className="grid grid-cols-1 gap-3">
-                                        <div>
-                                            <label htmlFor="searchname" className="font-medium">
-                                                {t('search-properties')}
-                                            </label>
-                                            <div className="relative mt-2">
-                                                <FiSearch className="absolute top-[8px] start-3" width={18} />
-                                                <input
-                                                    name="query"
-                                                    id="search_query"
-                                                    type="text"
-                                                    className="form-input border border-slate-100 dark:border-slate-800 ps-10"
-                                                    placeholder={t('search')}
-                                                    defaultValue={query}
-                                                />
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <label className="font-medium">{t('categories')} :</label>
-                                            <select
-                                                name="propertyType"
-                                                className="form-select form-input border border-slate-100 dark:border-slate-800 block w-full mt-1"
-                                                defaultValue={propertyType}
-                                            >
-                                                {translatedPropertyTypes.map((option) => (
-                                                    <option key={option.value} value={option.value}>
-                                                        {option.label}
-                                                    </option>
-                                                ))}
-                                            </select>
-                                        </div>
-
-                                        <div>
-                                            <label className="font-medium">{t('listing-type')} :</label>
-                                            <select
-                                                name="listingType"
-                                                className="form-select form-input border border-slate-100 dark:border-slate-800 block w-full mt-1"
-                                                defaultValue={listingType}
-                                            >
-                                                {['rent', 'sale'].map((option) => (
-                                                    <option key={option} value={option.toUpperCase()}>
-                                                        {t(option)}
-                                                    </option>
-                                                ))}
-                                            </select>
-                                        </div>
-
-                                        <div>
-                                            <label className="font-medium">{t('min-price')} :</label>
-                                            <select
-                                                name="minPrice"
-                                                className="form-select form-input border border-slate-100 dark:border-slate-800 block w-full mt-1"
-                                                defaultValue={minPriceValue || maxPrice[0].value}
-                                            >
-                                                {maxPrice.map((option) => (
-                                                    <option key={option.value} value={option.value}>
-                                                        {option.label}
-                                                    </option>
-                                                ))}
-                                            </select>
-                                        </div>
-
-                                        <div>
-                                            <label className="font-medium">{t('max-price')} :</label>
-                                            <select
-                                                name="maxPrice"
-                                                className="form-select form-input border border-slate-100 dark:border-slate-800 block w-full mt-1"
-                                                defaultValue={maxPriceValue || maxPrice[maxPrice.length - 1].value}
-                                            >
-                                                {maxPrice.map((option) => (
-                                                    <option key={option.value} value={option.value}>
-                                                        {option.label}
-                                                    </option>
-                                                ))}
-                                            </select>
-                                        </div>
-
-                                        <div>
-                                            <input
-                                                type="submit"
-                                                className="btn bg-green-600 hover:bg-green-700 border-green-600 hover:border-green-700 text-white rounded-md w-full"
-                                                value={t('apply-filters')}
-                                            />
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+                    <div className={`flex gap-6 ${isDesktop ? 'flex-row' : 'flex-col'}`}>
+                        <div className="lg:w-[300px] xl:w-[350px] flex-shrink-0">
+                            <Accordion
+                                collapsibleComponent={<PropertyFilters />}
+                                defaultComponentActive={isDesktop}
+                                componentTitle={t('property-filters')}
+                                icon={
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        className=""
+                                        fill="currentColor"
+                                    >
+                                        <path d="M14.9 9h2V7h4V5h-4V3h-2zm6 4v-2h-10v2zm-14-4v2H3v2h4v2h2V9zm6 12v-2h8v-2h-8v-2h-2v6zM2.9 5v2h10V5zm0 12v2h6v-2z"></path>
+                                    </svg>
+                                }
+                            />
                         </div>
 
-                        <StoreProvider key={'search-properties'}>
-                            <PropertyListItem />
-                        </StoreProvider>
+                        {/* Listings section */}
+                        <div className="flex-1 min-w-0">
+                            <StoreProvider key={'search-properties'}>
+                                <PropertyListItem />
+                            </StoreProvider>
+                        </div>
                     </div>
                 </div>
             </section>

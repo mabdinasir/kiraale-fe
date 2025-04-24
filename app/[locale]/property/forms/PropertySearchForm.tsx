@@ -2,10 +2,10 @@
 
 import React from 'react'
 import { useTranslations } from 'next-intl'
-import { FiHome, FiSearch } from 'react-icons/fi'
+import { FiHome, FiSearch, FiGlobe } from 'react-icons/fi'
 import { LuCircleDollarSign } from 'react-icons/lu'
 import { useParams } from 'next/navigation'
-import { maxPrice, minPrice, proprtyTypes } from '@lib/constants'
+import { countries, maxPrice, minPrice, proprtyTypes } from '@lib/constants'
 
 type PropertySearchFormProps = {
     activeTabIndex: number
@@ -24,7 +24,25 @@ const PropertySearchForm: React.FC<PropertySearchFormProps> = ({ activeTabIndex 
     return (
         <form action={path}>
             <div className="registration-form text-dark text-start">
-                <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 lg:gap-0 gap-6">
+                <div className="grid lg:grid-cols-5 md:grid-cols-2 grid-cols-1 lg:gap-0 gap-6">
+                    <div>
+                        <label className="form-label text-slate-900 dark:text-white font-medium">{t('country')}:</label>
+                        <div className="filter-search-form relative filter-border mt-2">
+                            <FiGlobe className="icons" width={18} />
+                            <select
+                                name="country"
+                                className="form-input filter-input-box bg-gray-50 dark:bg-slate-800 border-0"
+                                defaultValue={countries[0].value}
+                            >
+                                {countries.map((country) => (
+                                    <option key={country.value} value={country.value}>
+                                        {country.label}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
+
                     <div>
                         <label className="form-label text-slate-900 dark:text-white font-medium">
                             {t('search')} : <span className="text-red-600">*</span>

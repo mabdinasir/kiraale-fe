@@ -24,12 +24,19 @@ export const propertyFeaturesSchema = z.object({
 
 // Main property schema (matches backend Prisma model)
 export const propertySchema = z.object({
+    country: z.enum(['SOMALIA', 'KENYA'], {
+        errorMap: () => ({ message: 'Country must be either Somalia or Kenya' }),
+    }),
     title: z.string().min(3, 'Title must be at least 3 characters'),
     description: z.string().optional(),
     address: z.string().min(5, 'Address must be at least 5 characters'),
     price: z.number().min(1, 'Price must be a positive number'),
-    listingType: z.enum(['SALE', 'RENT']),
-    propertyType: z.enum(['RESIDENTIAL', 'COMMERCIAL', 'LAND']),
+    listingType: z.enum(['SALE', 'RENT'], {
+        errorMap: () => ({ message: 'Listing type must be either Sale or Rent' }),
+    }),
+    propertyType: z.enum(['RESIDENTIAL', 'COMMERCIAL', 'LAND'], {
+        errorMap: () => ({ message: 'Property type must be either Residential, Commercial, or Land' }),
+    }),
     features: propertyFeaturesSchema.optional(), // Nested features
 })
 

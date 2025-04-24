@@ -212,6 +212,7 @@
     "previous": "Previous",
     "payment-successful": "Payment successful",
     "property-listings": "Property Listings",
+    "property-filters": "Property Filters",
     "apply-filters": "Apply Filters",
     "no-properties-found": "No properties found!",
     "no-properties-description": "We couldn't find any properties matching your search criteria. Please refine your search term and criteria then try again.",
@@ -394,5 +395,9 @@
     "password-reset-success": "Password reset successfully. You can now log in with your new password.",
     "password-reset-failed": "Failed to reset password. Please try again.",
     "invalid-reset-token": "Invalid password reset token. Please request a new password reset link.",
-    "resetting-password": "Resetting Password..."
+    "resetting-password": "Resetting Password...",
+    "admin": "Admin",
+    "pending-properties": "Pending Properties",
+    "rejected-properties": "Rejected Properties",
+    "country": "Country"
 }

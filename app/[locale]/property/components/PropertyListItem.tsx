@@ -16,6 +16,7 @@ import FavoriteButton from './FavoriteButton'
 const PropertyListItem = () => {
     const t = useTranslations()
     const searchParams = useSearchParams()
+    const country = searchParams.get('country')
     const query = searchParams.get('query') || ''
     const minPrice = searchParams.get('minPrice') || ''
     const maxPrice = searchParams.get('maxPrice') || ''
@@ -24,6 +25,7 @@ const PropertyListItem = () => {
 
     const { data, isLoading } = useSearchPropertiesQuery(
         {
+            country: country as 'SOMALIA' | 'KENYA',
             query,
             minPrice: minPrice ? Number(minPrice) : undefined,
             maxPrice: maxPrice ? Number(maxPrice) : undefined,

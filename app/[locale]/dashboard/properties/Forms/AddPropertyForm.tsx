@@ -16,7 +16,7 @@ import isApiError from '@utils/isApiError'
 import showToast from '@utils/showToast'
 import { useAppDispatch } from '@hooks/rtkHooks'
 import { updateStep } from '@store/slices/stepValidation'
-import { proprtyTypes } from '@lib/constants'
+import { countries, proprtyTypes } from '@lib/constants'
 import { propertySchema } from 'schemas'
 import { PropertyFormData } from '@models/properties/property'
 
@@ -39,7 +39,7 @@ const AddPropertyForm = () => {
 
     const initialPropertyData = useMemo<PropertyFormData>(
         () => ({
-            id: '',
+            country: 'SOMALIA',
             title: '',
             description: '',
             address: '',
@@ -48,8 +48,6 @@ const AddPropertyForm = () => {
             listingType: 'SALE',
             status: 'PENDING',
             features: {
-                id: '',
-                propertyId: '',
                 bedrooms: 0,
                 bathrooms: 0,
                 parking: 0,
@@ -192,6 +190,30 @@ const AddPropertyForm = () => {
                             />
                         </div>
                         {errors.description && <Error error={errors.description} />}
+                    </div>
+
+                    {/* Country dropdown*/}
+                    <div className="col-span-12">
+                        <label htmlFor="country" className="form-label text-slate-900 dark:text-white font-medium">
+                            {t('country')}:
+                        </label>
+                        <div className="filter-search-form relative filter-border mt-2">
+                            <PiBuildingApartmentFill className="icons" width={18} />
+                            <select
+                                className="w-full filter-input-box border border-gray-200 focus:border-green-600 outline-none rounded-md bg-transparent dark:border-gray-800 dark:bg-gray-800 dark:bg-slate-900"
+                                name="country"
+                                id="country"
+                                value={propertyData.country}
+                                onChange={handleChange}
+                            >
+                                {countries.map((option) => (
+                                    <option key={option.value} value={option.value}>
+                                        {option.label}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        {errors.country && <Error error={errors.country} />}
                     </div>
 
                     {/* Address */}

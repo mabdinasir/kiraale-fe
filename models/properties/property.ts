@@ -5,6 +5,7 @@ export interface PropertyBase {
     description?: string
     address: string
     price: number
+    country: 'SOMALIA' | 'KENYA'
     propertyType: 'RESIDENTIAL' | 'COMMERCIAL' | 'LAND'
     listingType: 'SALE' | 'RENT'
     status: 'PENDING' | 'REJECTED' | 'EXPIRED' | 'AVAILABLE' | 'SOLD' | 'LEASED'
@@ -53,7 +54,7 @@ export interface PropertyUser {
     email: string
 }
 
-export interface PropertyFormData extends PropertyBase {
+export interface PropertyFormData extends Omit<PropertyBase, 'id'> {
     features: Omit<PropertyFeatures, 'id' | 'propertyId'>
 }
 
@@ -75,6 +76,7 @@ export interface PropertiesResponse {
 }
 
 export interface PropertySearchParams {
+    country: 'SOMALIA' | 'KENYA'
     query?: string
     minPrice?: number
     maxPrice?: number
