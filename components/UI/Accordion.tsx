@@ -1,7 +1,8 @@
 'use client' // This is a client component 👈🏽
 
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { useTranslations } from 'next-intl'
+import { FaChevronDown } from 'react-icons/fa'
 
 type AccordionProps = {
     accordionData?: {
@@ -9,21 +10,29 @@ type AccordionProps = {
         content: string
     }[]
     collapsibleComponent?: React.ReactNode
-    defaultComponentActive?: boolean
     componentTitle?: string
     icon?: React.ReactNode
+    isResponsive?: boolean
+    isDesktop?: boolean
 }
 
 const Accordion: FC<AccordionProps> = ({
     accordionData,
     collapsibleComponent,
-    defaultComponentActive = false,
     componentTitle,
     icon,
+    isResponsive = false,
+    isDesktop = false,
 }) => {
     const [activeIndex, setActiveIndex] = useState<number | null>(0)
-    const [isComponentOpen, setIsComponentOpen] = useState(defaultComponentActive)
+    const [isComponentOpen, setIsComponentOpen] = useState(isResponsive ? isDesktop : false)
     const t = useTranslations()
+
+    useEffect(() => {
+        if (isResponsive) {
+            setIsComponentOpen(isDesktop)
+        }
+    }, [isDesktop, isResponsive])
 
     const toggleAccordion = (index: number) => {
         setActiveIndex(activeIndex === index ? null : index)
@@ -54,18 +63,11 @@ const Accordion: FC<AccordionProps> = ({
                             }`}
                         >
                             <span>{t(section.title)}</span>
-                            <svg
-                                className={`w-4 h-4 transform ${activeIndex === index ? 'rotate-180' : ''}`}
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    fillRule="evenodd"
-                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                    clipRule="evenodd"
-                                ></path>
-                            </svg>
+                            {activeIndex === index ? (
+                                <FaChevronDown size={16} className="rotate-180" />
+                            ) : (
+                                <FaChevronDown size={16} />
+                            )}
                         </button>
                     </h2>
                     {activeIndex === index && (
@@ -88,27 +90,10 @@ const Accordion: FC<AccordionProps> = ({
                         <button
                             type="button"
                             onClick={toggleComponent}
-                            className={`flex justify-between items-center p-5 w-full font-medium text-left ${
-                                isComponentOpen ? 'bg-gray-50 dark:bg-slate-800 text-green-600' : ''
-                            }`}
+                            className={`flex justify-between items-center-safe p-5 w-full font-medium text-left ${isComponentOpen ? 'bg-gray-50 dark:bg-slate-800 text-green-600' : ''}`}
                         >
-                            <span>{componentTitle}</span>
-                            {icon ? (
-                                <span className="mr-2">{icon}</span>
-                            ) : (
-                                <svg
-                                    className={`w-4 h-4 transform ${isComponentOpen ? 'rotate-180' : ''}`}
-                                    fill="currentColor"
-                                    viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        fillRule="evenodd"
-                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                        clipRule="evenodd"
-                                    ></path>
-                                </svg>
-                            )}
+                            <h1 className="font-bold">{componentTitle}</h1>
+                            <span className="mr-2">{icon}</span>
                         </button>
                     </h2>
                     {isComponentOpen && <div className="p-1">{collapsibleComponent}</div>}

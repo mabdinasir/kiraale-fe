@@ -1,12 +1,12 @@
 'use client' // This is a client component 👈🏽
 
-import React from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import Accordion from '@components/UI/Accordion'
 import PropertyFilters from '../components/PropertyFilters'
 import StoreProvider from 'app/[locale]/StoreProvider'
 import PropertyListItem from '../components/PropertyListItem'
-import { useEffect, useState } from 'react'
+import { FaSliders } from 'react-icons/fa6'
 
 const PropertyList = () => {
     const t = useTranslations()
@@ -55,20 +55,10 @@ const PropertyList = () => {
                         <div className="lg:w-[300px] xl:w-[350px] flex-shrink-0">
                             <Accordion
                                 collapsibleComponent={<PropertyFilters />}
-                                defaultComponentActive={isDesktop}
+                                isResponsive={true}
+                                isDesktop={isDesktop}
                                 componentTitle={t('property-filters')}
-                                icon={
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 24 24"
-                                        className=""
-                                        fill="currentColor"
-                                    >
-                                        <path d="M14.9 9h2V7h4V5h-4V3h-2zm6 4v-2h-10v2zm-14-4v2H3v2h4v2h2V9zm6 12v-2h8v-2h-8v-2h-2v6zM2.9 5v2h10V5zm0 12v2h6v-2z"></path>
-                                    </svg>
-                                }
+                                icon={<FaSliders size={18} />}
                             />
                         </div>
 
