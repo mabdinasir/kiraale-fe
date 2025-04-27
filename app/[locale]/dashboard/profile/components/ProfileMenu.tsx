@@ -10,6 +10,7 @@ import useCurrentUser from '@hooks/useCurrentUser'
 import Button from '@components/UI/Button'
 import ReusableLink from '@components/Links/ReusableLink'
 import { useGetUserByIdQuery } from '@store/services/users'
+import { Role } from '@models/user'
 
 const ProfileMenu = () => {
     const t = useTranslations()
@@ -17,6 +18,7 @@ const ProfileMenu = () => {
     const currentUser = useCurrentUser()
     const id = currentUser?.id
     const { data: userData } = useGetUserByIdQuery(id || '')
+    const isAdmin = userData?.user?.role === Role.ADMIN || userData?.user?.role === Role.MODERATOR
 
     const [isOpen, setIsOpen] = useState(false)
     const [signout, { isLoading }] = useSignOutMutation()
@@ -90,16 +92,6 @@ const ProfileMenu = () => {
                     <ul className="py-2 text-base font-medium" aria-labelledby="dropdownUserAvatarButton">
                         <li>
                             <ReusableLink
-                                href={'/dashboard'}
-                                className="block px-4 py-2 hover:bg-green-100 hover:text-green-700 dark:hover:bg-gray-700 dark:hover:text-green-600 rounded"
-                                onClick={closeSidebar}
-                            >
-                                <i className="mdi mdi-view-dashboard me-2"></i>
-                                {t('dashboard')}
-                            </ReusableLink>
-                        </li>
-                        <li>
-                            <ReusableLink
                                 href={'/dashboard/profile'}
                                 className="block px-3 py-2 hover:bg-green-100 hover:text-green-700 dark:hover:bg-gray-700 dark:hover:text-green-600 rounded"
                                 onClick={closeSidebar}
@@ -108,6 +100,7 @@ const ProfileMenu = () => {
                                 {t('profile')}
                             </ReusableLink>
                         </li>
+
                         <li>
                             <ReusableLink
                                 href={'/dashboard/properties/my-properties'}
@@ -118,6 +111,30 @@ const ProfileMenu = () => {
                                 {t('my-properties')}
                             </ReusableLink>
                         </li>
+
+                        <li>
+                            <ReusableLink
+                                href={'/dashboard'}
+                                className="block px-4 py-2 hover:bg-green-100 hover:text-green-700 dark:hover:bg-gray-700 dark:hover:text-green-600 rounded"
+                                onClick={closeSidebar}
+                            >
+                                <i className="mdi mdi-view-dashboard me-2"></i>
+                                {t('dashboard')}
+                            </ReusableLink>
+                        </li>
+
+                        {isAdmin && (
+                            <li>
+                                <ReusableLink
+                                    href={'/admin'}
+                                    className="block px-4 py-2 hover:bg-green-100 hover:text-green-700 dark:hover:bg-gray-700 dark:hover:text-green-600 rounded"
+                                    onClick={closeSidebar}
+                                >
+                                    <i className="mdi mdi-account-cog-outline me-2"></i>
+                                    {t('admin')}
+                                </ReusableLink>
+                            </li>
+                        )}
                         {/* <li>
                             <ReusableLink
                                 href={'/dashboard/notifications'}

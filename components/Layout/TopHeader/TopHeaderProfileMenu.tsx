@@ -10,6 +10,7 @@ import { useSignOutMutation } from '@store/services/auth'
 import { clearToken } from '@store/slices/tokenSlice'
 import ReusableLink from '@components/Links/ReusableLink'
 import { useGetUserByIdQuery } from '@store/services/users'
+import { Role } from '@models/user'
 
 const TopHeaderProfileMenu = () => {
     const t = useTranslations()
@@ -20,6 +21,7 @@ const TopHeaderProfileMenu = () => {
     const [signout, { isLoading }] = useSignOutMutation()
     const profileMenuRef = useRef<HTMLDivElement>(null)
     const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const isAdmin = userData?.user?.role === Role.ADMIN || userData?.user?.role === Role.MODERATOR
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -60,15 +62,36 @@ const TopHeaderProfileMenu = () => {
                             {t('profile')}
                         </ReusableLink>
                     </li>
+
                     <li>
                         <ReusableLink
-                            href="/dashboard/my-properties"
+                            href="/dashboard/properties/my-properties"
                             className="block py-1 px-4 hover:text-green-600 dark:hover:text-white"
                         >
-                            <i className="mdi mdi-account-outline me-2"></i>
+                            <i className="mdi mdi-view-dashboard me-2"></i>
                             {t('my-properties')}
                         </ReusableLink>
                     </li>
+
+                    {isAdmin && (
+                        <li>
+                            <ReusableLink
+                                href="/admin"
+                                className="block py-1 px-4 hover:text-green-600 dark:hover:text-white"
+                            >
+                                <i className="mdi mdi-account-cog-outline me-2"></i>
+                                {t('admin')}
+                            </ReusableLink>
+                        </li>
+                    )}
+                    {/* <li>
+                        <ReusableLink
+                            href="/dashboard/messages"
+                            className="block py-1 px-3 hover:text-green-600 dark:hover:text-white"
+                        >
+                            <i className="mdi mdi-message-outline me-2"></i>
+                            {t('messages')}
+                        </ReusableLink>
                     {/* <li>
                         <ReusableLink
                             href="/dashboard/notifications"
