@@ -76,7 +76,7 @@ const Navbar: React.FC<NavbarProps> = ({ navClass, topnavClass, tagline }) => {
                     <div className="flex items-center space-x-4">
                         <ReusableLink href="/" className="logo">
                             <Image
-                                src="/images/logo-dark.png"
+                                src="/images/logo/logo-hr.png"
                                 className="inline-block dark:hidden"
                                 alt="Logo"
                                 width={98}
@@ -84,7 +84,7 @@ const Navbar: React.FC<NavbarProps> = ({ navClass, topnavClass, tagline }) => {
                                 priority
                             />
                             <Image
-                                src="/images/logo-light.png"
+                                src="/images/logo/logo-hr.png"
                                 className="hidden dark:inline-block"
                                 alt="Logo"
                                 width={98}

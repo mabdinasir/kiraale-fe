@@ -35,7 +35,7 @@ const Sidebar = () => {
             <div className="sidebar-content">
                 <div className="sidebar-brand">
                     <ReusableLink href="/">
-                        <Image src="/images/logo-light.png" width={98} height={24} alt="" />
+                        <Image src="/images/logo/logo-hr.png" width={98} height={24} alt="" />
                     </ReusableLink>
                 </div>
                 <SimpleBar style={{ height: 'calc(100% - 70px)' }}>

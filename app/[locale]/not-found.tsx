@@ -13,7 +13,7 @@ const NotFound = () => {
                         <div className="text-center">
                             <Link href="/">
                                 <Image
-                                    src="/images/logo-icon-64.png"
+                                    src="/images/logo/logo-icon-80-name.png"
                                     className="mx-auto"
                                     alt=""
                                     width={64}

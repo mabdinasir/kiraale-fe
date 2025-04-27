@@ -20,7 +20,7 @@ const SignUp = () => {
                     <div className="max-w-[400px] w-full m-auto p-6 bg-white dark:bg-slate-900 shadow-md dark:shadow-gray-700 rounded-md">
                         <Link href="/">
                             <Image
-                                src="/images/logo-icon-64.png"
+                                src="/images/logo/logo-icon-80-name.png"
                                 className="mx-auto"
                                 alt=""
                                 width={64}

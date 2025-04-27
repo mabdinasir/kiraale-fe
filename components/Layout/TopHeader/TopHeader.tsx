@@ -14,17 +14,23 @@ const TopHeader: FC = () => (
         <div className="header-bar flex justify-between">
             <div className="flex items-center space-x-1">
                 <ReusableLink href="/" className="xl:hidden block me-2">
-                    <Image src="/images/logo-icon-32.png" width={32} height={32} className="md:hidden block" alt="" />
+                    <Image
+                        src="/images/logo/logo-icon-32.png"
+                        width={32}
+                        height={32}
+                        className="md:hidden block"
+                        alt=""
+                    />
                     <span className="md:block hidden">
                         <Image
-                            src="/images/logo-dark.png"
+                            src="/images/logo/logo-hr.png"
                             width={98}
                             height={28}
                             className="inline-block dark:hidden"
                             alt=""
                         />
                         <Image
-                            src="/images/logo-light.png"
+                            src="/images/logo/logo-hr.png"
                             width={98}
                             height={28}
                             className="hidden dark:inline-block"
