@@ -170,10 +170,10 @@ const Footer = () => {
                                             <FiPhone className="w-5 h-5 text-green-600 me-3"></FiPhone>
                                             <div className="">
                                                 <ReusableLink
-                                                    href="tel:+254746661538"
+                                                    href="tel:+252614797985"
                                                     className="text-slate-300 hover:text-slate-400 duration-500 ease-in-out"
                                                 >
-                                                    +254 746 661 538
+                                                    {t('contact-phone-number')}
                                                 </ReusableLink>
                                             </div>
                                         </div>

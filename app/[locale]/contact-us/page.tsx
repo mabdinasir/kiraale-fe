@@ -72,7 +72,7 @@ const Contact = () => {
 
                                         <div className="mt-5">
                                             <Link
-                                                href="tel:+254 746 661 538"
+                                                href="tel:+252614797985"
                                                 className="btn btn-link text-green-600 hover:text-green-600 after:bg-green-600 transition duration-500 inline-block"
                                             >
                                                 {t(item.contact)}
