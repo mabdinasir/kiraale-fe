@@ -1,28 +1,58 @@
 'use client' // This is a client component 👈🏽
 
-import React from 'react'
-import Link from 'next/link'
-
+import React, { useState } from 'react'
 import { LiaCompressArrowsAltSolid } from 'react-icons/lia'
 import { LuBath, LuBedDouble } from 'react-icons/lu'
-import { FiMapPin, FiPhone } from 'react-icons/fi'
+import { FiMapPin } from 'react-icons/fi'
 import Carousel from '@components/UI/Carousel'
 import LoadingIndicator from '@components/UI/LoadingIndicator'
-import { useGetPropertyByIdQuery } from '@store/services/properties'
+import { useGetPropertyByIdQuery, useUpdatePropertyStatusMutation } from '@store/services/properties'
 import { useParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import EmptyState from '@components/UI/EmptyState'
 import { PiBuildingApartmentFill } from '@node_modules/react-icons/pi'
 import statuses from '@utils/statuses'
+import Button from '@components/UI/Button'
+import showToast from '@utils/showToast'
+import { ApiError } from '@models/apiError'
 
-const PropertyDetail = () => {
-    const { id, locale } = useParams()
+const AdminPropertyDetail = () => {
+    const { id } = useParams()
     const t = useTranslations()
 
     const { data, isLoading } = useGetPropertyByIdQuery(id as string)
+    const [updatePropertyStatus] = useUpdatePropertyStatusMutation()
     const property = data?.property
 
+    const [isApproving, setIsApproving] = useState(false)
+    const [isRejecting, setIsRejecting] = useState(false)
+
+    const handleUpdateStatus = async (status: 'AVAILABLE' | 'REJECTED') => {
+        if (!property) return
+
+        try {
+            if (status === 'AVAILABLE') {
+                setIsApproving(true)
+            } else {
+                setIsRejecting(true)
+            }
+
+            await updatePropertyStatus({
+                propertyId: property.id,
+                status,
+            }).unwrap()
+            showToast('success', status === 'AVAILABLE' ? t('property-approved') : t('property-rejected'))
+        } catch (error) {
+            const errorMessage = (error as ApiError)?.data?.message
+            showToast('error', t('unexpected-error', { error: errorMessage }))
+        } finally {
+            setIsApproving(false)
+            setIsRejecting(false)
+        }
+    }
+
     if (isLoading) return <LoadingIndicator />
+
     if (!property)
         return (
             <div className="py-24">
@@ -35,7 +65,7 @@ const PropertyDetail = () => {
         )
 
     return (
-        <section className="relative md:py-24 pt-24 pb-12">
+        <section className="relative pb-12">
             <div className="container relative">
                 <div className="grid md:grid-cols-12 grid-cols-1 gap-[30px]">
                     <div className="lg:col-span-8 md:col-span-7">
@@ -239,36 +269,34 @@ const PropertyDetail = () => {
                                     </div>
                                 </div>
                             </div>
-
-                            <div className="mt-12 text-center">
-                                <h3 className="mb-6 text-xl leading-normal font-medium text-black dark:text-white">
-                                    {t('have-a-question')}
-                                </h3>
-
-                                <div className="mt-6">
-                                    <Link
-                                        href={`/${locale}/contact-us`}
-                                        className="btn bg-transparent hover:bg-green-600 border border-green-600 text-green-600 hover:text-white rounded-md"
-                                    >
-                                        <FiPhone className="align-middle me-2" /> {t('contact-us')}
-                                    </Link>
-                                </div>
+                        </div>
+                        <div className="flex mt-4">
+                            <div className="p-1 w-1/2">
+                                <Button
+                                    title={isApproving ? t('approving') : t('approve')}
+                                    variant="blue"
+                                    fullWidth
+                                    onClick={() => handleUpdateStatus('AVAILABLE')}
+                                    disabled={isApproving || property.status === 'AVAILABLE'}
+                                    isLoading={isApproving}
+                                />
+                            </div>
+                            <div className="p-1 w-1/2">
+                                <Button
+                                    title={isRejecting ? t('rejecting') : t('reject')}
+                                    variant="red"
+                                    fullWidth
+                                    onClick={() => handleUpdateStatus('REJECTED')}
+                                    disabled={isRejecting || property.status === 'REJECTED'}
+                                    isLoading={isRejecting}
+                                />
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className="w-full leading-[0] border-0 mt-20">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15958.999999999998!2d45.3181625!3d2.0469345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3d58426c5f5f5f5f%3A0x5f5f5f5f5f5f5f5f!2sMogadishu!5e0!3m2!1sen!2sso!4v1697045861440!5m2!1sen!2sso"
-                        style={{ border: '0' }}
-                        title="mogadishu-map"
-                        className="w-full h-[500px]"
-                        allowFullScreen
-                    ></iframe>
                 </div>
             </div>
         </section>
     )
 }
 
-export default PropertyDetail
+export default AdminPropertyDetail

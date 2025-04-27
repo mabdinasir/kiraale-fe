@@ -1,11 +1,18 @@
 import Starter from '@components/UI/Starter'
-import React from 'react'
+import StoreProvider from 'app/[locale]/StoreProvider'
+import { useTranslations } from 'next-intl'
+import RejectedProperties from '../components/RejectedProperties'
 
-const RejectedProperties = () => (
-    <Starter
-        title="Admin Rejected Properties"
-        description="Welcome to the admin Rejected Properties. All admin data will be displayed here later. "
-    />
-)
+const Page = () => {
+    const t = useTranslations()
 
-export default RejectedProperties
+    return (
+        <Starter title={t('rejected-properties')} description={t('rejected-properties-description')}>
+            <StoreProvider>
+                <RejectedProperties />
+            </StoreProvider>
+        </Starter>
+    )
+}
+
+export default Page

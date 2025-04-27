@@ -12,6 +12,7 @@ import { FaCalendarAlt } from 'react-icons/fa'
 import { LuBedDouble, LuBath } from 'react-icons/lu'
 import { PiBuildingApartmentFill } from 'react-icons/pi'
 import FavoriteButton from './FavoriteButton'
+import statuses from '@utils/statuses'
 
 const PropertyListItem = () => {
     const t = useTranslations()
@@ -111,6 +112,27 @@ const PropertyListItem = () => {
                                                     .format(property?.price || 0)
                                                     .replace('$', '$ ')}
                                             </p>
+                                        </li>
+
+                                        <li>
+                                            <span className="text-slate-400">{t('listed-on')}</span>
+                                            <p className="text-sm font-medium">
+                                                {new Date(property.createdAt).toLocaleDateString('en-GB', {
+                                                    timeZone: 'UTC',
+                                                })}
+                                            </p>
+                                        </li>
+
+                                        <li>
+                                            <span className="text-slate-400">{t('status')} :</span>
+                                            <div className="flex items-center text-sm">
+                                                <span className={`${statuses[property.status]?.color} me-2`}>
+                                                    {property?.status}
+                                                </span>
+                                                <span className={`${statuses[property.status]?.color}`}>
+                                                    {statuses[property.status]?.icon}
+                                                </span>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>

@@ -1505,6 +1505,22 @@ video {
 .bg-red-600\/20 {
     background-color: rgb(220 38 38 / 0.2) !important;
 }
+.bg-blue-600 {
+    --tw-bg-opacity: 1 !important;
+    background-color: rgb(37 99 235 / var(--tw-bg-opacity)) !important;
+}
+.bg-blue-700 {
+    --tw-bg-opacity: 1 !important;
+    background-color: rgb(29 78 216 / var(--tw-bg-opacity)) !important;
+}
+.hover\:bg-blue-700:hover {
+    --tw-bg-opacity: 1 !important;
+    background-color: rgb(29 78 216 / var(--tw-bg-opacity)) !important;
+}
+.hover\:bg-blue-600:hover {
+    --tw-bg-opacity: 1 !important;
+    background-color: rgb(37 99 235 / var(--tw-bg-opacity)) !important;
+}
 .bg-slate-400 {
     --tw-bg-opacity: 1 !important;
     background-color: rgb(148 163 184 / var(--tw-bg-opacity)) !important;
@@ -1920,6 +1936,26 @@ video {
 .shadow-green-600\/10 {
     --tw-shadow-color: rgb(22 163 74 / 0.1) !important;
     --tw-shadow: var(--tw-shadow-colored) !important;
+}
+.text-pink-600 {
+    --tw-text-opacity: 1 !important;
+    color: rgb(236 72 153 / var(--tw-text-opacity)) !important;
+}
+.text-orange-500 {
+    --tw-text-opacity: 1 !important;
+    color: rgb(251 146 60 / var(--tw-text-opacity)) !important;
+}
+.text-orange-600 {
+    --tw-text-opacity: 1 !important;
+    color: rgb(249 115 22 / var(--tw-text-opacity)) !important;
+}
+.text-amber-700 {
+    --tw-text-opacity: 1 !important;
+    color: rgb(245 158 11 / var(--tw-text-opacity)) !important;
+}
+.text-blue-600 {
+    --tw-text-opacity: 1 !important;
+    color: rgb(37 99 235 / var(--tw-text-opacity)) !important;
 }
 .outline-none {
     outline: 2px solid transparent !important;

@@ -9,6 +9,7 @@ import { z } from 'zod'
 import showToast from '@utils/showToast'
 import isApiError from '@utils/isApiError'
 import Error from '@components/UI/Error'
+import { ApiError } from '@models/apiError'
 
 type ChangePasswordFormProps = {
     user?: User
@@ -64,7 +65,8 @@ const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({ user }) => {
                 if (isApiError(err)) {
                     showToast('error', err.data.message)
                 } else {
-                    showToast('error', t('something-went-wrong'))
+                    const errorMessage = (err as ApiError)?.data?.message
+                    showToast('error', `${t('something-went-wrong')}: ${errorMessage}`)
                 }
             }
         },
@@ -114,7 +116,7 @@ const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({ user }) => {
 
                 <Button
                     title={isLoading ? t('saving-password') : t('save-password')}
-                    className="btn bg-green-600 hover:bg-green-700 border-green-600 hover:border-green-700 text-white rounded-md mt-5"
+                    className="mt-5"
                     isLoading={isLoading}
                     disabled={isLoading || Object.values(errors).some((err) => !!err)}
                 />

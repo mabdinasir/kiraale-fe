@@ -1518,6 +1518,22 @@ video {
     --tw-bg-opacity: 1 !important;
     background-color: rgb(185 28 28 / var(--tw-bg-opacity)) !important;
 }
+.bg-blue-600 {
+    --tw-bg-opacity: 1 !important;
+    background-color: rgb(37 99 235 / var(--tw-bg-opacity)) !important;
+}
+.bg-blue-700 {
+    --tw-bg-opacity: 1 !important;
+    background-color: rgb(29 78 216 / var(--tw-bg-opacity)) !important;
+}
+.hover\:bg-blue-700:hover {
+    --tw-bg-opacity: 1 !important;
+    background-color: rgb(29 78 216 / var(--tw-bg-opacity)) !important;
+}
+.hover\:bg-blue-600:hover {
+    --tw-bg-opacity: 1 !important;
+    background-color: rgb(37 99 235 / var(--tw-bg-opacity)) !important;
+}
 .bg-gradient-to-b {
     background-image: -webkit-gradient(linear, left top, left bottom, from(var(--tw-gradient-stops))) !important;
     background-image: linear-gradient(to bottom, var(--tw-gradient-stops)) !important;
@@ -1888,6 +1904,26 @@ video {
 .text-yellow-500 {
     --tw-text-opacity: 1 !important;
     color: rgb(234 179 8 / var(--tw-text-opacity)) !important;
+}
+.text-pink-600 {
+    --tw-text-opacity: 1 !important;
+    color: rgb(236 72 153 / var(--tw-text-opacity)) !important;
+}
+.text-orange-500 {
+    --tw-text-opacity: 1 !important;
+    color: rgb(251 146 60 / var(--tw-text-opacity)) !important;
+}
+.text-orange-600 {
+    --tw-text-opacity: 1 !important;
+    color: rgb(249 115 22 / var(--tw-text-opacity)) !important;
+}
+.text-amber-700 {
+    --tw-text-opacity: 1 !important;
+    color: rgb(245 158 11 / var(--tw-text-opacity)) !important;
+}
+.text-blue-600 {
+    --tw-text-opacity: 1 !important;
+    color: rgb(37 99 235 / var(--tw-text-opacity)) !important;
 }
 .opacity-0 {
     opacity: 0 !important;

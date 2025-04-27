@@ -42,7 +42,7 @@ const Sidebar = () => {
                     <ul className="sidebar-menu border-t border-white/10">
                         <li className={`${menu === `/${locale}/admin` ? 'active' : ''} ms-0`}>
                             <ReusableLink href="/admin" onClick={closeSidebar}>
-                                <i className="mdi mdi-chart-bell-curve-cumulative me-2"></i>
+                                <i className="mdi mdi-account-cog-outline me-2"></i>
                                 {t('admin')}
                             </ReusableLink>
                         </li>

@@ -19,6 +19,7 @@ import { updateStep } from '@store/slices/stepValidation'
 import { countries, proprtyTypes } from '@lib/constants'
 import { propertySchema } from 'schemas'
 import { PropertyFormData } from '@models/properties/property'
+import { ApiError } from '@models/apiError'
 
 export type FormErrors = Partial<
     Record<keyof PropertyFormData | `features.${keyof PropertyFormData['features']}`, string>
@@ -143,7 +144,8 @@ const AddPropertyForm = () => {
                 showToast('success', t('property-added-successfully'))
                 setErrors({})
             } catch (err) {
-                showToast('error', `${t('property-add-failed')} ${err}`)
+                const errorMessage = (err as ApiError)?.data?.message
+                showToast('error', `${t('property-add-failed')}: ${errorMessage}`)
             }
         },
         [validateFields, addProperty, propertyData, dispatch, t],

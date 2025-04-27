@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 
 export enum Role {
-    USER,
-    MODERATOR,
-    AGENT,
-    ADMIN,
+    USER = 'USER',
+    MODERATOR = 'MODERATOR',
+    AGENT = 'AGENT',
+    ADMIN = 'ADMIN',
 }
 
 export interface User {

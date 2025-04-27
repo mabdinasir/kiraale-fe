@@ -20,7 +20,7 @@ const ProfilePic: FC<ProfilePicProps> = ({ user, hasEditButton }) => {
     const [file, setFile] = useState(user?.profilePicture || '/images/profile/profile-picture-3.jpg')
     const [uploading, setUploading] = useState(false)
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
-    const [uploadProfilePic] = useUploadProfilePicMutation()
+    const [uploadProfilePic, { isLoading: isUploadingPic }] = useUploadProfilePicMutation()
 
     const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
@@ -73,7 +73,13 @@ const ProfilePic: FC<ProfilePicProps> = ({ user, hasEditButton }) => {
                     <label className="absolute inset-0 cursor-pointer" htmlFor="profile-img"></label>
                 </div>
             </div>
-            {hasEditButton && <Button title="Edit Profile Picture" onClick={handleEditClick} />}
+            {hasEditButton && (
+                <Button
+                    title={isUploadingPic ? t('uploading-profile-picture') : t('edit-profile-picture')}
+                    onClick={handleEditClick}
+                    isLoading={isUploadingPic}
+                />
+            )}
             <input
                 id="profile-img"
                 ref={fileInputRef}

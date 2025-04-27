@@ -14,6 +14,7 @@ import { useDeletePropertyMediaMutation, useUploadPropertyMediaMutation } from '
 import { useRouter } from 'next/navigation'
 import { useGetPropertyByIdQuery } from '@store/services/properties'
 import LoadingIndicator from '@components/UI/LoadingIndicator'
+import { ApiError } from '@models/apiError'
 
 interface MediaFile {
     id?: string // Existing media will have an ID
@@ -87,8 +88,9 @@ const PropertyMedia = () => {
                 setErrorMessage(t('upload-error'))
             }
         } catch (error) {
-            showToast('error', t('upload-error'))
-            setErrorMessage(t('unexpected-error', { error: (error as Error).message || 'Unknown error' }))
+            const errMessage = (error as ApiError)?.data?.message
+            showToast('error', `${t('upload-error')}: ${errMessage}`)
+            setErrorMessage(t('unexpected-error', { error: errMessage || 'Unknown error' }))
         } finally {
             setUploading(false)
         }
@@ -127,9 +129,9 @@ const PropertyMedia = () => {
             // Remove from state in both cases
             setMediaFiles((prev) => prev.filter((_, i) => i !== index))
             showToast('success', t('media-deleted'))
-        } catch {
+        } catch (error) {
             setDeletingMediaId(null)
-            showToast('error', t('delete-error'))
+            showToast('error', `${t('delete-error')}: ${(error as ApiError)?.data?.message || 'Unknown error'}`)
         }
     }
 

@@ -1,11 +1,18 @@
 import Starter from '@components/UI/Starter'
-import React from 'react'
+import StoreProvider from 'app/[locale]/StoreProvider'
+import { useTranslations } from 'next-intl'
+import PendingProperties from '../components/PendingProperties'
 
-const PendingProperties = () => (
-    <Starter
-        title="Pending Properties"
-        description="Welcome to the pending properties section. All pending property data will be displayed here later. "
-    />
-)
+const Page = () => {
+    const t = useTranslations()
 
-export default PendingProperties
+    return (
+        <Starter title={t('pending-properties')} description={t('pending-properties-description')}>
+            <StoreProvider>
+                <PendingProperties />
+            </StoreProvider>
+        </Starter>
+    )
+}
+
+export default Page

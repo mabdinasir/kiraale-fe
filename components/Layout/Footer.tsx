@@ -26,9 +26,9 @@ const Footer = () => {
     const { locale } = useParams()
     const currentPath = usePathname()
 
-    const noFooterPrefix = `/${locale}/dashboard`
+    const noFooterPrefix = [`/${locale}/dashboard`, `/${locale}/admin`]
 
-    if (currentPath.startsWith(noFooterPrefix)) {
+    if (noFooterPrefix.some((prefix) => currentPath.includes(prefix))) {
         return null
     }
 

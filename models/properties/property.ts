@@ -2,7 +2,7 @@
 export interface PropertyBase {
     id: string
     title: string
-    description?: string
+    description: string
     address: string
     price: number
     country: 'SOMALIA' | 'KENYA'
@@ -16,9 +16,14 @@ export interface PropertyDetails extends PropertyBase {
     updatedAt: string
     updatedBy: string
     isFavorited: boolean
-    approvedAt: string | null
     expiresAt: string | null
+    approvedAt: string | null
     approvedBy: string | null
+    rejectedAt: string | null
+    rejectedBy: string | null
+    isDeleted: boolean
+    deletedAt: string | null
+    deletedBy: string | null
     userId: string
 }
 
@@ -44,6 +49,9 @@ export interface PropertyMedia {
     propertyId: string
     url: string
     type: 'IMAGE' | 'VIDEO'
+    uploadedBy: string
+    createdAt: string
+    updatedAt: string
 }
 
 export interface PropertyUser {

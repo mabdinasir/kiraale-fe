@@ -1,3 +1,4 @@
+import { Role } from '@models/user'
 import decodeAuthToken from '@utils/decodeJwt'
 import createMiddleware from 'next-intl/middleware'
 import { NextResponse } from 'next/server'
@@ -23,14 +24,21 @@ export default function middleware(request: NextRequest) {
     // Check if the current route matches any protected route prefix
     const isProtectedRoute = protectedRoutePrefixes.some((prefix) => pathname.startsWith(`/${locale}${prefix}`))
 
+    // Redirect signed-in users away from auth pages
     if (isSignedIn && pathname.startsWith(`/${locale}/auth`)) {
-        // Redirect signed-in users away from auth pages
         return NextResponse.redirect(new URL(`/${locale}`, request.url))
     }
 
+    // Redirect unauthenticated users to the login page
     if (isProtectedRoute && !isSignedIn) {
-        // Redirect unauthenticated users to the login page
         return NextResponse.redirect(new URL(`/${locale}/auth/login`, request.url))
+    }
+
+    // if user is not moderator or admin and trying to access admin page, redirect to /
+    if (isSignedIn && pathname.startsWith(`/${locale}/admin`)) {
+        if (!(currentUser?.role === Role.MODERATOR || currentUser?.role === Role.ADMIN)) {
+            return NextResponse.redirect(new URL(`/${locale}`, request.url))
+        }
     }
 
     return intlMiddleware(request)

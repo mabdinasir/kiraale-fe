@@ -85,7 +85,7 @@ const ProfileSettings = () => {
                                     }
                                     isLoading={isDeactivating || isSigningOut}
                                     disabled={isDeactivating || isSigningOut}
-                                    redVariant
+                                    variant="red"
                                     onClick={handleDeactivateAccount}
                                 />
                             </div>

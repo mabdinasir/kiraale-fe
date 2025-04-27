@@ -20,7 +20,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ propertyId, isFavorited
         try {
             await toggleFavoriteProperty(propertyId).unwrap()
         } catch {
-            setLocalFavorited((prev) => !prev) // Revert if API call fails
+            setLocalFavorited((prev) => !prev)
         }
     }
 

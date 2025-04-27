@@ -144,10 +144,9 @@ const ProfileMenu = () => {
                 {/* Sign-Out */}
                 <div className="p-2">
                     <Button
-                        className="block px-2 text-base font-medium hover:bg-red-100 dark:hover:bg-red-600 rounded w-full text-left"
                         isLoading={isLoading}
                         title={isLoading ? t('signing-out') : t('sign-out')}
-                        redVariant
+                        variant="red"
                         fullWidth
                         onClick={async () => {
                             if (currentUser) {

@@ -22,6 +22,7 @@ import { PropertyFormData } from '@models/properties/property'
 import LoadingIndicator from '@components/UI/LoadingIndicator'
 import { useAppDispatch } from '@hooks/rtkHooks'
 import { updateStep } from '@store/slices/stepValidation'
+import { ApiError } from '@models/apiError'
 
 export type FormErrors = Partial<
     Record<keyof PropertyFormData | `features.${keyof PropertyFormData['features']}`, string>
@@ -169,7 +170,8 @@ const EditPropertyForm = () => {
                 setErrors({})
                 setFormTouched(false)
             } catch (err) {
-                showToast('error', `Something went wrong! ${err}`)
+                const errorMessage = (err as ApiError)?.data?.message
+                showToast('error', t('unexpected-error', { error: errorMessage }))
             }
         },
         [validateFields, updateProperty, propertyId, propertyData, dispatch, t],

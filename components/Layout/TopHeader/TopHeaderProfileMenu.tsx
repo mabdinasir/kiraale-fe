@@ -90,10 +90,9 @@ const TopHeaderProfileMenu = () => {
                     <li className="border-t border-gray-100 dark:border-gray-800 my-2"></li>
                     <div className={`${!isLoading ? 'px-3' : ''}`}>
                         <Button
-                            className="flex items-center px-2 text-base font-medium hover:bg-red-100 dark:hover:bg-red-600 rounded text-left"
                             isLoading={isLoading}
                             title={isLoading ? t('signing-out') : t('sign-out')}
-                            redVariant
+                            variant="red"
                             fullWidth
                             onClick={async () => {
                                 if (userData?.user?.id && userData?.user?.isSignedIn) {

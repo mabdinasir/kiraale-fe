@@ -14,6 +14,7 @@ import PasswordInput from '@components/UI/PasswordInput'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { passwordResetSchema } from 'schemas'
 import { useResetPasswordMutation } from '@store/services/auth'
+import { ApiError } from '@models/apiError'
 
 type FormErrors = {
     password?: string
@@ -80,8 +81,9 @@ const ResetPasswordForm = () => {
                 setFormData({ password: '', confirmPassword: '' })
                 setErrors({})
                 router.push('/auth/login')
-            } catch {
-                showToast('error', t('password-reset-failed'))
+            } catch (err) {
+                const errorMessage = (err as ApiError)?.data?.message
+                showToast('error', `${t('password-reset-failed')}: ${errorMessage}`)
             }
         },
         [token, validateForm, t, resetPassword, formData.password, formData.confirmPassword, router],
@@ -159,7 +161,6 @@ const ResetPasswordForm = () => {
                                             fullWidth
                                             title={isLoading ? t('resetting-password') : t('reset-password')}
                                             disabled={!!errors.password || !!errors.confirmPassword || isLoading}
-                                            className="bg-green-600 hover:bg-green-700 text-white"
                                         />
                                     </div>
 

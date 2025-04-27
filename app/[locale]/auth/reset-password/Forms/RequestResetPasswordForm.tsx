@@ -11,6 +11,7 @@ import Error from '@components/UI/Error'
 import isApiError from '@utils/isApiError'
 import Button from '@components/UI/Button'
 import showToast from '@utils/showToast'
+import { ApiError } from '@models/apiError'
 
 const emailSchema = z.object({
     email: z.string().email({ message: 'Please enter a valid email address' }),
@@ -57,8 +58,9 @@ const RequestResetPasswordForm = () => {
             try {
                 await requestPasswordReset({ email }).unwrap()
                 showToast('success', t('password-reset-email-sent'))
-            } catch {
-                showToast('error', t('password-reset-email-failed'))
+            } catch (err) {
+                const errorMessage = (err as ApiError)?.data?.message
+                showToast('error', `${t('password-reset-email-failed')}: ${errorMessage}`)
             }
         },
         [email, validateEmail, requestPasswordReset, t],
@@ -115,12 +117,11 @@ const RequestResetPasswordForm = () => {
 
                                     <div className="mb-4">
                                         <Button
+                                            title={isLoading ? t('sending') : t('send')}
                                             type="submit"
                                             isLoading={isLoading}
                                             fullWidth
-                                            title={isLoading ? t('sending') : t('send')}
                                             disabled={!!errors.email || !email || isLoading}
-                                            className="bg-green-600 hover:bg-green-700 text-white"
                                         />
                                     </div>
 

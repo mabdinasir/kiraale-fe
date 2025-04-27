@@ -193,7 +193,7 @@ const OtherDetailsForm: React.FC<OtherDetailsFormProps> = ({ user }) => {
 
                 <Button
                     title={isLoading ? t('saving-changes') : t('save-changes')}
-                    className="btn bg-green-600 hover:bg-green-700 border-green-600 hover:border-green-700 text-white rounded-md mt-5"
+                    className="mt-5"
                     isLoading={isLoading}
                     disabled={isLoading || Object.values(errors).some((err) => !!err)}
                 />

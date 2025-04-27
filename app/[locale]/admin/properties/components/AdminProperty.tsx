@@ -6,25 +6,22 @@ import { LuBath, LuBedDouble } from 'react-icons/lu'
 import Image from 'next/image'
 import { Property as IProperty } from '@models/properties/property'
 import { PiBuildingApartmentFill } from 'react-icons/pi'
-import FavoriteButton from './FavoriteButton'
 import EmptyState from '@components/UI/EmptyState'
-import EditButton from './EditButton'
-import useCurrentUser from '@hooks/useCurrentUser'
-import { useGetUserByIdQuery } from '@store/services/users'
+import AdminDeleteButton from './AdminDeleteButton'
 import statuses from '@utils/statuses'
 import { FiMapPin } from 'react-icons/fi'
 
-interface PropertyProps {
+interface AdminPropertyProps {
     properties: IProperty[]
     emptyStateTile?: string
     emptyStateDescription?: string
 }
 
-const Property: React.FC<PropertyProps> = ({ properties, emptyStateTile, emptyStateDescription }) => {
+const AdminProperty: React.FC<AdminPropertyProps> = ({ properties, emptyStateTile, emptyStateDescription }) => {
     const t = useTranslations()
-    const currentUser = useCurrentUser()
-    const id = currentUser?.id
-    const { data: userData } = useGetUserByIdQuery(id || '')
+    // const currentUser = useCurrentUser()
+    // const id = currentUser?.id
+    // const { data: userData } = useGetUserByIdQuery(id || '')
 
     if (!properties || properties.length === 0)
         return (
@@ -38,7 +35,7 @@ const Property: React.FC<PropertyProps> = ({ properties, emptyStateTile, emptySt
     return (
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-8 gap-[30px]">
             {properties.map((property) => (
-                <ReusableLink key={property.id} href={`/property/${property.id}`}>
+                <ReusableLink key={property.id} href={`/admin/properties/${property.id}`}>
                     <div className="group rounded-xl bg-white dark:bg-slate-900 shadow hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden ease-in-out duration-500">
                         <div className="relative">
                             <Image
@@ -50,8 +47,12 @@ const Property: React.FC<PropertyProps> = ({ properties, emptyStateTile, emptySt
                                 style={{ width: '100%', height: '250px' }}
                                 priority
                             />
-                            {userData?.user?.id === property.user?.id ? <EditButton propertyId={property.id} /> : null}
-                            <FavoriteButton propertyId={property.id} isFavorited={property.isFavorited ?? false} />
+                            <AdminDeleteButton propertyId={property.id} />
+
+                            {/* {userData?.user?.role &&
+                            (currentUser?.role === Role.MODERATOR || currentUser?.role === Role.ADMIN) ? (
+                                <AdminEditButton propertyId={property.id} />
+                            ) : null} */}
                         </div>
 
                         <div className="p-6">
@@ -60,6 +61,7 @@ const Property: React.FC<PropertyProps> = ({ properties, emptyStateTile, emptySt
                                 {property?.country ?? 'N/A'}
                             </span>
                             <div className="pb-6">{property.title}</div>
+
                             <ul className="md:py-4 py-6 border-y border-slate-100 dark:border-gray-800 flex items-center list-none justify-between">
                                 <li className="flex items-center me-4">
                                     <FaCalendarAlt width={20} className="me-2 text-green-600 text-2xl" />
@@ -128,4 +130,4 @@ const Property: React.FC<PropertyProps> = ({ properties, emptyStateTile, emptySt
     )
 }
 
-export default Property
+export default AdminProperty
