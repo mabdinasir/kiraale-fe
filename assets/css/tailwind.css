@@ -1925,6 +1925,10 @@ video {
     --tw-text-opacity: 1 !important;
     color: rgb(37 99 235 / var(--tw-text-opacity)) !important;
 }
+.text-purple-600 {
+    --tw-text-opacity: 1 !important;
+    color: rgb(126 34 206 / var(--tw-text-opacity)) !important;
+}
 .opacity-0 {
     opacity: 0 !important;
 }
