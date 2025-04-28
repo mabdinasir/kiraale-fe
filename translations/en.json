@@ -424,5 +424,11 @@
     "edit-profile-picture": "Edit Profile Picture",
     "uploading-profile-picture": "Uploading Profile Picture...",
     "property-deleted": "Property deleted successfully.",
-    "property-deletion-failed": "Failed to delete property. Please try again."
+    "property-deletion-failed": "Failed to delete property. Please try again.",
+    "PENDING": "PENDING",
+    "REJECTED": "REJECTED",
+    "EXPIRED": "EXPIRED",
+    "AVAILABLE": "AVAILABLE",
+    "SOLD": "SOLD",
+    "LEASED": "LEASED"
 }

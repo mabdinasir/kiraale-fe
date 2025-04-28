@@ -117,7 +117,7 @@ const AdminProperty: React.FC<AdminPropertyProps> = ({ properties, emptyStateTil
                                     <span className="text-slate-400">{t('status')} :</span>
                                     <div className="flex items-center text-sm">
                                         <span className={`${statuses[property.status]?.color} me-2`}>
-                                            {property?.status}
+                                            {t(property?.status)}
                                         </span>
                                         <span className={`${statuses[property.status]?.color}`}>
                                             {statuses[property.status]?.icon}

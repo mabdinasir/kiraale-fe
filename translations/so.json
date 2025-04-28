@@ -424,5 +424,11 @@
     "edit-profile-picture": "Beddel Sawirka Shaqsiga",
     "uploading-profile-picture": "La badelaya sawirka...",
     "property-deleted": "Hantida si guul leh ayaa loo tirtiray.",
-    "property-deletion-failed": " Tirtirida hantida waa lagu guuldareysatay. Fadlan isku day mar kale."
+    "property-deletion-failed": " Tirtirida hantida waa lagu guuldareysatay. Fadlan isku day mar kale.",
+    "PENDING": "LAMA ANSIXIN",
+    "REJECTED": "LA DIIDAY",
+    "EXPIRED": "WAQTIGII DHAMAADAY",
+    "AVAILABLE": "LA HELI KARA",
+    "SOLD": "LA IIBSADAY",
+    "LEASED": "LA KIRAYSTAY"
 }

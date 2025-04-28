@@ -132,7 +132,7 @@ const PropertyListItem = () => {
                                             <span className="text-slate-400">{t('status')} :</span>
                                             <div className="flex items-center text-lg">
                                                 <span className={`${statuses[property.status]?.color} me-2`}>
-                                                    {property?.status}
+                                                    {t(property?.status)}
                                                 </span>
                                                 <span className={`${statuses[property.status]?.color}`}>
                                                     {statuses[property.status]?.icon}

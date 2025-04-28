@@ -156,7 +156,7 @@ const PropertyDetail = () => {
                                         <li className="flex justify-between items-center mt-2 ms-0">
                                             <span className=" text-md">{t('status')}:</span>
                                             <span className={`font-medium text-md ${statuses[property.status]?.color}`}>
-                                                {property?.status}
+                                                {t(property?.status)}
                                             </span>
                                         </li>
                                     </ul>
