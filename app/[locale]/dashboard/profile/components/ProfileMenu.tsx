@@ -93,7 +93,7 @@ const ProfileMenu = () => {
                         <li>
                             <ReusableLink
                                 href={'/dashboard/profile'}
-                                className="block px-3 py-2 hover:bg-green-100 hover:text-green-700 dark:hover:bg-gray-700 dark:hover:text-green-600 rounded"
+                                className="block px-4 py-2 hover:bg-green-100 hover:text-green-700 dark:hover:bg-gray-700 dark:hover:text-green-600 rounded"
                                 onClick={closeSidebar}
                             >
                                 <i className="mdi mdi-account me-2"></i>
@@ -115,7 +115,7 @@ const ProfileMenu = () => {
                         <li>
                             <ReusableLink
                                 href={'/dashboard'}
-                                className="block px-4 py-2 hover:bg-green-100 hover:text-green-700 dark:hover:bg-gray-700 dark:hover:text-green-600 rounded"
+                                className="block px-3 py-2 hover:bg-green-100 hover:text-green-700 dark:hover:bg-gray-700 dark:hover:text-green-600 rounded"
                                 onClick={closeSidebar}
                             >
                                 <i className="mdi mdi-view-dashboard me-2"></i>
@@ -127,7 +127,7 @@ const ProfileMenu = () => {
                             <li>
                                 <ReusableLink
                                     href={'/admin'}
-                                    className="block px-4 py-2 hover:bg-green-100 hover:text-green-700 dark:hover:bg-gray-700 dark:hover:text-green-600 rounded"
+                                    className="block px-3 py-2 hover:bg-green-100 hover:text-green-700 dark:hover:bg-gray-700 dark:hover:text-green-600 rounded"
                                     onClick={closeSidebar}
                                 >
                                     <i className="mdi mdi-account-cog-outline me-2"></i>
@@ -166,7 +166,7 @@ const ProfileMenu = () => {
                         variant="red"
                         fullWidth
                         onClick={async () => {
-                            if (currentUser) {
+                            if (userData?.user?.id && userData?.user?.isSignedIn) {
                                 await signout()
                                 dispatch(clearToken())
                             }

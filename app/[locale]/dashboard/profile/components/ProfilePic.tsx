@@ -74,20 +74,22 @@ const ProfilePic: FC<ProfilePicProps> = ({ user, hasEditButton }) => {
                 </div>
             </div>
             {hasEditButton && (
-                <Button
-                    title={isUploadingPic ? t('uploading-profile-picture') : t('edit-profile-picture')}
-                    onClick={handleEditClick}
-                    isLoading={isUploadingPic}
-                />
+                <>
+                    <Button
+                        title={isUploadingPic ? t('uploading-profile-picture') : t('edit-profile-picture')}
+                        onClick={handleEditClick}
+                        isLoading={isUploadingPic}
+                    />
+                    <input
+                        id="profile-img"
+                        ref={fileInputRef}
+                        name="profile-image"
+                        type="file"
+                        className="hidden"
+                        onChange={handleChange}
+                    />
+                </>
             )}
-            <input
-                id="profile-img"
-                ref={fileInputRef}
-                name="profile-image"
-                type="file"
-                className="hidden"
-                onChange={handleChange}
-            />
             {errorMessage && <div className="text-red-500 mt-2">{errorMessage}</div>}
             {uploading && <div className="mt-2">{t('uploading')}</div>}
         </div>

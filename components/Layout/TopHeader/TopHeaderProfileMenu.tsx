@@ -56,7 +56,7 @@ const TopHeaderProfileMenu = () => {
                     <li>
                         <ReusableLink
                             href="/dashboard/profile"
-                            className="block py-1 px-4 hover:text-green-600 dark:hover:text-white"
+                            className="block py-1 px-5 hover:text-green-600 dark:hover:text-white"
                         >
                             <i className="mdi mdi-account-outline me-2"></i>
                             {t('profile')}
