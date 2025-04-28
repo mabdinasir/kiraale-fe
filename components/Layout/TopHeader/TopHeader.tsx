@@ -23,14 +23,14 @@ const TopHeader: FC = () => (
                     />
                     <span className="md:block hidden">
                         <Image
-                            src="/images/logo/logo-hr.png"
+                            src="/images/logo/12.png"
                             width={98}
                             height={28}
                             className="inline-block dark:hidden"
                             alt=""
                         />
                         <Image
-                            src="/images/logo/logo-hr.png"
+                            src="/images/logo/12.png"
                             width={98}
                             height={28}
                             className="hidden dark:inline-block"

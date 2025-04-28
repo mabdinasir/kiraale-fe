@@ -45,7 +45,7 @@ const Footer = () => {
                                 <div className="grid md:grid-cols-12 grid-cols-1 gap-[30px] -mt-24">
                                     <div className="lg:col-span-4 md:col-span-12">
                                         <ReusableLink href="#" className="text-[22px] focus:outline-none">
-                                            <Image src="/images/logo/logo-hr.png" alt="" width={98} height={28} />
+                                            <Image src="/images/logo/12.png" alt="" width={98} height={28} />
                                         </ReusableLink>
                                         <p className="mt-6 text-gray-300">{t('feature-subtitle')}</p>
                                     </div>
