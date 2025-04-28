@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTranslations } from 'next-intl'
 import ReusableLink from '@components/Links/ReusableLink'
-import { FaCalendarAlt } from 'react-icons/fa'
+import { RiSofaFill } from 'react-icons/ri'
 import { LuBath, LuBedDouble } from 'react-icons/lu'
 import Image from 'next/image'
 import { Property as IProperty } from '@models/properties/property'
@@ -62,25 +62,28 @@ const AdminProperty: React.FC<AdminPropertyProps> = ({ properties, emptyStateTil
                             </span>
                             <div className="pb-6">{property.title}</div>
 
-                            <ul className="md:py-4 py-6 border-y border-slate-100 dark:border-gray-800 flex items-center list-none justify-between">
-                                <li className="flex items-center me-4">
-                                    <FaCalendarAlt width={20} className="me-2 text-green-600 text-2xl" />
-                                    <span>{property?.features?.yearBuilt ?? 'N/A'}</span>
-                                </li>
-
-                                <li className="flex items-center me-4">
-                                    <LuBedDouble width={20} className="me-2 text-green-600 text-2xl" />
-                                    <span>
-                                        {property?.features?.bedrooms ?? 0}{' '}
-                                        {property?.features?.bedrooms === 1 ? t('bed') : t('beds')}
+                            <ul className="md:py-4 py-6 border-y border-slate-100 dark:border-gray-800 flex items-center list-none justify-between gap-1">
+                                <li className="flex items-center">
+                                    <LuBedDouble width={20} className="me-1 text-green-600 text-2xl" />
+                                    <span className="whitespace-nowrap overflow-hidden text-ellipsis">
+                                        {property?.features?.bedroom ?? 0}{' '}
+                                        {property?.features?.bedroom === 1 ? t('bed') : t('beds')}
                                     </span>
                                 </li>
 
                                 <li className="flex items-center">
-                                    <LuBath width={20} className="me-2 text-green-600 text-2xl" />
-                                    <span>
-                                        {property?.features?.bathrooms ?? 0}{' '}
-                                        {property?.features?.bathrooms === 1 ? t('bath') : t('baths')}
+                                    <LuBath width={20} className="me-1 text-green-600 text-2xl" />
+                                    <span className="whitespace-nowrap overflow-hidden text-ellipsis">
+                                        {property?.features?.bathroom ?? 0}{' '}
+                                        {property?.features?.bathroom === 1 ? t('bath') : t('baths')}
+                                    </span>
+                                </li>
+
+                                <li className="flex items-center">
+                                    <RiSofaFill width={20} className="me-1 text-green-600 text-2xl" />
+                                    <span className="whitespace-nowrap overflow-hidden text-ellipsis">
+                                        {property?.features?.livingRoom ?? 0}{' '}
+                                        {property?.features?.livingRoom === 1 ? t('living-room') : t('living-rooms')}
                                     </span>
                                 </li>
                             </ul>
@@ -103,7 +106,7 @@ const AdminProperty: React.FC<AdminPropertyProps> = ({ properties, emptyStateTil
 
                                 <li>
                                     <span className="text-slate-400">{t('listed-on')}</span>
-                                    <p className="text-sm font-medium">
+                                    <p className="text-lg font-medium">
                                         {new Date(property.createdAt).toLocaleDateString('en-GB', {
                                             timeZone: 'UTC',
                                         })}

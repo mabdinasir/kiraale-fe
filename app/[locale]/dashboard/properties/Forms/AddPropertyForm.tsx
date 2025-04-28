@@ -4,6 +4,8 @@ import React, { useCallback, useState, useMemo } from 'react'
 import { useTranslations } from 'next-intl'
 import { FiHome, FiDollarSign, FiMapPin } from 'react-icons/fi'
 import { FaBath, FaBed, FaParking } from 'react-icons/fa'
+import { FaKitchenSet } from 'react-icons/fa6'
+import { RiSofaFill } from 'react-icons/ri'
 import { CgDetailsMore } from 'react-icons/cg'
 import { IoCalendarNumber, IoExpandOutline } from 'react-icons/io5'
 import { MdHolidayVillage } from 'react-icons/md'
@@ -49,8 +51,10 @@ const AddPropertyForm = () => {
             listingType: 'SALE',
             status: 'PENDING',
             features: {
-                bedrooms: 0,
-                bathrooms: 0,
+                bedroom: 0,
+                livingRoom: 0,
+                bathroom: 0,
+                kitchen: 0,
                 parking: 0,
                 area: 0,
                 yearBuilt: 1900,
@@ -347,46 +351,88 @@ const AddPropertyForm = () => {
                         {errors['features.area'] && <Error error={errors['features.area']} />}
                     </div>
 
-                    {/* Bedrooms */}
+                    {/* bedroom */}
                     <div className="col-span-4">
-                        <label htmlFor="features.bedrooms" className="font-medium">
-                            {t('bedrooms')}:
+                        <label htmlFor="features.bedroom" className="font-medium">
+                            {t('bedroom')}:
                         </label>
                         <div className="form-icon relative mt-2">
                             <FaBed className="w-4 h-4 absolute top-3 start-4 text-green-600" />
                             <input
-                                name="features.bedrooms"
-                                id="features.bedrooms"
+                                name="features.bedroom"
+                                id="features.bedroom"
                                 type="number"
                                 className="form-input ps-11"
-                                placeholder={t('bedrooms')}
+                                placeholder={t('bedroom')}
                                 min={0}
-                                value={propertyData.features.bedrooms}
+                                value={propertyData.features.bedroom}
                                 onChange={handleChange}
                             />
                         </div>
-                        {errors['features.bedrooms'] && <Error error={errors['features.bedrooms']} />}
+                        {errors['features.bedroom'] && <Error error={errors['features.bedroom']} />}
                     </div>
 
-                    {/* Bathrooms */}
+                    {/* Living Rooms */}
                     <div className="col-span-4">
-                        <label htmlFor="features.bathrooms" className="font-medium">
-                            {t('bathrooms')}:
+                        <label htmlFor="features.livingRoom" className="font-medium">
+                            {t('living-room')}:
+                        </label>
+                        <div className="form-icon relative mt-2">
+                            <RiSofaFill className="w-4 h-4 absolute top-3 start-4 text-green-600" />
+                            <input
+                                name="features.livingRoom"
+                                id="features.livingRoom"
+                                type="number"
+                                className="form-input ps-11"
+                                placeholder={t('living-room')}
+                                min={0}
+                                value={propertyData.features.livingRoom}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        {errors['features.livingRoom'] && <Error error={errors['features.livingRoom']} />}
+                    </div>
+
+                    {/* bathroom */}
+                    <div className="col-span-4">
+                        <label htmlFor="features.bathroom" className="font-medium">
+                            {t('bathroom')}:
                         </label>
                         <div className="form-icon relative mt-2">
                             <FaBath className="w-4 h-4 absolute top-3 start-4 text-green-600" />
                             <input
-                                name="features.bathrooms"
-                                id="features.bathrooms"
+                                name="features.bathroom"
+                                id="features.bathroom"
                                 type="number"
                                 className="form-input ps-11"
-                                placeholder={t('bathrooms')}
+                                placeholder={t('bathroom')}
                                 min={0}
-                                value={propertyData.features.bathrooms}
+                                value={propertyData.features.bathroom}
                                 onChange={handleChange}
                             />
                         </div>
-                        {errors['features.bathrooms'] && <Error error={errors['features.bathrooms']} />}
+                        {errors['features.bathroom'] && <Error error={errors['features.bathroom']} />}
+                    </div>
+
+                    {/* Kitchen */}
+                    <div className="col-span-4">
+                        <label htmlFor="features.kitchen" className="font-medium">
+                            {t('kitchen')}:
+                        </label>
+                        <div className="form-icon relative mt-2">
+                            <FaKitchenSet className="w-4 h-4 absolute top-3 start-4 text-green-600" />
+                            <input
+                                name="features.kitchen"
+                                id="features.kitchen"
+                                type="number"
+                                className="form-input ps-11"
+                                placeholder={t('kitchen')}
+                                min={0}
+                                value={propertyData.features.kitchen}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        {errors['features.kitchen'] && <Error error={errors['features.kitchen']} />}
                     </div>
 
                     {/* Parking */}

@@ -8,7 +8,7 @@ import { useSearchPropertiesQuery } from '@store/services/properties'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
-import { FaCalendarAlt } from 'react-icons/fa'
+import { RiSofaFill } from 'react-icons/ri'
 import { LuBedDouble, LuBath } from 'react-icons/lu'
 import { PiBuildingApartmentFill } from 'react-icons/pi'
 import FavoriteButton from './FavoriteButton'
@@ -77,23 +77,28 @@ const PropertyListItem = () => {
 
                                     <ul className="md:py-4 py-6 border-y border-slate-100 dark:border-gray-800 flex items-center list-none justify-between">
                                         <li className="flex items-center me-4">
-                                            <FaCalendarAlt width={20} className="me-2 text-green-600 text-2xl" />
-                                            <span>{property?.features?.yearBuilt ?? 'N/A'}</span>
-                                        </li>
-
-                                        <li className="flex items-center me-4">
                                             <LuBedDouble width={20} className="me-2 text-green-600 text-2xl" />
                                             <span>
-                                                {property.features.bedrooms ?? 0}{' '}
-                                                {property.features.bedrooms === 1 ? t('bed') : t('beds')}
+                                                {property.features.bedroom ?? 0}{' '}
+                                                {property.features.bedroom === 1 ? t('bed') : t('beds')}
                                             </span>
                                         </li>
 
                                         <li className="flex items-center">
                                             <LuBath width={20} className="me-2 text-green-600 text-2xl" />
                                             <span>
-                                                {property.features.bathrooms ?? 0}{' '}
-                                                {property.features.bathrooms === 1 ? t('bath') : t('baths')}
+                                                {property.features.bathroom ?? 0}{' '}
+                                                {property.features.bathroom === 1 ? t('bath') : t('baths')}
+                                            </span>
+                                        </li>
+
+                                        <li className="flex items-center me-4">
+                                            <RiSofaFill width={20} className="me-2 text-green-600 text-2xl" />
+                                            <span>
+                                                {property?.features?.livingRoom}{' '}
+                                                {property?.features?.livingRoom === 1
+                                                    ? t('living-room')
+                                                    : t('living-rooms')}
                                             </span>
                                         </li>
                                     </ul>
@@ -116,7 +121,7 @@ const PropertyListItem = () => {
 
                                         <li>
                                             <span className="text-slate-400">{t('listed-on')}</span>
-                                            <p className="text-sm font-medium">
+                                            <p className="text-lg font-medium">
                                                 {new Date(property.createdAt).toLocaleDateString('en-GB', {
                                                     timeZone: 'UTC',
                                                 })}
@@ -125,7 +130,7 @@ const PropertyListItem = () => {
 
                                         <li>
                                             <span className="text-slate-400">{t('status')} :</span>
-                                            <div className="flex items-center text-sm">
+                                            <div className="flex items-center text-lg">
                                                 <span className={`${statuses[property.status]?.color} me-2`}>
                                                     {property?.status}
                                                 </span>

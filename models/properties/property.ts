@@ -30,8 +30,10 @@ export interface PropertyDetails extends PropertyBase {
 export interface PropertyFeatures {
     id: string
     propertyId: string
-    bedrooms: number
-    bathrooms: number
+    bedroom: number
+    livingRoom: number
+    bathroom: number
+    kitchen: number
     area: number
     parking: number
     yearBuilt: number

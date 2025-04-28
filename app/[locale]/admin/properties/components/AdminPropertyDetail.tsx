@@ -1,7 +1,6 @@
 'use client' // This is a client component 👈🏽
 
 import React, { useState } from 'react'
-import { LiaCompressArrowsAltSolid } from 'react-icons/lia'
 import { LuBath, LuBedDouble } from 'react-icons/lu'
 import { FiMapPin } from 'react-icons/fi'
 import Carousel from '@components/UI/Carousel'
@@ -15,6 +14,8 @@ import statuses from '@utils/statuses'
 import Button from '@components/UI/Button'
 import showToast from '@utils/showToast'
 import { ApiError } from '@models/apiError'
+import { RiSofaFill } from 'react-icons/ri'
+import { FaKitchenSet } from 'react-icons/fa6'
 
 const AdminPropertyDetail = () => {
     const { id } = useParams()
@@ -91,33 +92,43 @@ const AdminPropertyDetail = () => {
                             {property?.address ?? 'N/A'}, {property?.country ?? 'N/A'}
                         </span>
 
-                        <ul className="py-6 flex items-center list-none">
-                            <li className="flex items-center lg:me-6 me-4">
-                                <LiaCompressArrowsAltSolid className="lg:text-3xl text-2xl me-2 text-green-600" />
-                                <span className="lg:text-xl ">
-                                    {property?.features?.area === 1
-                                        ? ` ${property?.features?.area} ${t('meter')}`
-                                        : ` ${property?.features?.area} ${t('meters')}`}
-                                </span>
-                            </li>
-
+                        <ul className="pt-6 pb-4 flex items-center list-none">
                             <li className="flex items-center lg:me-6 me-4">
                                 <LuBedDouble className="lg:text-3xl text-2xl me-2 text-green-600" />
                                 <span className="lg:text-xl ">
-                                    {property?.features?.bedrooms ?? 0}{' '}
-                                    {property?.features?.bedrooms === 1 ? t('bed') : t('beds')}
+                                    {property?.features?.bedroom ?? 0}{' '}
+                                    {property?.features?.bedroom === 1 ? t('bed') : t('beds')}
                                 </span>
                             </li>
 
-                            <li className="flex items-center">
+                            <li className="flex items-center lg:me-6 me-4">
                                 <LuBath className="lg:text-3xl text-2xl me-2 text-green-600" />
                                 <span className="lg:text-xl ">
-                                    {property?.features?.bathrooms ?? 0}{' '}
-                                    {property?.features?.bathrooms === 1 ? t('bath') : t('baths')}
+                                    {property?.features?.bathroom ?? 0}{' '}
+                                    {property?.features?.bathroom === 1 ? t('bath') : t('baths')}
+                                </span>
+                            </li>
+
+                            <li className="flex items-center lg:me-6 me-4">
+                                <RiSofaFill className="lg:text-3xl text-2xl me-2 text-green-600" />
+                                <span className="lg:text-xl ">
+                                    {property?.features?.livingRoom ?? 0}{' '}
+                                    {property?.features?.livingRoom === 1 ? t('living-room') : t('living-rooms')}
                                 </span>
                             </li>
                         </ul>
 
+                        <li className="flex items-center lg:me-6 me-4 mb-6">
+                            <FaKitchenSet className="lg:text-3xl text-2xl me-2 text-green-600" />
+                            <span className="lg:text-xl ">
+                                {property?.features?.kitchen ?? 0}{' '}
+                                {property?.features?.kitchen === 1 ? t('kitchen') : t('kitchens')}
+                            </span>
+                        </li>
+
+                        <div className="text-2xl font-medium pb-3">
+                            <h5 className="text-2xl font-medium border-b">{t('description')}:</h5>
+                        </div>
                         <p>{property?.description ?? 'N/A'}</p>
                     </div>
 
@@ -161,6 +172,15 @@ const AdminPropertyDetail = () => {
                                             <span className=" text-md">{t('year-built')}:</span>
                                             <span className="font-medium text-md">
                                                 {property?.features?.yearBuilt ?? 'N/A'}
+                                            </span>
+                                        </li>
+
+                                        <li className="flex justify-between items-center mt-2 ms-0">
+                                            <span className=" text-md">{t('area')}:</span>
+                                            <span className="font-medium text-md">
+                                                {property?.features?.area === 1
+                                                    ? ` ${property?.features?.area} ${t('meter')}`
+                                                    : ` ${property?.features?.area} ${t('meters')}`}
                                             </span>
                                         </li>
 
@@ -210,6 +230,13 @@ const AdminPropertyDetail = () => {
                                                 {property?.features?.furnished ? t('yes') : t('no')}
                                             </span>
                                         </li>
+                                        {/* kitchen */}
+                                        <li className="flex justify-between items-center mt-2 ms-0">
+                                            <span className=" text-md">{t('kitchen')}:</span>
+                                            <span className="font-medium text-md">
+                                                {property?.features?.kitchen ? t('yes') : t('no')}
+                                            </span>
+                                        </li>
                                         {/* dishwasher */}
                                         <li className="flex justify-between items-center mt-2 ms-0">
                                             <span className=" text-md">{t('dishwasher')}:</span>
@@ -245,13 +272,6 @@ const AdminPropertyDetail = () => {
                                                 {property?.features?.parking === 1
                                                     ? ` ${property?.features?.parking} ${t('space')}`
                                                     : ` ${property?.features?.parking} ${t('spaces')}`}
-                                            </span>
-                                        </li>
-                                        {/* pool */}
-                                        <li className="flex justify-between items-center mt-2 ms-0">
-                                            <span className=" text-md">{t('pool')}:</span>
-                                            <span className="font-medium text-md">
-                                                {property?.features?.pool ? t('yes') : t('no')}
                                             </span>
                                         </li>
                                     </ul>
