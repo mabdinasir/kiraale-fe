@@ -32,7 +32,7 @@ const Profile = () => {
                     <div className="profile-banner relative text-transparent rounded-md shadow dark:shadow-gray-700 overflow-hidden">
                         <div className="relative shrink-0">
                             <Image
-                                src="/images/bg/profile-avatar.jpg"
+                                src="/images/bg/profile-avatar.png"
                                 width={0}
                                 height={0}
                                 sizes="100vw"
