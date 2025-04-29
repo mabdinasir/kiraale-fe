@@ -19,12 +19,7 @@ const PropertySearch = () => {
 
     return (
         <div className="grid grid-cols-1">
-            <ul
-                className="inline-block sm:w-fit w-full flex-wrap justify-center text-center p-4 bg-white dark:bg-slate-900 rounded-t-xl border-b dark:border-gray-800"
-                id="myTab"
-                data-tabs-toggle="#StarterContent"
-                role="tablist"
-            >
+            <ul className="myTab" id="myTab" data-tabs-toggle="#StarterContent" role="tablist">
                 {translatedTabs.map((tab, index) => (
                     <li key={tab} role="presentation" className="inline-block">
                         <button

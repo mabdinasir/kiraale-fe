@@ -3845,6 +3845,17 @@ html[dir='rtl'] .tns-visually-hidden {
     font-family: 'Material Design Icons';
 }
 
+.myTab {
+    display: inline-block;
+    width: fit-content;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem;
+    background-color: #ffffff;
+    border-radius: 0.75rem 0.75rem 0 0;
+    border-bottom-width: 1px;
+}
+
 /*********************************/
 /*         Countdown             */
 /*===============================*/
