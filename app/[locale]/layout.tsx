@@ -8,6 +8,7 @@ import Navbar from '@components/Layout/Navbar'
 import Switcher from '@components/UI/Switcher'
 import Footer from '@components/Layout/Footer'
 import { Toaster } from 'react-hot-toast'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 import '../globals.css'
 import '@assets/css/materialdesignicons.min.css'
@@ -46,6 +47,7 @@ export default async function RootLayout({
                     <Toaster position="bottom-left" />
                 </NextIntlClientProvider>
                 <Analytics />
+                <SpeedInsights />
             </body>
         </html>
     )
